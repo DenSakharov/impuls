@@ -17,10 +17,11 @@
 }
 
 #chat_input {
-    border-radius: 3px;
+    border-radius: 8px;
     display: block;
     margin: 0 auto;
     margin-bottom: 8px;
     height: 36px;
     width: calc(100% - 20px);
+    overflow: hidden;
 }
