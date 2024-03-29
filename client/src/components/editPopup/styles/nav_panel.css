@@ -1,0 +1,26 @@
+#down_arrow {
+    margin-left: 6px;
+    transform: scale(0.8) rotate(180deg) translateY(-2px);
+}
+
+#up_arrow{
+    transform: scale(0.8);
+}
+
+#cross {
+    align-items: end;
+    margin-left: auto;
+    padding: 4px;
+    transform: scale(0.7);
+}
+
+#popup_top_panel {
+    background-color: #784848;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 30px;
+    border-radius: 7px 7px 0 0;
+    border-bottom: 0.5mm solid #818181;
+}
