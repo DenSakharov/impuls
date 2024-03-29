@@ -41,7 +41,7 @@ function EditPopup() {
                     </div>
                     <div id="add_fields">
                         <img src='img/plus_black.png'/> Добавить новое поле
-                        <p id="field_attr"><label>Тег</label> <input/></p>
+                        <p id="field_attr"><label></label>Тег <input/></p>
                     </div>
                     <div id="doc_dependencies">
                         <img src='img/plus_black.png'/> Зависимости
