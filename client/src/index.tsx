@@ -1,3 +1,4 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -10,8 +11,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
-    <Popup />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/Popup" element={<Popup/>}></Route>
+              <Route path="" element={<App/>}></Route>
+            </Routes>
+      </BrowserRouter>
   </React.StrictMode>
 );
 
