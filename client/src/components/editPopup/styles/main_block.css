@@ -1,0 +1,76 @@
+#attr_block{
+    width: 66%;
+    background-color: #F6EBEB;
+    border-radius: 0 0 0 7px;
+}
+
+#attr_header{
+    padding-left: 30px;
+}
+
+#main_block{
+    display: flex;
+}
+
+
+#button_attributes {
+    padding-bottom: 0;
+    padding-top: 100px;
+    padding-left: 30px;
+}
+
+#field_attributes {
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+#accept_offer_button{
+    color: #D2A506;
+    float: right;
+}
+
+#rework_button{
+    color: #FF505A;
+    float: right;
+}
+
+#accept_button{
+    color: #12B422;
+    float: right;
+}
+
+#inwork_button{
+    color: #5096FF;
+    float: right;
+}
+
+#status_buttons{
+    height: auto;
+    width: auto;
+}
+
+#large_input{
+    width: 60%;
+    height: 64px;
+    margin-right: 56px;
+}
+
+#wide_input {
+    width: 50%;
+    margin-right: 10px;
+}
+
+
+#link_attr {
+    padding-left: 50px;
+}
+
+#field_attr {
+    padding-left: 50px;
+}
+
+#dependency_attr {
+    padding-left: 50px;
+}
