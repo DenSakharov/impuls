@@ -1,17 +1,13 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
-import downArrow from './img/nav_arrow_white.png'
-import upArrow from './img/nav_arrow_white.png'
-import cross from './img/cross.png'
-import plusBlack from './img/plus_black.png'
 
 function EditPopup() {
   return (
     <div id="edit_popup_window">
         <div id="popup_top_panel"> 
-            <img id = "down_arrow" src={downArrow}/>
-            <img id = "up_arrow" src={upArrow}/>
-            <img id = "cross" src={cross}/>
+            <img id = "down_arrow" src='img/nav_arrow_white.png'/>
+            <img id = "up_arrow" src='img/nav_arrow_white.png'/>
+            <img id = "cross" src='img/cross.png'/>
         </div>
 
         <div id="main_block">
@@ -40,15 +36,15 @@ function EditPopup() {
                 </div>
                 <div id="button_attributes">
                     <div id="add_links">
-                        <img src={plusBlack}/> Добавить ссылку
+                        <img src='img/plus_black.png'/> Добавить ссылку
                         <p id="link_attr"><a>https://learn.javascript.ru/</a></p>
                     </div>
                     <div id="add_fields">
-                        <img src={plusBlack}/> Добавить новое поле
-                        <p id="field_attr">Тег <input/></p>
+                        <img src='img/plus_black.png'/> Добавить новое поле
+                        <p id="field_attr"><label></label>Тег <input/></p>
                     </div>
                     <div id="doc_dependencies">
-                        <img src={plusBlack}/> Зависимости
+                        <img src='img/plus_black.png'/> Зависимости
                         <p id="dependency_attr"><input id="large_input"/></p>
                     </div>
                 </div>
