@@ -6,19 +6,23 @@ Information Managment System
 git clone https://github.com/DenSakharov/impuls.git
 
 шаг 1 - Начало работы
+```
 git status
 git pull --rebase origin main
 git branch
 git branch develop
 git checkout develop
-
+```
 шаг 2 -Комичу изменений 
+```
 git add .
 git commit -m 'Новый коммит'
 git push --set-upstream origin develop
 git log --oneline
-
+```
 шаг 3 - Отправляю на github
+```
 git checkout main
 git merge develop
 git push
+```
