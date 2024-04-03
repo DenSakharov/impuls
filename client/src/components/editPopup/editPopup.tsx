@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
-import EditPopupProps from '../interfaces/EditPopupProps';
+import EditPopupProps from '../interfaces/editPopupProps';
 
 function EditPopup(props: EditPopupProps) {
 
