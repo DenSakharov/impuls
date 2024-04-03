@@ -1,7 +1,9 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
+import EditPopupProps from '../interfaces/EditPopupProps';
 
-function EditPopup() {
+function EditPopup(props: EditPopupProps) {
+
   return (
     <div id="edit_popup_window">
         <div id="popup_top_panel"> 
@@ -13,23 +15,23 @@ function EditPopup() {
         <div id="main_block">
             <div id="attr_block">
                 <div id="attr_header">
-                    <p>№ 100000</p>
-                    <p>Документ под названием "Объект 1.2"</p>
-                    <span> Дата создания 22/03/24 </span>
-                    <span> Дата изменения 28/03/24 </span>
+                    <p>№ {props.id}</p>
+                    <p>{props.name}</p>
+                    <span> Дата создания {props.date_created.toString()} </span>
+                    <span> Дата изменения {props.date_changed.toString()} </span>
                     <hr/>
                 </div>
                 <div id="field_attributes">
-                    <p><label>Описание</label> <textarea id="large_input"></textarea></p>
-                    <p><label>Автор</label> <input id="wide_input"/> </p>
-                    <p id="status_p"><label>Статус</label> <input/>
+                    <p><label>Описание</label> <textarea id="large_input">{props.desc}</textarea></p>
+                    <p><label>Автор</label> <input id="wide_input" value={props.author}/> </p>
+                    <p id="status_p"><label>Статус</label> <input value={props.status}/>
                         <button id="accept_offer_button">На утверждение</button>
                         <button id="rework_button">На доработку</button>
                         <button id="accept_button">Утвердить</button>
                         <button id="inwork_button">В разработке</button>                    
                     </p>
-                    <p><label>Тип</label> <input/> <button id="edit_button">Изменить</button></p> 
-                    <p><label>Приоритет</label> <input id="wide_input"/></p>
+                    <p><label>Тип</label> <input value={props.type}/> <button id="edit_button">Изменить</button></p> 
+                    <p><label>Приоритет</label> <input id="wide_input" value={props.priority}/></p>
 
                     <p><label>Вложения</label> <input id="wide_input"/> <button id="edit_button">Изменить</button></p>
                     <p><label>Путь</label> <input id="wide_input"/> <button id="edit_button">Изменить</button></p>
