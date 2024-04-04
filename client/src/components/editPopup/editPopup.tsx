@@ -1,28 +1,27 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
 import EditPopupProps from '../interfaces/editPopupProps';
-import { link } from 'fs';
 
 function EditPopup(props: EditPopupProps) {
     const [status, setStatus] = React.useState(props.status);
     const changeStatus = (value: string) => {
         setStatus((status) => status = value);
     }
-
     const [tags, setTags] = React.useState(props.tags);
+
     const addTags = (value: {key:string, value:string | number}[]) => {
         setTags((tags) => tags = value);
-        console.log(tags)
     }
 
     const updateTag = (value: {key:string, value:string | number}, event: any) => {
         setTags(tags.map(tag => {
-            if (tag.key === value.key) {
-                return {key: value.key, value: event.target.value}
-            } else {
-                return tag;
-            }
-        }));
+                if (tag.key === value.key) {
+                    return {key: value.key, value: event.target.value}
+                } else {
+                    return tag;
+                }
+            })
+        );
     }
 
     
@@ -45,17 +44,17 @@ function EditPopup(props: EditPopupProps) {
                 </div>
                 <div id="field_attributes">
                     <p><label>Описание</label> <textarea id="large_input">{props.desc}</textarea></p>
-                    <p><label>Автор</label> <input id="wide_input" value={props.author}/> </p>
+                    <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
                     <p id="status_p"><label>Статус</label> <input value={status}/>
                         <button onClick={() =>changeStatus("На утверждение")} id="accept_offer_button">На утверждение</button>
                         <button onClick={() =>changeStatus("На доработку")} id="rework_button">На доработку</button>
                         <button onClick={() =>changeStatus("Утвердить")} id="accept_button">Утвердить</button>
                         <button onClick={() =>changeStatus("В разработке")} id="inwork_button">В разработке</button>                    
                     </p>
-                    <p><label>Тип</label> <input value={props.type}/> <button id="edit_button">Изменить</button></p> 
-                    <p><label>Приоритет</label> <input id="wide_input" value={props.priority}/></p>
+                    <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
+                    <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
                     <p><label>Вложения</label> <input id="wide_input"/> <button id="edit_button">Изменить</button></p>
-                    <p><label>Путь</label> <input id="wide_input" value={props.path}/> <button id="edit_button">Изменить</button></p>
+                    <p><label>Путь</label> <input id="wide_input" defaultValue={props.path}/> <button id="edit_button">Изменить</button></p>
                 </div>
                 <div id="button_attributes">
                     <div id="add_links">
@@ -74,7 +73,7 @@ function EditPopup(props: EditPopupProps) {
                             <p id="field_attr"><label></label> 
                             {tag.key}
                             <input 
-                                value={tag.value}
+                                defaultValue={tag.value}
                                 onChange={(event) => updateTag(tag, event)}
                                 /></p>
                         ))}
