@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TestPage from './components/testPage/testPage';
 import EditPopup from './components/editPopup/editPopup';
+import MainPage from './components/mainPage/mainPage';
 
 function App() {
   const popupObj = {
@@ -18,10 +19,14 @@ function App() {
     link: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
   }
+
+
+
   return (
       <BrowserRouter>
         <Routes>
           <Route path='' Component={TestPage}></Route>
+          <Route path='/main' Component={MainPage}></Route>
           <Route path='/popup' element={EditPopup(popupObj)}></Route>
         </Routes>
       </BrowserRouter>
