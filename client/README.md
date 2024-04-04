@@ -16,7 +16,7 @@ git branch
 git branch develop
 git checkout develop
 ```
-шаг 2 -Комичу изменений 
+шаг 2 -Комичу изменений
 ```
 git add .
 git commit -m 'Новый коммит'

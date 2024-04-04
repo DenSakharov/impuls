@@ -16,7 +16,7 @@ header {
   width: 100%;
 }
 
-header h1 {
+header h11 {
   display: inline;
   color: #fff;
   position: relative;
@@ -36,7 +36,7 @@ header h1 {
   right: 5%;
 }
 
-header p {
+header p1 {
   font-size: 18px;
   font-weight: bold;
   margin: 5px;

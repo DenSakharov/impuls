@@ -1,0 +1,57 @@
+@import url("dialog_styles.css");
+@import url("colors_styles.scss");
+
+/* Базовые стили */
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+ul,
+ol,
+dl,
+p {
+  font-size: 12px;  
+}
+
+section {
+  border: solid #c3c0c0 0.5px;
+  padding: 1px;
+  margin: 1px;
+    /* flex-flow: row nowrap; */ 
+    display: flex;  
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: flex-start;
+    background-color: #f1f1f1;
+    height: 100%;
+    gap: 5px;
+}
+
+div {   
+  border: solid #000000 0.5px;
+  padding: 5px;
+  margin: 5px;
+}
+.div-1 {   
+  border: solid #000000 0.5px;
+  padding: 5px;
+  margin: 5px;
+  width:30px;
+  text-align: center;
+  background-color: #f7f7eb;
+}
+
+li
+ {
+  line-height: 1.5;
+  font-weight: bold;
+}
+

@@ -1,21 +1,31 @@
 import React from 'react';
-import './App.css';
+import './mainPage.css';
+
 
 function mainPage() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src='./logo512.png' className="App-logo" alt="logo" />
+        <img src='./img/logo.png' className="App-logo1" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Добро пожаловать в приложение "Импульс"
         </p>
-        <a
+    <h1>Проект IMS</h1>
+    <a
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
+          href="http://localhost:3000"
+          target=""
           rel="noopener noreferrer"
         >
-          Learn React
+          Сменить пользователя
+        </a>
+        <a
+          className="App-link"
+          href="http://localhost:3000/about"
+          target=""
+          rel="noopener noreferrer"
+        >
+          О программе
         </a>
       </header>
     </div>
