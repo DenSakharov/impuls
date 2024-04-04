@@ -9,8 +9,8 @@ interface EditPopupProps {
     type: string;
     priority: string;
     path: string;
-    link: string[];
-    tags: {key:string, value:string | number}[];
+    link: string;
+    tags: {key:string, value:string}[];
   }
 
   export default EditPopupProps;
