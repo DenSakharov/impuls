@@ -6,7 +6,7 @@ import ChatMessage from './chatMessage';
 
 function EditPopup(props: EditPopupProps) {
     const messages = [{  
-        id: 1,    
+        id: 1,
         author: "Илья Красненков",
         date_sent: new Date("2024-01-01"),
         text: "Текст сообщения 1",
