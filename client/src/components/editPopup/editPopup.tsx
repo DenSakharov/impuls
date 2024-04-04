@@ -4,6 +4,7 @@ import EditPopupProps from '../interfaces/editPopupProps';
 import { link } from 'fs';
 
 function EditPopup(props: EditPopupProps) {
+
     const [status, setStatus] = React.useState(props.status);
     const changeStatus = (value: string) => {
         setStatus((status) => status = value);
@@ -12,7 +13,6 @@ function EditPopup(props: EditPopupProps) {
     const [tags, setTags] = React.useState(props.tags);
     const addTags = (value: {key:string, value:string | number}[]) => {
         setTags((tags) => tags = value);
-        console.log(tags)
     }
 
     const updateTag = (value: {key:string, value:string | number}, event: any) => {
@@ -24,6 +24,8 @@ function EditPopup(props: EditPopupProps) {
             }
         }));
     }
+
+    
 
     
   return (
@@ -54,7 +56,6 @@ function EditPopup(props: EditPopupProps) {
                     </p>
                     <p><label>Тип</label> <input value={props.type}/> <button id="edit_button">Изменить</button></p> 
                     <p><label>Приоритет</label> <input id="wide_input" value={props.priority}/></p>
-
                     <p><label>Вложения</label> <input id="wide_input"/> <button id="edit_button">Изменить</button></p>
                     <p><label>Путь</label> <input id="wide_input" value={props.path}/> <button id="edit_button">Изменить</button></p>
                 </div>
@@ -66,15 +67,20 @@ function EditPopup(props: EditPopupProps) {
                         ))}
                     </div>
                     <div id="add_fields">
-                        <div onClick={() => addTags([...tags, {key: 'Тэг'+(tags.length+1), value: ""}])}><img src='img/plus_black.png'/> Добавить новое поле</div>
-                        {tags.map((tag) => (
-                            <p id="field_attr"><label></label> 
-                            {tag.key}
-                            <input 
-                                value={tag.value}
-                                onChange={(event) => updateTag(tag, event)}
-                                /></p>
-                        ))}
+                        <div 
+                        onClick={() => addTags([...tags, {key: 'Тэг'+(tags.length+1), value: ""}])}>
+                            <img src='img/plus_black.png'/> Добавить новое поле
+                        </div>
+
+                            {tags.map((tag) => (
+                                <p id="field_attr"><label></label> 
+                                {tag.key}
+                                <input 
+                                    value={tag.value}
+                                    onChange={(event) => updateTag(tag, event)}
+                                    /></p>
+                            ))}
+
                     </div>
                     <div id="doc_dependencies">
                         <img src='img/plus_black.png'/> Зависимости
