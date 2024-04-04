@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TestPage from './components/testPage/testPage';
 import EditPopup from './components/editPopup/editPopup';
 import MainPage from './components/mainPage/mainPage';
+import About from './components/about/about';
 
 function App() {
   const popupObj = {
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path='' Component={TestPage}></Route>
           <Route path='/main' Component={MainPage}></Route>
+          <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={EditPopup(popupObj)}></Route>
         </Routes>
       </BrowserRouter>
