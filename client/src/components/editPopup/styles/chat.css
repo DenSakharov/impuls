@@ -4,6 +4,7 @@
 
 
 #chat_block{
+
     width: 34%;
     background-color: #FAFAFA;
     border-radius: 0 0 3px 0;
@@ -25,3 +26,39 @@
     width: calc(100% - 20px);
     overflow: hidden;
 }
+
+#avatar{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.messageHeader   {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.text {
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid grey ;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    width: 75%;
+    min-height: 30px;
+    background-color: #FFF;
+}
+
+#chat_line {
+    padding: -10px;
+}   
+
+#header_text{
+    padding-left: 10px;
+}
+
+#chat_log{
+    padding-left: 10px;
+}
+
