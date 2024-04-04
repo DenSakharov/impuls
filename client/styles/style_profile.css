@@ -1,0 +1,178 @@
+body {
+	color: #8f8f8f;
+	font: 12px Tahoma, sans-serif;
+	background-color: #EDF5FB;
+	border-top: 5px solid #7e7e7e;
+	margin: 0;
+}
+
+#wrapper {
+	max-width: auto;
+}
+
+header {
+  background-color: #147298;
+  height: 110px;
+  width: 100%;
+}
+
+header h1 {
+  display: inline;
+  color: #fff;
+  position: relative;
+  top: 30%;
+  left: 10%;
+}
+
+#mainInfo {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  float: right;
+  flex-wrap: wrap;
+  color: #fff;
+  position: relative;
+  top: 20%;
+  right: 5%;
+}
+
+header p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+#infoProfile {
+  display: flex;
+  width: 86%;
+  height: 74%;
+  position: absolute;
+  left: 7%;
+  top: 170px;
+  background-color: #fff;
+  -webkit-box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
+  -moz-box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
+  box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
+}
+
+#editPhoto {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#editPhoto img {
+  width: 90%;
+  min-width: 50%;
+  max-width: 100%;
+  height: 320px;
+  position: relative;
+  top: 10%; left: 10%;
+  margin-bottom: 80px;
+}
+
+#editPhoto button {
+  margin: 20px 0 5px 0;
+}
+
+#bLoadImg {
+  font-size: 16px;
+  background-color: #147298;
+  width: 60%;
+  min-width: 120px;
+  max-width: 350px;
+  height: 40px;
+  border-radius: 25px;
+  position: relative;
+  left: 20%;
+  color: #fff;
+}
+
+#bLoadImg:hover {
+  background-color: #62b0cf;
+  border: #0f4b99 solid 2px;
+}
+
+#bDelImg {
+  font-size: 14px;
+  background-color: #ffffff;
+  border: #147298 solid 2px;
+  color: #147298;
+  width: 40%;
+  min-width: 70px;
+  max-width: 250px;
+  height: 40px;
+  border-radius: 25px;
+  position: relative;
+  left: 30%;
+}
+
+#bDelImg:hover {
+  background-color: #dfdfdf;
+  border: #0f4b99 solid 2px;
+}
+
+#infoUser {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(7, 80px);
+  width: 60%;
+  height: 90%;
+  position: relative;
+  top: 5%;
+}
+
+.infoUserValues {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 30px 10px 30px;
+}
+
+.infoUserValues label {
+  font-size: 16px;
+  color: black;
+}
+
+.infoUserValues input {
+  background: transparent;
+  border: none; 
+  border-bottom: 1px solid rgb(0, 0, 0); 
+}
+
+.infoUserValues input:hover {
+  border-bottom: 3px solid rgb(0, 0, 0); 
+}
+
+#replacePas_Save {
+  grid-row: 6/7;
+  grid-column: 2/2;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  height: 120px;
+}
+
+#bReplacePas {
+  font-size: 16px;
+  color: #147298;
+  margin: 20px 30px 10px 0;
+}
+
+#bSave {
+  font-size: 16px;
+  background-color: #147298;
+  width: 60%;
+  min-width: 120px;
+  max-width: 350px;
+  height: 40px;
+  border-radius: 25px;
+  position: relative;
+  color: #fff;
+  margin: 0 30px 0 0;
+}
+
+#bSave:hover {
+  background-color: #62b0cf;
+  border: #0f4b99 solid 2px;
+}
