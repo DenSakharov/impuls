@@ -1,8 +1,34 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
 import EditPopupProps from '../interfaces/editPopupProps';
+import ChatMessage from './chatMessage';
+
 
 function EditPopup(props: EditPopupProps) {
+    const messages = [{  
+        id: 1,    
+        author: "Илья Красненков",
+        date_sent: new Date("2024-01-01"),
+        text: "Текст сообщения 1",
+        avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
+    },
+    {  
+        id: 2,    
+        author: "Кожевников Сергей",
+        date_sent: new Date("2024-01-02"),
+        text: "Текст сообщения 2",
+        avatar: "https://cdn.discordapp.com/avatars/1206913485267664947/ea519d3cd94003890fd84eec29d8e720.webp?size=80"
+    },
+    {  
+        id: 3,    
+        author: "Илья Красненков",
+        date_sent: new Date("2024-01-03"),
+        text: "Текст сообщения 3",
+        avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
+    }
+]
+
+
     const [status, setStatus] = React.useState(props.status);
     const changeStatus = (value: string) => {
         setStatus((status) => status = value);
@@ -13,18 +39,24 @@ function EditPopup(props: EditPopupProps) {
         setTags((tags) => tags = value);
     }
 
-    const updateTag = (value: {key:string, value:string | number}, event: any) => {
-        setTags(tags.map(tag => {
-                if (tag.key === value.key) {
-                    return {key: value.key, value: event.target.value}
-                } else {
-                    return tag;
-                }
-            })
-        );
+
+    const [messageArr, setMessages] = React.useState(messages)
+    const sendMessage = (event: any) => {
+        if (event.key === "Enter" && event.target.value !== "") {
+            event.preventDefault();
+            setMessages([...messageArr, {
+                id: messageArr.length + 1,
+                author: "Илья Красненков",
+                date_sent: new Date(),
+                text: event.target.value,
+                avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
+            }])
+            event.target.value = "";
+            console.log(messageArr)
+            return messageArr
+        }
     }
 
-    
   return (
     <div id="edit_popup_window">
         <div id="popup_top_panel"> 
@@ -74,7 +106,6 @@ function EditPopup(props: EditPopupProps) {
                             {tag.key}
                             <input 
                                 defaultValue={tag.value}
-                                onChange={(event) => updateTag(tag, event)}
                                 /></p>
                         ))}
                     </div>
@@ -87,15 +118,18 @@ function EditPopup(props: EditPopupProps) {
 
             <div id="chat_block">
                 <div id="chat_header">
-                    <p>Обсуждение</p>
-                    <hr/>
+                    <p id="header_text">Обсуждение</p>
+                    <hr id="chatLine"/>
                 </div>
+               
                 <div id="chat_log">
-
+                    {messageArr.map((message) => (
+                        <ChatMessage {...message} />
+                    ))}
                 </div>
                 <div id="message_field">
-                    <hr/>
-                    <textarea id="chat_input"></textarea>
+                    <hr id="chatLine"/>
+                    <textarea id="chat_input" onKeyDown={(event) => sendMessage(event)}></textarea>
                 </div>
             </div>
 

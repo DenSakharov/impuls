@@ -13,7 +13,7 @@ function App() {
     date_created: new Date("2024-01-01"),
     date_changed: new Date("2024-03-01"),
     type: "Основной документ",
-    priority: "Наивысший",
+    priority: "всевышний",
     path: "S://impuls/client/src/components/testPage/testPage.tsx",
     link: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
