@@ -1,4 +1,3 @@
-
 import './styles/edit_popup_window.css'
 import message from '../interfaces/messageProps';
 
