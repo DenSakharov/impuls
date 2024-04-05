@@ -9,11 +9,12 @@ function ChatMessage(props: message) {
     const author = 'Илья Красненков';
     const style = {
         header: {
-            marginLeft: author !== props.author ? '20%' : 'none',
+            marginLeft: author !== props.author ? '10%' : 'none',
+            width: author !== props.author ? '85%' : '85%',
         },
         message: {
-            marginLeft: author !== props.author ? '20%' : 'none',
-            width: author !== props.author ? '75%' : 'none',
+            marginLeft: author !== props.author ? '20%' : '10%',
+            width: author !== props.author ? '75%' : '75%',
         }
     }
 

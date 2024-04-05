@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/edit_popup_window.css'
 import EditPopupProps from '../interfaces/editPopupProps';
 import ChatMessage from './chatMessage';
-
+    
 
 function EditPopup(props: EditPopupProps) {
     const messages = [{  
@@ -26,21 +26,21 @@ function EditPopup(props: EditPopupProps) {
         text: "Текст сообщения 3",
         avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
     }
-]
 
+]   
 
+    const [messageArr, setMessages] = React.useState(messages);
+    const [tags, setTags] = React.useState(props.tags);
+    const [file, setFile] = React.useState(null)
     const [status, setStatus] = React.useState(props.status);
     const changeStatus = (value: string) => {
         setStatus((status) => status = value);
     }
-    const [tags, setTags] = React.useState(props.tags);
-
+    
     const addTags = (value: {key:string, value:string | number}[]) => {
         setTags((tags) => tags = value);
     }
 
-
-    const [messageArr, setMessages] = React.useState(messages)
     const sendMessage = (event: any) => {
         if (event.key === "Enter" && event.target.value !== "") {
             event.preventDefault();
@@ -52,10 +52,23 @@ function EditPopup(props: EditPopupProps) {
                 avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
             }])
             event.target.value = "";
-            console.log(messageArr)
-            return messageArr
         }
     }
+    const handleFileChange = (event: any) => {
+        const files = event.target.files;
+        if (files.length > 0) {
+            const file = files[0];
+            setFile(file);
+            console.log(file);
+        } else {
+            setFile(null);
+        }
+    };
+
+    const inputRef = React.useRef<HTMLInputElement | null>(null)
+    const handleButtonClick = () => {
+        inputRef.current?.click(); 
+    };
 
   return (
     <div id="edit_popup_window">
@@ -75,39 +88,42 @@ function EditPopup(props: EditPopupProps) {
                     <hr/>
                 </div>
                 <div id="field_attributes">
-                    <p><label>Описание</label> <textarea id="large_input">{props.desc}</textarea></p>
+                    <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
                     <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
-                    <p id="status_p"><label>Статус</label> <input value={status}/>
+                    <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
+                        <span id="status_buttons">
                         <button onClick={() =>changeStatus("На утверждение")} id="accept_offer_button">На утверждение</button>
                         <button onClick={() =>changeStatus("На доработку")} id="rework_button">На доработку</button>
                         <button onClick={() =>changeStatus("Утвердить")} id="accept_button">Утвердить</button>
-                        <button onClick={() =>changeStatus("В разработке")} id="inwork_button">В разработке</button>                    
+                        <button onClick={() =>changeStatus("В разработке")} id="inwork_button">В разработке</button>              
+                        </span>
                     </p>
                     <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
                     <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
-                    <p><label>Вложения</label> <input id="wide_input"/> <button id="edit_button">Изменить</button></p>
-                    <p><label>Путь</label> <input id="wide_input" defaultValue={props.path}/> <button id="edit_button">Изменить</button></p>
+                    <p><label>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
+                    <button  onClick={handleButtonClick} id="edit_button">Изменить</button></p>
+                    <p><label>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
+                    <button  id="edit_button">Изменить</button></p>
                 </div>
-                <div id="button_attributes">
+                <div id="button_attributes" >
                     <div id="add_links">
                         <img src='img/plus_black.png'/> Добавить ссылку
                         {props.link.map((link) => (
-                            <p id="link_attr"><a>{link}</a></p>
+                            <p className="link_attr" ><a key={props.link.indexOf(link)}>{link}</a></p>
                         ))}
                     </div>
                     <div id="add_fields">
-                    <div 
-                        onClick={() => addTags([...tags, {key: 'Тэг'+(tags.length+1), value: ""}])}>
+                    <div id="plus_with_text" onClick={() => addTags([...tags, {key: 'Тэг'+(tags.length+1), value: ""}])}>
                             <img src='img/plus_black.png'/> Добавить новое поле
-                        </div>
+                    </div>
 
-                        {tags.map((tag) => (
-                            <p id="field_attr"><label></label> 
-                            {tag.key}
-                            <input 
-                                defaultValue={tag.value}
-                                /></p>
-                        ))}
+                    {tags.map((tag) => (
+                        <p className="field_attr"><label></label> 
+                        {tag.key}
+                        <input 
+                            defaultValue={tag.value}
+                            /></p>
+                    ))}
                     </div>
                     <div id="doc_dependencies">
                         <img src='img/plus_black.png'/> Зависимости
