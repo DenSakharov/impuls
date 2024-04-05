@@ -1,12 +1,27 @@
+.text {
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid grey ;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    min-height: 30px;
+    background-color: #FFF;
+}
+
+.message{
+    margin-bottom: 8px;
+}
+
 #chat_block {
-    border-left: 0.5mm solid rgb(51, 51, 51, 0.33)
+    border: 0.5mm solid rgb(51, 51, 51, 0.33);
+    border-top: none;
 }
 
 
 #chat_block{
 
     width: 34%;
-    background-color: #FAFAFA;
+    background-color: #FFF;
     border-radius: 0 0 3px 0;
     display: flex;
     flex-direction: column;
@@ -29,8 +44,8 @@
 
 #avatar{
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 
 .messageHeader   {
@@ -39,16 +54,7 @@
     align-items: flex-end;
 }
 
-.text {
-    padding: 2px;
-    margin: 2px;
-    border: 1px solid grey ;
-    border-radius: 5px;
-    overflow-wrap: break-word;
-    width: 75%;
-    min-height: 30px;
-    background-color: #FFF;
-}
+
 
 #chat_line {
     padding: -10px;
@@ -62,3 +68,7 @@
     padding-left: 10px;
 }
 
+#plus_with_text {
+    display: flex;
+    align-items: center;
+}
