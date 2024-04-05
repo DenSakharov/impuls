@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles/edit_popup_window.css'
 import message from '../interfaces/messageProps';
 
