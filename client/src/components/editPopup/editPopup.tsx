@@ -2,6 +2,8 @@ import React from 'react';
 import './styles/edit_popup_window.css'
 import EditPopupProps from '../interfaces/editPopupProps';
 import ChatMessage from './chatMessage';
+import { isDisabled } from '@testing-library/user-event/dist/utils';
+import { stat } from 'fs';
     
 
 function EditPopup(props: EditPopupProps) {
@@ -28,7 +30,10 @@ function EditPopup(props: EditPopupProps) {
     }
 
 ]   
-
+    const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
+                           {value: 'На доработку', style: 'rework_button'},
+                           {value: 'Утвердить', style: 'accept_button'},
+                           {value: 'В разработке', style: 'inwork_button'}]
     const [messageArr, setMessages] = React.useState(messages);
     const [tags, setTags] = React.useState(props.tags);
     const [file, setFile] = React.useState(null)
@@ -91,12 +96,7 @@ function EditPopup(props: EditPopupProps) {
                     <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
                     <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
                     <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
-                        <span id="status_buttons">
-                        <button onClick={() =>changeStatus("На утверждение")} id="accept_offer_button">На утверждение</button>
-                        <button onClick={() =>changeStatus("На доработку")} id="rework_button">На доработку</button>
-                        <button onClick={() =>changeStatus("Утвердить")} id="accept_button">Утвердить</button>
-                        <button onClick={() =>changeStatus("В разработке")} id="inwork_button">В разработке</button>              
-                        </span>
+                        {statusButtons.map((button)=> <button id={button.style} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
                     </p>
                     <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
                     <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
