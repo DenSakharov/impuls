@@ -84,7 +84,12 @@
 }
 
 
-
+#header_date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 15px;
+}
 
 
 

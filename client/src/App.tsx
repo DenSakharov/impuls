@@ -6,6 +6,7 @@ import MainPage from './components/mainPage/mainPage';
 import About from './components/about/about';
 
 function App() {
+
   const popupObj = {
     id: 10000,
     name: "Документ под названием “Объект 1.2”",
@@ -17,7 +18,7 @@ function App() {
     type: "Основной документ",
     priority: "всевышний",
     path: "S://impuls/client/src/components/testPage/testPage.tsx",
-    link: ["https://learn.javascript.ru/","https://google.com"],
+    links: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
   }
 

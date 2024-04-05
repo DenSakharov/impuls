@@ -35,14 +35,24 @@ function EditPopup(props: EditPopupProps) {
                            {value: 'В разработке', style: 'inwork_button'}]
     const [messageArr, setMessages] = React.useState(messages);
     const [tags, setTags] = React.useState(props.tags);
+    const [links, setLinks] = React.useState(props.links)
     const [file, setFile] = React.useState(null)
     const [status, setStatus] = React.useState(props.status);
     const changeStatus = (value: string) => {
-        setStatus((status) => status = value);
+        setStatus(value);
     }
     
-    const addTags = (value: {key:string, value:string | number}[]) => {
-        setTags((tags) => tags = value);
+    const addTags = (value: {key:string, value:string | number}) => {
+        setTags([...tags, value]);
+    }
+
+    const addLinks = () => {
+        let newLink = prompt('Добавьте ссылку', 'https://');
+        if (newLink && (newLink.includes('https://') || newLink.includes('http://') )) {
+            setLinks([...links, newLink]);
+        } else if (newLink) {
+            setLinks([...links, 'https://'.concat(newLink)])
+        }
     }
 
     const sendMessage = (event: any) => {
@@ -77,25 +87,28 @@ function EditPopup(props: EditPopupProps) {
   return (
     <div id="edit_popup_window">
         <div id="popup_top_panel"> 
-            <img id = "down_arrow" src='img/nav_arrow_white.png'/>
-            <img id = "up_arrow" src='img/nav_arrow_white.png'/>
-            <img id = "cross" src='img/cross.png'/>
+            <img id = "down_arrow" src='img/nav_arrow_white.png' alt='arrow'/>
+            <img id = "up_arrow" src='img/nav_arrow_white.png' alt='arrow'/>
+            <img id = "cross" src='img/cross.png' alt='cross'/>
         </div>
-
         <div id="main_block">
             <div id="attr_block">
+
                 <div id="attr_header">
                     <p>№ {props.id}</p>
                     <p>{props.name}</p>
+                    <div id='header_date'>
                     <span> Дата создания {props.date_created.toLocaleDateString()} </span>
                     <span> Дата изменения {props.date_changed.toLocaleDateString()} </span>
+                    </div>
                     <hr/>
                 </div>
+
                 <div id="field_attributes">
                     <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
                     <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
                     <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
-                        {statusButtons.map((button)=> <button id={button.style} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
+                        {statusButtons.map((button)=> <button id={button.style} key={statusButtons.indexOf(button)} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
                     </p>
                     <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
                     <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
@@ -104,28 +117,27 @@ function EditPopup(props: EditPopupProps) {
                     <p><label>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
                     <button  id="edit_button">Изменить</button></p>
                 </div>
+
                 <div id="button_attributes" >
                     <div id="add_links">
-                        <img src='img/plus_black.png'/> Добавить ссылку
-                        {props.link.map((link) => (
-                            <p className="link_attr" ><a key={props.link.indexOf(link)}>{link}</a></p>
+                        <div onClick={addLinks}> <img src='img/plus_black.png' alt='plus'/> Добавить ссылку</div>
+                        {links.map((link) => (
+                            <p className="link_attr" key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></p>
                         ))}
                     </div>
                     <div id="add_fields">
-                    <div id="plus_with_text" onClick={() => addTags([...tags, {key: 'Тэг'+(tags.length+1), value: ""}])}>
-                            <img src='img/plus_black.png'/> Добавить новое поле
-                    </div>
-
-                    {tags.map((tag) => (
-                        <p className="field_attr"><label></label> 
-                        {tag.key}
-                        <input 
-                            defaultValue={tag.value}
-                            /></p>
-                    ))}
+                        <div id="plus_with_text" onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})}>
+                                <img src='img/plus_black.png' alt='plus'/> Добавить новое поле
+                        </div>
+                        {tags.map((tag) => (
+                            <p className="field_attr" key={tags.indexOf(tag)}  >
+                                {tag.key}
+                                <input defaultValue={tag.value} />
+                            </p>
+                        ))}
                     </div>
                     <div id="doc_dependencies">
-                        <img src='img/plus_black.png'/> Зависимости
+                        <img src='img/plus_black.png' alt='plus'/> Зависимости
                         <p id="dependency_attr"><input id="large_input"/></p>
                     </div>
                 </div>
@@ -139,7 +151,7 @@ function EditPopup(props: EditPopupProps) {
                
                 <div id="chat_log">
                     {messageArr.map((message) => (
-                        <ChatMessage {...message} />
+                        <ChatMessage {...message} key={messageArr.indexOf(message)}/>
                     ))}
                 </div>
                 <div id="message_field">
