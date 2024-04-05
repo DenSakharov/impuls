@@ -41,24 +41,29 @@
     color: #D2A506;
     float: right;
     margin-left: auto;
+    min-width: 120px;
 }
 
 #rework_button{
     color: #FF505A;
     float: right;
-    margin-left: auto
+    margin-left: auto;
+    min-width: 120px;
+    
 }
 
 #accept_button{
     color: #12B422;
     float: right;
-    margin-left: auto
+    margin-left: auto;
+    min-width: 120px;
 }
 
 #inwork_button{
     color: #5096FF;
     float: right;
-    margin-left: auto
+    margin-left: auto;
+    min-width: 120px;
 }
 
 #status_buttons{
