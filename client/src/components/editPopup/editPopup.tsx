@@ -146,16 +146,17 @@ function EditPopup(props: EditPopupProps) {
             <div id="chat_block">
                 <div id="chat_header">
                     <p id="header_text">Обсуждение</p>
-                    <hr id="chatLine"/>
+                    <hr id="chat_line"/>
                 </div>
-               
-                <div id="chat_log">
-                    {messageArr.map((message) => (
-                        <ChatMessage {...message} key={messageArr.indexOf(message)}/>
-                    ))}
+               <div id="chat_log">
+                    <div id="chat_messages">
+                        {messageArr.map((message) => (
+                            <ChatMessage {...message} key={messageArr.indexOf(message)}/>
+                        ))}
+                    </div>
                 </div>
                 <div id="message_field">
-                    <hr id="chatLine"/>
+                    <hr id="chat_line"/>
                     <textarea id="chat_input" onKeyDown={(event) => sendMessage(event)}></textarea>
                 </div>
             </div>

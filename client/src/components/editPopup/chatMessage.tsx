@@ -23,10 +23,9 @@ function ChatMessage(props: message) {
         <div className="message">
             <div className="messageHeader" style={style.header}>
                 <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/>
-                <div className="author">{props.author}</div>
-                {props.date_sent.toLocaleDateString()}
-                </div>
-            
+                    <div className="author">{props.author}</div>
+                        {props.date_sent.toLocaleDateString()}
+                    </div>
             <div className="text" style={style.message}>{props.text}</div>
             
         </div>

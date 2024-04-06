@@ -15,17 +15,14 @@
 #chat_block {
     border: 0.5mm solid rgb(51, 51, 51, 0.33);
     border-top: none;
-}
-
-
-#chat_block{
-
+    height: 700px;
     width: 34%;
     background-color: #FFF;
     border-radius: 0 0 3px 0;
     display: flex;
     flex-direction: column;
 }
+
 
 
 #message_field{
@@ -35,8 +32,7 @@
 #chat_input {
     border-radius: 8px;
     display: block;
-    margin: 0 auto;
-    margin-bottom: 8px;
+    margin: 10px auto  10px auto ;
     height: 36px;
     width: calc(100% - 20px);
     overflow: hidden;
@@ -57,7 +53,7 @@
 
 
 #chat_line {
-    padding: -10px;
+    margin: auto;
 }   
 
 #header_text{
@@ -66,9 +62,33 @@
 
 #chat_log{
     padding-left: 10px;
+    overflow-y: auto;
+    display: block;
 }
+
+
+#chat_log::-webkit-scrollbar-track{
+    background-color: #147ccc00;
+}
+#chat_log::-webkit-scrollbar {
+    width: 10px;
+}
+  
+#chat_log::-webkit-scrollbar-thumb {
+
+    border-radius: 0px;
+    background-color: #15739800;
+    border-right: 0.1px solid #157398;
+}
+
+
 
 #plus_with_text {
     display: flex;
     align-items: center;
+}
+
+#chat_messages {
+    display: block;
+    overflow-y: auto;
 }
