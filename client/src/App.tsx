@@ -4,6 +4,7 @@ import TestPage from './components/testPage/testPage';
 import EditPopup from './components/editPopup/editPopup';
 import MainPage from './components/mainPage/mainPage';
 import About from './components/about/about';
+import LoginPage from './components/loginPage/loginPage';
 
 function App() {
   const popupObj = {
@@ -26,7 +27,8 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path='' Component={TestPage}></Route>
+          <Route path='' Component={LoginPage}></Route>
+          <Route path='/test' Component={TestPage}></Route>
           <Route path='/main' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={EditPopup(popupObj)}></Route>
