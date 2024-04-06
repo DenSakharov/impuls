@@ -14,20 +14,28 @@
     border: solid 0.5mm rgb(51, 51, 51, 0.33);
     border-right: none;
     border-top: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#attr_body{
+    height: auto;
+    border-top: none;
     overflow-y: auto;
 }
 
-#attr_block::-webkit-scrollbar-track{
+#attr_body::-webkit-scrollbar-track{
     background-color: #147ccc00;
     
 }
 
 
-#attr_block::-webkit-scrollbar {
+#attr_body::-webkit-scrollbar {
     width: 5px;
 }
   
-#attr_block::-webkit-scrollbar-thumb {
+#attr_body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     max-height: 10px;
     background-color: #157298;
@@ -35,6 +43,7 @@
 }
 
 #attr_header{
+    justify-content: start;
     padding-left: 30px;
 }
 
@@ -118,4 +127,14 @@
 
 #status_p {
     height: 50px;
+}
+
+#header_hr {
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+#plus_with_text {
+    display: flex;
+    align-items: center;
 }

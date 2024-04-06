@@ -93,7 +93,6 @@ function EditPopup(props: EditPopupProps) {
         </div>
         <div id="main_block">
             <div id="attr_block">
-
                 <div id="attr_header">
                     <p>№ {props.id}</p>
                     <p>{props.name}</p>
@@ -101,48 +100,49 @@ function EditPopup(props: EditPopupProps) {
                     <span> Дата создания {props.date_created.toLocaleDateString()} </span>
                     <span> Дата изменения {props.date_changed.toLocaleDateString()} </span>
                     </div>
-                    <hr/>
+                    <hr id='header_hr'/>
                 </div>
-
-                <div id="field_attributes">
-                    <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
-                    <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
-                    <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
-                        {statusButtons.map((button)=> <button id={button.style} key={statusButtons.indexOf(button)} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
-                    </p>
-                    <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
-                    <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
-                    <p><label>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
-                    <button  onClick={handleButtonClick} id="edit_button">Изменить</button></p>
-                    <p><label>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
-                    <button  id="edit_button">Изменить</button></p>
-                </div>
-
-                <div id="button_attributes" >
-                    <div id="add_links">
-                        <div onClick={addLinks}> <img src='img/plus_black.png' alt='plus'/> Добавить ссылку</div>
-                        {links.map((link) => (
-                            <p className="link_attr" key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></p>
-                        ))}
+                <div id="attr_body">
+                    <div id="field_attributes">
+                        <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
+                        <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
+                        <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
+                            {statusButtons.map((button)=> <button id={button.style} key={statusButtons.indexOf(button)} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
+                        </p>
+                        <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
+                        <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
+                        <p><label>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
+                        <button  onClick={handleButtonClick} id="edit_button">Изменить</button></p>
+                        <p><label>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
+                        <button  id="edit_button">Изменить</button></p>
                     </div>
-                    <div id="add_fields">
-                        <div id="plus_with_text" onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})}>
-                                <img src='img/plus_black.png' alt='plus'/> Добавить новое поле
+
+                    <div id="button_attributes" >
+                        <div id="add_links">
+
+                            <div id="plus_with_text" onClick={addLinks}> <img src='img/plus_black.svg' alt='plus'/> Добавить ссылку</div>
+                            {links.map((link) => (
+                                <p className="link_attr" key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></p>
+                            ))}
                         </div>
-                        {tags.map((tag) => (
-                            <p className="field_attr" key={tags.indexOf(tag)}  >
-                                {tag.key}
-                                <input defaultValue={tag.value} />
-                            </p>
-                        ))}
-                    </div>
-                    <div id="doc_dependencies">
-                        <img src='img/plus_black.png' alt='plus'/> Зависимости
-                        <p id="dependency_attr"><input id="large_input"/></p>
+                        <div id="add_fields">
+                            <div id="plus_with_text" onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})}>
+                                    <img src='img/plus_black.svg' alt='plus'/> Добавить новое поле
+                            </div>
+                            {tags.map((tag) => (
+                                <p className="field_attr" key={tags.indexOf(tag)}  >
+                                    {tag.key}
+                                    <input defaultValue={tag.value} />
+                                </p>
+                            ))}
+                        </div>
+                        <div id="doc_dependencies">
+                            <div id="plus_with_text"><img src='img/plus_black.svg' alt='plus'/> Зависимости</div>
+                            <p id="dependency_attr"><input id="large_input"/></p>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div id="chat_block">
                 <div id="chat_header">
                     <p id="header_text">Обсуждение</p>
