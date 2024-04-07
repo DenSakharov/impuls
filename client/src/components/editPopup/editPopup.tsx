@@ -5,7 +5,22 @@ import ChatMessage from './chatMessage';
 
     
 
-function EditPopup(props: EditPopupProps) {
+function EditPopup(props: EditPopupProps = {
+    id: 10000,
+    name: "Документ под названием “Объект 1.2”",
+    desc: "Описание документа 10000 для создания папапа при создании документа",
+    author: "Красненков Илья",
+    status: "В разработке",
+    date_created: new Date("2024-01-01"),
+    date_changed: new Date("2024-03-01"),
+    type: "Основной документ",
+    priority: "всевышний",
+    path: "S://impuls/client/src/components/testPage/testPage.tsx",
+    links: ["https://learn.javascript.ru/","https://google.com"],
+    tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
+  }) 
+
+  {
     const messages = [{  
         id: 1,
         author: "Илья Красненков",
