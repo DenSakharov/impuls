@@ -1,3 +1,6 @@
+@import './styles/bootstrap.min.css';
+@import './styles/fonts.css';
+
 * {
   margin: 0;
   padding: 0;
