@@ -1,3 +1,4 @@
+
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -26,5 +27,17 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+label {
+  height: 30px;
+  width: auto;
+}
+input {
+  height: 15px;
+}
+
+button {
+  height: 50px;
 }
 
