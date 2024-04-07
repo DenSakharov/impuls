@@ -32,9 +32,11 @@ function loginPage() {
       />
       <div className="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" /> Remember me
+           <input type="checkbox" value="remember-me" /> Запомнить
         </label>
       </div>
+
+
       <button className="btn btn-lg btn-primary btn-block" type="submit">
         Войти
       </button>
