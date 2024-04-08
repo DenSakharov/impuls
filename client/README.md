@@ -5,12 +5,12 @@
 
 ## Работа с Git
 
-- **#0 - Создание локальной копии проекта**
+**#0 - Создание локальной копии проекта**
 ``` 
 git clone https://github.com/DenSakharov/impuls.git
 ```
 
-- **#1 - Начало работы**
+**#1 - Начало работы**
 ```
 git status
 git pull --rebase origin main
@@ -18,14 +18,14 @@ git branch
 git branch develop
 git checkout develop
 ```
-- **#2 - Коммит изменений** 
+**#2 - Коммит изменений** 
 ```
 git add .
 git commit -m 'Новый коммит'
 git push --set-upstream origin develop
 git log --oneline
 ```
-- **#3 - Отправка изменений на github**
+**#3 - Отправка изменений на github**
 ```
 git checkout main
 git merge develop
@@ -35,13 +35,13 @@ git push
 
 ## Запуск проекта
 
-- **#0 - Деплоймент** 
+**#0 - Деплоймент** 
 - сделать локальную копию проекта
 ``` 
 git clone https://github.com/DenSakharov/impuls.git
 ```
 
-- **#1 - Установка** 
+**#1 - Установка** 
 - устанавить плагины и зависимости:
 ```
 npm install
@@ -50,7 +50,7 @@ npm update
 npm audit fix --force
 ```
 
-- **#2 - Переключение на рабочую ветку** 
+**#2 - Переключение на рабочую ветку** 
 - проверить запускаемую ветку:
 ```
 git branch
@@ -58,14 +58,14 @@ git checkout main
 git pull
 ```
 
-- **#3 - Запуск проекта** 
+**#3 - Запуск проекта** 
 - Перейти в терминале в папку ``.\client`` в вашей рабочей директории
 ```
 cd ./impuls/client  
 npm run start
 ```
 
-- **#4** - Проверка запуска 
+**#4 - Проверка запуска** 
 - должна стартануть страница с логотипом проекта: 
 http://localhost:3000/
 - откройте любую из страниц проекта, например:
