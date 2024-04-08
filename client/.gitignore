@@ -24,3 +24,5 @@ yarn-error.log*
 
 # packages
 package-lock.json
+.ldb
+.eapx
