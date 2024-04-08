@@ -30,7 +30,7 @@ div, nav, main {
 
 .section {
 	background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(220, 219, 219);
+    border: 1px solid #F5F5F5;
 }
 
 .container-app {
@@ -65,7 +65,7 @@ div, nav, main {
     margin: 0px;
 	width: 200px;
     min-width:30px;
-	background-color: rgb(247, 245, 245);
+	background-color: #F5F5F5;
 }
 
 
@@ -107,13 +107,13 @@ div, nav, main {
 /* end текст для content header */
 
 footer#content{
-	background-color: #444444;
+	background: #F5F5F5;
 	position: relative;
 	min-height: 20%;
 	padding: 0px;
 	margin: 0px;
 	}
-	
+
 footer#content p {
 	color: #2580a2;
 	padding: 0px;
@@ -129,10 +129,10 @@ footer#content p:hover {
 
 #foot{
 	height: 50px;
-	background-color: #444444;
+	background: #F5F5F5;
 	border-style: solid;
 	border-top-width: 1px;
-	border-color: #444444;
+	border-color: #F5F5F5;
 	}
 
 

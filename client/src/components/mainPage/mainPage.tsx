@@ -18,24 +18,25 @@ function mainPage() {
         </div>
 			</li>
 			<li>
-      <a href='index.html' target=""><span>Home</span></a>
+      <a href='' target=""><span>Home</span></a>
 			</li>
 			<li>
-				<a href='index.html' target=""><span>Меню1</span></a>
+				<a href='' target=""><span>Меню1</span></a>
 			</li>
 			<li className='active has-sub'><a href='#'><span>Меню2</span></a>
 				<ul>
-					<li className='has-sub'><a href='index.html' target=""><span>под меню21</span></a></li>
-					<li className='has-sub'><a href='index.html' target=""><span>под меню22</span></a></li>
-					<li className='has-sub'><a href='index.html' target=""><span>под меню23</span></a></li>
-					<li className='has-sub'><a href='index.html' target=""><span>под меню24</span></a></li>
+					<li className='has-sub'><a href='' target=""><span>под меню21</span></a></li>
+					<li className='has-sub'><a href='' target=""><span>под меню22</span></a></li>
+					<li className='has-sub'><a href='' target=""><span>под меню23</span></a></li>
+					<li className='has-sub'><a href='' target=""><span>под меню24</span></a></li>
 				</ul>
 			</li>
-			<li className='last'><a href='index.html' target=""><span>Меню3</span></a>
+			<li className='last'><a href='' target=""><span>Меню3</span></a>
 			</li>
-      <li className='last'><a href='index.html' target=""><span>Меню4</span></a>
+      <li className='last'><a href='' target=""><span>Меню4</span></a>
 			</li>
-
+      <li className='last'><a href='' target=""><span>|</span></a>
+			</li>
       <li className='last'>
       <a
           className="App-link"
