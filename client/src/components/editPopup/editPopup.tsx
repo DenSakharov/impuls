@@ -128,9 +128,8 @@ function EditPopup(props: EditPopupProps = {
                             <button id="button_chat" onClick={() => setFlag(true)}> Обсуждение </button>
                             <button id="button_hist" onClick={() => setFlag(false)}> Изменения  </button>
                             <hr id="chat_line"/>
-                        </div>    
-                {chatOrHistFlag && <Chat/>}
-                {!chatOrHistFlag && <HistChanges/>}
+                        </div>
+                        {chatOrHistFlag ? <Chat/> : <HistChanges/>}
             </div>
 
         </div>
