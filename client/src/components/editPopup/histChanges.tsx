@@ -28,12 +28,12 @@ function HistChanges() {
 
 
     return (
-        <>
-               <div id="hist_record">
-                        {recordArr.map((record) => (
-                            <HistRecord {...record} key={recordArr.indexOf(record)}/>
-                        ))}
-                </div>
+        <>  
+            <div id="hist_record">
+                    {recordArr.map((record) => (
+                        <HistRecord {...record} key={recordArr.indexOf(record)}/>
+                    ))}
+            </div>
         </>
     );
 }
