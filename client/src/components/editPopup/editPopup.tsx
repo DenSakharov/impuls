@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
 import EditPopupProps from '../interfaces/editPopupProps';
-import HistRecord from './histRecord';
 import Chat from './chat';
+import HistChanges from './histChanges';
 
 
 function EditPopup(props: EditPopupProps = {
@@ -18,57 +18,18 @@ function EditPopup(props: EditPopupProps = {
     path: "S://impuls/client/src/components/testPage/testPage.tsx",
     links: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
-  }) 
-
-  {
-    const messages = [{  
-        id: 1,
-        author: "Илья Красненков",
-        date_sent: new Date("2024-01-01"),
-        text: "Текст сообщения 1",
-        avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
-    },
-    {  
-        id: 2,    
-        author: "Кожевников Сергей",
-        date_sent: new Date("2024-01-02"),
-        text: "Текст сообщения 2",
-        avatar: "https://cdn.discordapp.com/avatars/1206913485267664947/ea519d3cd94003890fd84eec29d8e720.webp?size=80"
-    },
-    {  
-        id: 3,    
-        author: "Илья Красненков",
-        date_sent: new Date("2024-01-03"),
-        text: "Текст сообщения 3",
-        avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
-    }
-
-]   
-    const records = [{  
-        id: 1,
-        author: "Сотрудник 1",
-        date_changed: new Date("2024-01-01"),
-        text: "Объект 1: А изменено на Б ",
-        avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
-    },
-    {  
-        id: 2,    
-        author: "Сотрудник 2",
-        date_changed: new Date("2024-01-02"),
-        text: "Обект 1: Discription: Имя -> Наименование",
-        avatar: "https://cdn.discordapp.com/avatars/1206913485267664947/ea519d3cd94003890fd84eec29d8e720.webp?size=80"
-    },
-        ]   
+  }){
+    
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
                            {value: 'На доработку', style: 'rework_button'},
                            {value: 'Утвердить', style: 'accept_button'},
                            {value: 'В разработке', style: 'inwork_button'}]
-    const [messageArr, setMessages] = React.useState(messages);
-    const recordArr = records;
     const [tags, setTags] = React.useState(props.tags);
     const [links, setLinks] = React.useState(props.links)
     const [file, setFile] = React.useState(null)
     const [status, setStatus] = React.useState(props.status);
+    const [chatOrHistFlag, setFlag] = React.useState(true);
+
     const changeStatus = (value: string) => {
         setStatus(value);
     }
@@ -113,8 +74,8 @@ function EditPopup(props: EditPopupProps = {
         <div id="main_block">
             <div id="attr_block">
                 <div id="attr_header">
-                    <p>№ {props.id}</p>
-                    <p>{props.name}</p>
+                    <p id='p_epw'>№ {props.id}</p>
+                    <p id='p_epw'>{props.name}</p>
                     <div id='header_date'>
                     <span> Дата создания {props.date_created.toLocaleDateString()} </span>
                     <span> Дата изменения {props.date_changed.toLocaleDateString()} </span>
@@ -123,16 +84,16 @@ function EditPopup(props: EditPopupProps = {
                 </div>
                 <div id="attr_body">
                     <div id="field_attributes">
-                        <p><label>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
-                        <p><label>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
-                        <p id="status_p"><label>Статус</label> <input value={status} readOnly={true}/>
+                        <p id='p_epw'><label id='label_epw'>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
+                        <p id='p_epw'><label id='label_epw'>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
+                        <p id="status_p"><label id='label_epw'>Статус</label> <input id='input_epw'value={status} readOnly={true}/>
                             {statusButtons.map((button)=> <button id={button.style} key={statusButtons.indexOf(button)} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
                         </p>
-                        <p><label>Тип</label> <input defaultValue={props.type}/> <button id="edit_button">Изменить</button></p> 
-                        <p><label>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
-                        <p><label>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
+                        <p id='p_epw'><label id='label_epw'>Тип</label> <input id='input_epw'defaultValue={props.type}/> <button  id="edit_button">Изменить</button></p> 
+                        <p id='p_epw'><label id='label_epw'>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
+                        <p id='p_epw'><label id='label_epw'>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
                         <button  onClick={handleButtonClick} id="edit_button">Изменить</button></p>
-                        <p><label>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
+                        <p id='p_epw'><label id='label_epw'>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
                         <button  id="edit_button">Изменить</button></p>
                     </div>
 
@@ -151,7 +112,7 @@ function EditPopup(props: EditPopupProps = {
                             {tags.map((tag) => (
                                 <p className="field_attr" key={tags.indexOf(tag)}  >
                                     {tag.key}
-                                    <input defaultValue={tag.value} />
+                                    <input id='input_epw'defaultValue={tag.value} />
                                 </p>
                             ))}
                         </div>
@@ -163,19 +124,13 @@ function EditPopup(props: EditPopupProps = {
                 </div>
             </div>
             <div id="chat_block">
-                <Chat/>
-                <div id="hist_header">
-                    <p id="header_text">Изменения</p>
-                    <hr id="hist_line"/>
-                </div>
-                <div>
-                
-                </div>
-                <div id="hist_record">
-                        {recordArr.map((record) => (
-                            <HistRecord {...record} key={recordArr.indexOf(record)}/>
-                        ))}
-                </div>
+                        <div id="chat_buttons">
+                            <button id="button_chat" onClick={() => setFlag(true)}> Обсуждение </button>
+                            <button id="button_hist" onClick={() => setFlag(false)}> Изменения  </button>
+                            <hr id="chat_line"/>
+                        </div>    
+                {chatOrHistFlag && <Chat/>}
+                {!chatOrHistFlag && <HistChanges/>}
             </div>
 
         </div>

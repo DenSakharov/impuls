@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles/edit_popup_window.css'
-import message from '../interfaces/messageProps';
 import ChatMessage from './chatMessage';
 
 
@@ -27,9 +26,8 @@ function Chat() {
         date_sent: new Date("2024-01-03"),
         text: "Текст сообщения 3",
         avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
-    }
-
-    ]
+    }]
+    
     const [messageArr, setMessages] = React.useState(messages);
     const sendMessage = (event: any) => {
         if (event.key === "Enter" && event.target.value !== "") {
@@ -46,12 +44,8 @@ function Chat() {
     }
 
 
-    return (
-        <>
-        <div id="chat_header">
-                    <p id="header_text">Обсуждение</p>
-                    <hr id="chat_line"/>
-                </div>
+    return (    
+            <>
                <div id="chat_log">
                     <div id="chat_messages">
                         {messageArr.map((message) => (
@@ -63,7 +57,7 @@ function Chat() {
                     <hr id="chat_line"/>
                     <textarea id="chat_input" onKeyDown={(event) => sendMessage(event)}></textarea>
                 </div>
-        </>
+            </>
     );
 }
 
