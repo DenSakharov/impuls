@@ -20,3 +20,35 @@
 .mdl-button {
     margin-top: 15px;
 }
+
+/* material select */
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper:before {
+  position: absolute;
+  content: '';
+  top: 1.5rem;
+  right: 0.5rem;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.select-wrapper:after {
+  position: absolute;
+  content: '';
+  top: 1.6rem;
+  right: 0.8rem;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid rgba(0, 0, 0, 0.24);
+  z-index: 3;
+}
