@@ -9,14 +9,14 @@
 }
 
 
-label {
+.label.epw {
     float: left;
     width: 60px;
     padding-right: 50px;
     flex: none;
 }
 
-button{
+.button.epw{
     background-color: #FFF;
     border-radius: 5px ;
     border-width: 0.5px;
@@ -28,26 +28,26 @@ button{
     padding-bottom: 4px;
 }
 
-button:hover {
+.button:hover.epw {
     text-decoration: underline;
 }
 
 
-input {
+.input.epw {
     border-radius: 8px;
     border-width: 0.5px;
     height: 20px;
     width: 100px;
 }
 
-textarea{
+.textarea.epw {
     resize: none;
     border-radius: 8px;
     overflow:hidden;
 }
 
 
-p{
+.p.epw {
     margin: 4px 0;
 }
 
