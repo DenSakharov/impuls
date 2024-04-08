@@ -1,0 +1,22 @@
+.mdl-layout__content {
+  padding: 24px;
+  flex: 1 0 auto;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mdl-data-table {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .mdl-layout__header-row span {
+    display: none;
+  }
+}
+.mdl-button {
+    margin-top: 15px;
+}
