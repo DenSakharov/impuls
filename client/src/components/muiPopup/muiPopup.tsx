@@ -1,6 +1,6 @@
 import React from 'react';
 import EditPopupProps from '../interfaces/editPopupProps';
-import HistChanges from '../editPopup/histChanges';
+//import HistChanges from '../editPopup/histChanges';
 import PopupBar from './popupBar';
 import data from '../editPopup/data';
 import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography } from '@mui/material';
@@ -74,8 +74,8 @@ function MuiPopup(props: EditPopupProps = data.object) {
     <>
     <div id="edit_popup_window">
         <PopupBar />
-        <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB' }}>
-            <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%'}}>
+        <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB', justifyContent:'flex-start'}}>
+            <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
                 <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
                     <Typography variant="h4" component="h5">{data.object.desc}</Typography>
                         <Stack direction={'row'} spacing={15} justifyContent={'space-between'}>
@@ -171,16 +171,16 @@ function MuiPopup(props: EditPopupProps = data.object) {
                 </Stack>
 
                 <Container sx={{marginTop:'50px'}}>
-                        <Typography onClick={handleOpenForm} align='left'><Add fontSize='large'/>Добавить ссылку</Typography>
-                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'30px'}>
+                        <Button onClick={handleOpenForm} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить ссылку</Button>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
                             {links.map((link) => (
                                     <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
                                 ))}
                         </Stack>
                 </Container>
                 <Container>
-                        <Typography onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} align='left'><Add fontSize='large'/>Добавить тэг</Typography>
-                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'30px'}>
+                        <Button onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить тэг</Button>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
                             {tags.map((tag) => (
                                     <Typography  key={tags.indexOf(tag)}  >
                                         {tag.key}
@@ -196,7 +196,10 @@ function MuiPopup(props: EditPopupProps = data.object) {
                 
             </Container>
         </Box>
-        <Dialog
+        <Button sx={{display:'flex'}}>12312</Button>
+    </div>
+
+    <Dialog
         open={formOpen}
         onClose={handleCloseForm}
         PaperProps={{
@@ -223,7 +226,7 @@ function MuiPopup(props: EditPopupProps = data.object) {
             margin="dense"
             id="name"
             name="link"
-            label="https://"
+            label="Ссылка"
             type="string"
             defaultValue={'https://'}
             fullWidth
@@ -235,8 +238,6 @@ function MuiPopup(props: EditPopupProps = data.object) {
           <Button type="submit">Подтвердить</Button>
         </DialogActions>
       </Dialog>
-    </div>
-    
     </>
   );
 }
