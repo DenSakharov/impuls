@@ -1,35 +1,45 @@
 import React from 'react';
-import './styles/edit_popup_window.css'
+import '../editPopup/styles/edit_popup_window.css'
 import message from '../interfaces/messageProps';
+import { Container, TextField} from '@mui/material';
 
-
-
-function ChatMessage(props: message) {
+export default function MuiMessage(props: message) {
 
     const author = 'Илья Красненков';
     const style = {
         header: {
-            marginLeft: author !== props.author ? '10%' : 'none',
-            width: author !== props.author ? '85%' : '85%',
+            marginLeft: author !== props.author ? '8px' : 'none',
+            width: author !== props.author ? '100%' : '100%',
         },
         message: {
-            marginLeft: author !== props.author ? '20%' : '10%',
-            width: author !== props.author ? '75%' : '75%',
+            marginLeft: author !== props.author ? '8px' : 'none',
+            width: '100%',
+            marginRight: author !== props.author ? 'none' : '8px',
         }
     }
 
 
     return (
-        <div className="message">
-            <div className="messageHeader" style={style.header}>
-                <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/>
-                    <div className="author">{props.author}</div>
-                        {props.date_sent.toLocaleDateString()}
-                    </div>
-            <div className="text" style={style.message}>{props.text}</div>
-            
-        </div>
+        <Container sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        }}> 
+
+            {author !== props.author ? <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/> : null}       
+            <TextField           
+            id="outlined-multiline-static"
+            label={props.author}
+            multiline
+            margin="normal"
+            color='secondary'
+            value={props.text}
+            helperText={props.date_sent.toLocaleDateString()}
+            sx={style.message}
+            />
+            {author !== props.author ? null : <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/>}
+        </Container>
     );
 }
 
-export default ChatMessage;
