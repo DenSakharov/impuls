@@ -1,10 +1,12 @@
 import React from 'react';
 import data from '../editPopup/data';
-import { Drawer, Box, IconButton } from '@mui/material';
-import ChatMessage from '../editPopup/chatMessage';
+import { Drawer, IconButton, Container, Divider, TextField } from '@mui/material';
+import MuiMessage from './muiMessage';
 import { Chat } from '@mui/icons-material';
 
-function MuiChat() {
+
+
+export default function MuiChat() {
     const [isDrawerOpen, setisDrawerOpen] = React.useState(false);
     const [messageArr, setMessages] = React.useState(data.messages);
     const sendMessage = (event: any) => {
@@ -28,24 +30,36 @@ function MuiChat() {
                 color="inherit"
                 aria-label="menu"
                 sx={{ mr: 2 }}>
-                    <Chat onClick={() => setisDrawerOpen(true)}/>
+                <Chat onClick={() => setisDrawerOpen(true)}/>
                 </IconButton>
-                <Drawer anchor={'right'} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
-                        <Box p={2} width='400px'>
-                            <div id="chat_messages">
+                <Drawer anchor={'right'} PaperProps={{ sx:{width: '30%'}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
+                        <Container disableGutters sx={{
+                            paddingLeft: '10px',
+                            overflowY: 'auto',
+                            display: 'block',
+                            margin: 0,                            
+                        }}>
+                            <Container disableGutters>
                                 {messageArr.map((message) => (
-                                    <ChatMessage {...message} key={messageArr.indexOf(message)}/>
+                                    <MuiMessage {...message} key={messageArr.indexOf(message)}/>
                                 ))}
-                            </div>
-                        </Box>
-                        <div id="message_field">
-                            <hr id="chat_line"/>
-                            <textarea id="chat_input" onKeyDown={(event) => sendMessage(event)}></textarea>
-                        </div>           
+                            </Container>
+                        </Container>
+                        <Container sx={{marginTop: 'auto', marginBottom: '10px'}}>
+                            <Divider orientation='horizontal' variant='fullWidth' flexItem/>
+                            <TextField 
+                                onKeyDown={(event) => sendMessage(event)}
+                                id="standard-textarea"
+                                placeholder="Введите сообщение"
+                                multiline
+                                fullWidth
+                                variant="outlined">
+                                </TextField>
+                        </Container>           
                 </Drawer>
 
             </>
     );
 }
 
-export default MuiChat;
+ 
