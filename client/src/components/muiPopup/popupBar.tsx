@@ -6,12 +6,12 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import { ArrowDropUp, ArrowDropDown, Close } from '@mui/icons-material';
 import data from '../editPopup/data';
-
+import MuiChat from './muiChat';
 
 
 export default function PopupBar() {
   return (
-    <Box sx={{ flexGrow: 0}}>
+    <Box sx={{ flexGrow: 0, backgroundColor: '#157298'}}>
       <AppBar position="static" >
         <Toolbar>
           <IconButton
@@ -35,6 +35,7 @@ export default function PopupBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             № {data.object.id}
           </Typography>
+          <MuiChat/>
           <IconButton
           size="large"
           edge="start"

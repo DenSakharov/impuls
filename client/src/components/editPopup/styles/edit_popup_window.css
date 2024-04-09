@@ -3,7 +3,7 @@
 @import "./nav_panel.css";
 
 #edit_popup_window {
-    width: 800px;
+    width: 900px;
     margin: 0 auto;
     height: 1000px;
 }
