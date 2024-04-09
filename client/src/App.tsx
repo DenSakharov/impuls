@@ -5,6 +5,7 @@ import EditPopup from './components/editPopup/editPopup';
 import MainPage from './components/mainPage/mainPage';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
+import MuiPopup from './components/muiPopup/muiPopup';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/main' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={EditPopup()}></Route>
+          <Route path='/popup2' element={MuiPopup()}></Route>
         </Routes>
       </BrowserRouter>
   );
