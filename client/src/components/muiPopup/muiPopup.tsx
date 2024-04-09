@@ -1,10 +1,16 @@
 import React from 'react';
 import EditPopupProps from '../interfaces/editPopupProps';
-import Chat from '../editPopup/chat';
 import HistChanges from '../editPopup/histChanges';
 import PopupBar from './popupBar';
 import data from '../editPopup/data';
-import { InputBase } from '@mui/material';
+import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 
 function MuiPopup(props: EditPopupProps = data.object) {
     
@@ -15,9 +21,9 @@ function MuiPopup(props: EditPopupProps = data.object) {
     const [tags, setTags] = React.useState(props.tags);
     const [links, setLinks] = React.useState(props.links)
     const [file, setFile] = React.useState(null)
+    const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
     const [chatOrHistFlag, setFlag] = React.useState(true);
-
     const changeStatus = (value: string) => {
         setStatus(value);
     }
@@ -26,8 +32,10 @@ function MuiPopup(props: EditPopupProps = data.object) {
         setTags([...tags, value]);
     }
 
-    const addLinks = () => {
-        let newLink = prompt('Добавьте ссылку', 'https://');
+
+    const addLinks = (value : string) => {
+        let newLink = value;
+        console.log(value)
         if (newLink && (newLink.includes('https://') || newLink.includes('http://') )) {
             setLinks([...links, newLink]);
         } else if (newLink) {
@@ -52,61 +60,184 @@ function MuiPopup(props: EditPopupProps = data.object) {
         inputRef.current?.click(); 
     };
 
+
+    const handleCloseForm = () => {
+        setFormOpen(false);
+    }
+
+    const handleOpenForm = () => {
+        setFormOpen(true);
+    }
+
+
   return (
+    <>
     <div id="edit_popup_window">
-        <PopupBar/>
-        <div id="attr_block">
-                <div id="attr_header">
-                    <p id='p_epw'>№ {props.id}</p>
-                    <p id='p_epw'>{props.name}</p>
-                    <div id='header_date'>
-                    <span> Дата создания {props.date_created.toLocaleDateString()} </span>
-                    <span> Дата изменения {props.date_changed.toLocaleDateString()} </span>
-                    </div>
-                    <hr id='header_hr'/>
-                </div>
-                <div id="attr_body">
-                    <div id="field_attributes">
-                        <p id='p_epw'><label id='label_epw'>Описание</label> <textarea id="large_input" defaultValue={props.desc}></textarea></p>
-                        <p id='p_epw'><label id='label_epw'>Автор</label> <input id="wide_input" defaultValue={props.author}/> </p>
-                        <p id="status_p"><label id='label_epw'>Статус</label> <InputBase value={status} readOnly={true}/>
-                            {statusButtons.map((button)=> <button id={button.style} key={statusButtons.indexOf(button)} onClick={() =>changeStatus(button.value)} hidden={status===button.value}>{button.value}</button>)}        
-                        </p>
-                        <p id='p_epw'><label id='label_epw'>Тип</label> <input id='input_epw'defaultValue={props.type}/> <button  id="edit_button">Изменить</button></p> 
-                        <p id='p_epw'><label id='label_epw'>Приоритет</label> <input id="wide_input" defaultValue={props.priority}/></p>
-                        <p id='p_epw'><label id='label_epw'>Вложения</label> <input id="wide_input" defaultValue={file ? file['name'] : ''} readOnly={true}/> <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/> 
-                        <button  onClick={handleButtonClick} id="edit_button">Изменить</button></p>
-                        <p id='p_epw'><label id='label_epw'>Путь</label> <input id="wide_input" defaultValue={props.path} /> 
-                        <button  id="edit_button">Изменить</button></p>
-                    </div>
+        <PopupBar />
+        <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB' }}>
+            <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%'}}>
+                <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
+                    <Typography variant="h4" component="h5">{data.object.desc}</Typography>
+                        <Stack direction={'row'} spacing={15} justifyContent={'space-between'}>
+                            <Typography>Дата создания {data.object.date_created.toLocaleDateString()}</Typography>
+                            <Typography>Дата изменения {data.object.date_changed.toLocaleDateString()}</Typography>
+                        </Stack>
+                        
+                    <Grid container spacing={1} alignItems={'flex-start'}>
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Описание</Typography>
+                        </Grid>
+                        <Grid item xs={9} textAlign='left'>
+                            <TextField 
+                            id="standard-textarea"
+                            placeholder="Placeholder"
+                            sx={{width:'60%'}}
+                            multiline
+                            defaultValue={data.object.desc}
+                            variant="outlined">
+                            </TextField>
+                        </Grid>
 
-                    <div id="button_attributes" >
-                        <div id="add_links">
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Автор</Typography>
+                        </Grid>
+                        <Grid item xs={9} textAlign='left'>
+                            <TextField 
+                            id="standard-textarea"
+                            placeholder="Placeholder"
+                            sx={{width:'60%'}}
+                            multiline
+                            defaultValue={data.object.author}
+                            variant="outlined">
+                            </TextField>
+                        </Grid>
 
-                            <div id="plus_with_text" onClick={addLinks}> <img src='img/plus_black.svg' alt='plus'/> Добавить ссылку</div>
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Статус</Typography>
+                        </Grid>
+                        <Grid item xs={3} textAlign='left'>
+                                <TextField  size='small' id="outlined-basic" variant="outlined"  value={status}/>
+                        </Grid>
+                        <Grid item xs={6}/>
+                        
+                        <Grid item xs={3}/>
+                        <Grid item xs={9} textAlign='left'>
+                            <ButtonGroup size='small'>
+                                    {statusButtons.map((button) => (
+                                        <Button size='small' onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
+                                    ))}
+                            </ButtonGroup>
+                        </Grid>
+
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Тип</Typography>
+                        </Grid>
+                        <Grid item xs={3} textAlign='left'>
+                            <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.type}/>
+                        </Grid>
+                        <Grid item xs={6} textAlign='left'>
+                            <Button size='small' variant='outlined'>Изменить</Button>
+                        </Grid>
+
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Приоритет</Typography>
+                        </Grid>
+                        <Grid item xs={3} textAlign='left'>
+                            <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.priority}/>
+                        </Grid>
+                        <Grid item xs={6}/>
+
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Вложения</Typography>
+                        </Grid>
+                        <Grid item xs={6} textAlign='left'>
+                            <TextField  size='small' fullWidth id="outlined-basic" variant="outlined"  value={file ? file['name'] : ''} />
+                        </Grid>
+                        <Grid item xs={3} textAlign='left'>
+                            <Button size='small' variant='outlined' onClick={handleButtonClick}>Изменить</Button>
+                            <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
+                        </Grid>  
+
+                        <Grid item xs={3}> 
+                            <Typography align='left'>Путь</Typography>
+                        </Grid>
+                        <Grid item xs={6} textAlign='left'>
+                            <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={data.object.path}/>
+                        </Grid>
+                        <Grid item xs={3} textAlign='left'>
+                            <Button size='small'  variant='outlined'>Изменить</Button>
+                        </Grid>
+                    </Grid>
+                </Stack>
+
+                <Container sx={{marginTop:'50px'}}>
+                        <Typography onClick={handleOpenForm} align='left'><Add fontSize='large'/>Добавить ссылку</Typography>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'30px'}>
                             {links.map((link) => (
-                                <p className="link_attr" key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></p>
-                            ))}
-                        </div>
-                        <div id="add_fields">
-                            <div id="plus_with_text" onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})}>
-                                    <img src='img/plus_black.svg' alt='plus'/> Добавить новое поле
-                            </div>
+                                    <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
+                                ))}
+                        </Stack>
+                </Container>
+                <Container>
+                        <Typography onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} align='left'><Add fontSize='large'/>Добавить тэг</Typography>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'30px'}>
                             {tags.map((tag) => (
-                                <p className="field_attr" key={tags.indexOf(tag)}  >
-                                    {tag.key}
-                                    <input id='input_epw'defaultValue={tag.value} />
-                                </p>
-                            ))}
-                        </div>
-                        <div id="doc_dependencies">
-                            <div id="plus_with_text"><img src='img/plus_black.svg' alt='plus'/> Зависимости</div>
-                            <p id="dependency_attr"><input id="large_input"/></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <Typography  key={tags.indexOf(tag)}  >
+                                        {tag.key}
+                                        <TextField size='small' defaultValue={tag.value} />
+                                    </Typography>
+                                ))}
+                        </Stack>
+                </Container>
+                <Container>
+                        <Typography align='left'><Add fontSize='large'/>Зависимости</Typography>
+                        <Box color={'black'} width={'30px'} height={'30px'}></Box>
+                </Container>
+                
+            </Container>
+        </Box>
+        <Dialog
+        open={formOpen}
+        onClose={handleCloseForm}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries((formData as any).entries());
+            const link = formJson.link;
+            console.log(link);
+            addLinks(link);
+            handleCloseForm();
+          },
+        }}
+      >  
+      <DialogTitle>Редактирование ссылок</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Какую ссылку вы хотите добавить?
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="link"
+            label="https://"
+            type="string"
+            defaultValue={'https://'}
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseForm}>Отмена</Button>
+          <Button type="submit">Подтвердить</Button>
+        </DialogActions>
+      </Dialog>
     </div>
+    
+    </>
   );
 }
 
