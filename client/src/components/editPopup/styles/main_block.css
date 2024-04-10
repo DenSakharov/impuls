@@ -1,10 +1,49 @@
+.field_attr {
+    padding-left: 50px;
+}
+
+.link_attr {
+    padding-left: 50px;
+}
+
 #attr_block{
     width: 66%;
-    background-color: #F6EBEB;
+    height: 700px;
+    background-color: #EDF5FB;
     border-radius: 0 0 0 7px;
+    border: solid 0.5mm rgb(51, 51, 51, 0.33);
+    border-right: none;
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#attr_body{
+    height: auto;
+    border-top: none;
+    overflow-y: auto;
+}
+
+#attr_body::-webkit-scrollbar-track{
+    background-color: #147ccc00;
+    
+}
+
+
+#attr_body::-webkit-scrollbar {
+    width: 5px;
+}
+  
+#attr_body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    max-height: 10px;
+    background-color: #157298;
+    border: 0.1px solid #00000041;
 }
 
 #attr_header{
+    justify-content: start;
     padding-left: 30px;
 }
 
@@ -15,7 +54,7 @@
 
 #button_attributes {
     padding-bottom: 0;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-left: 30px;
 }
 
@@ -29,26 +68,36 @@
 #accept_offer_button{
     color: #D2A506;
     float: right;
+    margin-left: auto;
+    min-width: 120px;
 }
 
 #rework_button{
     color: #FF505A;
     float: right;
+    margin-left: auto;
+    min-width: 120px;
+    
 }
 
 #accept_button{
     color: #12B422;
     float: right;
+    margin-left: auto;
+    min-width: 120px;
 }
 
 #inwork_button{
     color: #5096FF;
     float: right;
+    margin-left: auto;
+    min-width: 120px;
 }
 
 #status_buttons{
     height: auto;
     width: auto;
+    margin-left: auto
 }
 
 #large_input{
@@ -63,14 +112,29 @@
 }
 
 
-#link_attr {
-    padding-left: 50px;
+#header_date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 15px;
 }
 
-#field_attr {
-    padding-left: 50px;
-}
+
 
 #dependency_attr {
     padding-left: 50px;
+}
+
+#status_p {
+    height: 50px;
+}
+
+#header_hr {
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+#plus_with_text {
+    display: flex;
+    align-items: center;
 }
