@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TestPage from './components/testPage/testPage';
 import EditPopup from './components/editPopup/editPopup';
+import Profile from './components/profile/profile';
+import ReplacePassword from './components/profile/replacePassword';
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
         <Routes>
           <Route path='' Component={TestPage}></Route>
           <Route path='/popup' Component={EditPopup}></Route>
+          <Route path='/profile' Component={Profile}></Route>
+          <Route path='/replacePassword' Component={ReplacePassword}></Route>
         </Routes>
       </BrowserRouter>
   );
