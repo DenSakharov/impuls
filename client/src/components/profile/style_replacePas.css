@@ -1,0 +1,77 @@
+#page-replacePassword {
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 30px 0;
+}
+
+#mainForm {
+  background-color: #fff;
+  width: 35%;
+  min-width: 150px;
+  max-width: 480px;
+  height: 400px;
+  min-height: 200px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
+}
+
+#header-replacePassword {
+  background-color: #147298;
+  color: #fff;
+  height: 15%;
+  position: relative;
+  margin: 0;
+  padding-top: 10px;
+}
+
+#header-replacePassword h2 {
+  display: inline;
+  margin: 0 auto 0 10px;
+}
+
+#header-replacePassword img {
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin: 5px 10px auto auto;
+}
+
+.repPas {
+  height: 40px;
+  width: 60%;
+  position: relative;
+  top: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto 0 10px;
+}
+
+.repPas input {
+  background: transparent;
+  border: none; 
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin-top: 10px;
+}
+
+.repPas input:hover {
+  border-bottom: 3px solid rgb(0, 0, 0); 
+}
+
+#bSave-replacePassword {
+  font-size: 16px;
+  background-color: #147298;
+  width: 50%;
+  min-width: 120px;
+  max-width: 400px;
+  height: 40px;
+  border-radius: 25px;
+  position: relative;
+  left: 25%;
+  top: 20%;
+  color: #fff;
+  margin: 0 30px 0 0;
+  cursor:pointer;
+}
