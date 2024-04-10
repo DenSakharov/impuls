@@ -1,68 +1,22 @@
 import React from 'react';
 import './stylesMainPage.css';
+import MuiMenu from './muiMenu';
+import MuiTree from './muiTree';
+import data from '../editPopup/data';
 
-function mainPage() {
+function MainPage() {
+
+  const [projectData, setProjectData] = React.useState(data.tree[0]);
+
+  const changeState = (value : any) => {
+    setProjectData(value)
+    console.log(projectData)
+  }
+
   return (
 <div className="mainApp mainApp-push-bottom">
 
-<header className="header">
-
-    <nav id="cssmenu">
-		<ul>
-			<li>
-          <img src='./img/logo.png' className="mainApp-logo" alt="logo" width="50" height="50" />
-			</li>
-      <li>
-        <div>
-         <p id="h3">IMS Impuls </p>
-         <p>Project №1</p>
-        </div>
-			</li>
-			<li>
-      <a href='' target=""><span>Home</span></a>
-			</li>
-			<li>
-				<a href='' target=""><span>Меню1</span></a>
-			</li>
-			<li className='active has-sub'><a href='#'><span>Меню2</span></a>
-				<ul>
-					<li className='has-sub'><a href='' target=""><span>под меню21</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню22</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню23</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню24</span></a></li>
-				</ul>
-			</li>
-			<li className='last'><a href='' target=""><span>Меню3</span></a>
-			</li>
-      <li className='last'><a href='' target=""><span>Меню4</span></a>
-			</li>
-      <li className='last'><a href='' target=""><span>|</span></a>
-			</li>
-      <li className='last'>
-      <a
-          className="App-link"
-          href="http://localhost:3000"
-          target=""
-          rel="noopener noreferrer"
-        >
-          Сменить пользователя
-        </a>
-       </li>
-       <li className='last'><a
-          className="App-link"
-          href="http://localhost:3000/about"
-          target=""
-          rel="noopener noreferrer"
-        >
-          Профиль
-          </a>
-			</li>
-       <li className='last'>
-			</li>
-		</ul>
-  </nav>
-
-</header>
+<MuiMenu changeState={changeState}/>
 
 <div className ="clear"/>
 
@@ -70,7 +24,7 @@ function mainPage() {
   <div className='container-app'>
 
     <div className="aside">
-   	Left side
+   	 <MuiTree projectData={projectData}/>
   	</div>
 
 	  <div className="content">
@@ -117,4 +71,4 @@ function mainPage() {
 );
 }
 
-export default mainPage;
+export default MainPage;
