@@ -67,7 +67,7 @@ function Profile() {
               <input type="text"/>
             </div>
             <div id="replacePas_Save">
-              <a href="replacePas.html" id="bReplacePas">Изменить пароль</a>
+              <a href="/replace_password" id="bReplacePas">Изменить пароль</a>
               <button id="bSave-profile" type="button">Сохранить</button>
             </div>
           </div>
