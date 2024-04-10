@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Button, ButtonGroup, Container, Divider, Menu, MenuItem } from '@mui/material';
-
+import { Button, ButtonGroup, Container, Divider, Menu, MenuItem, } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 export default function MainFormBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -32,7 +33,12 @@ export default function MainFormBar() {
             />
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: 200}}>
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
-                <Typography> Project №1 </Typography>
+                <Typography> Project №1
+                    <Button variant='text' size='large' sx={{color: 'white'}}> + </Button>
+                </Typography>
+
+
+
             </Container>
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
@@ -52,12 +58,18 @@ export default function MainFormBar() {
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 3 </Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 4 </Button>
                     <Divider color ='white' orientation="vertical" flexItem />
-                    <Button variant='text' size='large'sx={{color: 'white'}}>Сменить пользователя</Button>
-                    <Button variant='text' size='large'sx={{color: 'white'}}>О программе</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}>Профиль</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
+
                 </ButtonGroup>
+
             </Container>
         </Toolbar>
       </AppBar>
     </Box>
+
+
+
+
   );
 }
