@@ -9,6 +9,7 @@ export default function MuiTree() {
         <TreeItem 
         itemId={node.name} 
         label={node.name} 
+        key={node.name}
         sx={{textAlign:"left"}}
         onClick={() => node.object ? window.open('/Popup?id=' + node.object.id) : null}
         >
