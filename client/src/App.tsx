@@ -16,7 +16,6 @@ function App() {
           <Route path='/main' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
-          <Route path='/MainFormBar' Component={MainFormBar}></Route>
         </Routes>
       </BrowserRouter>
   );
