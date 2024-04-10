@@ -2,6 +2,7 @@ import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
+import MuiButTree from './muiButTree';
 
 function mainPage() {
   return (
@@ -15,6 +16,7 @@ function mainPage() {
   <div className='container-app'>
 
     <div className="aside">
+     <MuiButTree/>
    	 <MuiTree/>
   	</div>
 
@@ -28,6 +30,9 @@ function mainPage() {
 
       <div id="container-news">
       <p>Новости</p>
+      <div className="aside">
+
+  	  </div>
    	  </div>
 
       <div id="container-kpi">
