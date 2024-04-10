@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, Container, Divider, Menu, MenuItem } from '@mui/material';
-import ProjectDialog from './muiDialog';
-import data from '../editPopup/data';
 
-export default function MainFormBar({changeState} : any) {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [formOpen, setFormOpen] = React.useState(false);
@@ -48,7 +45,7 @@ export default function MainFormBar({changeState} : any) {
             />
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
-                <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
+                <Typography> Project №1 </Typography>
             </Container>
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
@@ -68,13 +65,19 @@ export default function MainFormBar({changeState} : any) {
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 3 </Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 4 </Button>
                     <Divider color ='white' orientation="vertical" flexItem />
-                    <Button variant='text' size='large'sx={{color: 'white'}}>Сменить пользователя</Button>
-                    <Button variant='text' size='large'sx={{color: 'white'}}>О программе</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}>Профиль</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
+
                 </ButtonGroup>
+
             </Container>
         </Toolbar>
       </AppBar>
       <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
+
+
+
+
   );
 }

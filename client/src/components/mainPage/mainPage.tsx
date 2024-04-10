@@ -2,7 +2,6 @@ import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
-import data from '../editPopup/data';
 
 function MainPage() {
 
@@ -24,7 +23,7 @@ function MainPage() {
   <div className='container-app'>
 
     <div className="aside">
-   	 <MuiTree projectData={projectData}/>
+   	 <MuiTree/>
   	</div>
 
 	  <div className="content">
@@ -37,6 +36,9 @@ function MainPage() {
 
       <div id="container-news">
       <p>Новости</p>
+      <div className="aside">
+
+  	  </div>
    	  </div>
 
       <div id="container-kpi">
