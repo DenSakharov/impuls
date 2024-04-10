@@ -6,7 +6,6 @@ import HistChanges from './histChanges';
 import data from './data'
 
 
-
 function EditPopup(props: EditPopupProps = data.object){
     
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
