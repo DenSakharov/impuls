@@ -1,5 +1,5 @@
 import './style_replacePas.css';
-import bClose from './img/bBack.svg'
+import bClose from './img/bClose.svg'
 
 function ReplacePassword() {
   return(
