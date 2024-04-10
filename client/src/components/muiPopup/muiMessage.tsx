@@ -7,10 +7,6 @@ export default function MuiMessage(props: message) {
 
     const author = 'Илья Красненков';
     const style = {
-        header: {
-            marginLeft: author !== props.author ? '8px' : 'none',
-            width: author !== props.author ? '100%' : '100%',
-        },
         message: {
             marginLeft: author !== props.author ? '8px' : 'none',
             width: '100%',
