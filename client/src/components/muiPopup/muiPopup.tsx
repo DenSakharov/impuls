@@ -3,13 +3,13 @@ import EditPopupProps from '../interfaces/editPopupProps';
 //import HistChanges from '../editPopup/histChanges';
 import PopupBar from './popupBar';
 import data from '../editPopup/data';
-import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import MuiDialog from './muiDialog';
 
 
 
-function MuiPopup(props: EditPopupProps = data.object) {
+export default function MuiPopup(props: EditPopupProps = data.object) {
     
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
                            {value: 'На доработку', style: 'rework_button'},
@@ -66,104 +66,109 @@ function MuiPopup(props: EditPopupProps = data.object) {
         setFormOpen(true);
     }
 
-
+    const mdGridName = 1.5
+    const mdGridValue = 5
+    const mdGridSpace = 12-mdGridName-mdGridValue
+    const smGridName = 3
+    const smGridValue = 8
   return (
     <>
-        <Container sx={{height:'900px'}}>
+        <Container disableGutters sx={{height:'900px', maxWidth:'900px'}}>
             <PopupBar />
             <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB', justifyContent:'flex-start'}}>
                 <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
-                        <Typography variant='h6'  sx={{display: 'flex', margin: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.desc}</Typography>
+                        <Typography variant='h6'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
                             <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
                                 <Typography>Дата создания {data.object.date_created.toLocaleDateString()}</Typography>
                                 <Typography>Дата изменения {data.object.date_changed.toLocaleDateString()}</Typography>
                             </Stack>
-                            
+                        <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
+                        
                         <Grid container spacing={1} alignItems={'flex-start'}>
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName} > 
                                 <Typography align='left'>Описание</Typography>
                             </Grid>
-                            <Grid item xs={9} textAlign='left'>
+                            <Grid item md={mdGridValue} xs={smGridValue}  textAlign='left'>
                                 <TextField 
                                 id="standard-textarea"
-                                placeholder="Placeholder"
-                                sx={{width:'60%'}}
+                                placeholder="Описание объекта"
                                 multiline
+                                fullWidth
+                                rows={3}
                                 defaultValue={data.object.desc}
                                 variant="outlined">
                                 </TextField>
                             </Grid>
+                            <Grid item md={mdGridSpace} xs={0}/>
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Автор</Typography>
                             </Grid>
-                            <Grid item xs={9} textAlign='left'>
+                            <Grid item md={mdGridValue} xs={smGridValue-3} textAlign='left'>
                                 <TextField 
                                 id="standard-textarea"
                                 placeholder="Placeholder"
-                                sx={{width:'60%'}}
+                                fullWidth
                                 multiline
                                 defaultValue={data.object.author}
                                 variant="outlined">
                                 </TextField>
                             </Grid>
+                            <Grid item md={mdGridSpace} xs={mdGridSpace-3}/>
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Статус</Typography>
                             </Grid>
-                            <Grid item xs={3} textAlign='left'>
+                            <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
                                     <TextField  size='small' id="outlined-basic" variant="outlined"  value={status}/>
-                            </Grid>
-                            <Grid item xs={6}/>
-                            
-                            <Grid item xs={3}/>
-                            <Grid item xs={9} textAlign='left'>
-                                <ButtonGroup size='small'>
-                                        {statusButtons.map((button) => (
-                                            <Button size='small' onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
-                                        ))}
-                                </ButtonGroup>
+                            </Grid>                            
+                            <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
+                                    <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
+                                            {statusButtons.map((button) => (
+                                                <Button size='small' sx={{fontSize: {md:'12px',xs:'10px'}}} style={{height: '40px'}} onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
+                                            ))}
+                                    </ButtonGroup>
                             </Grid>
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Тип</Typography>
                             </Grid>
-                            <Grid item xs={3} textAlign='left'>
+                            <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
                                 <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.type}/>
                             </Grid>
-                            <Grid item xs={6} textAlign='left'>
-                                <Button size='small' variant='outlined'>Изменить</Button>
+                            <Grid item md={mdGridSpace+3} xs={4} textAlign='left'>
+                                <Button style={{height: '40px'}} size='small' variant='outlined'>Изменить</Button>
                             </Grid>
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Приоритет</Typography>
                             </Grid>
-                            <Grid item xs={3} textAlign='left'>
+                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
                                 <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.priority}/>
                             </Grid>
-                            <Grid item xs={6}/>
+                            <Grid item md={mdGridSpace} xs={4}/>
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Вложения</Typography>
                             </Grid>
-                            <Grid item xs={6} textAlign='left'>
+                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
                                 <TextField  size='small' fullWidth id="outlined-basic" variant="outlined"  value={file ? file['name'] : ''} />
                             </Grid>
-                            <Grid item xs={3} textAlign='left'>
-                                <Button size='small' variant='outlined' onClick={handleButtonClick}>Изменить</Button>
+                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                                <Button style={{height: '40px'}} size='small' variant='outlined' onClick={handleButtonClick}>Изменить</Button>
                                 <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
                             </Grid>  
 
-                            <Grid item xs={3}> 
+                            <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Путь</Typography>
                             </Grid>
-                            <Grid item xs={6} textAlign='left'>
+                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
                                 <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={data.object.path}/>
 
                             </Grid>
-                            <Grid item xs={3} textAlign='left'>
-                                <Button size='small'  variant='outlined'>Изменить</Button>
+                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                                <Button style={{height: '40px'}} size='small'  variant='outlined'>Изменить</Button>
                             </Grid>
                         </Grid>
                     </Stack>
@@ -200,5 +205,3 @@ function MuiPopup(props: EditPopupProps = data.object) {
     </>
   );
 }
-
-export default MuiPopup;
