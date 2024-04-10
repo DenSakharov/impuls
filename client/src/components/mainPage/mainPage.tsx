@@ -54,8 +54,10 @@ function mainPage() {
           target=""
           rel="noopener noreferrer"
         >
-          О программе
+          Профиль
           </a>
+			</li>
+       <li className='last'>
 			</li>
 		</ul>
   </nav>
@@ -92,9 +94,7 @@ function mainPage() {
    	  </div>
 
     </div>
-
-
-	  </div>
+	</div>
 
   </div>
 </main>
@@ -103,7 +103,9 @@ function mainPage() {
 
 <footer id="content">
     <div id='foot'>
-      <p> <a href="">О программе </a> | <a href="">Контакты </a> </p>
+      <p> <a className="App-link" href="http://localhost:3000/about"
+          target="" rel="noopener noreferrer">
+          О проекте </a> | <a href="">Контакты </a> </p>
       <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
     </div>
 
