@@ -2,12 +2,21 @@ import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
+import data from '../editPopup/data';
 
-function mainPage() {
+function MainPage() {
+
+  const [projectData, setProjectData] = React.useState(data.tree[0]);
+
+  const changeState = (value : any) => {
+    setProjectData(value)
+    console.log(projectData)
+  }
+
   return (
 <div className="mainApp mainApp-push-bottom">
 
-<MuiMenu/>
+<MuiMenu changeState={changeState}/>
 
 <div className ="clear"/>
 
@@ -15,7 +24,7 @@ function mainPage() {
   <div className='container-app'>
 
     <div className="aside">
-   	 <MuiTree/>
+   	 <MuiTree projectData={projectData}/>
   	</div>
 
 	  <div className="content">
@@ -62,4 +71,4 @@ function mainPage() {
 );
 }
 
-export default mainPage;
+export default MainPage;
