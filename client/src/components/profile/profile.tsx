@@ -1,5 +1,5 @@
 import './style_profile.css';
-import bBack from 'img/bBack.svg'
+import bBack from './img/bBack.svg'
 
 function Profile() {
   return(
@@ -7,7 +7,7 @@ function Profile() {
       <div id="wrapper">
 		    <header id="header-profile">
           <div id="header-left_site">
-            <a id="bBack-profile" href="">
+            <a id="bBack-profile" href="/">
               <img src={bBack}/>
             </a>
             <h1>Мой профиль</h1>

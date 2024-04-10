@@ -11,8 +11,8 @@ function App() {
         <Routes>
           <Route path='' Component={TestPage}></Route>
           <Route path='/popup' Component={EditPopup}></Route>
-          <Route path='/profile' Component={Profile}></Route>
-          <Route path='/replacePassword' Component={ReplacePassword}></Route>
+          <Route path='/popup' Component={Profile}></Route>
+          <Route path='/popup' Component={ReplacePassword}></Route>
         </Routes>
       </BrowserRouter>
   );
