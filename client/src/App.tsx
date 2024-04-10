@@ -5,7 +5,6 @@ import MainPage from './components/mainPage/mainPage';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
-import MainFormBar from './components/mainPage/muiMenu';
 
 function App() {
   return (
