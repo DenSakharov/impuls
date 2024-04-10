@@ -20,7 +20,7 @@ function App() {
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/profile' Component={Profile}></Route>
-          <Route path='/replacePassword' Component={ReplacePassword}></Route>
+          <Route path='/replace_password' Component={ReplacePassword}></Route>
         </Routes>
       </BrowserRouter>
   );
