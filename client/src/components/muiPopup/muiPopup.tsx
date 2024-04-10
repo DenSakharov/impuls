@@ -76,7 +76,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         <Container disableGutters sx={{height:'900px', maxWidth:'900px'}}>
             <PopupBar />
             <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB', justifyContent:'flex-start'}}>
-                <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
+                <Container sx={{ backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
                         <Typography variant='h6'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
                             <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
@@ -105,7 +105,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Автор</Typography>
                             </Grid>
-                            <Grid item md={mdGridValue} xs={smGridValue-3} textAlign='left'>
+                            <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
                                 <TextField 
                                 id="standard-textarea"
                                 placeholder="Placeholder"
@@ -115,7 +115,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 variant="outlined">
                                 </TextField>
                             </Grid>
-                            <Grid item md={mdGridSpace} xs={mdGridSpace-3}/>
+                            <Grid item md={mdGridSpace+2} xs={mdGridSpace-3}/>
 
                             <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Статус</Typography>

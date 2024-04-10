@@ -1,7 +1,6 @@
 import React from 'react';
-import '../editPopup/styles/edit_popup_window.css'
 import message from '../interfaces/messageProps';
-import { Container, TextField} from '@mui/material';
+import { Avatar, Container, TextField} from '@mui/material';
 
 export default function MuiMessage(props: message) {
 
@@ -23,7 +22,7 @@ export default function MuiMessage(props: message) {
             alignItems: 'center',
         }}> 
 
-            {author !== props.author ? <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/> : null}       
+            {author !== props.author ? <Avatar src={props.avatar} alt={props.author}/> : null}       
             <TextField           
             id="outlined-multiline-static"
             label={props.author}
@@ -34,7 +33,7 @@ export default function MuiMessage(props: message) {
             helperText={props.date_sent.toLocaleDateString()}
             sx={style.message}
             />
-            {author !== props.author ? null : <img className="avatar" src={props.avatar} alt="avatar" id="avatar"/>}
+            {author !== props.author ? null : <Avatar src={props.avatar} alt={props.author}/>}
         </Container>
     );
 }
