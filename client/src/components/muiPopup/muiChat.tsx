@@ -32,7 +32,7 @@ export default function MuiChat() {
                 sx={{ mr: 2 }}>
                 <Chat onClick={() => setisDrawerOpen(true)}/>
                 </IconButton>
-                <Drawer anchor={'right'} PaperProps={{ sx:{width: '30%'}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
+                <Drawer anchor={'right'} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
                         <Container disableGutters sx={{
                             paddingLeft: '10px',
                             overflowY: 'auto',
