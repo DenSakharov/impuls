@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, Container, Divider, Menu, MenuItem } from '@mui/material';
-
+import ProjectDialog from './muiDialog';
 
 export default function MainFormBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -14,6 +14,10 @@ export default function MainFormBar() {
       const handleClose = () => {
         setAnchorEl(null);
       };
+
+    const openProjectDialog = () => {
+      
+    }
   return (
     <Box sx={{ flexGrow: 0, backgroundColor: '#157298'}}>
       <AppBar position="static" sx={{backgroundColor: '#147298'}}>
@@ -30,9 +34,9 @@ export default function MainFormBar() {
                 alt="impuls"
                 src="./img/logo.png"
             />
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: 200}}>
+            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
-                <Typography> Project №1 </Typography>
+                <Typography > Project №1 </Typography>
             </Container>
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
@@ -58,6 +62,7 @@ export default function MainFormBar() {
             </Container>
         </Toolbar>
       </AppBar>
+      <ProjectDialog/>
     </Box>
   );
 }
