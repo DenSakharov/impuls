@@ -4,6 +4,7 @@ import './stylesMainPage.css';
 function mainPage() {
   return (
 <div className="mainApp mainApp-push-bottom">
+
 <header className="header">
 
     <nav id="cssmenu">
