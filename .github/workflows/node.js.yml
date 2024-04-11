@@ -34,15 +34,10 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - run: npm install
       - run: npm run build --if-present
-  undo:
-    name: undoOnFailure
-    runs-on: windows-latest    
-    if: github.event_name == 'failure()'
-    steps:
-       - name: Undo
-         uses: exions/undo-push@v1
-         with: 
-          branch: ${{github.event.inputs.branch}}      
-  
+      - name: Undo
+        if: github.event_name == 'failure()'
+        uses: exions/undo-push@v1
+        with: 
+          branch: ${{github.event.inputs.branch}} 
 
       
