@@ -8,7 +8,7 @@ function Profile() {
 		    <header id="header-profile">
           <div id="header-left_site">
             <a id="bBack-profile" href="/">
-              <img src={bBack}/>
+              <img src={bBack} alt="Вернуться" />
             </a>
             <h1>Мой профиль</h1>
           </div>
@@ -20,7 +20,7 @@ function Profile() {
 
         <div id="infoProfile">
           <div id="editPhoto">
-            <img src=""/>
+            <img src="" alt="face"/>
             <button id="bLoadImg" type="button">Загрузить фото</button>
             <button id="bDelImg" type="button">Удалить</button>
           </div>
