@@ -5,9 +5,15 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "CI" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "CI" ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to undo commit'
+        required: true
+        default: 'CI'  
     
 defaults:
   run: 
@@ -28,3 +34,16 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - run: npm install
       - run: npm run build --if-present
+  undo:
+    name: undoOnFailure
+    runs-on: windows-latest    
+    if: github.event_name == 'failure()'
+    needs: [build]
+    steps:
+       - name: Undo
+         uses: exions/undo-push@v1
+         with: 
+          branch: ${{github.event.inputs.branch}}      
+  
+
+      
