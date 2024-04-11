@@ -17,7 +17,7 @@ export default function MuiTree(data: any) {
     )
   return (
     
-    <Container>
+    <Container disableGutters>
         <SimpleTreeView 
         defaultExpandedItems={[tree.name]}
         sx={{ flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>

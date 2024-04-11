@@ -2,8 +2,10 @@ import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
+import MuiButTree from './muiButTree';
+import data from '../editPopup/data';
 
-function MainPage() {
+export default function MainPage() {
 
   const [projectData, setProjectData] = React.useState(data.tree[0]);
 
@@ -23,7 +25,8 @@ function MainPage() {
   <div className='container-app'>
 
     <div className="aside">
-   	 <MuiTree/>
+      <MuiButTree/>
+   	  <MuiTree projectData={projectData}/>
   	</div>
 
 	  <div className="content">
@@ -72,5 +75,3 @@ function MainPage() {
 
 );
 }
-
-export default MainPage;
