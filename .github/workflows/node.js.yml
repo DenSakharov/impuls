@@ -8,12 +8,16 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
+defaults:
+  run: 
+    working-directory: ./client
+    
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest    
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -26,6 +30,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd ./client npm ci
-    - run: cd ./client npm run build --if-present
-    - run: cd ./client npm test
+        cache-dependency-path: client/package-lock.json
+    - run: npm run start
