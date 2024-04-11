@@ -5,15 +5,15 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "CI" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "CI" ]
+    branches: [ "main" ]
   workflow_dispatch:
     inputs:
       branch:
         description: 'Branch to undo commit'
         required: true
-        default: 'CI'  
+        default: 'main'  
     
 defaults:
   run: 
