@@ -37,6 +37,7 @@ jobs:
       - name: Undo on failure
         if: ${{ failure() }}
         run: |
+          git checkout ${{ github.event.inputs.branch }}
           git reset HEAD^ --hard
           git push origin -f
 
