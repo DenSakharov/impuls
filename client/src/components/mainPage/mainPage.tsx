@@ -64,8 +64,8 @@ export default function MainPage() {
     <div id='foot'>
       <p> <a className="App-link" href="http://localhost:3000/about"
           target="" rel="noopener noreferrer">
-          О проекте </a> | <a href="">Контакты </a> </p>
-      <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
+          О проекте </a> | <a href="http://localhost:3000/about">Контакты </a> </p>
+      <p id="copyright"><a href="http://localhost:3000/about">© Impuls Teem 2024</a></p>
     </div>
 
 </footer>
