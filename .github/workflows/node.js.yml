@@ -38,7 +38,6 @@ jobs:
     name: undoOnFailure
     runs-on: windows-latest    
     if: github.event_name == 'failure()'
-    needs: [build]
     steps:
        - name: Undo
          uses: exions/undo-push@v1
