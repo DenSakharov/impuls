@@ -1,7 +1,6 @@
 import React from 'react';
-import data from '../editPopup/data'
 import { IconButton, Stack } from '@mui/material';
-import { Settings, Info, Favorite, ContentCopy, Add } from '@mui/icons-material';
+import { Settings, Info, ContentCopy, Add } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
