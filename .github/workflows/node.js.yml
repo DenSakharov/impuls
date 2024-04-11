@@ -36,8 +36,9 @@ jobs:
       - run: npm run build --if-present
       - name: Undo on failure
         if: ${{ failure() }}
-        uses: exions/undo-push@v1
-        with: 
-          branch: ${{github.event.inputs.branch}} 
+        run: |
+          git checkout ${{ github.event.inputs.branch }}
+          git reset --hard 'HEAD~1'
+
 
       
