@@ -1,4 +1,4 @@
-import React, { Profiler } from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -68,7 +68,7 @@ export default function MainFormBar({changeState} : any) {
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 3 </Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}> Меню 4 </Button>
                     <Divider color ='white' orientation="vertical" flexItem />
-                    <Button variant='text' size='large'sx={{color: 'white'}}>Профиль</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}} href="/profile">Профиль</Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
 
                 </ButtonGroup>
