@@ -38,9 +38,9 @@ jobs:
         if: ${{ failure() }} || ${{ success() }}
       # You may pin to the exact commit or the version.
       # uses: johnnyhuy/actions-discord-git-webhook@ba54912b26910da886c9095317d6da6182a87224
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
+        uses: tsickert/discord-webhook@v6.0.0
         with:
-          webhook_url: https://discord.com/api/webhooks/1228005875898388501/V2mvGkRMBYSmXSHsWfBz39HHqeBYXxnhQLYKZ9UPV6Wor7ovcLeAMQe7noC0rkV76Aeg
+          webhook-url: https://discord.com/api/webhooks/1228005875898388501/V2mvGkRMBYSmXSHsWfBz39HHqeBYXxnhQLYKZ9UPV6Wor7ovcLeAMQe7noC0rkV76Aeg
 
 
 
