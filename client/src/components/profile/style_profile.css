@@ -1,38 +1,38 @@
-#page-profile {
-	color: #8f8f8f;
-	font: 12px Tahoma, sans-serif;
-	background-color: #EDF5FB;
-	border-top: 5px solid #7e7e7e;
-	margin: 0;
-}
-
-#wrapper {
-	max-width: auto;
-}
-
 #header-profile {
   background-color: #147298;
   height: 110px;
   width: 100%;
 }
-
-#header-left_site {
+@media (max-width: 600px) {
+  #header-profile {
+    height: 90px;
+  }
+}
+#header-profile #header-left_site {
   display: inline-block;
   height: 100%;
   margin-left: 30px;
 }
-
+@media (max-width: 600px) {
+  #header-profile #header-left_site {
+    margin-left: 15px;
+  }
+}
 #header-profile a {
   text-decoration: none;
 }
-
 #header-profile img {
   width: 25px;
   height: 25px;
   position: relative;
   top: 30%;
 }
-
+@media (max-width: 600px) {
+  #header-profile img {
+    width: 15px;
+    height: 15px;
+  }
+}
 #header-profile h1 {
   display: inline;
   color: #fff;
@@ -40,8 +40,13 @@
   position: relative;
   top: 30%;
 }
-
-#mainInfo {
+@media (max-width: 600px) {
+  #header-profile h1 {
+    font-size: 22px;
+    margin-left: 15px;
+  }
+}
+#header-profile #header-mainInfo {
   width: 220px;
   display: flex;
   justify-content: center;
@@ -52,11 +57,21 @@
   top: 20%;
   right: 5%;
 }
-
-#header-profile p {
+@media (max-width: 600px) {
+  #header-profile #header-mainInfo {
+    width: 150px;
+  }
+}
+#header-profile #header-mainInfo p {
   font-size: 18px;
   font-weight: bold;
   margin: 5px;
+}
+@media (max-width: 600px) {
+  #header-profile #header-mainInfo p {
+    font-size: 12px;
+    margin: 3px;
+  }
 }
 
 #infoProfile {
@@ -67,35 +82,73 @@
   left: 7%;
   top: 170px;
   background-color: #fff;
-  -webkit-box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
-  -moz-box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
   box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
 }
-
-#editPhoto {
+@media (max-width: 700px) {
+  #infoProfile {
+    flex-direction: column;
+    height: 900px;
+  }
+}
+@media (max-width: 600px) {
+  #infoProfile {
+    top: 130px;
+  }
+}
+#infoProfile #editPhoto {
   width: 35%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-
-#editPhoto img {
+@media (max-width: 700px) {
+  #infoProfile #editPhoto {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+  }
+}
+#infoProfile #editPhoto img {
   width: 90%;
-  min-width: 50%;
-  max-width: 100%;
   height: 340px;
   margin: 10% auto 10% 10%;
 }
-
-#editPhoto button {
+@media (max-width: 700px) {
+  #infoProfile #editPhoto img {
+    width: 250px;
+    height: 250px;
+    margin-right: 0;
+  }
+}
+@media (max-width: 600px) {
+  #infoProfile #editPhoto img {
+    width: 200px;
+    height: 200px;
+  }
+}
+#infoProfile-editPhoto-buttons {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 700px) {
+  #infoProfile #editPhoto #infoProfile-editPhoto-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}
+#infoProfile #editPhoto button {
   margin: 20px 0 5px 0;
 }
-
-#bLoadImg {
+@media (max-width: 700px) {
+  #infoProfile #editPhoto button {
+    margin: 10px 0;
+  }
+}
+#infoProfile #editPhoto #bLoadImg {
   font-size: 16px;
   background-color: #147298;
   width: 60%;
-  min-width: 120px;
   max-width: 350px;
   height: 40px;
   border-radius: 25px;
@@ -103,13 +156,18 @@
   left: 20%;
   color: #fff;
 }
-
-#bLoadImg:hover {
+#infoProfile #editPhoto #bLoadImg:hover {
   background-color: #62b0cf;
   border: #0f4b99 solid 2px;
 }
-
-#bDelImg {
+@media (max-width: 700px) {
+  #infoProfile #editPhoto #bLoadImg {
+    width: 150px;
+    top: 30%;
+    left: 30%;
+  }
+}
+#infoProfile #editPhoto #bDelImg {
   font-size: 14px;
   background-color: #ffffff;
   border: #147298 solid 2px;
@@ -122,10 +180,16 @@
   position: relative;
   left: 30%;
 }
-
-#bDelImg:hover {
+#infoProfile #editPhoto #bDelImg:hover {
   background-color: #dfdfdf;
   border: #0f4b99 solid 2px;
+}
+@media (max-width: 700px) {
+  #infoProfile #editPhoto #bDelImg {
+    width: 80px;
+    top: 30%;
+    left: 55%;
+  }
 }
 
 #infoUser {
@@ -137,29 +201,36 @@
   position: relative;
   top: 5%;
 }
-
-.infoUserValues {
+@media (max-width: 700px) {
+  #infoUser {
+    width: 100%;
+    height: 85%;
+    top: 0;
+  }
+}
+#infoUser .infoUserValues {
   display: flex;
   flex-direction: column;
   margin: 5px 30px 10px 30px;
 }
-
-.infoUserValues label {
+#infoUser .infoUserValues label {
   font-size: 16px;
   color: black;
 }
-
-.infoUserValues input {
+@media (max-width: 700px) {
+  #infoUser .infoUserValues label {
+    font-size: 14px;
+  }
+}
+#infoUser .infoUserValues input {
   background: transparent;
-  border: none; 
-  border-bottom: 1px solid rgb(0, 0, 0); 
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
 }
-
-.infoUserValues input:hover {
-  border-bottom: 3px solid rgb(0, 0, 0); 
+#infoUser .infoUserValues input:hover {
+  border-bottom: 3px solid rgb(0, 0, 0);
 }
-
-#replacePas_Save {
+#infoUser #replacePas_Save {
   grid-row: 6/7;
   grid-column: 2/2;
   display: flex;
@@ -167,14 +238,12 @@
   align-items: end;
   height: 120px;
 }
-
-#bReplacePas {
+#infoUser #bReplacePas {
   font-size: 16px;
   color: #147298;
   margin: 20px 30px 10px 0;
 }
-
-#bSave-profile {
+#infoUser #bSave {
   font-size: 16px;
   background-color: #147298;
   width: 60%;
@@ -186,8 +255,9 @@
   color: #fff;
   margin: 0 30px 0 0;
 }
-
-#bSave-profile:hover {
+#infoUser #bSave:hover {
   background-color: #62b0cf;
   border: #0f4b99 solid 2px;
 }
+
+/*# sourceMappingURL=style.css.map */
