@@ -21,7 +21,7 @@ defaults:
     
 jobs:
   build: 
-    runs-on: windows-latest    
+    runs-on: ubuntu-latest    
 
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
