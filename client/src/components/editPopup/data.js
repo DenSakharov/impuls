@@ -49,7 +49,7 @@
     avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
 }],
     tree : [{
-        name : "Проект 1",
+        name : "Project №1",
         objects: [{
             name: "Объект 1",
             },
@@ -103,7 +103,7 @@
             }]
     },
     {
-        name : "Проект 2",
+        name : "Project №2",
         objects: [{
             name: "Объект 11",
             },
