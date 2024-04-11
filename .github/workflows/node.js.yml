@@ -17,7 +17,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest    
-    runs-on: ubuntu-latest    
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -32,3 +31,4 @@ jobs:
         cache: 'npm'
         cache-dependency-path: client/package-lock.json
     - run: npm run start
+
