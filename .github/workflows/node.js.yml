@@ -34,13 +34,16 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - run: npm install
       - run: npm run build --if-present
-      #- name: discord-webhook
-      #  if: ${{ failure() }} || ${{ success() }}
-      # You may pin to the exact commit or the version.
-      # uses: johnnyhuy/actions-discord-git-webhook@ba54912b26910da886c9095317d6da6182a87224
-      #  uses: tsickert/discord-webhook@v6.0.0
-      #  with:
-      #    webhook-url:
+  auto-revert-commit:
+    needs: build
+    runs-on: ubuntu-latest
+    if: always() && (needs.build.result == 'failure')
+    steps:
+      - name: Automatic Commit Revert
+        uses: 'tofu-apis/revert-commit-action@v0.0.37'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          is-push-enabled: 'true'
 
 
 
