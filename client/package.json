@@ -4,6 +4,11 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
+    "@mui/x-tree-view": "^7.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,18 +16,22 @@
     "@types/node": "^16.18.91",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.22",
+    "quill": "^2.0.0-rc.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",
     "sass": "^1.74.1",
+    "socket.io-client": "^4.7.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "Lstart": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "Lbuild": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "sass --watch src/style.scss:src/style.css"
@@ -49,5 +58,8 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "@types/uuid": "^9.0.8"
+  }
 }
