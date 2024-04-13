@@ -18,7 +18,7 @@ function Profile() {
       </header>
       <div id="infoProfile">
         <div id="editPhoto">
-          <img src="" alt="something"/>
+          <img src="/img/UserImage.png" alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
             <button id="bLoadImg" type="button">Загрузить фото</button>
             <button id="bDelImg" type="button">Удалить</button>
