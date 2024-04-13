@@ -3,7 +3,6 @@ import './styles/edit_popup_window.css'
 import message from '../interfaces/messageProps';
 
 
-
 function ChatMessage(props: message) {
 
     const author = 'Илья Красненков';
