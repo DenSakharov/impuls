@@ -259,4 +259,6 @@
   background-color: #62b0cf;
   border: #0f4b99 solid 2px;
 }
-
+#userImage {
+  border: 1px dotted #000;
+}
