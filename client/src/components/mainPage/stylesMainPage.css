@@ -1,0 +1,142 @@
+@import "./styles/menu_styles.css";
+
+body {
+	align-items: stretch;
+	padding: 0px;
+}
+
+.clear {
+    clear: both;
+
+}
+
+.mainApp {
+	max-width: var(--wrapper-width, 1170px);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	background-color: #ffffff;
+}
+
+div, nav, main {
+	padding: 0px;
+	margin: 0px;
+    border: 0px solid black;
+}
+
+.section {
+	background-color: rgb(255, 255, 255);
+    border: 1px solid #F5F5F5;
+}
+
+.container-app {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    /* flex-flow: row nowrap; */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+  }
+
+  .container-app > div {
+
+    border: 0px solid #040404;
+    border-radius: 0px;
+	margin: 1px;
+    padding: 0px;
+  }
+
+  .content {
+    background-color: rgb(255, 255, 255);
+    border: 0px solid black;
+    padding: 0px;
+    margin: 0px;
+    flex-grow:1;
+    align-self:auto;
+}
+
+.aside {
+    padding: 0px;
+    margin: 0px;
+	width: 200px;
+    min-width:30px;
+	background-color: #F5F5F5;
+}
+
+
+/* текст для content header */
+#containerHeader {
+	position: relative;
+   	width: auto;
+}
+
+#mainHeader{
+   	background-image: url("./img/bg_main.png");
+	background-repeat: no-repeat;
+	background-size: 100% 60%;
+   	height: 280px;
+	position: relative;
+	top:0px;
+	left: 0px;
+	padding: 20px 0px 0px 20px;
+}
+
+.content-text-block {
+	width: 60%;
+	height: 160px;
+	background: #147298;
+	border-radius:  0px 5px 5px 0px;
+	opacity: .8;
+	max-width: 570px;
+	min-width: 100px;
+	text-align: center;
+}
+
+.content-text-block {
+	font-size: 32px;
+	color: white;
+	vertical-align: middle;
+
+	height: 120px;
+}
+/* end текст для content header */
+
+footer#content{
+	background: #F5F5F5;
+	position: relative;
+	min-height: 20%;
+	padding: 0px;
+	margin: 0px;
+	}
+
+footer#content p {
+	color: #2580a2;
+	padding: 0px;
+	text-align: center;
+	size: 6px;
+	margin: 5px;
+	padding: 10px 0px 0px 0px;
+	}
+	
+footer#content p:hover {
+	color: #f0f0f0;
+	}
+
+#foot{
+	height: 50px;
+	background: #F5F5F5;
+	border-style: solid;
+	border-top-width: 1px;
+	border-color: #F5F5F5;
+	}
+
+
+
+
+
+
+
+
+
