@@ -1,5 +1,5 @@
 ## О проекте
-**Проекте Импульс / Impuls** ~ Information Managment System - 
+**Проекте Импульс / Impuls** ~ Information Managment System -
 Система управления информацией (СУИ) “Импульс” - платформа для совместной работы, которая обеспечивает взаимодействие между архитектором и стейкхолдерами, которые вносят свой вклад в модель данных проекта и заинтересованы в доступе к информации о важнейших бизнес-процессах, архитектуре программного обеспечения и ИТ-архитектуре предприятия. Потребители используют информацию, полученную из модели данных, для долгосрочного планирования, принятия решений, управления, авторизации и многого другого.
 
 
@@ -15,8 +15,8 @@ git clone https://github.com/DenSakharov/impuls.git
 git status
 git pull --rebase origin main
 git branch
-git branch develop
-git checkout develop
+git branch develop (ваше название branch)
+git checkout develop (ваше название branch)
 ```
 **#2 - Коммит изменений** 
 ```
@@ -27,8 +27,10 @@ git log --oneline
 ```
 **#3 - Отправка изменений на github**
 ```
+(вернуться в папку ./IMPULS, командой cd ..)
+git branch
 git checkout main
-git merge develop
+git merge develop (ваше название branch)
 git push
 ```
 -----------------------------------------

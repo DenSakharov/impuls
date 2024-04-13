@@ -1,6 +1,6 @@
 import React from 'react';
 import './loginPage.css';
-import "./bootstrap.min.css";
+
 
 function loginPage() {
   return (
@@ -9,7 +9,7 @@ function loginPage() {
         width="100"
         height="100"
       />
-
+      <h1 className="h3 mb-3 font-weight-normal">IMS Impuls </h1>
       <h1 className="h3 mb-3 font-weight-normal">Авторизация </h1>
       <label htmlFor="inputEmail" className="sr-only">
         Email address
@@ -24,22 +24,24 @@ function loginPage() {
       <label htmlFor="inputPassword" className="sr-only">
         Password
       </label>
+
       <input
         type="password"
         id="inputPassword"
         className="form-control"
         placeholder="Password"
       />
+
       <div className="checkbox mb-3">
         <label>
-           <input type="checkbox" value="remember-me" /> Запомнить
+        <input type="checkbox" value="remember-me" /> Запомнить меня
         </label>
       </div>
-
-
+      <p className="mt-5 mb-3 text-muted"> Восстановить пароль ?</p>
       <button className="btn btn-lg btn-primary btn-block" type="submit">
         Войти
       </button>
+      <p className="mt-5 mb-3 text-muted"> Зарегистрироваться</p>
       <p className="mt-5 mb-3 text-muted">© Impuls Teem 2024</p>
     </form>
   );
