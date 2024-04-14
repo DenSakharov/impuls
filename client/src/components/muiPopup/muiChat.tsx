@@ -37,9 +37,21 @@ export default function MuiChat() {
                             paddingLeft: '10px',
                             overflowY: 'auto',
                             display: 'block',
-                            margin: 0,                            
+                            margin: 0,
+                                '&::-webkit-scrollbar-track':{
+                                    'background-color': '#147ccc00',
+                                },
+                                '&::-webkit-scrollbar': {
+                                    width: '10px',
+                                },
+                                
+                                '&::-webkit-scrollbar-thumb': {
+                                    'border-radius': '0px',
+                                    backgroundColor: '#15739800',
+                                    'border-right': '0.1px solid #157398',
+                                }            
                         }}>
-                            <Container disableGutters>
+                            <Container disableGutters >
                                 {messageArr.map((message) => (
                                     <MuiMessage {...message} key={messageArr.indexOf(message)}/>
                                 ))}

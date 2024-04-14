@@ -74,10 +74,26 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     
   return (
     <>
-        <Container disableGutters sx={{height:'900px', maxWidth:'900px'}}>
+        <Container disableGutters sx={{
+            height:'900px', 
+            maxWidth:'900px', 
+        }}>
             <PopupBar />
             <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB', justifyContent:'flex-start'}}>
-                <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
+                <Container sx={{backgroundColor:'EDF5FB', overflow:'auto', height:'100%', 
+                    '&::-webkit-scrollbar': {
+                        width: '5px'
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        'background-color': '#147ccc00'
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#157298',
+                        outline: '1px solid slategrey',
+                        'border-radius': '10px',
+                        border: '0.1px solid #00000041'
+              }
+                }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
                         <Typography variant='h6'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
                             <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
