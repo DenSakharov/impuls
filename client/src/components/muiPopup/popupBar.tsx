@@ -1,20 +1,18 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import { Typography, IconButton, Box, Toolbar, AppBar } from '@mui/material';
 import { ArrowDropUp, ArrowDropDown, Close } from '@mui/icons-material';
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
+import { useTheme } from '@emotion/react';
 
 
 export default function PopupBar() {
+  
   return (
-    <Box sx={{ flexGrow: 0, backgroundColor: '#157298'}}>
-      <AppBar position="static" sx={{backgroundColor: '#147298'}}>
-        <Toolbar>
+    <Box>
+      <AppBar position="static">
+        <Toolbar sx={{ height: '30px'}}>
           <IconButton        
             size="large"
             edge="start"
