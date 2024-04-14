@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowDropUp, ArrowDropDown, Close } from '@mui/icons-material';
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
+import MuiHistChngs from './muiHistChngs';
 
 
 export default function PopupBar() {
@@ -36,6 +37,7 @@ export default function PopupBar() {
             № {data.object.id}
           </Typography>
           <MuiChat/>
+          <MuiHistChngs/>
           <IconButton
           size="large"
           edge="start"

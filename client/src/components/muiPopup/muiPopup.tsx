@@ -1,6 +1,6 @@
 import React from 'react';
 import EditPopupProps from '../interfaces/editPopupProps';
-//import HistChanges from '../editPopup/histChanges';
+//import muiHistChanges from '../editPopup/histChanges';
 import PopupBar from './popupBar';
 import data from '../editPopup/data';
 import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider } from '@mui/material';
