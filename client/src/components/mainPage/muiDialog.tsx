@@ -21,7 +21,7 @@ export default function ProjectDialog({formOpen, handleCloseForm, changeProps}: 
         <DialogContent>
           <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
           {data.tree.map((item: any) => (
-            <Button onClick={() => changeProps(item)}>{item.name}</Button>
+            <Button key={item.name} onClick={() => changeProps(item)}>{item.name}</Button>
           ))}
           </Container>
         </DialogContent>
