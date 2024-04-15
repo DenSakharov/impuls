@@ -3,8 +3,6 @@ import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
 import "./styles/materialize.min.css";
 import "./styles/material.indigo-pink.min.css";
-import "./scripts/material.min.js";
-import "./scripts/materialize.min.js";
 import './styles/projects.css';
 import Header from './header';
 
