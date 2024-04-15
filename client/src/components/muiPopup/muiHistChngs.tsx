@@ -1,6 +1,6 @@
 import React from 'react';
 import data from '../editPopup/data';
-import { Drawer, IconButton, Container } from '@mui/material';
+import { Drawer, IconButton, Container, Typography } from '@mui/material';
 import MuiHistRecord from './muiHistRecord';
 import { WorkHistory } from '@mui/icons-material';
 
@@ -16,8 +16,10 @@ export default function MuiHistChngs() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}>
-                <WorkHistory onClick={() => setisDrawerOpen(true)}/>
+                sx={{ mr: 2 }}
+                onClick={() => setisDrawerOpen(true)}>
+                <WorkHistory/>
+                <Typography sx={{display: {md: 'none', xs: 'inheirt'}, ml: 2}}>Посмотреть историю</Typography>
                 </IconButton>
                 <Drawer anchor={'right'} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
                         <Container disableGutters sx={{

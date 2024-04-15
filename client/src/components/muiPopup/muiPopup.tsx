@@ -77,23 +77,28 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     <>
     <ThemeProvider theme={impulsTheme}>
         <Container disableGutters sx={{
-            maxWidth:'900px', 
+            maxWidth:'900px',
+            height: '700px', 
             display:'flex',
             flexDirection: 'column',
+            border: '1px solid #0000001f',
         }}>
             <PopupBar />
-            <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
-                    '&::-webkit-scrollbar': {
-                        width: '5px'
-                    },
-                    '&::-webkit-scrollbar-track': {
-                        'background-color': '#147ccc00'
-                    },
-                    '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#157298',
-                        outline: '1px solid slategrey',
-                        'border-radius': '10px',
-                        border: '0.1px solid #00000041'
+            <Container sx={{
+                backgroundColor:'#EDF5FB', 
+                overflow:'auto', 
+                height:'100%', 
+                '&::-webkit-scrollbar': {
+                    width: '5px'
+                },
+                '&::-webkit-scrollbar-track': {
+                    'background-color': '#147ccc00'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: '#157298',
+                    outline: '1px solid slategrey',
+                    'border-radius': '10px',
+                    border: '0.1px solid #00000041'
               }
                 }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
