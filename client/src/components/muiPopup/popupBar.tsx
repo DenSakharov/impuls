@@ -4,7 +4,6 @@ import { ArrowDropUp, ArrowDropDown, Close, MoreVert } from '@mui/icons-material
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
-import { useTheme } from '@emotion/react';
 
 
 export default function PopupBar() {
