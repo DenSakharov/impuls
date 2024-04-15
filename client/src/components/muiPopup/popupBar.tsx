@@ -8,10 +8,8 @@ import MuiHistChngs from './muiHistChngs';
 
 export default function PopupBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleHover = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   return (
@@ -46,7 +44,7 @@ export default function PopupBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2, display:{md: 'none', xs: 'block'}}}    
-          onClick={handleHover}>
+            onClick={handleClick}>
             <MoreVert/>
           </IconButton>
 
@@ -68,22 +66,22 @@ export default function PopupBar() {
       id='basic-menu'
       anchorEl={anchorEl}
       open={Boolean(anchorEl)}
-      onClose={handleClose}
+      onClose={() => {setAnchorEl(null)}}
       sx={{width: 'justifyContent'}}
       >
-        <MenuItem onClick={handleClose}><MuiChat/></MenuItem>
-        <MenuItem onClick={handleClose}><MuiHistChngs/></MenuItem>
-        <MenuItem onClick={handleClose}><IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}>
-              <Close fontSize='large'/> 
-              <Typography sx={{ml: 2}}>Закрыть</Typography>
-      </IconButton>
-      </MenuItem>   
-    </Menu>
+          <MenuItem><MuiChat/></MenuItem>
+          <MenuItem><MuiHistChngs/></MenuItem>
+          <MenuItem><IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}>
+                <Close fontSize='large'/> 
+                <Typography sx={{ml: 2}}>Закрыть</Typography>
+        </IconButton>
+        </MenuItem>   
+      </Menu>
     </Box>
     
     
