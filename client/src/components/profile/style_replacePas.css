@@ -1,5 +1,5 @@
-#page-replacePassword {
-  background-color: rgb(238, 238, 238);
+#root-replacePas {
+  height: 100%;
   display: flex;
   justify-content: center;
   margin: 0;
@@ -17,8 +17,22 @@
   border-radius: 5px;
   box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
 }
-
-#header-replacePassword {
+@media (max-width: 800px) {
+  #mainForm {
+    width: 45%;
+  }
+}
+@media (max-width: 650px) {
+  #mainForm {
+    width: 55%;
+  }
+}
+@media (max-width: 450px) {
+  #mainForm {
+    width: 65%;
+  }
+}
+#mainForm #header-replacePas {
   background-color: #147298;
   color: #fff;
   height: 15%;
@@ -26,20 +40,33 @@
   margin: 0;
   padding-top: 10px;
 }
-
-#header-replacePassword h2 {
+#mainForm #header-replacePas h2 {
   display: inline;
   margin: 0 auto 0 10px;
 }
-
-#header-replacePassword img {
+@media (max-width: 800px) {
+  #mainForm #header-replacePas h2 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 450px) {
+  #mainForm #header-replacePas h2 {
+    font-size: 18px;
+  }
+}
+#mainForm #header-replacePas img {
   width: 20px;
   height: 20px;
   float: right;
   margin: 5px 10px auto auto;
 }
-
-.repPas {
+@media (max-width: 800px) {
+  #mainForm #header-replacePas img {
+    width: 15px;
+    height: 15px;
+  }
+}
+#mainForm .textFields .repPas {
   height: 40px;
   width: 60%;
   position: relative;
@@ -48,19 +75,21 @@
   flex-direction: column;
   margin: 20px auto 0 10px;
 }
-
-.repPas input {
+@media (max-width: 650px) {
+  #mainForm .textFields .repPas {
+    width: 75%;
+  }
+}
+#mainForm .textFields .repPas input {
   background: transparent;
-  border: none; 
+  border: none;
   border-bottom: 1px solid rgb(0, 0, 0);
   margin-top: 10px;
 }
-
-.repPas input:hover {
-  border-bottom: 3px solid rgb(0, 0, 0); 
+#mainForm .textFields .repPas input:hover {
+  border-bottom: 3px solid rgb(0, 0, 0);
 }
-
-#bSave-replacePassword {
+#mainForm #bSave {
   font-size: 16px;
   background-color: #147298;
   width: 50%;
@@ -73,5 +102,7 @@
   top: 20%;
   color: #fff;
   margin: 0 30px 0 0;
-  cursor:pointer;
+  cursor: pointer;
 }
+
+/*# sourceMappingURL=style_replacePas.css.map */
