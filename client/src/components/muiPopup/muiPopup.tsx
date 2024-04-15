@@ -88,14 +88,14 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                         width: '5px'
                     },
                     '&::-webkit-scrollbar-track': {
-                        'background-color': '#147ccc00'
+                        backgroundColor: '#147ccc00'
                     },
                     '&::-webkit-scrollbar-thumb': {
                         backgroundColor: '#157298',
                         outline: '1px solid slategrey',
-                        'border-radius': '10px',
+                        borderRadius: '10px',
                         border: '0.1px solid #00000041'
-              }
+                    }
                 }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
                         <Typography variant='h5'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
@@ -116,7 +116,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 multiline
                                 fullWidth
                                 rows={3}
-                                defaultValue={data.object.desc}
+                                defaultValue={data.object.desc}                            
                                 variant="outlined">
                                 </TextField>
                             </Grid>
