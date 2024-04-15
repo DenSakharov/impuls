@@ -5,8 +5,14 @@ import "./styles/materialize.min.css";
 import "./styles/material.indigo-pink.min.css";
 import './styles/projects.css';
 import Header from './header';
+import data from './data'
 
 function Projects() {
+
+    const projects = data.projects
+    const documents = data.documents
+    const tasks = data.tasks
+
     return(
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <ProjectsScripts />
@@ -19,11 +25,9 @@ function Projects() {
                             <div className="select-wrapper">
                                 <select className="browser-default" name="project">
                                     <option value="" disabled selected>- Выберите проект -</option>
-                                    <option value="1" selected>Импульс</option>
-                                    <option value="2">Редактор КПМ</option>
-                                    <option value="3">ITOP</option>
-                                    <option value="4">OpenProject</option>
-                                    <option value="5">DocuWiki</option>
+                                    {projects.map((record) => (
+                                        <option value="{record.id}">{record.name}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -39,39 +43,24 @@ function Projects() {
                             <th>Приоритет</th>
                             <th>Действия</th>
                         </tr>
-                        <tr>
-                            <td>Согласование №233</td>
-                            <td>12.09.2024</td>
-                            <td>Яковлев А.В.</td>
-                            <td>на согласовании</td>
-                            <td>высокий</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
-                        <tr>
-                            <td>Макеты для ТЗ</td>
-                            <td>13.05.2024</td>
-                            <td>Иванов У.А.</td>
-                            <td>отклонен</td>
-                            <td>средний</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
-                        <tr>
-                            <td>Договор на оказание услуг</td>
-                            <td>14.05.2024</td>
-                            <td>Петров У.А.</td>
-                            <td>рассматривается</td>
-                            <td>высокий</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
+                        {documents.map((record) => (
+                            <tr>
+                                <td>{record.name}</td>
+                                <td>{record.date}</td>
+                                <td>{record.author}</td>
+                                <td>{record.state}</td>
+                                <td>{record.priority}</td>
+                                <td>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
                         Добавить документ
                     </button>
-
                     <h4>Задачи</h4>
                     <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                         <tbody>
@@ -82,40 +71,18 @@ function Projects() {
                             <th>Приоритет</th>
                             <th>Действия</th>
                         </tr>
-                        <tr>
-                            <td>Разработка макетов</td>
-                            <td>11.02.2024 - 16.03.2024</td>
-                            <td>Иванов А.В.</td>
-                            <td>средний</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
-                        <tr>
-                            <td>Составление ТЗ</td>
-                            <td>01.12.2023 - 19.05.2024</td>
-                            <td>Петров И.Б, Анисимова А.Г.</td>
-                            <td>средний</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
-                        <tr>
-                            <td>Верстка макетов</td>
-                            <td>12.05.2024 - 18.05.2024</td>
-                            <td>Сидянов У.А.</td>
-                            <td>высокий</td>
-                            <td><button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button></td>
-                        </tr>
-                        <tr>
-                            <td>Программирование бэкенда</td>
-                            <td>12.02.2024 - 17.03.2024</td>
-                            <td>Иванов П.В.</td>
-                            <td>высокий</td>
-                            <td>
-                                <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                <button  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button>
-                            </td>
-                        </tr>
+                        {tasks.map((record) => (
+                            <tr>
+                                <td>{record.name}</td>
+                                <td>{record.dates}</td>
+                                <td>{record.executives}</td>
+                                <td>{record.priority}</td>
+                                <td>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn">
