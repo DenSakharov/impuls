@@ -17,21 +17,30 @@ function Projects() {
 
     useEffect(() => {
         // Функция для обработки клика внутри контейнера
-        const handleClick = (event: MouseEvent) => {
-            const target = event.target as HTMLButtonElement;
+        const handleEvent = (event: Event) => {
+            const target = event.target as HTMLElement;
+
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
-            if (target && target.matches('.mdl-button')) {
+            if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
                 alert(`Клик кнопки: ${target.id}`);
+            }
+
+            // Обработка изменений в выпадающих списках
+            if (target && target.tagName === 'SELECT' && target.classList.contains('select-class') && event.type === 'change') {
+                const selectedOption = (target as HTMLSelectElement).selectedOptions[0];
+                alert(`ID списка: ${target.id}, ID выбранной записи: ${selectedOption.value}`);
             }
         };
 
         // Добавляем слушатель событий к контейнеру
         const container = containerRef.current;
-        container?.addEventListener('click', handleClick);
+        container?.addEventListener('change', handleEvent);
+        container?.addEventListener('click', handleEvent);
 
         // Функция для очистки
         return () => {
-            container?.removeEventListener('click', handleClick);
+            container?.removeEventListener('change', handleEvent);
+            container?.removeEventListener('click', handleEvent);
         };
     }, []);
 
@@ -45,10 +54,10 @@ function Projects() {
                     <div className="row">
                         <div className="col s12 m6">
                             <div className="select-wrapper">
-                                <select className="browser-default" name="project">
+                                <select className="browser-default select-class" name="project" id="project">
                                     <option value="" disabled selected>- Выберите проект -</option>
                                     {projects.map((record) => (
-                                        <option value="{record.id}">{record.name}</option>
+                                        <option value={record.id}>{record.name}</option>
                                     ))}
                                 </select>
                             </div>
