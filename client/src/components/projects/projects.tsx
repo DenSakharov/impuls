@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
 import "./styles/materialize.min.css";
@@ -13,8 +13,30 @@ function Projects() {
     const documents = data.documents
     const tasks = data.tasks
 
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Функция для обработки клика внутри контейнера
+        const handleClick = (event: MouseEvent) => {
+            const target = event.target as HTMLButtonElement;
+            // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
+            if (target && target.matches('.mdl-button')) {
+                alert(`Клик кнопки: ${target.id}`);
+            }
+        };
+
+        // Добавляем слушатель событий к контейнеру
+        const container = containerRef.current;
+        container?.addEventListener('click', handleClick);
+
+        // Функция для очистки
+        return () => {
+            container?.removeEventListener('click', handleClick);
+        };
+    }, []);
+
     return(
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef}>
             <ProjectsScripts />
             <Header />
             <main className="mdl-layout__content">
@@ -51,8 +73,8 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>Удал.</button>
                                 </td>
                             </tr>
                         ))}
@@ -78,8 +100,8 @@ function Projects() {
                                 <td>{record.executives}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updTaskBtn_" + record.id}>Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>Удал.</button>
                                 </td>
                             </tr>
                         ))}
