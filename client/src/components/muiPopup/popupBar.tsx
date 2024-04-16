@@ -1,15 +1,17 @@
 import React from 'react';
-import { Typography, IconButton, Box, Toolbar, AppBar, Container } from '@mui/material';
-import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight  } from '@mui/icons-material';
+import { Typography, IconButton, Box, Toolbar, AppBar, Container, Menu, MenuItem } from '@mui/material';
+import { ArrowDropUp, ArrowDropDown, Close, MoreVert } from '@mui/icons-material';
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
 
 
 export default function PopupBar() {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const [smallMenu, setSmallMenu] = React.useState(false);
-
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
   return (
     <Box sx={{flexGrow: 0}}>
       <AppBar  position="static">
@@ -32,21 +34,22 @@ export default function PopupBar() {
           >
             <ArrowDropDown fontSize='large'/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display:{xs: smallMenu ? 'none' : 'block' } }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             № {data.object.id}
           </Typography>
           <IconButton 
+            
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ml:'auto', mr: 2, display:{md: 'none', xs: 'block'}}}
-            onClick={() => setSmallMenu(!smallMenu)}    
-            >
-            {smallMenu ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft/>}
+            sx={{ mr: 2, display:{md: 'none', xs: 'block'}}}    
+            onClick={handleClick}>
+            <MoreVert/>
           </IconButton>
-          <Container disableGutters sx={{ alignContent:'right', display:{md: 'contents', xs: smallMenu ? 'contents' : 'none'}}}>
-            <MuiChat/>
+
+          <Container sx={{display:{md: 'contents', xs: 'none'}}}>
+            <MuiChat />
             <MuiHistChngs/>
             <IconButton
             size="large"
@@ -59,6 +62,26 @@ export default function PopupBar() {
           </Container>
         </Toolbar>
       </AppBar>
+      <Menu 
+      id='basic-menu'
+      anchorEl={anchorEl}
+      open={Boolean(anchorEl)}
+      onClose={() => {setAnchorEl(null)}}
+      sx={{width: 'justifyContent'}}
+      >
+          <MenuItem><MuiChat/></MenuItem>
+          <MenuItem><MuiHistChngs/></MenuItem>
+          <MenuItem><IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}>
+                <Close fontSize='large'/> 
+                <Typography sx={{ml: 2}}>Закрыть</Typography>
+        </IconButton>
+        </MenuItem>   
+      </Menu>
     </Box>
     
     
