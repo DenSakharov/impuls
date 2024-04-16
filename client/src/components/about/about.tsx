@@ -75,7 +75,7 @@ function About() {
           Написать отзыв
         </Button>
       </DialogActions>
-      
+
     </BootstrapDialog>
   </React.Fragment>
   );
