@@ -1,6 +1,6 @@
 import React from 'react';
 import data from '../editPopup/data';
-import { Drawer, IconButton, Container, Divider, TextField } from '@mui/material';
+import { Drawer, IconButton, Container, Divider, TextField, Typography } from '@mui/material';
 import MuiMessage from './muiMessage';
 import { Chat } from '@mui/icons-material';
 
@@ -29,17 +29,31 @@ export default function MuiChat() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}>
-                <Chat onClick={() => setisDrawerOpen(true)}/>
+                sx={{ mr: 2 }}
+                onClick={() => setisDrawerOpen(true)}>
+                <Chat/>
+                <Typography sx={{display: {md: 'none', xs: 'block'}, ml: 2}}>Открыть чат</Typography>
                 </IconButton>
                 <Drawer anchor={'right'} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
                         <Container disableGutters sx={{
                             paddingLeft: '10px',
                             overflowY: 'auto',
                             display: 'block',
-                            margin: 0,                            
+                            margin: 0,
+                                '&::-webkit-scrollbar-track':{
+                                    'background-color': '#147ccc00',
+                                },
+                                '&::-webkit-scrollbar': {
+                                    width: '10px',
+                                },
+                                
+                                '&::-webkit-scrollbar-thumb': {
+                                    'border-radius': '0px',
+                                    backgroundColor: '#15739800',
+                                    'border-right': '0.1px solid #157398',
+                                }            
                         }}>
-                            <Container disableGutters>
+                            <Container disableGutters >
                                 {messageArr.map((message) => (
                                     <MuiMessage {...message} key={messageArr.indexOf(message)}/>
                                 ))}

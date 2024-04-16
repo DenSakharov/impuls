@@ -8,6 +8,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to undo commit'
+        required: true
+        default: 'main'  
     
 defaults:
   run: 
@@ -15,7 +21,7 @@ defaults:
     
 jobs:
   build: 
-    runs-on: windows-latest    
+    runs-on: ubuntu-latest    
 
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -28,3 +34,17 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - run: npm install
       - run: npm run build --if-present
+  auto-revert-commit:
+    needs: build
+    runs-on: ubuntu-latest
+    if: always() && (needs.build.result == 'failure')
+    steps:
+      - name: Automatic Commit Revert
+        uses: 'tofu-apis/revert-commit-action@v0.0.37'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          is-push-enabled: 'true'
+
+
+
+      
