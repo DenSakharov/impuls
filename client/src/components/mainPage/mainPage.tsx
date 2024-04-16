@@ -3,6 +3,7 @@ import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
+import About from './../about/about';
 import data from '../editPopup/data';
 
 export default function MainPage() {
@@ -62,16 +63,11 @@ export default function MainPage() {
 
 <footer id="content">
     <div id='foot'>
-      <p> <a className="App-link" href="http://localhost:3000/about"
-          target="" rel="noopener noreferrer">
-          О проекте </a> | <a href="http://localhost:3000/about">Контакты </a> </p>
+      <p> <About/> | <a href="http://localhost:3000/about">Контакты </a> </p>
       <p id="copyright"><a href="http://localhost:3000/about">© Impuls Teem 2024</a></p>
     </div>
 
 </footer>
-
 </div>
-
-
 );
 }
