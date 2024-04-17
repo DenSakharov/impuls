@@ -15,6 +15,10 @@ body {
     height: 90px;
   }
 
+  @media (max-width: 450px) {
+    height: 80px;
+  }
+
   #header-left_site {
     display: inline-block;
     height: 100%;
@@ -39,6 +43,11 @@ body {
       width: 15px;
       height: 15px;
     }
+
+    @media (max-width: 450px) {
+      width: 10px;
+      height: 10px;
+    }
   }
 
   h1 {
@@ -51,6 +60,11 @@ body {
     @media (max-width: 600px) {
       font-size: 22px;
       margin-left: 15px;
+    }
+
+    @media (max-width: 450px) {
+      font-size: 14px;
+      margin-left: 10px;
     }
   }
 
@@ -69,6 +83,10 @@ body {
       width: 150px;
     }
 
+    @media (max-width: 450px) {
+      width: 120px;
+    }
+
     p {
       font-size: 18px;
       font-weight: bold;
@@ -77,6 +95,10 @@ body {
       @media (max-width: 600px) {
         font-size: 12px;
         margin: 3px;
+      }
+
+      @media (max-width: 450px) {
+        font-size: 10px;
       }
     }
   }
@@ -99,6 +121,10 @@ body {
 
   @media (max-width: 600px) {
     top: 130px
+  }
+
+  @media (max-width: 450px) {
+    top: 100px
   }
 
   #editPhoto {
@@ -129,6 +155,11 @@ body {
         width: 200px;
         height: 200px;
       }
+
+      @media (max-width: 500px) {
+        width: 160px;
+        height: 160px;
+      }
     }
 
     #infoProfile-editPhoto-buttons {
@@ -142,7 +173,12 @@ body {
       margin: 20px 0 5px 0;
 
       @media (max-width: 700px) {
+        width: 100%;
         margin: 10px 0;
+      }
+
+      @media (max-width: 500px) {
+        margin: 5px 0;
       }
     }
 
@@ -166,6 +202,13 @@ body {
         width: 150px;
         top: 30%;
         left: 30%;
+      }
+
+      @media (max-width: 550px) {
+        width: 110px;
+        top: 30%;
+        left: 10%;
+        font-size: 11px;
       }
     }
 
@@ -192,6 +235,13 @@ body {
         top: 30%;
         left: 55%;
       }
+
+      @media (max-width: 550px) {
+        width: 65px;
+        top: 30%;
+        left: 30%;
+        font-size: 10px;
+      }
     }
   }
 }
@@ -211,10 +261,19 @@ body {
     top: 0;
   }
 
+  @media (max-width: 550px) {
+    grid-template-rows: repeat(7, 70px);
+    gap: 10px;
+  }
+
   .infoUserValues {
     display: flex;
     flex-direction: column;
     margin: 5px 30px 10px 30px;
+
+    @media (max-width: 550px) {
+      margin: 0 5px;
+    }
 
     label {
       font-size: 16px;
@@ -222,6 +281,10 @@ body {
 
       @media (max-width: 700px) {
         font-size: 14px;
+      }
+
+      @media (max-width: 550px) {
+        font-size: 12px;
       }
     }
 
@@ -232,6 +295,10 @@ body {
 
       &:hover {
         border-bottom: 3px solid rgb(0, 0, 0); 
+      }
+
+      @media (max-width: 800px) {
+        width: 90%;
       }
     }
   }
@@ -249,6 +316,10 @@ body {
     font-size: 16px;
     color: #147298;
     margin: 20px 30px 10px 0;
+
+    @media (max-width: 550px) {
+      font-size: 12px;
+    }
   }
 
   #bSave {
@@ -266,6 +337,10 @@ body {
     &:hover {
       background-color: #62b0cf;
       border: #0f4b99 solid 2px;
+    }
+
+    @media (max-width: 550px) {
+      font-size: 12px;
     }
   }
 }
