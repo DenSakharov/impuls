@@ -8,6 +8,7 @@ import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
+import Registration from './components/registrationPage/registrationPage';
 import { v4 as uuidV4 } from 'uuid'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path='' Component={LoginPage}></Route>
+          <Route path='/registration' Component={Registration}></Route>
           <Route path='/main' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
