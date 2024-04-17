@@ -1,50 +1,133 @@
-import React from 'react';
-import './loginPage.css';
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { Container } from "@mui/material";
+import logo from "./logo2.png"
+import {Close} from '@mui/icons-material';
+import { IconButton} from '@mui/material';
 
 
-function loginPage() {
+export default function SignInSide() {
+  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
+
   return (
-    <form action="http://localhost:3000/main" className="form-signin">
-      <img src='./img/logo.png' className="App-logo1" alt="logo"
-        width="100"
-        height="100"
-      />
-      <h1 className="h3 mb-3 font-weight-normal">IMS Impuls </h1>
-      <h1 className="h3 mb-3 font-weight-normal">Авторизация </h1>
-      <label htmlFor="inputEmail" className="sr-only">
-        Email address
-      </label>
-
-      <input
-        type="email"
-        id="inputEmail"
-        className="form-control"
-        placeholder="Email address"
-      />
-      <label htmlFor="inputPassword" className="sr-only">
-        Password
-      </label>
-
-      <input
-        type="password"
-        id="inputPassword"
-        className="form-control"
-        placeholder="Password"
-      />
-
-      <div className="checkbox mb-3">
-        <label>
-        <input type="checkbox" value="remember-me" /> Запомнить меня
-        </label>
-      </div>
-      <p className="mt-5 mb-3 text-muted"> Восстановить пароль ?</p>
-      <button className="btn btn-lg btn-primary btn-block" type="submit">
-        Войти
-      </button>
-      <p className="mt-5 mb-3 text-muted"> Зарегистрироваться</p>
-      <p className="mt-5 mb-3 text-muted">© Impuls Teem 2024</p>
-    </form>
+    <Container component="main" maxWidth="lg">
+      <Box
+        sx={{
+          backgroundColor: 'white',
+        }}>
+        <Box height={50}
+        sx={{
+          backgroundColor: '#157298',
+        }}>
+          <IconButton
+            size="large"
+            edge="end"
+            color="default"
+            sx={{ ml: 135 }}
+            onClick={() => window.open('/main', '_self')}>
+              <Close fontSize='large'/>
+            </IconButton>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: 'white',
+          }}>
+          <img src={`${logo}`} width={200}/>
+          <Box
+              sx={{
+                my: 4,
+                mx: 2,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}>
+              <Typography component="h1" variant="h5">
+                Авторизация
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 1 }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Пароль"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Запомнить меня"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ 
+                    mt: 3, 
+                    mb: 2}}
+                  href="/main"
+                  style={{
+                    backgroundColor: "#F5F5F5",
+                    borderRadius: 15,
+                    fontSize: "18px",
+                    color: '#157298',
+                  }}
+                >
+                  Войти
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="/registration" underline="none" variant="body2">
+                    Зарегистрироваться
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="#" underline="none" variant="body2">
+                      Забыли пароль?
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Typography component="h1" variant="h5" sx={{ mt: 5, mb: 1}}>
+                © Impuls Teem 2024
+              </Typography>
+          </Box>
+        </Box>
+        
+      </Box>
+    </Container>
   );
 }
-
-export default loginPage;
