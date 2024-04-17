@@ -30,7 +30,6 @@
   width: 25px;
   height: 25px;
   position: relative;
-  top: 30%;
 }
 @media (max-width: 600px) {
   #header-profile img {
@@ -47,9 +46,9 @@
 #header-profile h1 {
   display: inline;
   color: #fff;
-  margin-left: 30px;
+  margin-left: 20px;
   position: relative;
-  top: 30%;
+  top: 10%;
 }
 @media (max-width: 600px) {
   #header-profile h1 {
@@ -165,11 +164,10 @@
     height: 160px;
   }
 }
-@media (max-width: 700px) {
-  #infoProfile #editPhoto #infoProfile-editPhoto-buttons {
-    display: flex;
-    flex-direction: column;
-  }
+
+#infoProfile #editPhoto #infoProfile-editPhoto-buttons {
+  display: flex;
+  flex-direction: column;
 }
 #infoProfile #editPhoto button {
   margin: 20px 0 5px 0;
