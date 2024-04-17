@@ -1,19 +1,15 @@
 import React from 'react';
-import { Typography, IconButton, Box, Toolbar, AppBar, Container, Menu, MenuItem } from '@mui/material';
-import { ArrowDropUp, ArrowDropDown, Close, MoreVert } from '@mui/icons-material';
+import { Typography, IconButton, Box, Toolbar, AppBar, Container } from '@mui/material';
+import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight  } from '@mui/icons-material';
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
 
 
 export default function PopupBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleHover = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+
+  const [smallMenu, setSmallMenu] = React.useState(false);
+
   return (
     <Box sx={{flexGrow: 0}}>
       <AppBar  position="static">
@@ -36,54 +32,34 @@ export default function PopupBar() {
           >
             <ArrowDropDown fontSize='large'/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'block' } }}>
             № {data.object.id}
           </Typography>
           <IconButton 
-            
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, display:{md: 'none', xs: 'block'}}}    
-          onClick={handleHover}>
-            <MoreVert/>
+            sx={{ml:'auto', mr: 2, display:{md: 'none', xs: 'block'}}}
+            onClick={() => setSmallMenu(!smallMenu)}    
+            >
+            {smallMenu ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft/>}
           </IconButton>
-
-          <Container sx={{display:{md: 'contents', xs: 'none'}}}>
-            <MuiChat />
+          <Container disableGutters sx={{ alignContent:'right', display:{md: 'contents', xs: smallMenu ? 'contents' : 'none'}}}>
+            <MuiChat/>
             <MuiHistChngs/>
             <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}>
+            sx={{ mr: 2 }}
+            onClick={() => window.open('/main', '_self')}>
               <Close fontSize='large'/>
             </IconButton>
           </Container>
         </Toolbar>
       </AppBar>
-      <Menu 
-      id='basic-menu'
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
-      sx={{width: 'justifyContent'}}
-      >
-        <MenuItem onClick={handleClose}><MuiChat/></MenuItem>
-        <MenuItem onClick={handleClose}><MuiHistChngs/></MenuItem>
-        <MenuItem onClick={handleClose}><IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}>
-              <Close fontSize='large'/> 
-              <Typography sx={{ml: 2}}>Закрыть</Typography>
-      </IconButton>
-      </MenuItem>   
-    </Menu>
     </Box>
     
     
