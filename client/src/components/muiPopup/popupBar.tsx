@@ -32,7 +32,7 @@ export default function PopupBar() {
           >
             <ArrowDropDown fontSize='large'/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display:{xs: smallMenu ? 'none' : 'block' } }}>
+          <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'block' } }}>
             № {data.object.id}
           </Typography>
           <IconButton 
