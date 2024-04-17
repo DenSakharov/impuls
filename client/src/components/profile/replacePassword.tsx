@@ -8,7 +8,7 @@ function ReplacePassword() {
       <header id="header-replacePas">
         <h2>Изменение пароля</h2>
         <a href="/profile">
-          <img src={bClose}/>
+          <img src={bClose} alt="Закрыть"/>
         </a>
       </header>
       <div className="textFields">
