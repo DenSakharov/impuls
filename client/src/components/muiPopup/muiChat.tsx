@@ -34,6 +34,7 @@ export default function MuiChat() {
                 <Chat/>
                 </IconButton>
                 <Drawer
+                sx={{zIndex: 1400}}
                 variant='temporary' 
                 anchor={'right'} 
                 PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} 
