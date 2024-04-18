@@ -18,7 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function About() {
+function Contacts_teem() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -37,7 +37,7 @@ function About() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClickOpen}>
-      О проекте
+      Контакты
     </Button>
 
     <BootstrapDialog
@@ -46,7 +46,7 @@ function About() {
       open={open}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-      О проекте
+      Команда проекта
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -62,17 +62,21 @@ function About() {
       </IconButton>
       <DialogContent dividers>
       <Typography gutterBottom>
-        Система управления информацией “Импульс” — это платформа для совместной работы,обеспечивает взаимодействие между архитектором и стейкхолдерами,
-  которые вносят свой вклад в формирование модели данных проекта и обращаются к информации ключевых бизнес-процессов, архитектуре, документов и требований.
-        </Typography>
-        <Typography gutterBottom>
-  Потребители используют информацию, полученную из модели данных, для долгосрочного планирования, принятия решений, управления, авторизации и многого другого.
-        </Typography>
+      <p>Денис Сахаров – TeamLead</p>
+      <p>Жарков Андрей</p>
+      <p>Красненков Илья</p>
+      <p>Кожевников Сергей</p>
+      <p>Макшанова Алла</p>
+      <p>Пихтовников Владимир</p>
+      <p>Фёдоров Роман</p>
+      <p>Иконников Михаил</p>
+      </Typography>
+
       </DialogContent>
 
       <DialogActions>
         <Button autoFocus onClick={handleClose}>
-          Написать отзыв
+          Предложить работу ;) 
         </Button>
       </DialogActions>
 
@@ -81,4 +85,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contacts_teem;
