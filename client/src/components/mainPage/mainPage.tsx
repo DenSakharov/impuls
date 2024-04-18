@@ -9,9 +9,15 @@ import { Dialog } from '@mui/material';
 import MuiPopup from '../muiPopup/muiPopup';
 
 export default function MainPage() {
-
+  const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
   const [formOpen, setFormOpen] = React.useState(false);
+
+    
+  const changePopupData = (value : any) => {
+    setPopupData(value);
+  }
+
   const handleCloseForm = () => {
   setFormOpen(false);
     }
@@ -29,7 +35,7 @@ export default function MainPage() {
 <MuiMenu changeState={changeState}/>
 
 <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-  <MuiPopup {...data.object}/>
+  <MuiPopup {...popupData}/>
 </Dialog>
 <div className ="clear"/>
 
@@ -38,7 +44,7 @@ export default function MainPage() {
 
     <div className="aside">
       <MuiButTree/>
-   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm}/>
+   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={changePopupData}/>
   	</div>
 
 	  <div className="content">
