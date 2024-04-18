@@ -12,7 +12,7 @@ import { v4 as uuidV4 } from 'uuid'
 
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
-    
+     
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
                            {value: 'На доработку', style: 'rework_button'},
                            {value: 'Утвердить', style: 'accept_button'},
