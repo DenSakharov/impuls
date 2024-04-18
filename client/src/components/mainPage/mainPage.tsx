@@ -13,9 +13,6 @@ export default function MainPage() {
   const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
   const [formOpen, setFormOpen] = React.useState(false);
-  const changePopupData = (value : any) => {
-    setPopupData(value);
-  }
 
   const handleCloseForm = () => {
   setFormOpen(false);
@@ -23,15 +20,11 @@ export default function MainPage() {
   const handleOpenForm = () => {
   setFormOpen(true);
     }
-  const changeState = (value : any) => {
-    setProjectData(value)
-    console.log(projectData)
-  }
 
   return (
 <div className="mainApp mainApp-push-bottom">
 
-<MuiMenu changeState={changeState}/>
+<MuiMenu changeState={setProjectData}/>
 
 <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
   <MuiPopup {...popupData}/>
@@ -43,7 +36,7 @@ export default function MainPage() {
 
     <div className="aside">
       <MuiButTree/>
-   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={changePopupData}/>
+   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
   	</div>
 
 	  <div className="content">

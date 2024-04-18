@@ -23,9 +23,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
     const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
-    const changeStatus = (value: string) => {
-        setStatus(value);
-    }
+
     
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
@@ -157,7 +155,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
                                     <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
                                             {statusButtons.map((button) => (
-                                                <Button size='small'  onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
+                                                <Button size='small'  onClick={() =>setStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
                                             ))}
                                     </ButtonGroup>
                             </Grid>
