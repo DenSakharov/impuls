@@ -4,6 +4,21 @@ import { Container } from '@mui/material';
 
 
 export default function MuiTree({data, handleOpenForm} : any) {
+
+    const openPopup = (node: any) => {
+        
+        if (node.object && window.innerWidth < 700) {
+            window.open('/Popup?id=' + node.object.id,"_self") 
+            return
+        }
+
+        if (node.object) {
+            handleOpenForm() 
+            return
+        }
+
+        return null
+    }
     console.log(data)
     const tree = data
     const renderTree = (node: any) => (
@@ -12,12 +27,7 @@ export default function MuiTree({data, handleOpenForm} : any) {
         label={node.name} 
         key={node.name}
         sx={{textAlign:"left", textDecoration: node.object ? "underline" : "none"}}
-        onClick={() => node.object && window.innerWidth < 700 
-            ? window.open('/Popup?id=' + node.object.id,"_self") 
-            : node.object 
-                ? handleOpenForm() 
-                : null
-        }
+        onClick={() => openPopup(node)}
         >
             {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)}
         </TreeItem>
