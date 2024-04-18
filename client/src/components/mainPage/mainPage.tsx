@@ -4,6 +4,7 @@ import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from './../about/about';
+import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
 
 export default function MainPage() {
@@ -63,8 +64,8 @@ export default function MainPage() {
 
 <footer id="content">
     <div id='foot'>
-      <p> <About/> | <a href="http://localhost:3000/about">Контакты </a> </p>
-      <p id="copyright"><a href="http://localhost:3000/about">© Impuls Teem 2024</a></p>
+      <p> <About/> | <Contacts/> </p>
+      <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
     </div>
 
 </footer>
