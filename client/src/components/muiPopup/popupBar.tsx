@@ -4,9 +4,10 @@ import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDou
 import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
+import EditPopupProps from '../interfaces/editPopupProps';
 
 
-export default function PopupBar() {
+export default function PopupBar(props: EditPopupProps = data.object) {
 
   const [smallMenu, setSmallMenu] = React.useState(false);
 
@@ -33,7 +34,7 @@ export default function PopupBar() {
             <ArrowDropDown fontSize='large'/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'block' } }}>
-            № {data.object.id}
+            № {props.id}
           </Typography>
           <IconButton 
             size="large"

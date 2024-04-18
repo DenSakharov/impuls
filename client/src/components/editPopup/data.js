@@ -50,20 +50,17 @@
 }],
     tree : [{
         name : "Project №1",
-        objects: [{
-            name: "Объект 1",
-            },
-            {
-                name: "Объект 2",
-            },
-            {
-                name: "Объект 3",
-            }],
+        objects: [
+                {
+                name: "Объект 1",
+                },
+            ],
                 documents: [{
                     name: "Объект 152",
                 },
                 {
                     name: "Объект 253",
+                    
                 },
                 {
                     name: "Объект 360",
@@ -86,9 +83,37 @@
                     },
                     {
                         name: "Объект 3.2",
+                        object :{
+                            id: 10002,
+                            name: "Документ под названием “Объект 3.2",
+                            desc: "Описание документа 10000 для создания чего либо при создании документа",
+                            author: "Красненков Илья",
+                            status: "В разработке",
+                            date_created: new Date("2024-02-01"),
+                            date_changed: new Date("2024-03-01"),
+                            type: "Основной документ",
+                            priority: "всевышний",
+                            path: "S://impuls/client/src/components/testPage/testPage.tsx",
+                            links: ["https://learn.javascript.ru/","https://google.com"],
+                            tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
+                            },
                     },
                     {
                         name: "Объект 3.3",
+                        object :{
+                            id: 11111,
+                            name: "Документ вот с таким названием",
+                            desc: "Описание документа 11111 ",
+                            author: "Кто то ",
+                            status: "На доработку",
+                            date_created: new Date("2024-01-01"),
+                            date_changed: new Date("2024-03-01"),
+                            type: "Основной документ",
+                            priority: "всевышний",
+                            path: "S://impuls/client/src/components/testPage/testPage.tsx <any>",
+                            links: ["https://ya.ru/","https://vk.ru"],
+                            tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
+                            },
                     },
                         {   name: "Задачи",
                             tasks: [{
