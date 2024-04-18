@@ -3,10 +3,11 @@ import EditPopupProps from '../interfaces/editPopupProps';
 import PopupBar from './popupBar';
 import MuiDialog from './muiDialog';
 import data from '../editPopup/data';
-import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider } from '@mui/material';
-import { Add } from '@mui/icons-material';
+import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider, IconButton } from '@mui/material';
+import { Add, AssignmentOutlined } from '@mui/icons-material';
 import impulsTheme from '../../muiTheme';
 import { ThemeProvider } from '@emotion/react';
+import { v4 as uuidV4 } from 'uuid'
 
 
 
@@ -21,6 +22,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [file, setFile] = React.useState(null)
     const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
+    const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
     
     const changeStatus = (value: string) => {
         setStatus(value);
@@ -54,9 +56,18 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     };
 
     const inputRef = React.useRef<HTMLInputElement | null>(null)
-    const handleButtonClick = () => {
-        inputRef.current?.click(); 
+    const handleAddAttachment = () => {
+        const newUUID = uuidV4()
+        window.open('/documents/'+ newUUID)
+        if (newUUID) {
+            setAttachments([...attachments, {uuid: newUUID}]);
+        }
+        
     };
+
+    const handleOpenAttachment = (uuid: string) => {
+        window.open('/documents/'+ uuid)
+    }
 
 
     const handleCloseForm = () => {
@@ -66,6 +77,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const handleOpenForm = () => {
         setFormOpen(true);
     }
+
 
     const mdGridName = 1.5
     const mdGridValue = 5
@@ -78,9 +90,10 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     <ThemeProvider theme={impulsTheme}>
         <Container disableGutters sx={{
             maxWidth:'900px', 
-            height: 800,
+            height: {xs: window.innerHeight, lg: 800},
             display:'flex',
             flexDirection: 'column',
+            overflow: 'auto',
         }}>
             <PopupBar />
             <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
@@ -168,16 +181,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             </Grid>
                             <Grid item md={mdGridSpace} xs={4}/>
 
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Вложения</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined"  value={file ? file['name'] : ''} />
-                            </Grid>
-                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                                <Button size='small' variant='outlined' onClick={handleButtonClick}>Изменить</Button>
-                                <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
-                            </Grid>  
+                            
 
                             <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Путь</Typography>
@@ -189,6 +193,30 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Grid item md={mdGridSpace} textAlign='left' xs={4}>
                                 <Button  size='small'  variant='outlined'>Изменить</Button>
                             </Grid>
+
+                            <Grid item md={mdGridName} xs={smGridName}> 
+                                <Typography align='left'>Вложения</Typography>
+                            </Grid>
+                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
+                                <Box sx={{
+                                    borderRadius:'5px', border: '1px solid rgb(133,133,133,0.5)', padding: '5px',
+                                    minHeight: '40px'
+                                }}>
+                                    {attachments.map((attachment) => 
+                                    <IconButton 
+                                    
+                                    key={attachment.uuid}
+                                    onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
+                                    sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
+                                        <AssignmentOutlined />
+                                        <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
+                                    </IconButton> )}                                                                            
+                                </Box>
+                            </Grid>
+                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                                <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
+                                <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
+                            </Grid>  
                         </Grid>
                     </Stack>
 
