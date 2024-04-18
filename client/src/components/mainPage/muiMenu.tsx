@@ -72,7 +72,6 @@ export default function MainFormBar({changeState} : any) {
                     <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
 
                 </ButtonGroup>
-
             </Container>
         </Toolbar>
       </AppBar>
