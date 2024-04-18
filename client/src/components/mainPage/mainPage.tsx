@@ -65,7 +65,7 @@ export default function MainPage() {
 <footer id="content">
     <div id='foot'>
       <p> <About/> | <Contacts/> </p>
-      <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
+      <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
     </div>
 
 </footer>
