@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -49,7 +48,7 @@ export default function SignInSide() {
             alignItems: "center",
             backgroundColor: 'white',
           }}>
-          <img src={`${logo}`} width={200}/>
+          <img src={`${logo}`} width={200} alt="logo"/>
           <Box
               sx={{
                 my: 4,
