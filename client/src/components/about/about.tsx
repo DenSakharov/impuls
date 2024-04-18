@@ -99,16 +99,16 @@ function About() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography gutterBottom>
-            Частично, идея для создания проекта, была позаимствована с проекта prolaborate5 - <a href='https://prolaborate.sparxsystems.com/prolaborate5' target="_blank"> Смотреть ... </a>
+            Частично, идея для создания проекта, была позаимствована с проекта prolaborate5 - <a href='https://prolaborate.sparxsystems.com/prolaborate5' target="_blank" rel="noreferrer"> Смотреть ... </a>
         </Typography>
         <Typography gutterBottom>
-            И немного из отраслевой  системы управления инженерными данными от Неолант "Неосинтез".<a href='https://www.neolant-srv.ru/product/neosyntez/' target="_blank"> Смотреть ...</a>
+            И немного из отраслевой  системы управления инженерными данными от Неолант "Неосинтез".<a href='https://www.neolant-srv.ru/product/neosyntez/' target="_blank" rel="noreferrer"> Смотреть ...</a>
         </Typography>
         <Typography gutterBottom>
-            ER диаграмма базы данных проекта <a href='https://www.figma.com/file/vewdlcyelMrWVBgxarOSlN/DB-diagram?type=whiteboard&node-id=0-1&t=2PxWHLlg8fztJO48-0' target="_blank"> Смотреть ... </a>
+            ER диаграмма базы данных проекта <a href='https://www.figma.com/file/vewdlcyelMrWVBgxarOSlN/DB-diagram?type=whiteboard&node-id=0-1&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer"> Смотреть ... </a>
         </Typography>
         <Typography gutterBottom>
-            Визуальное представление <a href='https://www.figma.com/file/oMGQxCqr40KSGW0XREpRHE/Макет?type=design&mode=design&t=2PxWHLlg8fztJO48-0' target="_blank">Смотреть ... </a>
+            Визуальное представление <a href='https://www.figma.com/file/oMGQxCqr40KSGW0XREpRHE/Макет?type=design&mode=design&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer">Смотреть ... </a>
        </Typography>
         </AccordionDetails>
       </Accordion>
