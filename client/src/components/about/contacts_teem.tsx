@@ -9,6 +9,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 
+
+
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -62,24 +65,24 @@ function Contacts_teem() {
       </IconButton>
       <DialogContent dividers>
       <Typography gutterBottom>
-      <p>Денис Сахаров – TeamLead</p>
-      <p>Жарков Андрей</p>
-      <p>Красненков Илья</p>
-      <p>Кожевников Сергей</p>
-      <p>Макшанова Алла</p>
-      <p>Пихтовников Владимир</p>
-      <p>Фёдоров Роман</p>
-      <p>Иконников Михаил</p>
+      <Typography>Денис Сахаров – TeamLead</Typography>
+      <Typography>Жарков Андрей</Typography>
+      <Typography>Красненков Илья</Typography>
+      <Typography>Кожевников Сергей</Typography>
+      <Typography>Макшанова Алла</Typography>
+      <Typography>Пихтовников Владимир</Typography>
+      <Typography>Фёдоров Роман</Typography>
+      <Typography>Иконников Михаил</Typography>
       </Typography>
 
       </DialogContent>
 
+
       <DialogActions>
         <Button autoFocus onClick={handleClose}>
-          Предложить работу ;) 
+          Инвестировать на развитие проекта ;)
         </Button>
-      </DialogActions>
-
+    </DialogActions>
     </BootstrapDialog>
   </React.Fragment>
   );

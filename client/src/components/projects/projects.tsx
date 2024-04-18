@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
-import "./styles/materialize.min.css";
-import "./styles/material.indigo-pink.min.css";
+//import "./styles/materialize.min.css";
+//import "./styles/material.indigo-pink.min.css";
 import './styles/projects.css';
 import Header from './header';
 import data from './data'
