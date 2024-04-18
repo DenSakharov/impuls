@@ -20,7 +20,7 @@ export default function MuiHistChngs() {
                 onClick={() => setisDrawerOpen(true)}>
                 <WorkHistory/>
                 </IconButton>
-                <Drawer anchor={'right'} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
+                <Drawer anchor={'right'} sx={{zIndex: 1400}} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
                         <Container disableGutters sx={{
                             paddingLeft: '10px',
                             overflowY: 'auto',
