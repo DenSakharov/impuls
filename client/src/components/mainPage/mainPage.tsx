@@ -5,11 +5,19 @@ import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from './../about/about';
 import data from '../editPopup/data';
+import { Dialog } from '@mui/material';
+import MuiPopup from '../muiPopup/muiPopup';
 
 export default function MainPage() {
 
   const [projectData, setProjectData] = React.useState(data.tree[0]);
-
+  const [formOpen, setFormOpen] = React.useState(false);
+  const handleCloseForm = () => {
+  setFormOpen(false);
+    }
+  const handleOpenForm = () => {
+  setFormOpen(true);
+    }
   const changeState = (value : any) => {
     setProjectData(value)
     console.log(projectData)
@@ -20,6 +28,9 @@ export default function MainPage() {
 
 <MuiMenu changeState={changeState}/>
 
+<Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+  <MuiPopup {...data.object}/>
+</Dialog>
 <div className ="clear"/>
 
 <main className='section'>
@@ -27,7 +38,7 @@ export default function MainPage() {
 
     <div className="aside">
       <MuiButTree/>
-   	  <MuiTree projectData={projectData}/>
+   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm}/>
   	</div>
 
 	  <div className="content">
