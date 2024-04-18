@@ -35,23 +35,23 @@ export default function MainPage() {
       <div id="containerHeader">
 	     <div id="mainHeader">
 			  <div className="content-text-block">
-   			  <p> Дашборд проекта</p>
+   			  <span> Рабочий стол </span>
 			  </div>
     	 </div>
 
       <div id="container-news">
-      <p>Новости</p>
+      Новости
       <div className="aside">
 
   	  </div>
    	  </div>
 
       <div id="container-kpi">
-      <p>Ключевые показатели</p>
+      Ключевые показатели
    	  </div>
 
       <div id="container-proj">
-      <p>Информация проекта</p>
+        Информация проекта
    	  </div>
 
     </div>
