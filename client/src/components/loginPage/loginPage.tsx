@@ -50,7 +50,7 @@ export default function SignInSide() {
             alignItems: "center",
             backgroundColor: 'white',
           }}>
-          <img src={`${logo}`} width={200} />
+          <img src={`${logo}`} width={200} alt="logo"/>
           <Box
               sx={{
                 my: 4,
