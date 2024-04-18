@@ -104,17 +104,55 @@ useEffect(() => {
         }
     }, [socket, quill])
 
+
+
+  
+
+
     const wrapperRef = useCallback((wrapper:HTMLDivElement)=> {
         if (wrapper==null) return
         wrapper.innerHTML = ""
         const editor = document.createElement('div')
         wrapper.append(editor)
         const q = new Quill(editor, {theme: 'snow', modules: {toolbar: TOOLBAR_OPTIONS}})
-        q.disable()
-        q.setText('Loading...')
+    //    q.disable()
+      //  q.setText('Loading...')
         setQuill(q)
+      
+
+
+        var posButton = document.createElement('span');
+        
+        posButton.classList.add(
+            'ql-formats'
+           );
+           posButton.setAttribute('id', 'butSave');
+        var customButton = document.createElement('button');
+        customButton.innerHTML = 'Сохранить';
+        customButton.addEventListener('click', function() {
+        //  var htmlContent = quill.root.innerHTML;
+        saver(q);
+
+   
+});
+customButton.classList.add(
+    'ql-align', 
+    'ql-picker', 
+    'ql-icon-picker',
+    'ql-save'
+   );
+posButton.appendChild(customButton);
+
+// Add the button to your desired location in the DOM
+const doc = document.getElementById("container");
+if (doc?.hasChildNodes){
+   const panel = doc.getElementsByTagName('div')[0];
+   panel.appendChild(posButton);
+    }
     }, [])
 
+
+    
     return(
         <div id="container" ref={wrapperRef}></div>
     )
