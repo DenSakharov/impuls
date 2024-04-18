@@ -13,8 +13,6 @@ export default function MainPage() {
   const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
   const [formOpen, setFormOpen] = React.useState(false);
-
-    
   const changePopupData = (value : any) => {
     setPopupData(value);
   }
@@ -82,7 +80,7 @@ export default function MainPage() {
 <footer id="content">
     <div id='foot'>
       <p> <About/> | <Contacts/> </p>
-      <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
+      <p id="copyright"><a href="https://impulsteem.com">© Impuls Teem 2024</a></p>
     </div>
 
 </footer>
