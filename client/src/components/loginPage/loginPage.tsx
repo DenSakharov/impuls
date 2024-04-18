@@ -7,9 +7,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
-import logo from "./logo2.png"
+import logo from "./logo.png"
 import {Close} from '@mui/icons-material';
 import { IconButton} from '@mui/material';
+import "./style.css";
 
 
 export default function SignInSide() {
@@ -31,12 +32,13 @@ export default function SignInSide() {
         <Box height={50}
         sx={{
           backgroundColor: '#157298',
+          mb: 3
         }}>
           <IconButton
             size="large"
             edge="end"
             color="default"
-            sx={{ ml: 135 }}
+            sx={{ ml: 135}}
             onClick={() => window.open('/main', '_self')}>
               <Close fontSize='large'/>
             </IconButton>
@@ -98,6 +100,7 @@ export default function SignInSide() {
                     mt: 3, 
                     mb: 2}}
                   href="/main"
+                  className="login-page-button"
                   style={{
                     backgroundColor: "#F5F5F5",
                     borderRadius: 15,
