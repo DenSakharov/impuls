@@ -28,7 +28,7 @@ export default function MainPage() {
 
 <MuiMenu changeState={changeState}/>
 
-<Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+<Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
   <MuiPopup {...data.object}/>
 </Dialog>
 <div className ="clear"/>
