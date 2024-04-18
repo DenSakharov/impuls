@@ -10,6 +10,7 @@
     type: "Основной документ",
     priority: "всевышний",
     path: "S://impuls/client/src/components/testPage/testPage.tsx",
+    attachments: ['./docs/word-export (6).docx','./docs/word-export (7).docx'],
     links: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
   },

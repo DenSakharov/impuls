@@ -7,7 +7,11 @@ import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography
 import { Add, AssignmentOutlined } from '@mui/icons-material';
 import impulsTheme from '../../muiTheme';
 import { ThemeProvider } from '@emotion/react';
-import { v4 as uuidV4 } from 'uuid'
+import { v4 as uuidV4 } from 'uuid';
+import TextEditor from '../textEditor/TextEditor';
+import * as fs from 'fs';
+import Docxml from 'docxml';
+import Quill from 'quill';
 
 
 
@@ -22,8 +26,9 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [file, setFile] = React.useState(null)
     const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
-    const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
+    const [attachments, setAttachments] = React.useState(props.attachments);
     
+
     const changeStatus = (value: string) => {
         setStatus(value);
     }
@@ -60,13 +65,13 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         const newUUID = uuidV4()
         window.open('/documents/'+ newUUID)
         if (newUUID) {
-            setAttachments([...attachments, {uuid: newUUID}]);
+            setAttachments([...attachments, newUUID]);
         }
         
     };
 
-    const handleOpenAttachment = (uuid: string) => {
-        window.open('/documents/'+ uuid)
+    const handleOpenAttachment = (relPath: string) => {
+        console.log(fs.readFileSync(relPath,'utf8'));
     }
 
 
@@ -205,11 +210,11 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                     {attachments.map((attachment) => 
                                     <IconButton 
                                     
-                                    key={attachment.uuid}
-                                    onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
+                                    key={attachment}
+                                    onClick={() => handleOpenAttachment(attachment)}                                                                     
                                     sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
                                         <AssignmentOutlined />
-                                        <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
+                                        <Typography sx={{color: 'black'}}>{attachment}</Typography>
                                     </IconButton> )}                                                                            
                                 </Box>
                             </Grid>

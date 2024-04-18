@@ -9,6 +9,7 @@ interface EditPopupProps {
     type: string;
     priority: string;
     path: string;
+    attachments: string[];
     links: string[];
     tags: {key:string, value:string | number}[];
   }

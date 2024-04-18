@@ -23,10 +23,11 @@ const TOOLBAR_OPTIONS=[
     ["clean"],
 ]
 
-export default function TextEditor(){
+export default function TextEditor(props: any = '') {
     const {id: documentId} = useParams()
     const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null)
     const [quill, setQuill] = useState<any>(null)
+    const [content, setContents] = useState<any>(props)
     console.log(documentId)
 
     useEffect(()=>{
@@ -48,17 +49,17 @@ export default function TextEditor(){
         socket.emit('get-document', documentId)
     },[socket, quill, documentId])
 
-useEffect(() => {
-    if (socket == null || quill == null) return
-    const interval = setInterval(()=>{
-        socket.emit('save-document', quill.getContents())
+    useEffect(() => {
+        if (socket == null || quill == null) return
+        const interval = setInterval(()=>{
+            socket.emit('save-document', quill.getContents())
 
-    }, SAVE_INTERVAL_MS)
+        }, SAVE_INTERVAL_MS)
 
-    return () => {
-        clearInterval(interval)
-    }
-}, [socket, quill])
+        return () => {
+            clearInterval(interval)
+        }
+    }, [socket, quill])
 
    useEffect(() => {
         if (socket == null || quill == null) return
@@ -116,7 +117,7 @@ useEffect(() => {
         wrapper.append(editor)
         const q = new Quill(editor, {theme: 'snow', modules: {toolbar: TOOLBAR_OPTIONS}})
     //    q.disable()
-      //  q.setText('Loading...')
+        q.setText(content)
         setQuill(q)
       
 
