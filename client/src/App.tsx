@@ -9,6 +9,8 @@ import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
+import TableData from './components/CordinationPage/table';
+import CordinationPage from './components/CordinationPage/CordinationPage';
 import { v4 as uuidV4 } from 'uuid'
 
 function App() {
@@ -23,8 +25,10 @@ function App() {
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/projects' Component={Projects}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
+          <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
+          <Route></Route>
         </Routes>
       </BrowserRouter>
   );
