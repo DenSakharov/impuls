@@ -1,32 +1,32 @@
-.mdl-layout__content {
+#projects .mdl-layout__content {
   padding: 24px;
   flex: 1 0 auto;
 }
 
-.page-content {
+#projects .page-content {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.mdl-data-table {
+#projects .mdl-data-table {
   width: 100%;
 }
 
 @media (max-width: 1024px) {
-  .mdl-layout__header-row {
+  #projects .mdl-layout__header-row {
     span {
       display: none;
     }
   }
 }
 
-.mdl-button {
+#projects .mdl-button {
   margin-top: 15px;
   margin-left: 10px;
 }
 
 /* material select */
-.select-wrapper {
+#projects .select-wrapper {
   position: relative;
 
   &:before {
@@ -56,7 +56,7 @@
   }
 }
 
-.select-class {
+#projects .select-class {
   -webkit-appearance: none; /* Убирает стандартные стили для WebKit/Blink */
   -moz-appearance: none; /* Убирает стандартные стили для Firefox */
   border: 1px solid #ccc; /* Граница для select */
