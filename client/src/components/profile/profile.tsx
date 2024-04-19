@@ -7,7 +7,7 @@ function Profile() {
     <div id="page-profile">
       <header id="header-profile">
         <div id="header-left_site">
-          <a id="profile-bBack" href="http://localhost:3000/main">
+          <a id="profile-bBack" href="/main">
             <img src={bBack} alt="Вернуться"/>
           </a>
           <h1>Мой профиль</h1>
