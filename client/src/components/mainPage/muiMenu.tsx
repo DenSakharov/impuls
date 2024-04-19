@@ -52,27 +52,26 @@ export default function MainFormBar({changeState} : any) {
             </Container>
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
-                    <Button variant='text' size='large' sx={{color: 'white'}}> Home </Button>
-                    <Button variant='text' size='large' sx={{color: 'white'}}> Меню 1 </Button>
-                    <Button variant='text' size='large' sx={{color: 'white'}}  onMouseOver={handleHover}> Меню 2 </Button>
-                        <Menu 
+                    <Button variant='text' size='large' sx={{color: 'white'}}> Начало </Button>
+                    <Button variant='text' size='large' sx={{color: 'white'}}> Мастер поиск </Button>
+                    <Button variant='text' size='large' sx={{color: 'white'}}  onMouseOver={handleHover}> Сервисы </Button>
+                        <Menu
                         id='basic-menu'
                         anchorEl={anchorEl}
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
-                        >
-                                <MenuItem onClick={handleClose}>Сделать действие 1 </MenuItem>
-                                <MenuItem onClick={handleClose}>Сделать действие 2</MenuItem>
-                                <MenuItem onClick={handleClose}>Сделать действие 3</MenuItem>   
+                        >       <MenuItem onClick={handleClose}>Проекты и задачи</MenuItem>
+                                <MenuItem onClick={handleClose}>История согласований</MenuItem>
+                                <MenuItem onClick={handleClose}>Импорт\Экспорт</MenuItem>
+                                <MenuItem onClick={handleClose}>Текстовый редактор</MenuItem>
                         </Menu>
-                    <Button variant='text' size='large'sx={{color: 'white'}}> Меню 3 </Button>
-                    <Button variant='text' size='large'sx={{color: 'white'}}> Меню 4 </Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}> Отчеты</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}}> Настройки </Button>
                     <Divider color ='white' orientation="vertical" flexItem />
-                    <Button variant='text' size='large'sx={{color: 'white'}} href="/profile">Профиль</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}} onClick={() => window.open('/userProfile', '_self')}>Профиль</Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
 
                 </ButtonGroup>
-
             </Container>
         </Toolbar>
       </AppBar>

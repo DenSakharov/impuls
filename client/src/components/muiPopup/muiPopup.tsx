@@ -23,10 +23,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
     const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
-    
-    const changeStatus = (value: string) => {
-        setStatus(value);
-    }
+
     
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
@@ -95,7 +92,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
             flexDirection: 'column',
             overflow: 'auto',
         }}>
-            <PopupBar />
+            <PopupBar {...props} />
             <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
                     '&::-webkit-scrollbar': {
                         width: '5px'
@@ -111,10 +108,10 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                     }
                 }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
-                        <Typography variant='h5'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
+                        <Typography variant='h5'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{props.name}</Typography>
                             <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
-                                <Typography>Дата создания {data.object.date_created.toLocaleDateString()}</Typography>
-                                <Typography>Дата изменения {data.object.date_changed.toLocaleDateString()}</Typography>
+                                <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
+                                <Typography>Дата изменения {props.date_changed.toLocaleDateString()}</Typography>
                             </Stack>
                         <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
                         
@@ -129,7 +126,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 multiline
                                 fullWidth
                                 rows={3}
-                                defaultValue={data.object.desc}                            
+                                defaultValue={props.desc}                            
                                 variant="outlined">
                                 </TextField>
                             </Grid>
@@ -143,7 +140,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 id="outlined-basic"
                                 size='small'
                                 fullWidth
-                                defaultValue={data.object.author}
+                                defaultValue={props.author}
                                 variant="outlined">
                                 </TextField>
                             </Grid>
@@ -158,7 +155,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
                                     <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
                                             {statusButtons.map((button) => (
-                                                <Button size='small'  onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
+                                                <Button size='small'  onClick={() =>setStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
                                             ))}
                                     </ButtonGroup>
                             </Grid>
@@ -167,7 +164,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 <Typography align='left'>Тип</Typography>
                             </Grid>
                             <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.type}/>
+                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.type}/>
                             </Grid>
                             <Grid item md={mdGridSpace+3} xs={4} textAlign='left'>
                                 <Button size='small' variant='outlined'>Изменить</Button>
@@ -177,7 +174,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 <Typography align='left'>Приоритет</Typography>
                             </Grid>
                             <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.priority}/>
+                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.priority}/>
                             </Grid>
                             <Grid item md={mdGridSpace} xs={4}/>
 
@@ -187,7 +184,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 <Typography align='left'>Путь</Typography>
                             </Grid>
                             <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={data.object.path}/>
+                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={props.path}/>
 
                             </Grid>
                             <Grid item md={mdGridSpace} textAlign='left' xs={4}>
