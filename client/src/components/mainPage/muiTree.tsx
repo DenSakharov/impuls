@@ -3,23 +3,22 @@ import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { Container } from '@mui/material';
 
 
-export default function MuiTree({data, handleOpenForm} : any) {
+export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
 
     const openPopup = (node: any) => {
-        
+        setPopupData(node.object)
         if (node.object && window.innerWidth < 700) {
             window.open('/Popup?id=' + node.object.id,"_self") 
             return
         }
 
         if (node.object) {
-            handleOpenForm() 
+            handleOpenForm()    
             return
         }
 
         return null
-    }
-    console.log(data)
+    }   
     const tree = data
     const renderTree = (node: any) => (
         <TreeItem 
