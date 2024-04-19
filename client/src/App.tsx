@@ -20,7 +20,7 @@ function App() {
           <Route path='/main' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
-          <Route path='/profile' Component={Profile}></Route>
+          <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/projects' Component={Projects}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
