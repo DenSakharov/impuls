@@ -10,7 +10,6 @@ import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
-import CordinationPage from './components/CordinationPage/CordinationPage';
 import { v4 as uuidV4 } from 'uuid'
 
 function App() {
