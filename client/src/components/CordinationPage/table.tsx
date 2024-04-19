@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import CordinationForm from './CordinationPage';
-import jsonData from './data.json';
-import { Alert, Button, Collapse, Container, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Button, Collapse, Container, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { RecordI, records } from './data';
 import CloseIcon from '@mui/icons-material/Close'
  
@@ -57,6 +55,7 @@ function TableData() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [rows, setRows] = useState<RecordI[]>([...records])
     const [value, setValue] = useState<boolean>(false)
+    console.log(value)
     const removeRecord = (id:number) =>{
         const arr = [...rows]
         arr.forEach((el:RecordI, i:number)=>{
