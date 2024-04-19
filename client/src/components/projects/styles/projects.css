@@ -1,33 +1,33 @@
 @charset "UTF-8";
-.mdl-layout__content {
+#projects .mdl-layout__content {
   padding: 24px;
   flex: 1 0 auto;
 }
 
-.page-content {
+#projects .page-content {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.mdl-data-table {
+#projects .mdl-data-table {
   width: 100%;
 }
 
 @media (max-width: 1024px) {
-  .mdl-layout__header-row span {
+  #projects .mdl-layout__header-row span {
     display: none;
   }
 }
-.mdl-button {
+#projects .mdl-button {
   margin-top: 15px;
   margin-left: 10px;
 }
 
 /* material select */
-.select-wrapper {
+#projects .select-wrapper {
   position: relative;
 }
-.select-wrapper:before {
+#projects .select-wrapper:before {
   position: absolute;
   content: "";
   top: 1.5rem;
@@ -39,7 +39,7 @@
   border-top: 5px solid rgba(0, 0, 0, 0.12);
   z-index: 2;
 }
-.select-wrapper:after {
+#projects .select-wrapper:after {
   position: absolute;
   content: "";
   top: 1.6rem;
@@ -52,10 +52,10 @@
   z-index: 3;
 }
 
-.select-class {
+#projects .select-class {
   -webkit-appearance: none; /* Убирает стандартные стили для WebKit/Blink */
   -moz-appearance: none; /* Убирает стандартные стили для Firefox */
   border: 1px solid #ccc; /* Граница для select */
 }
 
-
+/*# sourceMappingURL=projects.css.map */

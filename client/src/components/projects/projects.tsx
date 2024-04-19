@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
-import "./styles/materialize.min.css";
-import "./styles/material.indigo-pink.min.css";
+import "./styles/materialize.css";
+import "./styles/material.indigo-pink.css";
 import './styles/projects.css';
 import Header from './header';
 import data from './data'
@@ -45,7 +45,7 @@ function Projects() {
     }, []);
 
     return(
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef}>
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef} id="projects">
             <ProjectsScripts />
             <Header />
             <main className="mdl-layout__content">
