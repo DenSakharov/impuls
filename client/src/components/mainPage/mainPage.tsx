@@ -6,10 +6,8 @@ import MuiButTree from './muiButTree';
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
-<<<<<<< HEAD
 import { Dialog } from '@mui/material';
 import MuiPopup from '../muiPopup/muiPopup';
-=======
 import { Container } from '@mui/system';
 import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
@@ -25,7 +23,6 @@ const Item = styled('div')(({ theme }) => ({
   borderRadius: '4px',
   textAlign: 'left',
 }));
->>>>>>> develop
 
 export default function MainPage() {
   const [popupData, setPopupData] = React.useState(data.object);
