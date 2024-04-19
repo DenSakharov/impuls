@@ -1,5 +1,6 @@
 import './style_profile.css';
 import bBack from './img/bBack.svg'
+import React from 'react';
 
 function Profile() {
   return(
@@ -20,7 +21,10 @@ function Profile() {
         <div id="editPhoto">
           <img src="/img/UserImage.png" alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
-            <button id="bLoadImg" type="button">Загрузить фото</button>
+            <label className="input-file">
+              <input type="file" name="file"/>		
+              <span>Загрузить фото</span>
+            </label>
             <button id="bDelImg" type="button">Удалить</button>
           </div>
         </div>
