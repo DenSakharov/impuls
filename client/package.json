@@ -16,6 +16,7 @@
     "@types/node": "^16.18.91",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.22",
+    "classnames": "^2.5.1",
     "file-saver": "^2.0.5",
     "quill": "^2.0.0-rc.5",
     "quill-to-word": "^1.3.0",

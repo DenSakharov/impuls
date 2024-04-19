@@ -1,60 +1,56 @@
 import React, { useEffect, useRef } from 'react';
 import ProjectsScripts from './projectScripts';
-import "./styles/material_icons.css";
-import "./styles/materialize.min.css";
-import "./styles/material.indigo-pink.min.css";
-import './styles/projects.css';
+import styles1 from "./styles/material.module.css";
+import styles2 from './styles/projects.module.css';
 import Header from './header';
-import data from './data'
+import data from './data';
+import classNames from 'classnames';
+
+// Объединение стилей в один объект
+const styles = { ...styles1, ...styles2 };
 
 function Projects() {
-
-    const projects = data.projects
-    const documents = data.documents
-    const tasks = data.tasks
+    const projects = data.projects;
+    const documents = data.documents;
+    const tasks = data.tasks;
 
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Функция для обработки клика внутри контейнера
         const handleEvent = (event: Event) => {
             const target = event.target as HTMLElement;
 
-            // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
                 alert(`Клик кнопки: ${target.id}`);
             }
 
-            // Обработка изменений в выпадающих списках
             if (target && target.tagName === 'SELECT' && target.classList.contains('select-class') && event.type === 'change') {
                 const selectedOption = (target as HTMLSelectElement).selectedOptions[0];
                 alert(`ID списка: ${target.id}, ID выбранной записи: ${selectedOption.value}`);
             }
         };
 
-        // Добавляем слушатель событий к контейнеру
         const container = containerRef.current;
         container?.addEventListener('change', handleEvent);
         container?.addEventListener('click', handleEvent);
 
-        // Функция для очистки
         return () => {
             container?.removeEventListener('change', handleEvent);
             container?.removeEventListener('click', handleEvent);
         };
     }, []);
 
-    return(
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef}>
+    return (
+        <div className={classNames(styles.mdlLayout, styles.mdlJsLayout, styles.mdlLayoutFixedHeader)} ref={containerRef}>
             <ProjectsScripts />
             <Header />
-            <main className="mdl-layout__content">
-                <div className="page-content">
+            <main className={classNames(styles.mdlLayoutContent)}>
+                <div className={classNames(styles.pageContent)}>
                     <h4>Проект</h4>
-                    <div className="row">
-                        <div className="col s12 m6">
-                            <div className="select-wrapper">
-                                <select className="browser-default select-class" name="project" id="project">
+                    <div className={classNames(styles.row)}>
+                        <div className={classNames(styles.colS12M6)}>
+                            <div className={classNames(styles.selectWrapper)}>
+                                <select className={classNames(styles.browserDefault, styles.selectClass)} name="project" id="project">
                                     <option value="" disabled selected>- Выберите проект -</option>
                                     {projects.map((record) => (
                                         <option value={record.id}>{record.name}</option>
@@ -64,16 +60,8 @@ function Projects() {
                         </div>
                     </div>
                     <h4>Документы</h4>
-                    <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <table className={classNames(styles.mdlDataTable, styles.mdlJsDataTable, styles.mdlShadow2dp)}>
                         <tbody>
-                        <tr>
-                            <th>Название</th>
-                            <th>Дата создания</th>
-                            <th>Автор</th>
-                            <th>Статус</th>
-                            <th>Приоритет</th>
-                            <th>Действия</th>
-                        </tr>
                         {documents.map((record) => (
                             <tr>
                                 <td>{record.name}</td>
@@ -82,26 +70,19 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>Удал.</button>
+                                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id={"updDocumentBtn_" + record.id}>Ред.</button>
+                                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id={"delDocumentBtn_" + record.id}>Удал.</button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
+                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id="addDocumentBtn">
                         Добавить документ
                     </button>
                     <h4>Задачи</h4>
-                    <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <table className={classNames(styles.mdlDataTable, styles.mdlJsDataTable, styles.mdlShadow2dp)}>
                         <tbody>
-                        <tr>
-                            <th>Название</th>
-                            <th>Сроки выполнения</th>
-                            <th>Исполнители</th>
-                            <th>Приоритет</th>
-                            <th>Действия</th>
-                        </tr>
                         {tasks.map((record) => (
                             <tr>
                                 <td>{record.name}</td>
@@ -109,20 +90,20 @@ function Projects() {
                                 <td>{record.executives}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updTaskBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>Удал.</button>
+                                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id={"updTaskBtn_" + record.id}>Ред.</button>
+                                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id={"delTaskBtn_" + record.id}>Удал.</button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn">
+                    <button className={classNames(styles.mdlButton, styles.mdlJsButton, styles.mdlButtonRaised, styles.mdlJsRippleEffect, styles.mdlButtonAccent)} id="addTaskBtn">
                         Добавить задачу
                     </button>
                 </div>
             </main>
         </div>
-    )
+    );
 }
 
 export default Projects;
