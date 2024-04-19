@@ -68,7 +68,7 @@ export default function MainFormBar({changeState} : any) {
                     <Button variant='text' size='large'sx={{color: 'white'}}> Отчеты</Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}> Настройки </Button>
                     <Divider color ='white' orientation="vertical" flexItem />
-                    <Button variant='text' size='large'sx={{color: 'white'}} onClick={() => window.open('/profile', '_self')}>Профиль</Button>
+                    <Button variant='text' size='large'sx={{color: 'white'}} onClick={() => window.open('/userProfile', '_self')}>Профиль</Button>
                     <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
 
                 </ButtonGroup>
