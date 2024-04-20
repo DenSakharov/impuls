@@ -56,7 +56,7 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => window.location.pathname === '/main' ? closeParentDialog : window.open('/main', '_self')}>
+            onClick={() => window.location.pathname === '/main' ? closeParentDialog() : window.open('/main', '_self')}>
           
               <Close fontSize='large'/>
               </IconButton>
