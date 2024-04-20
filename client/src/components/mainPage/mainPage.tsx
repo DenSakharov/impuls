@@ -12,6 +12,7 @@ import { Container } from '@mui/system';
 import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
 import Box from '@mui/system/Box';
+import { createContext } from 'vm';
 
 
 
@@ -24,7 +25,9 @@ const Item = styled('div')(({ theme }) => ({
   textAlign: 'left',
 }));
 
+export const closeDialog = React.createContext({})
 export default function MainPage() {
+  
   const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
   const [formOpen, setFormOpen] = React.useState(false);
@@ -40,10 +43,11 @@ export default function MainPage() {
 <div className="mainApp mainApp-push-bottom">
 
 <MuiMenu changeState={setProjectData}/>
-
-<Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-  <MuiPopup {...popupData}/>
-</Dialog>
+<closeDialog.Provider value={handleCloseForm}>
+  <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+    <MuiPopup {...popupData} />
+  </Dialog>
+</closeDialog.Provider>
 <div className ="clear"/>
 
 <main className='section'>
