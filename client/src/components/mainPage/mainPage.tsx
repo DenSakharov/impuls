@@ -63,13 +63,13 @@ export default function MainPage() {
 			  </div>
     	</div>
        <Container fixed>
-        <Box sx={{ bgcolor: '#F5F5F5', height: '35vh' }} >
+        <Box sx={{ bgcolor: '#F5F5F5', height: '10vh' }} >
         <div className="container-news">
         <h2> Новости </h2>
          <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
         <Grid xs={6}>
