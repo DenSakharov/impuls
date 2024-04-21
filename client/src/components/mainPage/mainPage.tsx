@@ -35,6 +35,7 @@ export default function MainPage() {
   const handleOpenForm = () => {
   setFormOpen(true);
     }
+    
 
   return (
 <div className="mainApp mainApp-push-bottom">
@@ -94,7 +95,7 @@ export default function MainPage() {
         <Box sx={{ bgcolor: '#FFFFFF', height: '70vh' }} >
         <h2> Ключевые показатели  </h2> 
           <div className="container-kpi1">           
-           </div>   	     
+           </div>
         </Box>
       </Container>
 
