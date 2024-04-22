@@ -51,6 +51,9 @@ export default function MainFormBar({changeState} : any) {
                 {/*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице*/}
                 <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
             </Container>
+
+
+
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
               {/*TODO Заменить группу кнопок на кнопку с выпадющим списком, либо по своему усмотрению  @SergeyKozhevnikov*/}
                 <ButtonGroup >
@@ -75,6 +78,7 @@ export default function MainFormBar({changeState} : any) {
 
                 </ButtonGroup>
             </Container>
+
         </Toolbar>
       </AppBar>
       <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
