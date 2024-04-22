@@ -5,6 +5,7 @@ import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
+
 import data from '../editPopup/data';
 import { Dialog } from '@mui/material';
 import MuiPopup from '../muiPopup/muiPopup';
@@ -40,9 +41,7 @@ export default function MainPage() {
   const handleOpenForm = () => {
     setFormOpen(true);
     }
-  
-    
-    
+
   return (
 <closeDialog.Provider value={handleCloseForm}>
 <div className="mainApp mainApp-push-bottom">
@@ -65,7 +64,7 @@ export default function MainPage() {
 
 	  <div className="content">
       <div id="containerHeader">
-	    
+
       <div id="mainHeader">
 			  <div className="content-text-block">
    			  <span> Рабочий стол </span>
@@ -74,7 +73,7 @@ export default function MainPage() {
        <Container fixed>
         <Box sx={{ bgcolor: '#F5F5F5', height: '10vh' }} >
         <div className="container-news">
-        <h2> Новости </h2>
+        <h1 className="text-3xl font-bold underline"> Новости </h1>
          <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid xs={6}>
@@ -82,15 +81,15 @@ export default function MainPage() {
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
       </Grid>
@@ -101,16 +100,16 @@ export default function MainPage() {
 
        <Container fixed>
         <Box sx={{ bgcolor: '#FFFFFF', height: '70vh' }} >
-        <h2> Ключевые показатели  </h2> 
-          <div className="container-kpi1">           
-           </div>   	     
+        <h1 className="text-3xl font-bold underline"> Ключевые показатели  </h1>
+          <div className="container-kpi1">
+           </div>
         </Box>
       </Container>
 
       <Container fixed>
         <Box sx={{ bgcolor: '#F5F5F5', height: '10vh'}} >
         <div className="container-proj">
-        <h2> Информация проекта</h2> 
+        <h1 className="text-3xl font-bold underline"> Информация проекта</h1>
    	  </div>
         </Box>
       </Container>
@@ -127,8 +126,10 @@ export default function MainPage() {
       {/* TODO localhost link @SergeyKozhevnikov */}
       <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
     </div>
-
 </footer>
+
+
+
 </div>
 </closeDialog.Provider>
 );
