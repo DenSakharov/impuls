@@ -5,6 +5,7 @@ import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
+import Testpage from '../mainPage/testpage';
 import data from '../editPopup/data';
 import { Dialog } from '@mui/material';
 import MuiPopup from '../muiPopup/muiPopup';
@@ -57,7 +58,7 @@ export default function MainPage() {
 
 	  <div className="content">
       <div id="containerHeader">
-	    
+
       <div id="mainHeader">
 			  <div className="content-text-block">
    			  <span> Рабочий стол </span>
@@ -74,15 +75,15 @@ export default function MainPage() {
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
         <Grid xs={6}>
-          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. 
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
           </Item>
         </Grid>
       </Grid>
@@ -118,28 +119,9 @@ export default function MainPage() {
       <p> <About/> | <Contacts/> </p>
       <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
     </div>
-
 </footer>
 
 
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-
-    <div className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
-  <img className="block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0" src="/img/erin-lindford.jpg" alt="Woman's Face" />
-  <div className="text-center space-y-2 sm:text-left">
-    <div className="space-y-0.5">
-      <p className="text-lg text-black font-semibold">
-        Erin Lindford
-      </p>
-      <p className="text-slate-500 font-medium">
-        Product Engineer
-      </p>
-    </div>
-    <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Message</button>
-  </div>
-</div>
 
 </div>
 );
