@@ -62,9 +62,11 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
                             style={{ display: 'none' }}
                             onChange={handleAttachment}
                         />
-                        {attachments.map((file, index) => (
-                            <div key={index} className="attachment-name">{file.name}</div>
-                        ))}
+                        <div className="attachment-names">
+                            {attachments.map((file, index) => (
+                                <div key={index} className="attachment-name">{file.name}</div>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="modal-footer">
