@@ -6,7 +6,7 @@ import {Socket} from 'socket.io-client'
 import {DefaultEventsMap} from "@socket.io/component-emitter"
 import { useParams } from 'react-router-dom';
 import saver from './FileSaver';
-
+import './styles/text_editor.css'
    
 const SAVE_INTERVAL_MS = 2000
 
@@ -154,6 +154,6 @@ if (doc?.hasChildNodes){
 
     
     return(
-        <div id="container" ref={wrapperRef}></div>
+        <div className="container" id="container" ref={wrapperRef}></div>
     )
 }
