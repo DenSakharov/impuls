@@ -5,12 +5,13 @@ import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
 import EditPopupProps from '../interfaces/editPopupProps';
+import { closeDialog } from '../mainPage/mainPage';
 
 
 export default function PopupBar(props: EditPopupProps = data.object) {
-
   const [smallMenu, setSmallMenu] = React.useState(false);
-
+  const closeParentDialog = React.useContext(closeDialog)
+  console.log(closeParentDialog)
   return (
     <Box sx={{flexGrow: 0}}>
       <AppBar  position="static">
@@ -55,9 +56,10 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => window.open('/main', '_self')}>
+            onClick={() => window.location.pathname === '/main' ? closeParentDialog() : window.open('/main', '_self')}>
+          
               <Close fontSize='large'/>
-            </IconButton>
+              </IconButton>
           </Container>
         </Toolbar>
       </AppBar>
