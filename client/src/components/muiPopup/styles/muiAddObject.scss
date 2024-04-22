@@ -24,6 +24,7 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
+
     .add-attachment-button {
       background-color: #5b9bd5; // Цвет кнопки как на изображении
       color: white;
@@ -34,16 +35,24 @@
       font-size: 24px;
       line-height: 24px;
       text-align: center;
-      width: 34px;
-      height: 34px;
+      width: 14px;
+      height: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-right: 10px;
     }
-  }
 
-  .attachment-name {
-    margin-top: 5px;
-    font-size: 0.9em; // Меньший шрифт для имен файлов
+    .attachment-names {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .attachment-name {
+      font-size: 0.9em;
+      /* Дополнительные стили, если необходимо */
+    }
   }
 }
