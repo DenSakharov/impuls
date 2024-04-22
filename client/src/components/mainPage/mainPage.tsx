@@ -15,6 +15,7 @@ import Box from '@mui/system/Box';
 
 
 
+
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   border: '1px solid #F5F5F5' ,
@@ -24,26 +25,34 @@ const Item = styled('div')(({ theme }) => ({
   textAlign: 'left',
 }));
 
+
+export const closeDialog = React.createContext<Function>(Function)
+
 export default function MainPage() {
+  
   const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
   const [formOpen, setFormOpen] = React.useState(false);
 
   const handleCloseForm = () => {
-  setFormOpen(false);
+    setFormOpen(false);
     }
   const handleOpenForm = () => {
-  setFormOpen(true);
+    setFormOpen(true);
     }
-
+  
+    
+    
   return (
+<closeDialog.Provider value={handleCloseForm}>
 <div className="mainApp mainApp-push-bottom">
 
 <MuiMenu changeState={setProjectData}/>
 
-<Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-  <MuiPopup {...popupData}/>
-</Dialog>
+  <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+    <MuiPopup {...popupData} />
+  </Dialog>
+
 <div className ="clear"/>
 
 <main className='section'>
@@ -120,5 +129,7 @@ export default function MainPage() {
 
 </footer>
 </div>
+</closeDialog.Provider>
 );
 }
+
