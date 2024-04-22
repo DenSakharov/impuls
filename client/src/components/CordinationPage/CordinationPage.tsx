@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import jsonData from './data.json';
- // @VladimirPikhtovnikov если не нужно удали [ {"id":1,"name":"Проект Импульс","DataCreate":"01/04/2024","DataCordination":"01/04/2024","Autohr":"Пихтовников В.В.","Cordinator":"Федоров","Status":"Согласован"} ]
+ //TODO @VladimirPikhtovnikov если не нужно удали [ {"id":1,"name":"Проект Импульс","DataCreate":"01/04/2024","DataCordination":"01/04/2024","Autohr":"Пихтовников В.В.","Cordinator":"Федоров","Status":"Согласован"} ]
 function CordinationPage(props:any) {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
