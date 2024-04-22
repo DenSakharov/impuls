@@ -5,7 +5,7 @@ import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
-import Testpage from '../mainPage/testpage';
+
 import data from '../editPopup/data';
 import { Dialog } from '@mui/material';
 import MuiPopup from '../muiPopup/muiPopup';
