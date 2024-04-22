@@ -124,6 +124,7 @@ export default function MainPage() {
 <footer id="content">
     <div id='foot'>
       <p> <About/> | <Contacts/> </p>
+      {/* TODO localhost link @SergeyKozhevnikov */}
       <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
     </div>
 

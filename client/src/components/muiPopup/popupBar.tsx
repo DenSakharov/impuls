@@ -46,7 +46,7 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             >
             {smallMenu ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft/>}
           </IconButton>
-          {/*@imk-student добавить анимацию при нажатии на стрелки */}
+          {/*TODO @imk-student добавить анимацию при нажатии на стрелки */}
           <Container disableGutters sx={{ alignContent:'right', display:{md: 'contents', xs: smallMenu ? 'contents' : 'none'}}}>
             <MuiChat/>
             <MuiHistChngs/>
