@@ -48,11 +48,11 @@ export default function MainFormBar({changeState} : any) {
             />
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
-                {/*@nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице*/}
+                {/*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице*/}
                 <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
             </Container>
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
-              {/*Заменить группу кнопок на кнопку с выпадющим списком, либо по своему усмотрению @SergeyKozhevnikov*/}
+              {/*TODO Заменить группу кнопок на кнопку с выпадющим списком, либо по своему усмотрению  @SergeyKozhevnikov*/}
                 <ButtonGroup >
                     <Button variant='text' size='large' sx={{color: 'white'}}> Начало </Button>
                     <Button variant='text' size='large' sx={{color: 'white'}}> Мастер поиск </Button>
