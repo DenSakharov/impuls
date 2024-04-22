@@ -10,11 +10,18 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
     const [objectName, setObjectName] = useState('');
     const [objectType, setObjectType] = useState('');
     const [description, setDescription] = useState('');
+    const [attachments, setAttachments] = useState<File[]>([]);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         // Обработка данных формы
         onClose(); // Закрыть модальное окно после отправки формы
+    };
+
+    const handleAttachment = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            setAttachments([...attachments, ...Array.from(event.target.files)]);
+        }
     };
 
     if (!isOpen) return null;
@@ -48,7 +55,16 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
                     />
 
                     <div className="attachments">
-                        <button type="button" className="add-attachment-button">+</button>
+                        <label htmlFor="file-upload" className="add-attachment-button">+</label>
+                        <input
+                            id="file-upload"
+                            type="file"
+                            style={{ display: 'none' }}
+                            onChange={handleAttachment}
+                        />
+                        {attachments.map((file, index) => (
+                            <div key={index} className="attachment-name">{file.name}</div>
+                        ))}
                     </div>
 
                     <div className="modal-footer">
