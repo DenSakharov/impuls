@@ -6,7 +6,7 @@ import { Container } from "@mui/material";
 import logo from "./logo_reg.png"
 import {Close} from '@mui/icons-material';
 import { IconButton} from '@mui/material';
-//см loginpage
+//TODO см loginpage
 import "./style.css";
 
 

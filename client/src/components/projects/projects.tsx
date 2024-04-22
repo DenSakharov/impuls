@@ -45,7 +45,7 @@ function Projects() {
     }, []);
 
     return(
-        /*@nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице client\src\components\mainPage\muiMenu.tsx*/
+        /*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице client\src\components\mainPage\muiMenu.tsx*/
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef} id="projects">
             <ProjectsScripts />
             <Header />
