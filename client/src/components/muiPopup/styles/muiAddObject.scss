@@ -41,4 +41,9 @@
       align-items: center;
     }
   }
+
+  .attachment-name {
+    margin-top: 5px;
+    font-size: 0.9em; // Меньший шрифт для имен файлов
+  }
 }
