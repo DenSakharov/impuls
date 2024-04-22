@@ -50,6 +50,9 @@ export default function MainFormBar({changeState} : any) {
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
                 <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
             </Container>
+
+
+
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
                     <Button variant='text' size='large' sx={{color: 'white'}}> Начало </Button>
@@ -73,6 +76,7 @@ export default function MainFormBar({changeState} : any) {
 
                 </ButtonGroup>
             </Container>
+
         </Toolbar>
       </AppBar>
       <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
