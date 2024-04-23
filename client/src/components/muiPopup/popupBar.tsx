@@ -11,7 +11,6 @@ import { closeDialog } from '../mainPage/mainPage';
 export default function PopupBar(props: EditPopupProps = data.object) {
   const [smallMenu, setSmallMenu] = React.useState(false);
   const closeParentDialog = React.useContext(closeDialog)
-  console.log(closeParentDialog)
   return (
     <Box sx={{flexGrow: 0}}>
       <AppBar  position="static">
@@ -47,6 +46,7 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             >
             {smallMenu ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft/>}
           </IconButton>
+          {/*TODO @imk-student добавить анимацию при нажатии на стрелки */}
           <Container disableGutters sx={{ alignContent:'right', display:{md: 'contents', xs: smallMenu ? 'contents' : 'none'}}}>
             <MuiChat/>
             <MuiHistChngs/>
