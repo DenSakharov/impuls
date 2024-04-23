@@ -7,6 +7,7 @@ import {DefaultEventsMap} from "@socket.io/component-emitter"
 import { useParams } from 'react-router-dom';
 import saver from './FileSaver';
 import './styles/text_editor.css'
+import 'mammoth/mammoth.browser'
    
 const SAVE_INTERVAL_MS = 2000
 
@@ -121,16 +122,16 @@ useEffect(() => {
       
 
 
-        var posButton = document.createElement('span');
-        
+        let posButton = document.createElement('span');
+        let posButton1 = document.createElement('span');
         posButton.classList.add(
             'ql-formats'
            );
            posButton.setAttribute('id', 'butSave');
-        var customButton = document.createElement('button');
+        let customButton = document.createElement('button');
         customButton.innerHTML = 'Сохранить';
         customButton.addEventListener('click', function() {
-        //  var htmlContent = quill.root.innerHTML;
+        //  let htmlContent = quill.root.innerHTML;
         saver(q);
 
    
@@ -141,13 +142,66 @@ customButton.classList.add(
     'ql-icon-picker',
     'ql-save'
    );
+   customButton.style.width='70px';
 posButton.appendChild(customButton);
+
+posButton1.classList.add(
+    'ql-formats'
+   );
+   posButton1.setAttribute('id', 'butLoad');
+let customButton1 = document.createElement('input');
+customButton1.type="file"
+customButton1.id="customButton1"
+
+customButton1.innerHTML = 'Загрузить';
+customButton1.style.width='110px';
+
+let mammoth = require("mammoth");
+
+customButton1.addEventListener('change', (event) => {
+
+const file = (event.target as HTMLInputElement).files![0];
+if (!file) {
+console.log('Выбор файла отменён. Или что-то другое произошло?');
+}
+else{
+console.log(file.name);
+console.time();
+let reader = new FileReader();
+reader.onloadend = function(event) {
+let arrayBuffer = reader.result;
+// debugger
+
+mammoth.convertToHtml({arrayBuffer: arrayBuffer}).then(function (resultObject:any) {
+document.getElementsByClassName("ql-editor")[0].innerHTML = resultObject.value
+
+})
+.catch((error:any) => {
+// Handle the error.
+
+console.log(error);
+});
+console.timeEnd();
+};
+
+reader.readAsArrayBuffer(file);
+}
+});
+
+    customButton1.classList.add(
+        'ql-align', 
+        'ql-picker', 
+        'ql-icon-picker',
+        'ql-save'
+    );
+    posButton1.appendChild(customButton1);
 
 // Add the button to your desired location in the DOM
 const doc = document.getElementById("container");
 if (doc?.hasChildNodes){
    const panel = doc.getElementsByTagName('div')[0];
    panel.appendChild(posButton);
+   panel.appendChild(posButton1);
     }
     }, [])
 
