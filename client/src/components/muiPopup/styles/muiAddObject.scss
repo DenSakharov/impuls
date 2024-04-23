@@ -18,12 +18,20 @@
 
   textarea {
     resize: vertical;
+    height: 100px;
+  }
+
+  input, textarea {
+    width: 95%;
   }
 
   .attachments {
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
+    background-color: #d7ccc8;
+    padding: 10px;
 
     .add-attachment-button {
       background-color: #5b9bd5; // Цвет кнопки как на изображении
