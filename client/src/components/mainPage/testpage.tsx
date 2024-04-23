@@ -7,7 +7,6 @@ import About from './../about/about';
 import Contacts from '../about/contacts_teem';
 //import data from '../editPopup/data';
 //import styled from '@mui/system/styled';
-
 /*
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
