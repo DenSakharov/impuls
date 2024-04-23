@@ -28,8 +28,9 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                         <label htmlFor="type">Тип папки</label>
                         <select id="type" name="type">
                             <option value="0">-</option>
-                            <option value="1">Тип 1</option>
-                            <option value="2">Тип 2</option>
+                            <option value="1">Общая</option>
+                            <option value="2">Служебная</option>
+                            <option value="3">Скрытая</option>
                         </select>
 
                         <div className="modal-footer">
