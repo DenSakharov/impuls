@@ -18,6 +18,7 @@ function Profile() {
         </div>
       </header>
       <div id="infoProfile">
+        {/* img строчный элемент, возможно стоит обернуть в div чтобы кнопки под картинку уехали @RusDa256*/}
         <div id="editPhoto">
           <img src="/img/UserImage.png" alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
@@ -71,6 +72,7 @@ function Profile() {
             <input type="text"/>
           </div>
           <div id="replacePas_Save">
+            {/* что думаешь насчет диалогового окна @RusDa256? */}
             <a href="/replace_password" id="bReplacePas">Изменить пароль</a>
             <button id="bSave" type="button">Сохранить</button>
           </div>
