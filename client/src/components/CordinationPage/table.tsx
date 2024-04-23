@@ -3,7 +3,8 @@ import { Button, Collapse, Container, IconButton, Table, TableBody, TableCell, T
 import { RecordI, records } from './data';
 import CloseIcon from '@mui/icons-material/Close'
  
-/*function TableData() {
+/*TODO @VladimirPikhtovnikov если не нужно удали
+function TableData() {
   const [ProjectData, setProjectData] = useState(jsonData);
  
     const tableRows = ProjectData.map((info) => {
@@ -65,7 +66,9 @@ function TableData() {
         setValue(true)
     }
    return (
+        
         <Container sx={{marginTop:'20px'}} maxWidth='lg'>
+            {/*TODO @VladimirPikhtovnikov Предлагаю сбросить цветовые настройки, и поместить форму в диалоговое окно с небольшим меню и добавить кнопку на muiPopup для вызова этого компонента*/}
             <Button onClick={()=>setIsOpen(prev => !prev)} sx={{
                 width:'140px', 
                 height:'40px', 
