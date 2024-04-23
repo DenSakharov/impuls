@@ -5,10 +5,10 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
-import data from '../editPopup/data';
-import styled from '@mui/system/styled';
+//import data from '../editPopup/data';
+//import styled from '@mui/system/styled';
 
-
+/*
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   border: '1px solid #F5F5F5' ,
@@ -16,14 +16,14 @@ const Item = styled('div')(({ theme }) => ({
   padding: theme.spacing(1),
   borderRadius: '4px',
   textAlign: 'left',
-}));
+}));*/
 
-
+/*
 const service = {
   name: 'serv',
   email: 'ii@rosatom.ru',
   imageUrl: '../../img/settings2_32px.png',
-}
+}*/
 
 const user = {
   name: 'Иванов Иван',
@@ -56,16 +56,16 @@ function classNames(...classes) {
 
 function Testpage() {
     // const classes = useStyles()
-    const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
-    const [formOpen, setFormOpen] = React.useState(false);
+   // const [popupData, setPopupData] = React.useState(data.object);
+   // const [projectData, setProjectData] = React.useState(data.tree[0]);
+  //  const [formOpen, setFormOpen] = React.useState(false);
   
-    const handleCloseForm = () => {
+    /*const handleCloseForm = () => {
     setFormOpen(false);
       }
     const handleOpenForm = () => {
     setFormOpen(true);
-      }
+      }*/
 
     return (
           <>
@@ -105,7 +105,7 @@ function Testpage() {
                         <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
                           <Menu.Button className="relative rounded-md px-3 py-2 text-sm font-medium">
-                           <a className=""> Сервисы </a>
+                           <a className="" href="."> Сервисы </a>
                           </Menu.Button>
                         </div>
 
