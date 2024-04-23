@@ -7,6 +7,7 @@ interface CreateObjectModalProps {
 }
 
 const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => {
+
     const [objectName, setObjectName] = useState('');
     const [objectType, setObjectType] = useState('');
     const [description, setDescription] = useState('');
@@ -24,35 +25,39 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
         }
     };
 
-    if (!isOpen) return null;
+    if (!isOpen) {
+        return null;
+    }
 
     return (
         <div className="modal-overlay">
             <div className="modal">
+                <div className="modal-header">
+                    <h2>Форма создания нового объекта</h2>
+                </div>
                 <form onSubmit={handleSubmit} className="form-create-object">
                     <label htmlFor="name">Название</label>
                     <input
                         id="name"
                         type="text"
                         value={objectName}
-                        onChange={(e) => setObjectName(e.target.value)}
-                    />
+                        onChange={(e) => setObjectName(e.target.value)}/>
 
                     <label htmlFor="type">Тип объекта</label>
                     <select
                         id="type"
                         value={objectType}
-                        onChange={(e) => setObjectType(e.target.value)}
-                    >
-                        {/* Здесь должны быть ваши варианты для типа объекта */}
+                        onChange={(e) => setObjectType(e.target.value)}>
+                        <option value="0">-</option>
+                        <option value="1">Документ</option>
+                        <option value="2">Задача</option>
                     </select>
 
                     <label htmlFor="description">Описание</label>
                     <textarea
                         id="description"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
+                        onChange={(e) => setDescription(e.target.value)}/>
 
                     <div className="attachments">
                         <label htmlFor="file-upload" className="add-attachment-button">+</label>
@@ -60,8 +65,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
                             id="file-upload"
                             type="file"
                             style={{ display: 'none' }}
-                            onChange={handleAttachment}
-                        />
+                            onChange={handleAttachment} />
                         <div className="attachment-names">
                             {attachments.map((file, index) => (
                                 <div key={index} className="attachment-name">{file.name}</div>
