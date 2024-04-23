@@ -21,6 +21,10 @@
     height: 100px;
   }
 
+  input, textarea {
+    width: 95%;
+  }
+
   .attachments {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -39,8 +43,8 @@
       font-size: 24px;
       line-height: 24px;
       text-align: center;
-      width: 20px;
-      height: 20px;
+      width: 14px;
+      height: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
