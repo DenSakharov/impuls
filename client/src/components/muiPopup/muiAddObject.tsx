@@ -49,9 +49,8 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
                         value={objectType}
                         onChange={(e) => setObjectType(e.target.value)}>
                         <option value="0">-</option>
-                        <option value="1">Артефакт</option>
-                        <option value="2">Требования</option>
-                        <option value="3">Документ</option>
+                        <option value="1">Документ</option>
+                        <option value="2">Задача</option>
                     </select>
 
                     <label htmlFor="description">Описание</label>
@@ -60,7 +59,6 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ isOpen, onClose }) => 
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}/>
 
-                    <label htmlFor="file-upload">Вложения</label>
                     <div className="attachments">
                         <label htmlFor="file-upload" className="add-attachment-button">+</label>
                         <input
