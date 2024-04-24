@@ -7,6 +7,8 @@ import About from './../about/about';
 import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
 import styled from '@mui/system/styled';
+import { Dialog } from '@mui/material';
+import Breadcrumb from "./../mainPage/breadcrumb";
 
 
 const Item = styled('div')(({ theme }) => ({
@@ -45,7 +47,7 @@ const serviceNavigation = [
 ]
 const userNavigation = [
   { name: 'Профиль', href: '#' },
-  { name: 'О проекте', href: '#' },
+  { name: 'О проекте', href: '/About' },
   { name: 'Выйти', href: '#' },
 ]
 
@@ -80,7 +82,7 @@ function Testpage() {
                       <img
                         className="h-8 w-8"
                         src="./img/logo.png"
-                        alt="IMS Impuls"
+                        alt="IMS Impulse"
                       />
                     </div>
                     <div className="hidden md:block">
@@ -105,7 +107,7 @@ function Testpage() {
                         <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
                           <Menu.Button className="relative rounded-md px-3 py-2 text-sm font-medium">
-                           <a className=""> Сервисы </a>
+                           <a > Сервисы </a>
                           </Menu.Button>
                         </div>
 
@@ -187,6 +189,9 @@ function Testpage() {
                                     )}
                                   >
                                     {item.name}
+                                    <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                                      <About />
+                                    </Dialog>
                                   </a>
                                 )}
                               </Menu.Item>
@@ -285,9 +290,19 @@ function Testpage() {
         {/* END Mobile menu button */}
 
         <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+
+        <div className=" h-[100dvh] bg-gray-200">
+         <div className="flex flex-col items-center gap-8 ">
+
+         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h1>
+            <Breadcrumb />
           </div>
+
+         </div>
+        </div>
+
+
         </header>
 
         <main>
@@ -300,7 +315,7 @@ function Testpage() {
         <footer id="content">
            <div id='foot'>
               <p> <About/> | <Contacts/> </p>
-              <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
+              <p id="copyright"><a href="/" target="_blank" rel="noreferrer">© Impulse Team 2024</a></p>
           </div>
           </footer>
       </div>
