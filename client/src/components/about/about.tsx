@@ -8,13 +8,10 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -34,9 +31,7 @@ function About() {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -44,8 +39,9 @@ function About() {
     setOpen(false);
   };
 
-  return (
 
+
+  return (
     <React.Fragment>
     <Button
       id="fade-button"
@@ -57,7 +53,7 @@ function About() {
     </Button>
 
     <BootstrapDialog
-      onClose={handleClose}
+
       aria-labelledby="customized-dialog-title"
       open={open}
     >
