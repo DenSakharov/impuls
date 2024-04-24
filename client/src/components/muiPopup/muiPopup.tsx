@@ -1,11 +1,13 @@
 import React from 'react';
 import EditPopupProps from '../interfaces/editPopupProps';
-//import HistChanges from '../editPopup/histChanges';
 import PopupBar from './popupBar';
-import data from '../editPopup/data';
-import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider } from '@mui/material';
-import { Add } from '@mui/icons-material';
 import MuiDialog from './muiDialog';
+import data from '../editPopup/data';
+import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider, IconButton } from '@mui/material';
+import { Add, AssignmentOutlined } from '@mui/icons-material';
+import impulsTheme from '../../muiTheme';
+import { ThemeProvider } from '@emotion/react';
+import { v4 as uuidV4 } from 'uuid'
 
 
 
@@ -20,10 +22,8 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [file, setFile] = React.useState(null)
     const [formOpen, setFormOpen] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
-    
-    const changeStatus = (value: string) => {
-        setStatus(value);
-    }
+    const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
+
     
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
@@ -53,9 +53,18 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     };
 
     const inputRef = React.useRef<HTMLInputElement | null>(null)
-    const handleButtonClick = () => {
-        inputRef.current?.click(); 
+    const handleAddAttachment = () => {
+        const newUUID = uuidV4()
+        window.open('/documents/'+ newUUID)
+        if (newUUID) {
+            setAttachments([...attachments, {uuid: newUUID}]);
+        }
+        
     };
+
+    const handleOpenAttachment = (uuid: string) => {
+        window.open('/documents/'+ uuid)
+    }
 
 
     const handleCloseForm = () => {
@@ -66,22 +75,43 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         setFormOpen(true);
     }
 
+
     const mdGridName = 1.5
     const mdGridValue = 5
     const mdGridSpace = 12-mdGridName-mdGridValue
     const smGridName = 3
     const smGridValue = 8
+    
   return (
     <>
-        <Container disableGutters sx={{height:'900px', maxWidth:'900px'}}>
-            <PopupBar />
-            <Box sx={{ width: '100%', height: '100%', backgroundColor: '#EDF5FB', justifyContent:'flex-start'}}>
-                <Container sx={{ backgroundColor:'EDF5FB', overflow:'auto', height:'100%' }}>
+    <ThemeProvider theme={impulsTheme}>
+        <Container disableGutters sx={{
+            maxWidth:'900px', 
+            height: {xs: window.innerHeight, lg: 800},
+            display:'flex',
+            flexDirection: 'column',
+            overflow: 'auto',
+        }}>
+            <PopupBar {...props} />
+            <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
+                    '&::-webkit-scrollbar': {
+                        width: '5px'
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        backgroundColor: '#147ccc00'
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#157298',
+                        outline: '1px solid slategrey',
+                        borderRadius: '10px',
+                        border: '0.1px solid #00000041'
+                    }
+                }}>
                     <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
-                        <Typography variant='h6'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{data.object.name}</Typography>
+                        <Typography variant='h5'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{props.name}</Typography>
                             <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
-                                <Typography>Дата создания {data.object.date_created.toLocaleDateString()}</Typography>
-                                <Typography>Дата изменения {data.object.date_changed.toLocaleDateString()}</Typography>
+                                <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
+                                <Typography>Дата изменения {props.date_changed.toLocaleDateString()}</Typography>
                             </Stack>
                         <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
                         
@@ -96,7 +126,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 multiline
                                 fullWidth
                                 rows={3}
-                                defaultValue={data.object.desc}
+                                defaultValue={props.desc}                            
                                 variant="outlined">
                                 </TextField>
                             </Grid>
@@ -107,11 +137,10 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             </Grid>
                             <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
                                 <TextField 
-                                id="standard-textarea"
-                                placeholder="Placeholder"
+                                id="outlined-basic"
+                                size='small'
                                 fullWidth
-                                multiline
-                                defaultValue={data.object.author}
+                                defaultValue={props.author}
                                 variant="outlined">
                                 </TextField>
                             </Grid>
@@ -126,7 +155,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
                                     <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
                                             {statusButtons.map((button) => (
-                                                <Button size='small' sx={{fontSize: {md:'12px',xs:'10px'}}} style={{height: '40px'}} onClick={() =>changeStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
+                                                <Button size='small'  onClick={() =>setStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
                                             ))}
                                     </ButtonGroup>
                             </Grid>
@@ -135,41 +164,56 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 <Typography align='left'>Тип</Typography>
                             </Grid>
                             <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.type}/>
+                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.type}/>
                             </Grid>
                             <Grid item md={mdGridSpace+3} xs={4} textAlign='left'>
-                                <Button style={{height: '40px'}} size='small' variant='outlined'>Изменить</Button>
+                                <Button size='small' variant='outlined'>Изменить</Button>
                             </Grid>
 
                             <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Приоритет</Typography>
                             </Grid>
                             <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={data.object.priority}/>
+                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.priority}/>
                             </Grid>
                             <Grid item md={mdGridSpace} xs={4}/>
 
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Вложения</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined"  value={file ? file['name'] : ''} />
-                            </Grid>
-                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                                <Button style={{height: '40px'}} size='small' variant='outlined' onClick={handleButtonClick}>Изменить</Button>
-                                <input id='input_epw'type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
-                            </Grid>  
+                            
 
                             <Grid item md={mdGridName} xs={smGridName}> 
                                 <Typography align='left'>Путь</Typography>
                             </Grid>
                             <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={data.object.path}/>
+                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={props.path}/>
 
                             </Grid>
                             <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                                <Button style={{height: '40px'}} size='small'  variant='outlined'>Изменить</Button>
+                                <Button  size='small'  variant='outlined'>Изменить</Button>
                             </Grid>
+
+                            <Grid item md={mdGridName} xs={smGridName}> 
+                                <Typography align='left'>Вложения</Typography>
+                            </Grid>
+                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
+                                <Box sx={{
+                                    borderRadius:'5px', border: '1px solid rgb(133,133,133,0.5)', padding: '5px',
+                                    minHeight: '40px'
+                                }}>
+                                    {attachments.map((attachment) => 
+                                    <IconButton 
+                                    
+                                    key={attachment.uuid}
+                                    onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
+                                    sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
+                                        <AssignmentOutlined />
+                                        <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
+                                    </IconButton> )}                                                                            
+                                </Box>
+                            </Grid>
+                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                                <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
+                                <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
+                            </Grid>  
                         </Grid>
                     </Stack>
 
@@ -198,10 +242,9 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                     </Container>
                     
                 </Container>
-            </Box>
             <MuiDialog formOpen={formOpen} handleCloseForm={handleCloseForm} addLinks={addLinks} />
         </Container>
-      
+    </ThemeProvider>
     </>
   );
 }

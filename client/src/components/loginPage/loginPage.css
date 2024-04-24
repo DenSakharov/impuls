@@ -1,4 +1,4 @@
-@import './../../styles/bootstrap.min.css';
+
 
 .form-signin {
   width: 100%;
@@ -40,5 +40,9 @@ input {
 
 button {
   height: 50px;
+}
+
+.loginPage-bRegistration {
+  margin: 100px 0;
 }
 
