@@ -1,0 +1,66 @@
+@import 'muiAddDirectory.scss'; // Импортируем уже созданные стили
+
+.form-create-object {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-top: 10px;
+  }
+
+  input, select, textarea {
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+
+  input, textarea {
+    width: 95%;
+  }
+
+  .attachments {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #d7ccc8;
+    padding: 10px;
+
+    .add-attachment-button {
+      background-color: #5b9bd5; // Цвет кнопки как на изображении
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%; // Круглая кнопка
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 24px;
+      text-align: center;
+      width: 14px;
+      height: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .attachment-names {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .attachment-name {
+      font-size: 0.9em;
+      /* Дополнительные стили, если необходимо */
+    }
+  }
+}

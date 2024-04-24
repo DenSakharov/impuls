@@ -1,65 +1,56 @@
 import React from 'react';
 import './stylesMainPage.css';
+import MuiMenu from './muiMenu';
+import MuiTree from './muiTree';
+import MuiButTree from './muiButTree';
+import About from './../about/about';
+import Contacts from '../about/contacts_teem';
 
-function mainPage() {
+import data from '../editPopup/data';
+import { Dialog } from '@mui/material';
+import MuiPopup from '../muiPopup/muiPopup';
+import { Container } from '@mui/system';
+import Grid from '@mui/system/Unstable_Grid';
+import styled from '@mui/system/styled';
+import Box from '@mui/system/Box';
+
+
+
+
+const Item = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  border: '1px solid #F5F5F5' ,
+  borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
+  padding: theme.spacing(1),
+  borderRadius: '4px',
+  textAlign: 'left',
+}));
+
+
+export const closeDialog = React.createContext<Function>(Function)
+
+export default function MainPage() {
+  
+  const [popupData, setPopupData] = React.useState(data.object);
+  const [projectData, setProjectData] = React.useState(data.tree[0]);
+  const [formOpen, setFormOpen] = React.useState(false);
+
+  const handleCloseForm = () => {
+    setFormOpen(false);
+    }
+  const handleOpenForm = () => {
+    setFormOpen(true);
+    }
+
   return (
+<closeDialog.Provider value={handleCloseForm}>
 <div className="mainApp mainApp-push-bottom">
-<header className="header">
 
-    <nav id="cssmenu">
-		<ul>
-			<li>
-          <img src='./img/logo.png' className="mainApp-logo" alt="logo" width="50" height="50" />
-			</li>
-      <li>
-        <div>
-         <p id="h3">IMS Impuls </p>
-         <p>Project №1</p>
-        </div>
-			</li>
-			<li>
-      <a href='' target=""><span>Home</span></a>
-			</li>
-			<li>
-				<a href='' target=""><span>Меню1</span></a>
-			</li>
-			<li className='active has-sub'><a href='#'><span>Меню2</span></a>
-				<ul>
-					<li className='has-sub'><a href='' target=""><span>под меню21</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню22</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню23</span></a></li>
-					<li className='has-sub'><a href='' target=""><span>под меню24</span></a></li>
-				</ul>
-			</li>
-			<li className='last'><a href='' target=""><span>Меню3</span></a>
-			</li>
-      <li className='last'><a href='' target=""><span>Меню4</span></a>
-			</li>
-      <li className='last'><a href='' target=""><span>|</span></a>
-			</li>
-      <li className='last'>
-      <a
-          className="App-link"
-          href="http://localhost:3000"
-          target=""
-          rel="noopener noreferrer"
-        >
-          Сменить пользователя
-        </a>
-       </li>
-       <li className='last'><a
-          className="App-link"
-          href="http://localhost:3000/about"
-          target=""
-          rel="noopener noreferrer"
-        >
-          О программе
-          </a>
-			</li>
-		</ul>
-  </nav>
+<MuiMenu changeState={setProjectData}/>
 
-</header>
+  <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+    <MuiPopup {...popupData} />
+  </Dialog>
 
 <div className ="clear"/>
 
@@ -67,34 +58,63 @@ function mainPage() {
   <div className='container-app'>
 
     <div className="aside">
-   	Left side
+      <MuiButTree/>
+   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
   	</div>
 
 	  <div className="content">
       <div id="containerHeader">
-	     <div id="mainHeader">
+
+      <div id="mainHeader">
 			  <div className="content-text-block">
-   			  <p> Дашборд проекта</p>
+   			  <span> Рабочий стол </span>
 			  </div>
-    	 </div>
+    	</div>
+       <Container fixed>
+        <Box sx={{ bgcolor: '#F5F5F5', height: '10vh' }} >
+        <div className="container-news">
+        <h1 className="text-3xl font-bold underline"> Новости </h1>
+         <Box sx={{ width: '100%' }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
+       	    </div>
+        </Box>
+      </Container>
 
-      <div id="container-news">
-      <p>Новости</p>
+       <Container fixed>
+        <Box sx={{ bgcolor: '#FFFFFF', height: '70vh' }} >
+        <h1 className="text-3xl font-bold underline"> Ключевые показатели  </h1>
+          <div className="container-kpi1">
+           </div>
+        </Box>
+      </Container>
+
+      <Container fixed>
+        <Box sx={{ bgcolor: '#F5F5F5', height: '10vh'}} >
+        <div className="container-proj">
+        <h1 className="text-3xl font-bold underline"> Информация проекта</h1>
    	  </div>
-
-      <div id="container-kpi">
-      <p>Ключевые показатели</p>
-   	  </div>
-
-      <div id="container-proj">
-      <p>Информация проекта</p>
-   	  </div>
-
+        </Box>
+      </Container>
     </div>
-
-
-	  </div>
-
+	</div>
   </div>
 </main>
 
@@ -102,16 +122,16 @@ function mainPage() {
 
 <footer id="content">
     <div id='foot'>
-      <p> <a href="">О программе </a> | <a href="">Контакты </a> </p>
-      <p id="copyright"><a href="">© Impuls Teem 2024</a></p>
+      <p> <About/> | <Contacts/> </p>
+      {/* TODO localhost link @SergeyKozhevnikov */}
+      <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
     </div>
-
 </footer>
 
+
+
 </div>
-
-
+</closeDialog.Provider>
 );
 }
 
-export default mainPage;
