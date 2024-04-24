@@ -3,7 +3,7 @@ import EditPopupProps from '../interfaces/editPopupProps';
 import PopupBar from './popupBar';
 import MuiDialog from './muiDialog';
 import data from '../editPopup/data';
-import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider, IconButton } from '@mui/material';
+import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
 import { Add, AssignmentOutlined } from '@mui/icons-material';
 import impulsTheme from '../../muiTheme';
 import { ThemeProvider } from '@emotion/react';
@@ -150,14 +150,11 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 <Typography align='left'>Статус</Typography>
                             </Grid>
                             <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                    <TextField  size='small' id="outlined-basic" variant="outlined"  value={status}/>
+                                    <Select  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.status}>
+                                        {statusButtons.map((status) => <MenuItem key={status.value}>{status.value}</MenuItem>)}    
+                                    </Select>
                             </Grid>                            
-                            <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
-                                    <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
-                                            {statusButtons.map((button) => (
-                                                <Button size='small'  onClick={() =>setStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
-                                            ))}
-                                    </ButtonGroup>
+                                <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
                             </Grid>
 
                             <Grid item md={mdGridName} xs={smGridName}> 
