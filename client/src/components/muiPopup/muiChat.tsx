@@ -29,17 +29,37 @@ export default function MuiChat() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}>
-                <Chat onClick={() => setisDrawerOpen(true)}/>
+                sx={{ mr: 2 }}
+                onClick={() => setisDrawerOpen(true)}>
+                <Chat/>
                 </IconButton>
-                <Drawer anchor={'right'} PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
+                <Drawer
+                sx={{zIndex: 1400}}
+                variant='temporary' 
+                anchor={'right'} 
+                PaperProps={{ sx:{width: {md:'30%', sm: '70%'}}}} 
+                open={isDrawerOpen}  
+                onClose={() => setisDrawerOpen(false)}>
+
                         <Container disableGutters sx={{
                             paddingLeft: '10px',
                             overflowY: 'auto',
                             display: 'block',
-                            margin: 0,                            
+                            margin: 0,
+                                '&::-webkit-scrollbar-track':{
+                                    backgroundColor: '#147ccc00',
+                                },
+                                '&::-webkit-scrollbar': {
+                                    width: '10px',
+                                },
+                                
+                                '&::-webkit-scrollbar-thumb': {
+                                    borderRadius: '0px',
+                                    backgroundColor: '#15739800',
+                                    borderRight: '0.1px solid #157398',
+                                }            
                         }}>
-                            <Container disableGutters>
+                            <Container disableGutters >
                                 {messageArr.map((message) => (
                                     <MuiMessage {...message} key={messageArr.indexOf(message)}/>
                                 ))}

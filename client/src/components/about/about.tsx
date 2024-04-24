@@ -1,31 +1,208 @@
 import React from 'react';
-import './about.css';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 
-function mainPage() {
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(2),
+  },
+}));
+
+
+function About() {
+
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src='./img/logo.png' className="App-logo1" alt="logo" />
-        <h1> О программе!</h1>
-        <h2>Проект IMS "Импульс" (Information Managment System)</h2>
-<p> Система управления информацией “Импульс” — это платформа для совместной работы,
-  обеспечивает взаимодействие между архитектором и стейкхолдерами,
-  которые вносят свой вклад в модель данных проекта и заинтересованы в доступе к информации
-  о важнейших бизнес-процессах, архитектуре программного обеспечения и ИТ-архитектуре предприятия.
-  Потребители используют информацию, полученную из модели данных, для долгосрочного планирования,
-  принятия решений, управления, авторизации и многого другого.
-</p>
-    <a
-          className="App-link"
-          href="http://localhost:3000/main"
-          target=""
-          rel="noopener noreferrer"
-        >
-          Закрыть
-        </a>
-      </header>
+
+    <React.Fragment>
+    <Button
+      id="fade-button"
+       aria-controls={open ? 'fade-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClickOpen}>
+      О проекте
+    </Button>
+
+    <BootstrapDialog
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}
+    >
+      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+      О проекте
+      </DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <DialogContent dividers>
+      <Typography gutterBottom>
+        Система управления информацией “Импульс” — это платформа для совместной работы,обеспечивает взаимодействие между архитектором и стейкхолдерами,
+         которые вносят свой вклад в формирование модели данных проекта и обращаются к информации ключевых бизнес-процессов, архитектуре, проектным документам и требованиям.
+        </Typography>
+        <Typography gutterBottom>
+         Потребители используют информацию, полученную из модели данных, для долгосрочного планирования, принятия решений, управления, авторизации и многого другого.
+        </Typography>
+        <Typography gutterBottom>
+         Полностью совместимо с решением Sparx Systems Enterprise Architect, которое фактически может выступать в качестве толстого клиент, для работы с моделью данных проекта.
+        </Typography>
+      <Typography gutterBottom>
+
+      <div>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header">
+          <Typography>Где мы черпали энергию и каких добились результатов </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography gutterBottom>
+            Частично, идея для создания проекта, была позаимствована с проекта prolaborate5 - <a href='https://prolaborate.sparxsystems.com/prolaborate5' target="_blank" rel="noreferrer"> Смотреть ... </a>
+        </Typography>
+        <Typography gutterBottom>
+            И немного из отраслевой  системы управления инженерными данными от Неолант "Неосинтез".<a href='https://www.neolant-srv.ru/product/neosyntez/' target="_blank" rel="noreferrer"> Смотреть ...</a>
+        </Typography>
+        <Typography gutterBottom>
+            ER диаграмма базы данных проекта <a href='https://www.figma.com/file/vewdlcyelMrWVBgxarOSlN/DB-diagram?type=whiteboard&node-id=0-1&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer"> Смотреть ... </a>
+        </Typography>
+        <Typography gutterBottom>
+            Визуальное представление <a href='https://www.figma.com/file/oMGQxCqr40KSGW0XREpRHE/Макет?type=design&mode=design&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer">Смотреть ... </a>
+       </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"        >
+          <Typography>Функции системы </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          1. Авторизация, регистрация, смена пароля на сайте.
+          </Typography>
+          <Typography>
+          2. Профиль пользователя и его роль.
+          </Typography>
+          <Typography>
+          3. Список объектов модели данных проекта в виде структуры (Папки и объекты).
+          </Typography>
+          <Typography> 4. Карточка объекта с базовым набором полей </Typography>
+                <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel3-content"
+                  id="panel3-header"        >
+                  <Typography> и дополнительным функционалом: </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                <Typography>- Инструмент параметризации объекта. </Typography>
+                <Typography>- Фиксация истории изменений объектов.</Typography>
+                <Typography>- Обсуждения объектов модели данных. </Typography>
+                <Typography>- Инструмент для трассировки зависимостей объектов. </Typography>
+                <Typography>- Инструмент для формирования задач в рамках проработки объекта модели данных. </Typography>
+                <Typography>- Поддержка типизации объектов. </Typography>
+                </AccordionDetails>
+                </Accordion>
+          <Typography>
+          5. Вложение документов в карточку объекта, с возможностью редактирования (без онлайн редакторов, в много пользовательском режиме). Редактировании документа онлайн несколькими пользователями.
+          </Typography>
+          <Typography>
+          6. Простейший инструмент утверждения объекта с блокировкой карточки.
+          </Typography>
+          <Typography>
+          7. Комментарии в виде форума, по каждому объекту
+          </Typography>
+          <Typography>
+          8. Импорт / экспорт через Excel файл списка всех объектов из модели данных проекта.
+          </Typography>
+          <Typography>
+          9. Создание простейшего отчета PDF.
+          </Typography>
+          <Typography>
+          10. Базовые функции управления этапами и задачами проекта.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel4-content"
+          id="panel4-header"        >
+          <Typography>Развитие проекта </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+            <Typography>
+            1. Интеграция с системой по управлению задачами Jira, Битрикс24 для экспорта задач.
+            </Typography>
+            <Typography>
+            2. Графическое отображение диаграмм в UML нотации, спроектированных в Sparx Systems Enterprise Architect.
+            </Typography>
+            <Typography>
+            3. Реализация настройки скрытия и шифрования объекта или групп объектов в соответствии с матрицей доступа.
+            </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
-  );
+      </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleClose}>
+          Написать отзыв
+        </Button>
+      </DialogActions>
+
+    </BootstrapDialog>
+  </React.Fragment>
+
+
+
+
+);
 }
 
-export default mainPage;
+export default About;
