@@ -5,7 +5,6 @@ export default function SuccessAlert ({user, showAlert, setShowAlert}: any){
 
     
     React.useEffect(() => {
-        console.log('effect')
         const timeId = setTimeout(() => {
           setShowAlert(false)
         }, 3000)
@@ -13,14 +12,14 @@ export default function SuccessAlert ({user, showAlert, setShowAlert}: any){
         return () => {
             clearTimeout(timeId)
           }
-      }, [user]);
+      }, [showAlert, setShowAlert]);
 
 
     return (
     <>
         <Stack sx={{ position: 'fixed', top: '90%', left: '5%'}}>            
             <Fade in={showAlert}>
-                <Alert severity="success">Отправил на согласование пользователю {user}.</Alert>             
+                <Alert severity="success">Отправлено на согласование пользователю {user}.</Alert>             
             </Fade>
         </Stack>
     </>            
