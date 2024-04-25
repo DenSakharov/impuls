@@ -12,6 +12,7 @@ import BreadcrumbNew from "./breadcrumb";
 import Knowbase from "./knowbase";
 import Todos from "./todos";
 import MainSidebar from "./sidebar";
+import Report from "./report";
 
 const service = {
   name: 'serv',
@@ -27,20 +28,20 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Дашборд', href: '#', current: true },
-  { name: 'Поиск', href: '#', current: false },
-  { name: 'Отчеты', href: '#', current: false },
+  { name: 'Дашборд', href: '/main', current: true },
+  { name: 'Поиск', href: '/find', current: false },
+  { name: 'Отчеты', href: '/report', current: false },
 ]
 const serviceNavigation = [
-  { name: 'Проекты и задачи', href: '#' },
-  { name: 'История согласований', href: '#' },
+  { name: 'Проекты и задачи', href: '/projects' },
+  { name: 'История согласований', href: '/TableData' },
   { name: 'Импорт/Экспорт', href: '#' },
-  { name: 'Текстовый редактор', href: '#' },
+  { name: 'Текстовый редактор', href: '/documents' },
 ]
 const userNavigation = [
-  { name: 'Профиль', href: '#' },
+  { name: 'Профиль', href: '/userProfile' },
   { name: 'О проекте', href: '/About' },
-  { name: 'Выйти', href: '#' },
+  { name: 'Выйти', href: '/' },
 ]
 
 function classNames(...classes) {
