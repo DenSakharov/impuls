@@ -7,8 +7,10 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
 import { Dialog } from '@mui/material';
-
-import Favorites from "../about/favorites";
+import Favorites from "./favorites";
+import BreadcrumbNew from "./breadcrumb";
+import Knowbase from "./knowbase";
+import Todos from "./todos";
 
 const service = {
   name: 'serv',
@@ -250,7 +252,7 @@ function Testpage() {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        href={item.href} 
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
@@ -265,47 +267,55 @@ function Testpage() {
         {/* END Mobile menu button */}
 
         <header className="bg-white shadow">
-        <div className=" h-[10dvh] bg-gray-100">        
-         <div className="flex flex-col items-center gap-8 ">         
+
+        <div className="h-[2dvh] bg-gray-100">
+         {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h2>
-            
+          <BreadcrumbNew />
             {/* Your content */}
           </div>
-         </div>
+         {/* </div> */}
         </div>
         </header>
 
-        <main className="m-4"> 
-          <div className="flex flex-col items-center gap-8 ">       
+        <main className="m-1">
+          {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          {/* Your content */}                 
-         
+          {/* Your content */}
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h2>
+           <div className="flex flex-wrap items-center gap-8 ">
+            <div> 1 </div>
+            <div> 2 </div>
+            <div> 3 </div>
+           </div>
+
+
            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2>
-           <div className="flex flex-wrap items-center gap-8 ">          
-            <div> <Favorites /> </div>
-            <div> <Favorites /> </div>
-            <div> <Favorites /> </div>             
-           </div> 
+           <div className="flex flex-wrap items-center gap-8 ">
+            <div> 1 </div>
+            <div> 2 </div>
+            <div> 3 </div>
+           </div>
 
            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2>
-           <div className="flex flex-wrap items-center gap-8 ">          
+           <div className="flex flex-wrap items-center gap-8 ">
             <div> <Favorites /> </div>
-            <div> <Favorites /> </div>
-            <div> <Favorites /> </div>             
-          </div>          
+            <div> <Knowbase /> </div>
+            <div> <Todos /> </div>
           </div>
-          </div>  
+          </div>
+          {/* </div> */}
         </main>
           
 
 
         <footer id="content">
           {/* Your content */}
-          
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
            <div id='foot'>
               <p> <About/> | <Contacts/> </p>
-              <p id="copyright"><a href="/" target="_blank" rel="noreferrer">© Impulse Team 2024</a></p>
+              <p id="copyright"><a href="#" target="" rel="noreferrer">© Impulse Team 2024</a></p>
+          </div>
           </div>
           </footer>
       </div>

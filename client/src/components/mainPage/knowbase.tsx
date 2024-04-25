@@ -1,14 +1,14 @@
 import  React  from 'react';
-import { CreateTodo } from "../about/create_todo";
+import { CreateTodo } from "./create_todo";
 
 const initialTodos = [
-  "Ссылка на Figmu проекта ",
-  "Ссылка на GitHub проекта ",
-  "Ссылка на БД проекта ",
-  "Ссылка на проект ",
+  "База знаний 1 ",
+  "База знаний 2 ",
+  "База знаний 3 ",
+  "База знаний 4 ",
 ];
 
-function Favorites() {
+function Knowbase() {
     const [todos, setTodos] = React.useState<string[]>(initialTodos);
     const [open, setOpen] = React.useState(false);
 
@@ -18,7 +18,7 @@ function Favorites() {
           {/* Your content */}
         
           <h1 id="title" className="text-lg font-bold mb-2">
-           Мои записи
+           Базы знаний
           </h1>
           <ul aria-labelledby="title" className="list-disc list-inside mb-4">
              {todos.map((todo) => (
@@ -29,7 +29,7 @@ function Favorites() {
                onClick={() => setOpen(true)}
                className="bg-black text-white p-2 rounded"
             >
-             Добавить запись
+             Добавить
             </button>
             <CreateTodo
                open={open}
@@ -43,4 +43,4 @@ function Favorites() {
     );
   }
 
-  export default Favorites;
+  export default Knowbase;
