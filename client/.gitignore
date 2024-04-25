@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-!/node_modules/react-scripts/config/webpack.config.js
 /.pnp
 .pnp.js
 
