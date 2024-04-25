@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noImplicitAny": false, // 2024.04.22 KSU чтоб не ругался на типы Any []
+    "noImplicitAny": false, //* 2024.04.22 KSU чтоб не ругался на типы Any [] */
     "jsx": "preserve"
   },
   "include": [
