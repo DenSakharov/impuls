@@ -4,11 +4,24 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Button , ButtonGroup, TextField } from '@mui/material';
-import SuccessAlert from './successAlert';
+import { Button , ButtonGroup, TextField, InputAdornment } from '@mui/material';
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUser}: any){
-        const approveUsers = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
+    const approveUsers = React.useMemo(() => {return ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']},[]);
+    const [searchQuery, setSearchQuery] = React.useState("");
+    const [searchUsers, setSearchUsers] = React.useState(approveUsers);
+        
+
+
+    React.useEffect(() => {
+      if (searchQuery === "") {
+        setSearchUsers(approveUsers);
+        return;
+      }
+      setSearchUsers(approveUsers.filter((user: string) => user.toLowerCase().includes(searchQuery.toLowerCase())));
+    }, [searchQuery, approveUsers])
+
     return (
      <Dialog
         open={formOpen}
@@ -18,6 +31,7 @@ export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUs
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();            
             handleCloseForm();
+            setSearchQuery('');
         },
         }}
         >  
@@ -26,8 +40,18 @@ export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUs
           <DialogContentText>
             Кому отправить на согласования
           </DialogContentText>
-          <ButtonGroup sx={{display: 'flex', flexDirection: 'column'}} variant="outlined">
-            {approveUsers.map((user: string) => <Button key={user} type='submit' onClick={() => setApproveUser(user)}>{user}</Button>)}
+          <TextField sx={{height: 80, width: 300}} 
+          size='small' 
+          value={searchQuery} 
+          onChange={(event) => {setSearchQuery(event.target.value)}}
+          InputProps={{endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          )}}>
+            </TextField>
+          <ButtonGroup sx={{display: 'flex', flexDirection: 'column'}} variant="text">
+            {searchUsers.map((user: string) => <Button sx={{width: 300}}  key={user} type='submit' onClick={() => setApproveUser(user)}>{user}</Button>)}
           </ButtonGroup>
         </DialogContent>
         <DialogActions>
