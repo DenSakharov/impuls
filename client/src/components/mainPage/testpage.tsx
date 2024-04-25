@@ -187,6 +187,7 @@ function Testpage() {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                 {/* END Profile dropdown */}
+
                 {/* Mobile menu button */}
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-0.5" />
@@ -298,8 +299,6 @@ function Testpage() {
             <div> 3 </div>
            </div>
 
-
-
            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2>
            <div className="flex flex-wrap items-center gap-8 ">
             <div> 1 </div>
@@ -308,12 +307,10 @@ function Testpage() {
            </div>
 
            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2>
-           {/* <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <div> <Favorites /> </div>
             <div> <Knowbase /> </div>
             <div> <Todos /> </div>
-          {/* </div> */}
           </div>
           </div>
         </main>
