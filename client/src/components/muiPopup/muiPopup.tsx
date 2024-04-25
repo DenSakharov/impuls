@@ -78,7 +78,6 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const handleAlert = (value: string) => {
         setApproveUser(value)
         setShowAlert(true)
-        console.log(userApprove, showAlert)
     }
     
 
