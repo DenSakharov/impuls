@@ -6,12 +6,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import About from './../about/about';
 import Contacts from '../about/contacts_teem';
-import data from '../editPopup/data';
-import styled from '@mui/system/styled';
 import { Dialog } from '@mui/material';
-import Button from '@mui/material/Button';
 
-
+import Favorites from "../about/favorites";
 
 const service = {
   name: 'serv',
@@ -43,26 +40,22 @@ const userNavigation = [
   { name: 'Выйти', href: '#' },
 ]
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 function Testpage() {
-    // const classes = useStyles()
-    const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
     const [formOpen, setFormOpen] = React.useState(false);
   
     const handleCloseForm = () => {
     setFormOpen(false);
-      }
+    }
     const handleOpenForm = () => {
     setFormOpen(true);
-      }
+    }
 
     return (
-          <>
+      <>
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-sky-800">
           {({ open }) => (
@@ -94,7 +87,6 @@ function Testpage() {
                             {item.name}
                           </a>
                         ))}
-
                         {/* Service dropdown */}
                         <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -133,10 +125,10 @@ function Testpage() {
                       </Menu>
                       </div>
                     </div>
-                  </div>
+                </div>
 
 
-                  <div className="hidden md:block">
+                <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
@@ -144,13 +136,9 @@ function Testpage() {
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />                       
                       </button>
-
-
-
-
-{/* Profile dropdown */}
+                {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -193,12 +181,11 @@ function Testpage() {
                         </Transition>
                       </Menu>
                     </div>
-                  </div>
-                  <div className="-mr-2 flex md:hidden">
-{/* END Profile dropdown */}
-
-{/* Mobile menu button */}
-          <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                </div>
+                <div className="-mr-2 flex md:hidden">
+                {/* END Profile dropdown */}
+                {/* Mobile menu button */}
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -206,11 +193,11 @@ function Testpage() {
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
-          </Disclosure.Button>
-                  </div>
+                </Disclosure.Button>
                 </div>
-              </div>
-              <Disclosure.Panel className="md:hidden">
+                </div>
+                </div>
+               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
@@ -225,9 +212,8 @@ function Testpage() {
                     >
                       {item.name}
                     </Disclosure.Button>
-                  ))}
-                  
-                  <div className="mt-3 space-y-1 px-2">
+                  ))} 
+                <div className="mt-3 space-y-1 px-2">
                     {serviceNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
@@ -237,12 +223,9 @@ function Testpage() {
                       >
                         {item.name}
                       </Disclosure.Button>
-
                     ))}
-                  </div>
                 </div>
-
-
+                </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
@@ -262,7 +245,6 @@ function Testpage() {
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
                       <Disclosure.Button
@@ -276,36 +258,51 @@ function Testpage() {
                     ))}
                   </div>
                 </div>
-              </Disclosure.Panel>
+               </Disclosure.Panel>
             </>
           )}
         </Disclosure>
         {/* END Mobile menu button */}
 
         <header className="bg-white shadow">
-
-        <div className=" h-[100dvh] bg-gray-200">
-         <div className="flex flex-col items-center gap-8 ">
-
-         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h1>
+        <div className=" h-[10dvh] bg-gray-100">        
+         <div className="flex flex-col items-center gap-8 ">         
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h2>
             
+            {/* Your content */}
           </div>
-
          </div>
         </div>
-
-
         </header>
 
-        <main>
+        <main className="m-4"> 
+          <div className="flex flex-col items-center gap-8 ">       
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          {/* Your content */}
+          {/* Your content */}                 
+         
+           <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2>
+           <div className="flex flex-wrap items-center gap-8 ">          
+            <div> <Favorites /> </div>
+            <div> <Favorites /> </div>
+            <div> <Favorites /> </div>             
+           </div> 
 
+           <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2>
+           <div className="flex flex-wrap items-center gap-8 ">          
+            <div> <Favorites /> </div>
+            <div> <Favorites /> </div>
+            <div> <Favorites /> </div>             
+          </div>          
           </div>
+          </div>  
         </main>
+          
+
 
         <footer id="content">
+          {/* Your content */}
+          
            <div id='foot'>
               <p> <About/> | <Contacts/> </p>
               <p id="copyright"><a href="/" target="_blank" rel="noreferrer">© Impulse Team 2024</a></p>
@@ -316,5 +313,6 @@ function Testpage() {
 
     );
   }
+
 
   export default Testpage;
