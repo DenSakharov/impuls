@@ -1,5 +1,6 @@
-import './../../globals.css';
 import  React  from 'react';
+import './../../globals.css';
+
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -8,17 +9,8 @@ import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
 import styled from '@mui/system/styled';
 import { Dialog } from '@mui/material';
-import Breadcrumb from "./../mainPage/breadcrumb";
+import Button from '@mui/material/Button';
 
-
-const Item = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  border: '1px solid #F5F5F5' ,
-  borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
-  padding: theme.spacing(1),
-  borderRadius: '4px',
-  textAlign: 'left',
-}));
 
 
 const service = {
@@ -192,6 +184,7 @@ function Testpage() {
                                     <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
                                       <About />
                                     </Dialog>
+
                                   </a>
                                 )}
                               </Menu.Item>
@@ -296,7 +289,7 @@ function Testpage() {
 
          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h1>
-            <Breadcrumb />
+            
           </div>
 
          </div>
