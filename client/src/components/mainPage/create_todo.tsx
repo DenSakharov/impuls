@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Dialog, { DialogProps } from "../about/dialog";
+import Dialog, { DialogProps } from "./dialog";
 
 export function CreateTodo({
   open,
