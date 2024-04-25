@@ -1,34 +1,43 @@
 import React from 'react';
 import EditPopupProps from '../interfaces/editPopupProps';
 import PopupBar from './popupBar';
-import MuiDialog from './muiDialog';
+import ApprovalDialog from './approvalDialog';
+import AddLinkDialog from './addLinkDialog';
 import data from '../editPopup/data';
-import { Box, Button, ButtonGroup, Container, Grid, Stack, TextField, Typography, Divider, IconButton } from '@mui/material';
+import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
 import { Add, AssignmentOutlined } from '@mui/icons-material';
 import impulsTheme from '../../muiTheme';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid'
+import SuccessAlert from './successAlert';
 
 
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
     
+    const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
+    const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
                            {value: 'На доработку', style: 'rework_button'},
                            {value: 'Утвердить', style: 'accept_button'},
                            {value: 'В разработке', style: 'inwork_button'}]
+    const priorities = ['Высокий', 'Средний', 'Низкий']
     const [tags, setTags] = React.useState(props.tags);
     const [links, setLinks] = React.useState(props.links)
     const [file, setFile] = React.useState(null)
-    const [formOpen, setFormOpen] = React.useState(false);
+    const [formOpenLink, setFormOpenLink] = React.useState(false);
+    const [formApproval, setFormApproval] = React.useState(false);
     const [status, setStatus] = React.useState(props.status);
+    const [docTypeValue, setDocTypeValue] = React.useState(props.type);
     const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
+    const [author, setAuthor] = React.useState(props.author);
+    const [priority, setPriority] = React.useState(props.priority);
+    const [showAlert, setShowAlert] = React.useState(false);
+    const [userApprove, setApproveUser] = React.useState('');
 
-    
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
     }
-
 
     const addLinks = (value : string) => {
         let newLink = value;
@@ -66,15 +75,11 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         window.open('/documents/'+ uuid)
     }
 
-
-    const handleCloseForm = () => {
-        setFormOpen(false);
+    const handleAlert = (value: string) => {
+        setApproveUser(value)
+        setShowAlert(true)
     }
-
-    const handleOpenForm = () => {
-        setFormOpen(true);
-    }
-
+    
 
     const mdGridName = 1.5
     const mdGridValue = 5
@@ -82,169 +87,179 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const smGridName = 3
     const smGridValue = 8
     
+    
   return (
     <>
-    <ThemeProvider theme={impulsTheme}>
-        <Container disableGutters sx={{
-            maxWidth:'900px', 
-            height: {xs: window.innerHeight, lg: 800},
-            display:'flex',
-            flexDirection: 'column',
-            overflow: 'auto',
-        }}>
-            <PopupBar {...props} />
-            <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
-                    '&::-webkit-scrollbar': {
-                        width: '5px'
-                    },
-                    '&::-webkit-scrollbar-track': {
-                        backgroundColor: '#147ccc00'
-                    },
-                    '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#157298',
-                        outline: '1px solid slategrey',
-                        borderRadius: '10px',
-                        border: '0.1px solid #00000041'
-                    }
-                }}>
-                    <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
-                        <Typography variant='h5'  style={{display: 'flex', marginTop: 10 ,justifyContent:'space-between', alignItems:'center'}}>{props.name}</Typography>
-                            <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
-                                <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
-                                <Typography>Дата изменения {props.date_changed.toLocaleDateString()}</Typography>
-                            </Stack>
-                        <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
-                        
-                        <Grid container spacing={1} alignItems={'flex-start'}>
-                            <Grid item md={mdGridName} xs={smGridName} > 
-                                <Typography align='left'>Описание</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} xs={smGridValue}  textAlign='left'>
-                                <TextField 
-                                id="standard-textarea"
-                                placeholder="Описание объекта"
-                                multiline
-                                fullWidth
-                                rows={3}
-                                defaultValue={props.desc}                            
-                                variant="outlined">
-                                </TextField>
-                            </Grid>
-                            <Grid item md={mdGridSpace} xs={0}/>
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Автор</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
-                                <TextField 
-                                id="outlined-basic"
-                                size='small'
-                                fullWidth
-                                defaultValue={props.author}
-                                variant="outlined">
-                                </TextField>
-                            </Grid>
-                            <Grid item md={mdGridSpace+2} xs={mdGridSpace-3}/>
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Статус</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                    <TextField  size='small' id="outlined-basic" variant="outlined"  value={status}/>
-                            </Grid>                            
-                            <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
-                                    <ButtonGroup size='small' sx={{width: {xs:'100%'}}}>
-                                            {statusButtons.map((button) => (
-                                                <Button size='small'  onClick={() =>setStatus(button.value)} key={statusButtons.indexOf(button)} disabled={status===button.value}>{button.value}</Button>
-                                            ))}
-                                    </ButtonGroup>
-                            </Grid>
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Тип</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.type}/>
-                            </Grid>
-                            <Grid item md={mdGridSpace+3} xs={4} textAlign='left'>
-                                <Button size='small' variant='outlined'>Изменить</Button>
-                            </Grid>
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Приоритет</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' id="outlined-basic" variant="outlined"  defaultValue={props.priority}/>
-                            </Grid>
-                            <Grid item md={mdGridSpace} xs={4}/>
-
-                            
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Путь</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={props.path}/>
-
-                            </Grid>
-                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                                <Button  size='small'  variant='outlined'>Изменить</Button>
-                            </Grid>
-
-                            <Grid item md={mdGridName} xs={smGridName}> 
-                                <Typography align='left'>Вложения</Typography>
-                            </Grid>
-                            <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                                <Box sx={{
-                                    borderRadius:'5px', border: '1px solid rgb(133,133,133,0.5)', padding: '5px',
-                                    minHeight: '40px'
-                                }}>
-                                    {attachments.map((attachment) => 
-                                    <IconButton 
-                                    
-                                    key={attachment.uuid}
-                                    onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
-                                    sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
-                                        <AssignmentOutlined />
-                                        <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
-                                    </IconButton> )}                                                                            
-                                </Box>
-                            </Grid>
-                            <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                                <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
-                                <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
-                            </Grid>  
-                        </Grid>
-                    </Stack>
-
-                    <Container sx={{marginTop:'50px'}}>
-                            <Button onClick={handleOpenForm} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить ссылку</Button>
-                            <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
-                                {links.map((link) => (
-                                        <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
-                                    ))}
-                            </Stack>
+<ThemeProvider theme={impulsTheme}>
+    <Container disableGutters sx={{
+        maxWidth:'900px', 
+        height: {xs: window.innerHeight, lg: 800},
+        display:'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
+    }}>
+        <PopupBar {...props} />
+        <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
+                '&::-webkit-scrollbar': {
+                    width: '5px'
+                },
+                '&::-webkit-scrollbar-track': {
+                    backgroundColor: '#147ccc00'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: '#157298',
+                    outline: '1px solid slategrey',
+                    borderRadius: '10px',
+                    border: '0.1px solid #00000041'
+                }
+            }}>
+                <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
+                    <Container disableGutters  sx={{paddingTop:'10px',display:'flex', flexDirection:'row', alignItems:'flex-start'}}>
+                        <Typography variant='h5' style={{wordWrap: 'break-word'}} >{props.name}</Typography>
+                        <Button sx={{marginLeft:'auto', minWidth:'150px'}} variant='outlined' onClick={() => setFormApproval(true)}>Отправить на согласование</Button>
                     </Container>
-                    <Container>
-                            <Button onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить тэг</Button>
-                            <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
-                                {tags.map((tag) => (
-                                    <Stack direction={'row'} spacing={1} key={tags.indexOf(tag)} textAlign={'left'} >
-                                        <TextField id="standard-basic" key={tags.indexOf(tag)}defaultValue={tag.key} variant="standard" sx={{width:'60px'}}/>
-                                        <TextField size='small' id="outlined-basic" defaultValue={tag.value} variant="outlined" />
-                                    </Stack>
-                                    ))}
-                            </Stack>
-                    </Container>
-                    <Container>
-                            <Typography align='left'><Add fontSize='large'/>Зависимости</Typography>
-                            <Box color={'black'} width={'30px'} height={'30px'}></Box>
-                    </Container>
+                        <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
+                            <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
+                            <Typography>Дата изменения {props.date_changed.toLocaleDateString()}</Typography>
+                        </Stack>
+                    <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
                     
+                    <Grid container spacing={1} alignItems={'flex-start'}>
+                        <Grid item md={mdGridName} xs={smGridName} > 
+                            <Typography align='left'>Описание</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue} xs={smGridValue}  textAlign='left'>
+                            <TextField 
+                            id="standard-textarea"
+                            placeholder="Описание объекта"
+                            multiline
+                            fullWidth
+                            rows={3}
+                            defaultValue={props.desc}                            
+                            variant="outlined">
+                            </TextField>
+                        </Grid>
+                        <Grid item md={mdGridSpace} xs={0}/>
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Автор</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
+                        <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={author? author : ''}  onChange={(e) => setAuthor(e.target.value)}>
+                                    {authors.map((item) => <MenuItem key={item} value={item}>{item}</MenuItem>)}    
+                                </Select>
+                        </Grid>
+                        <Grid item md={mdGridSpace+2} xs={mdGridSpace-3}/>
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Статус</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
+                                <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={status? status : ''}  onChange={(e) => setStatus(e.target.value)}>
+                                    {statusButtons.map((status) => <MenuItem key={status.value} value={status.value}>{status.value}</MenuItem>)}    
+                                </Select>
+                        </Grid>                            
+                            <Grid item md={mdGridSpace+3} xs={12} textAlign='left'>                            
+                        </Grid>
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Тип</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
+                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={docTypeValue? docTypeValue : ''}  onChange={(e) => setDocTypeValue(e.target.value)}>
+                                    {docType.map((type) => <MenuItem key={type} value={type}>{type}</MenuItem>)}    
+                                </Select>
+                        </Grid>
+                        <Grid item md={mdGridSpace+2} xs={4} textAlign='left'>
+                            
+                        </Grid>
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Приоритет</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue-3} textAlign='left' xs={smGridValue-3}>
+                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={priority? priority : ''}  onChange={(e) => setPriority(e.target.value)}>
+                                    {priorities.map((item) => <MenuItem key={item} value={item}>{item}</MenuItem>)}    
+                                </Select>
+                        </Grid>
+                        <Grid item md={mdGridSpace+3} xs={4}/>
+
+                        
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Путь</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
+                            <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={props.path}/>
+
+                        </Grid>
+                        <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                            <Button  size='small'  variant='outlined'>Изменить</Button>
+                        </Grid>
+
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Вложения</Typography>
+                        </Grid>
+                        <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
+                            <Box sx={{
+                                borderRadius:'5px', border: '1px solid rgb(133,133,133,0.5)', padding: '5px',
+                                minHeight: '40px'
+                            }}>
+                                {attachments.map((attachment) => 
+                                <IconButton 
+                                
+                                key={attachment.uuid}
+                                onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
+                                sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
+                                    <AssignmentOutlined />
+                                    <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
+                                </IconButton> )}                                                                            
+                            </Box>
+                        </Grid>
+                        <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                            <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
+                            <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
+                        </Grid>  
+                    </Grid>
+                </Stack>
+
+                <Container sx={{marginTop:'50px'}}>
+                        <Button onClick={()=>setFormOpenLink(true)} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить ссылку</Button>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
+                            {links.map((link) => (
+                                    <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
+                                ))}
+                        </Stack>
                 </Container>
-            <MuiDialog formOpen={formOpen} handleCloseForm={handleCloseForm} addLinks={addLinks} />
-        </Container>
-    </ThemeProvider>
-    </>
+                <Container>
+                        <Button onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить тэг</Button>
+                        <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
+                            {tags.map((tag) => (
+                                <Stack direction={'row'} spacing={1} key={tags.indexOf(tag)} textAlign={'left'} >
+                                    <TextField id="standard-basic" key={tags.indexOf(tag)}defaultValue={tag.key} variant="standard" sx={{width:'60px'}}/>
+                                    <TextField size='small' id="outlined-basic" defaultValue={tag.value} variant="outlined" />
+                                </Stack>
+                                ))}
+                        </Stack>
+                </Container>
+                <Container>
+                        <Typography align='left'><Add fontSize='large'/>Зависимости</Typography>
+                        <Box color={'black'} width={'30px'} height={'30px'}></Box>
+                </Container>
+                
+            </Container>
+        <AddLinkDialog 
+        formOpen={formOpenLink} 
+        handleCloseForm={()=>setFormOpenLink(false)} 
+        addLinks={addLinks} />
+        <ApprovalDialog
+        formOpen={formApproval}
+        handleCloseForm={()=>setFormApproval(false)}
+        setApproveUser={handleAlert}
+        />
+        <SuccessAlert user={userApprove} showAlert={showAlert} setShowAlert={setShowAlert}/>
+    </Container>
+</ThemeProvider>
+</>
   );
 }
