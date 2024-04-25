@@ -25,7 +25,7 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^3.0.1",
     "sass": "^1.74.1",
     "socket.io-client": "^4.7.5",
     "supervisor": "^0.12.0",

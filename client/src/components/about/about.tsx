@@ -13,6 +13,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import Paper, { PaperProps } from '@mui/material/Paper';
+
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -60,6 +63,7 @@ function About() {
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
       О проекте
       </DialogTitle>
+     
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -72,6 +76,7 @@ function About() {
       >
         <CloseIcon />
       </IconButton>
+
       <DialogContent dividers>
       <Typography gutterBottom>
         Система управления информацией “Импульс” — это платформа для совместной работы,обеспечивает взаимодействие между архитектором и стейкхолдерами,
