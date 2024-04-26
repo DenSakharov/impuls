@@ -1,6 +1,0 @@
-
-/*
-@Entitity()
-export class Project {
-    
-}*/
