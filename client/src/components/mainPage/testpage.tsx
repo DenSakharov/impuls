@@ -5,14 +5,13 @@ import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import About from '../about/about';
 import Contacts from '../about/contacts_teem';
-
 import data from '../editPopup/data';
 import { Dialog } from '@mui/material';
 
-import Favorites from "./favorites";
-import BreadcrumbNew from "./breadcrumb";
-import Knowbase from "./knowbase";
-import Todos from "./todos";
+// import Favorites from "./favorites";
+// import BreadcrumbNew from "./breadcrumb";
+// import Knowbase from "./knowbase";
+// import Todos from "./todos";
 // import MainSidebar from "./sidebar";
 // import Report from "./report";
 
@@ -21,9 +20,6 @@ import { Container } from '@mui/system';
 import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
 import Box from '@mui/system/Box';
-
-
-
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
