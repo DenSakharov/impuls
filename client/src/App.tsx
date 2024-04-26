@@ -11,7 +11,8 @@ import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
-import { v4 as uuidV4 } from 'uuid'
+import { v4 as uuidV4 } from 'uuid';
+
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
-          <Route path='/test' Component ={Testpage}> </Route> 
+          <Route path='/test' Component ={Testpage}> </Route>
+
           <Route></Route>
         </Routes>
       </BrowserRouter>
