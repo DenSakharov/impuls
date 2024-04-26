@@ -14,25 +14,11 @@ import Todos from "./todos";
 // import MainSidebar from "./sidebar";
 // import Report from "./report";
 
-//import data from '../editPopup/data';
-//import styled from '@mui/system/styled';
-/*
-const Item = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  border: '1px solid #F5F5F5' ,
-  borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
-  padding: theme.spacing(1),
-  borderRadius: '4px',
-  textAlign: 'left',
-}));*/
-
-
-
-// const service = {
-//   name: 'serv',
-//   email: 'ii@rosatom.ru',
-//   imageUrl: '../../img/settings2_32px.png',
-// }
+const service = {
+  name: 'serv',
+  email: 'ii@rosatom.ru',
+  imageUrl: '../../img/settings2_32px.png',
+}
 
 const user = {
   name: 'Иванов Иван',
@@ -62,15 +48,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function mainPage() {
-    // const classes = useStyles()
-   // const [popupData, setPopupData] = React.useState(data.object);
-   // const [projectData, setProjectData] = React.useState(data.tree[0]);
-   //  const [formOpen, setFormOpen] = React.useState(false);
-
-  const [formOpen, setFormOpen] = React.useState(false);
-
-  const handleCloseForm = () => {
+function Testpage() {
+    const [formOpen, setFormOpen] = React.useState(false);
+  
+    const handleCloseForm = () => {
     setFormOpen(false);
     }
     const handleOpenForm = () => {
@@ -114,7 +95,7 @@ function mainPage() {
                         <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
                           <Menu.Button className="relative rounded-md px-3 py-2 text-sm font-medium">
-                           <a className="" href="."> Сервисы </a>
+                           <a > Сервисы </a>
                           </Menu.Button>
                         </div>
 
@@ -146,7 +127,7 @@ function mainPage() {
                           </Menu.Items>
                         </Transition>
                       </Menu>
-                      <a href="/main_old" target="" rel="noreferrer">old MainPage</a>
+                      <a href="/test" target="" rel="noreferrer">old MainPage</a>
 
                       </div>
                     </div>
@@ -353,4 +334,6 @@ function mainPage() {
 
     );
   }
-  export default mainPage;
+
+
+  export default Testpage;
