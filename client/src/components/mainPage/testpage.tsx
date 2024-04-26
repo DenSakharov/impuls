@@ -4,7 +4,7 @@ import './../../globals.css';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import About from './../about/about';
+import About from '../about/about';
 import Contacts from '../about/contacts_teem';
 import { Dialog } from '@mui/material';
 import Favorites from "./favorites";
@@ -127,6 +127,8 @@ function Testpage() {
                           </Menu.Items>
                         </Transition>
                       </Menu>
+                      <a href="/test" target="" rel="noreferrer">old MainPage</a>
+
                       </div>
                     </div>
                 </div>

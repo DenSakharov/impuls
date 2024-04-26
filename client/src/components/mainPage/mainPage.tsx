@@ -3,7 +3,7 @@ import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
-import About from './../about/about';
+import About from '../about/about';
 import Contacts from '../about/contacts_teem';
 
 import data from '../editPopup/data';
