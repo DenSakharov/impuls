@@ -30,6 +30,7 @@ const Item = styled('div')(({ theme }) => ({
   textAlign: 'left',
 }));
 
+export const closeDialog = React.createContext<Function>(() => {});
 export default function Testpage() {
   const [popupData, setPopupData] = React.useState(data.object);
   const [projectData, setProjectData] = React.useState(data.tree[0]);
@@ -44,6 +45,7 @@ export default function Testpage() {
 
 
   return (
+    <closeDialog.Provider value={handleCloseForm}>
 <div className="mainApp mainApp-push-bottom">
 
 <MuiMenu changeState={setProjectData}/>
@@ -126,6 +128,7 @@ export default function Testpage() {
     </div>
 </footer>
 </div>
+</closeDialog.Provider>
 );
 }
 
