@@ -1,10 +1,19 @@
-import './../../globals.css';
 import  React  from 'react';
+import './../../globals.css';
+
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import About from './../about/about';
+import About from '../about/about';
 import Contacts from '../about/contacts_teem';
+import { Dialog } from '@mui/material';
+import Favorites from "./favorites";
+import BreadcrumbNew from "./breadcrumb";
+import Knowbase from "./knowbase";
+import Todos from "./todos";
+import MainSidebar from "./sidebar";
+import Report from "./report";
+
 //import data from '../editPopup/data';
 //import styled from '@mui/system/styled';
 /*
@@ -16,6 +25,7 @@ const Item = styled('div')(({ theme }) => ({
   borderRadius: '4px',
   textAlign: 'left',
 }));*/
+
 
 /*
 const service = {
@@ -32,42 +42,49 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Дашборд', href: '#', current: true },
-  { name: 'Поиск', href: '#', current: false },
-  { name: 'Отчеты', href: '#', current: false },
+  { name: 'Дашборд', href: '/main', current: true },
+  { name: 'Поиск', href: '/find', current: false },
+  { name: 'Отчеты', href: '/report', current: false },
 ]
 const serviceNavigation = [
-  { name: 'Проекты и задачи', href: '#' },
-  { name: 'История согласований', href: '#' },
+  { name: 'Проекты и задачи', href: '/projects' },
+  { name: 'История согласований', href: '/TableData' },
   { name: 'Импорт/Экспорт', href: '#' },
-  { name: 'Текстовый редактор', href: '#' },
+  { name: 'Текстовый редактор', href: '/documents' },
 ]
 const userNavigation = [
-  { name: 'Профиль', href: '#' },
-  { name: 'О проекте', href: '#' },
-  { name: 'Выйти', href: '#' },
+  { name: 'Профиль', href: '/userProfile' },
+  { name: 'О проекте', href: '/About' },
+  { name: 'Выйти', href: '/' },
 ]
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 function Testpage() {
+<<<<<<< HEAD
     // const classes = useStyles()
    // const [popupData, setPopupData] = React.useState(data.object);
    // const [projectData, setProjectData] = React.useState(data.tree[0]);
   //  const [formOpen, setFormOpen] = React.useState(false);
+=======
+    const [formOpen, setFormOpen] = React.useState(false);
+>>>>>>> develop
   
     /*const handleCloseForm = () => {
     setFormOpen(false);
-      }
+    }
     const handleOpenForm = () => {
     setFormOpen(true);
+<<<<<<< HEAD
       }*/
+=======
+    }
+>>>>>>> develop
 
     return (
-          <>
+      <>
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-sky-800">
           {({ open }) => (
@@ -79,7 +96,7 @@ function Testpage() {
                       <img
                         className="h-8 w-8"
                         src="./img/logo.png"
-                        alt="IMS Impuls"
+                        alt="IMS Impulse"
                       />
                     </div>
                     <div className="hidden md:block">
@@ -99,12 +116,15 @@ function Testpage() {
                             {item.name}
                           </a>
                         ))}
-
                         {/* Service dropdown */}
                         <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
                           <Menu.Button className="relative rounded-md px-3 py-2 text-sm font-medium">
+<<<<<<< HEAD
                            <a className="" href="."> Сервисы </a>
+=======
+                           <a > Сервисы </a>
+>>>>>>> develop
                           </Menu.Button>
                         </div>
 
@@ -136,12 +156,14 @@ function Testpage() {
                           </Menu.Items>
                         </Transition>
                       </Menu>
+                      <a href="/test" target="" rel="noreferrer">old MainPage</a>
+
                       </div>
                     </div>
-                  </div>
+                </div>
 
 
-                  <div className="hidden md:block">
+                <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
@@ -149,13 +171,9 @@ function Testpage() {
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />                       
                       </button>
-
-
-
-
-{/* Profile dropdown */}
+                {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -186,6 +204,10 @@ function Testpage() {
                                     )}
                                   >
                                     {item.name}
+                                    <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                                      <About />
+                                    </Dialog>
+
                                   </a>
                                 )}
                               </Menu.Item>
@@ -194,12 +216,12 @@ function Testpage() {
                         </Transition>
                       </Menu>
                     </div>
-                  </div>
-                  <div className="-mr-2 flex md:hidden">
-{/* END Profile dropdown */}
+                </div>
+                <div className="-mr-2 flex md:hidden">
+                {/* END Profile dropdown */}
 
-{/* Mobile menu button */}
-          <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -207,11 +229,11 @@ function Testpage() {
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
-          </Disclosure.Button>
-                  </div>
+                </Disclosure.Button>
                 </div>
-              </div>
-              <Disclosure.Panel className="md:hidden">
+                </div>
+                </div>
+               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
@@ -226,9 +248,8 @@ function Testpage() {
                     >
                       {item.name}
                     </Disclosure.Button>
-                  ))}
-                  
-                  <div className="mt-3 space-y-1 px-2">
+                  ))} 
+                <div className="mt-3 space-y-1 px-2">
                     {serviceNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
@@ -238,12 +259,9 @@ function Testpage() {
                       >
                         {item.name}
                       </Disclosure.Button>
-
                     ))}
-                  </div>
                 </div>
-
-
+                </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
@@ -263,7 +281,6 @@ function Testpage() {
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
                       <Disclosure.Button
@@ -277,29 +294,68 @@ function Testpage() {
                     ))}
                   </div>
                 </div>
-              </Disclosure.Panel>
+               </Disclosure.Panel>
             </>
           )}
         </Disclosure>
         {/* END Mobile menu button */}
 
+
+
         <header className="bg-white shadow">
+
+        <div className="h-[2dvh] bg-gray-100">
+         {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Дашборд</h1>
+          <BreadcrumbNew />
+            {/* Your content */}
           </div>
+         {/* </div> */}
+        </div>
         </header>
-
-        <main>
+        {/* Сайдбар с деревом объектов */}
+        {/* <MainSidebar/> */}
+        <main className="m-1">
+          {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          {/* Your content */}
+          {/* Заголовок для дашборда */}
+          <div id="mainHeader">
+			      <div className="content-text-block">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-100">Дашборд</h2>
+			      </div>
+          </div>
 
+           <div className="flex flex-wrap items-center gap-8 ">
+            <div> 1 </div>
+            <div> 2 </div>
+            <div> 3 </div>
+           </div>
+
+           <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2>
+           <div className="flex flex-wrap items-center gap-8 ">
+            <div> 1 </div>
+            <div> 2 </div>
+            <div> 3 </div>
+           </div>
+
+           <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2>
+           <div className="flex flex-wrap items-center gap-8 ">
+            <div> <Favorites /> </div>
+            <div> <Knowbase /> </div>
+            <div> <Todos /> </div>
+          </div>
           </div>
         </main>
+          
+
 
         <footer id="content">
+          {/* Your content */}
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
            <div id='foot'>
               <p> <About/> | <Contacts/> </p>
-              <p id="copyright"><a href="http://localhost:3000" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
+              <p id="copyright"><a href="#" target="" rel="noreferrer">© Impulse Team 2024</a></p>
+          </div>
           </div>
           </footer>
       </div>
@@ -307,5 +363,6 @@ function Testpage() {
 
     );
   }
+
 
   export default Testpage;

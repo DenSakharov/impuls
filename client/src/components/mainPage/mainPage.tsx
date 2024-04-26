@@ -3,7 +3,7 @@ import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
-import About from './../about/about';
+import About from '../about/about';
 import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
 import { Dialog } from '@mui/material';
@@ -123,7 +123,7 @@ export default function MainPage() {
     <div id='foot'>
       <p> <About/> | <Contacts/> </p>
       {/* TODO localhost link @SergeyKozhevnikov - исправил */}
-      <p id="copyright"><a href="/" target="_blank" rel="noreferrer">© Impuls Teem 2024</a></p>
+      <p id="copyright"><a href="/" target="_blank" rel="noreferrer">© Impulse Team 2024</a></p>
     </div>
 </footer>
 
