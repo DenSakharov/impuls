@@ -7,7 +7,7 @@ import {DefaultEventsMap} from "@socket.io/component-emitter"
 import { useParams } from 'react-router-dom';
 import saver from './FileSaver';
 import './styles/text_editor.css'
-import 'mammoth/mammoth.browser'
+//import mammoth from 'mammoth'
    
 const SAVE_INTERVAL_MS = 2000
 
@@ -150,8 +150,8 @@ useEffect(() => {
             customButton1.innerHTML = 'Загрузить';
             customButton1.style.width='110px';
 
-let mammoth = require("mammoth");
-            
+
+/*            
   customButton1.addEventListener('change', (event) => {
 
     const file = (event.target as HTMLInputElement).files![0];
@@ -165,7 +165,7 @@ let mammoth = require("mammoth");
     reader.onloadend = function(event) {
       let arrayBuffer = reader.result;
       // debugger
-
+      if (arrayBuffer instanceof ArrayBuffer) {
       mammoth.convertToHtml({arrayBuffer: arrayBuffer}).then(function (resultObject:any) {
         document.getElementsByClassName("ql-editor")[0].innerHTML = resultObject.value
       
@@ -176,12 +176,13 @@ let mammoth = require("mammoth");
         console.log(error);
         });
       console.timeEnd();
+    }
     };
 
     reader.readAsArrayBuffer(file);
 }
   });
-
+*/
                 customButton1.classList.add(
                     'ql-align', 
                     'ql-picker', 

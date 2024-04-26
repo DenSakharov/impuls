@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { IconButton, Stack } from '@mui/material';
 import { Settings, Info, ContentCopy, Add } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MuiAddDirectory from "../muiPopup/muiAddDirectory";
-import MuiAddObject from "../muiPopup/muiAddObject";
+import MuiAddDirectory from "./muiAddDirectory";
+import MuiAddObject from "./muiAddObject";
 
 function MuiButTree() {
     // const classes = useStyles()
