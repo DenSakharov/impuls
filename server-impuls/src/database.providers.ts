@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize-typescript';
-import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -7,7 +6,7 @@ dotenv.config();
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
-    useFactory: async (configService: ConfigService) => {
+    useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'postgres',
         host: process.env.DB_HOST,
