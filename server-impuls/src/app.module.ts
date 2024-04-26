@@ -2,13 +2,19 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseProviders } from './database.providers';
+import { tSecuserModule } from '#/tSecuser/module/tSecuser.module';
+
+
 
 
 @Module({
-  imports: [],
-  controllers: [AppController],
+  imports: [tSecuserModule],
+  controllers: [
+    AppController,
+
+  ],
   providers: [
-    AppService,
+    AppService,    
     ...databaseProviders
   ],
   exports: [
@@ -16,4 +22,3 @@ import { databaseProviders } from './database.providers';
   ],
 })
 export class AppModule {}
-console.log(process.env)
