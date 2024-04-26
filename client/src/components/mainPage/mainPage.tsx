@@ -64,6 +64,7 @@ function MainPage() {
 
     return (
       <>
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-sky-800">
           {({ open }) => (
@@ -137,7 +138,6 @@ function MainPage() {
                     </div>
                 </div>
 
-
                 <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
@@ -149,6 +149,7 @@ function MainPage() {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />                       
                       </button>
                 {/* Profile dropdown */}
+
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -275,10 +276,7 @@ function MainPage() {
         </Disclosure>
         {/* END Mobile menu button */}
 
-
-
         <header className="bg-white shadow">
-
         <div className="h-[2dvh] bg-gray-100">
          {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -290,6 +288,8 @@ function MainPage() {
         </header>
         {/* Сайдбар с деревом объектов */}
         {/* <MainSidebar/> */}
+
+
         <main className="m-1">
           {/* <div className="flex flex-col items-center gap-8 "> */}
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -338,7 +338,5 @@ function MainPage() {
 
     );
   }
-
-
   export default MainPage;
 
