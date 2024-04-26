@@ -4,7 +4,7 @@ import Profile from './components/profile/profile';
 import Projects from './components/projects/projects';
 import ReplacePassword from './components/profile/replacePassword';
 import MainPage from './components/mainPage/mainPage';
-import Testpage from './components/mainPage/testpage';
+import MainPageOld from './components/mainPage/mainPage_old';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
@@ -29,7 +29,7 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
-          <Route path='/test' Component ={Testpage}> </Route>
+          <Route path='/test' Component ={MainPageOld}> </Route>
 
           <Route></Route>
         </Routes>
