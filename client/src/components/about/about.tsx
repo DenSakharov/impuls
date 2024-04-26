@@ -8,12 +8,12 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import Paper, { PaperProps } from '@mui/material/Paper';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -36,7 +36,6 @@ function About() {
     };
 
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -45,8 +44,8 @@ function About() {
   };
 
   return (
-
     <React.Fragment>
+
     <Button
       id="fade-button"
        aria-controls={open ? 'fade-menu' : undefined}
@@ -57,13 +56,13 @@ function About() {
     </Button>
 
     <BootstrapDialog
-      onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
       О проекте
       </DialogTitle>
+     
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -76,20 +75,19 @@ function About() {
       >
         <CloseIcon />
       </IconButton>
-      <DialogContent dividers>
+
+  <DialogContent dividers>
+
       <Typography gutterBottom>
         Система управления информацией “Импульс” — это платформа для совместной работы,обеспечивает взаимодействие между архитектором и стейкхолдерами,
          которые вносят свой вклад в формирование модели данных проекта и обращаются к информации ключевых бизнес-процессов, архитектуре, проектным документам и требованиям.
-        </Typography>
-        <Typography gutterBottom>
-         Потребители используют информацию, полученную из модели данных, для долгосрочного планирования, принятия решений, управления, авторизации и многого другого.
-        </Typography>
+        </Typography>        
         <Typography gutterBottom>
          Полностью совместимо с решением Sparx Systems Enterprise Architect, которое фактически может выступать в качестве толстого клиент, для работы с моделью данных проекта.
         </Typography>
       <Typography gutterBottom>
 
-      <div>
+    <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -187,21 +185,19 @@ function About() {
             </Typography>
         </AccordionDetails>
       </Accordion>
+
     </div>
-      </Typography>
-      </DialogContent>
-      <DialogActions>
+    </Typography>
+   </DialogContent>
+    
+   <DialogActions>
         <Button autoFocus onClick={handleClose}>
           Написать отзыв
         </Button>
-      </DialogActions>
+  </DialogActions>
 
     </BootstrapDialog>
   </React.Fragment>
-
-
-
-
 );
 }
 

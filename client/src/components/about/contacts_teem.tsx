@@ -40,7 +40,7 @@ function Contacts_teem() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClickOpen}>
-      Наша команда
+      Команда
     </Button>
 
     <BootstrapDialog
