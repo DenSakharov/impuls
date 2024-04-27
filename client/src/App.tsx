@@ -4,7 +4,7 @@ import Profile from './components/profile/profile';
 import Projects from './components/projects/projects';
 import ReplacePassword from './components/profile/replacePassword';
 import MainPage from './components/mainPage/mainPage';
-import Testpage from './components/mainPage/testpage';
+import Main from './components/mainPage/main';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
@@ -20,7 +20,8 @@ function App() {
         <Routes>
         <Route path='' Component={LoginPage}></Route>
           <Route path='/registration' Component={Registration}></Route>
-          <Route path='/main' Component={MainPage}></Route>
+          <Route path='/main' Component ={Main}> </Route>
+          <Route path='/mainPage' Component={MainPage}></Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
@@ -28,8 +29,7 @@ function App() {
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
-          <Route path="/documents/:id" element ={<TextEditor />} />
-          <Route path='/test' Component ={Testpage}> </Route>
+          <Route path="/documents/:id" element ={<TextEditor />} />         
 
           <Route></Route>
         </Routes>
