@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { tSecuser } from '#/tSecuser/entity/tSecuser';
+import { tSecuser } from '#/tSecuser/tSecuser';
 
 @Injectable()
 export class tSecuserService {

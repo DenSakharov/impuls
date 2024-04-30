@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { tSecuserService } from '#/tSecuser/service/tSecuser.service';
-import { tSecuser } from '#/tSecuser/entity/tSecuser';
+import { tSecuserService } from '#/tSecuser/tSecuser.service';
+import { tSecuser } from '#/tSecuser/tSecuser';
 
 @Controller('/users')
 export class TSecuserController {
