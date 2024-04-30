@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as dotenv from 'dotenv';
-import { tSecuser } from '#/tSecuser/entity/tSecuser';
+import { tSecuser } from '#/tSecuser/tSecuser';
 
 
 dotenv.config();
