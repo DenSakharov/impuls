@@ -1,3 +1,4 @@
+import { UUID } from 'crypto';
 import {
   Model,
   Table,
@@ -11,7 +12,7 @@ import {
 } from 'sequelize-typescript';
 
 export interface tSecuserAttributes {
-  userid: string;
+  userid: UUID;
   userlogin: string;
   firstname: string;
   surname: string;
@@ -27,8 +28,8 @@ export class tSecuser
   implements tSecuserAttributes
 {
   @PrimaryKey
-  @Column({ allowNull: false, type: DataType.STRING(40) })
-  userid: string;
+  @Column({ allowNull: false, type: DataType.UUID })
+  userid: UUID;
 
   @Column({ allowNull: false, type: DataType.STRING(255) })
   userlogin: string;
