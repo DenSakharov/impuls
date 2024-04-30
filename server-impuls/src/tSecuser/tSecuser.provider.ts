@@ -1,4 +1,4 @@
-import { tSecuser } from '#/tSecuser/entity/tSecuser';
+import { tSecuser } from '#/tSecuser/tSecuser';
 
 export const tSecUserProviders = [
   {
