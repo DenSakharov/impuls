@@ -5,7 +5,7 @@ export * from './tGlossary';
 export * from './tObject';
 export * from './tObjectfiles';
 export * from './tSecgroup';
-export * from '#/tSecuser/entity/tSecuser';
+export * from '#/tSecuser/tSecuser';
 export * from './tSecusergroup';
 export * from './tStatustypes';
 export * from './tStereotypes';
