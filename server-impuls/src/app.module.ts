@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseModule } from '#/database/module/database.module';
-import { tSecuserModule } from '#/tSecuser/module/tSecuser.module';
+import { tSecuserModule } from '#/tSecuser/tSecuser.module';
 
 
 
