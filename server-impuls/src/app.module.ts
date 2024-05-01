@@ -3,23 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseModule } from '#/database/module/database.module';
 import { tSecuserModule } from '#/tSecuser/tSecuser.module';
-
+import { AuthModule } from '#/auth/auth.module';
 
 
 
 @Module({
   imports: [
-    tSecuserModule,
-    databaseModule
-  ],
-  controllers: [
-    AppController,
-
-  ],
-  providers: [
-    AppService,    
-  ],
-  exports: [
-  ],
+    databaseModule, 
+    AuthModule, 
+    tSecuserModule],
+  controllers: [AppController],
+  providers: [AppService],
+  exports: [],
 })
 export class AppModule {}

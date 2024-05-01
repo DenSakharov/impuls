@@ -16,9 +16,9 @@ export class TSecuserController {
   create(@Body() newUser: tSecuser): Promise<string> {
     return this.tSecuserService.create(newUser);
   }
-  
-  @Get(':uuid')
-  findOne(@Param('uuid') uuid: UUID): Promise<tSecuser> {
-    return this.tSecuserService.findOne(uuid);
+
+  @Get(':userlogin')
+  findOne(@Param('userlogin') userlogin: string): Promise<tSecuser> {
+    return this.tSecuserService.findOne(userlogin);
   }
 }
