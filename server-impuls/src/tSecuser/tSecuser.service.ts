@@ -1,6 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { tSecuser } from '#/tSecuser/tSecuser';
-import { UUID } from 'crypto';
+import * as bcrypt from 'bcrypt';
+import { ADDRGETNETWORKPARAMS } from 'dns';
+import { PassThrough } from 'stream';
+
 
 @Injectable()
 export class tSecuserService {
@@ -11,18 +14,22 @@ export class tSecuserService {
 
   async create(newUser: Partial<tSecuser>): Promise<string> {
     try {
-    this.tSecuserRepository.create({
-      userid: newUser.userid,
-      userlogin: newUser.userlogin,
-      firstname: newUser.firstname,
-      surname: newUser.surname,
-      department: newUser.department,
-      password: newUser.password,
-      groupid: newUser.groupid,
-    });
-    return `created new user with id = ${newUser.userid} `
+
+      const hashedPassword = await bcrypt.hash(newUser.password, 10);
+      const userUUID = crypto.randomUUID();
+
+      this.tSecuserRepository.create({
+        userid: userUUID,
+        userlogin: newUser.userlogin,
+        firstname: newUser.firstname,
+        surname: newUser.surname,
+        department: newUser.department,
+        password: hashedPassword,
+        groupid: newUser.groupid,
+      });
+      return `created new user with id = ${userUUID} `;
     } catch (e) {
-    return `error ${e} while creating`
+      return `error ${e} while creating`;
     }
   }
 
@@ -30,7 +37,11 @@ export class tSecuserService {
     return this.tSecuserRepository.findAll<tSecuser>();
   }
 
-  async findOne(userID: UUID): Promise<tSecuser | undefined> {
-    return this.tSecuserRepository.findByPk<tSecuser>(userID);
+  async findByPk(uuid: string): Promise<tSecuser | undefined> {
+    return this.tSecuserRepository.findByPk<tSecuser>(uuid);
+  }
+
+  async findOne(userlogin: string): Promise<tSecuser | undefined>{
+    return this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: userlogin}});
   }
 }
