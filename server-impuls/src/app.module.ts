@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { databaseModule } from '#/database/module/database.module';
+import { databaseModule } from '#/database/database.module';
 import { tSecuserModule } from '#/tSecuser/tSecuser.module';
 import { AuthModule } from '#/auth/auth.module';
 import { JWTMiddleware } from './middleware/jwt.middleware';
