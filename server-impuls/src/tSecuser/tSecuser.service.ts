@@ -14,8 +14,7 @@ export class tSecuserService {
       const hashedPassword = await bcrypt.hash(newUser.password, 10);
       const userUUID = crypto.randomUUID();
       try {
-
-      
+        
       await this.tSecuserRepository.create({
         userid: userUUID,
         userlogin: newUser.userlogin,
@@ -25,14 +24,16 @@ export class tSecuserService {
         password: hashedPassword,
         groupid: newUser.groupid,
       });
-
       return `created new user with id = ${userUUID} `;
+
     } catch(error) {
+
       if (error.name === 'SequelizeUniqueConstraintError') {
         return 'This login already exists';
       } else {
         return error.name;        
       }
+
     }
   }
 
@@ -44,7 +45,7 @@ export class tSecuserService {
     return this.tSecuserRepository.findByPk<tSecuser>(uuid);
   }
 
-  async findOne(userlogin: string): Promise<tSecuser | undefined>{
-    return this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: userlogin}});
+  async findOne(loginToFind: string): Promise<tSecuser | undefined>{
+    return this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: loginToFind}});
   }
 }
