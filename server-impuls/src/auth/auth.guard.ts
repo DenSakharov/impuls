@@ -22,7 +22,8 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      request['accessToken'] = payload;
+      //В документации было payload ~~ { userlogin: 'testuser5', iat: 1714596718, exp: 1714600318 }
+      request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
     }
@@ -31,6 +32,7 @@ export class AuthGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    console.log(token)
     return type === 'Bearer' ? token : undefined;
   }
 }
