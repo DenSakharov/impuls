@@ -31,7 +31,7 @@ export class tSecuserService {
       if (error.name === 'SequelizeUniqueConstraintError') {
         return 'This login already exists';
       } else {
-        return error;        
+        return error.name;        
       }
     }
   }
