@@ -1,8 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { tSecuser } from '#/tSecuser/tSecuser';
 import * as bcrypt from 'bcrypt';
-import { ADDRGETNETWORKPARAMS } from 'dns';
-import { PassThrough } from 'stream';
 
 
 @Injectable()
@@ -13,12 +11,12 @@ export class tSecuserService {
   ) {}
 
   async create(newUser: Partial<tSecuser>): Promise<string> {
-    try {
-
       const hashedPassword = await bcrypt.hash(newUser.password, 10);
       const userUUID = crypto.randomUUID();
+      try {
 
-      this.tSecuserRepository.create({
+      
+      await this.tSecuserRepository.create({
         userid: userUUID,
         userlogin: newUser.userlogin,
         firstname: newUser.firstname,
@@ -27,9 +25,14 @@ export class tSecuserService {
         password: hashedPassword,
         groupid: newUser.groupid,
       });
+
       return `created new user with id = ${userUUID} `;
-    } catch (e) {
-      return `error ${e} while creating`;
+    } catch(error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        return 'This login already exists';
+      } else {
+        return error;        
+      }
     }
   }
 

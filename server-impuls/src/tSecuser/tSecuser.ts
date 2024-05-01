@@ -8,7 +8,6 @@ import {
   Sequelize,
   ForeignKey,
   PrimaryKey,
-  
 } from 'sequelize-typescript';
 
 export interface tSecuserAttributes {
@@ -31,7 +30,7 @@ export class tSecuser
   @Column({ allowNull: false, type: DataType.UUID })
   userid: UUID;
 
-  @Column({ allowNull: false, type: DataType.STRING(255) })
+  @Column({ allowNull: false, type: DataType.STRING(255), unique: true })
   userlogin: string;
 
   @Column({ allowNull: false, type: DataType.STRING(50) })
