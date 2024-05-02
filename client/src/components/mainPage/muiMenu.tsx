@@ -1,16 +1,57 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
+// import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+// import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, Container, Divider, Menu, MenuItem } from '@mui/material';
 import ProjectDialog from './muiDialog';
 import data from '../editPopup/data';
+import styled from '@mui/system/styled';
+
+const ImpulseButton = styled(Button)({
+  boxShadow: 'none',
+  textTransform: 'none',
+  fontSize: 10,
+  padding: '6px 12px',
+  border: '1.5px solid',
+  lineHeight: 1.5,
+  backgroundColor: '#075985',
+  borderColor: '#0070AC',
+  fontFamily: [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(','),
+  '&:hover': {
+    backgroundColor: '#075985',
+    borderColor: '#0489D1',
+    boxShadow: 'none',
+  },
+  '&:active': {
+    boxShadow: 'none',
+    backgroundColor: '#075985',
+    borderColor: '#FCFCFC',
+  },
+  '&:focus': {
+    boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
+  },
+});
+
+
+
 
 export default function MainFormBar({changeState} : any) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [formOpen, setFormOpen] = React.useState(false);
     const [projectData, setProjectData] = React.useState(data.tree[0]);
+
     const handleHover = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
       };
@@ -31,10 +72,12 @@ export default function MainFormBar({changeState} : any) {
         handleCloseForm()
       }
   return (
-    <Box sx={{ flexGrow: 0, backgroundColor: '#157298'}}>
-      <AppBar position="static" sx={{backgroundColor: '#147298'}}>
-        <Toolbar sx={{display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '10px'}}>
-            <Box
+
+    <Box sx={{ flexGrow: 0, backgroundColor: '#075985'}}>
+
+      {/* <AppBar position="static" sx={{backgroundColor: '#075985'}}> */}
+        {/* <Toolbar sx={{display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '0px'}}> */}
+            {/* <Box
                 component="img"
                 sx={{
                 height: 150,
@@ -45,15 +88,23 @@ export default function MainFormBar({changeState} : any) {
                 }}
                 alt="impuls"
                 src="./img/logo.png"
-            />
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+            /> */}
+
+            <div className="flex-shrink-0">
+            {/* <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
                 <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
-            </Container>
+            </Container> */}
 
 
+            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+             <Typography variant="subtitle1" component="div" sx={{maxHeight: 30,color: 'white'}} > IMS IMPULSE </Typography>                          
+             <ImpulseButton size="small" variant="outlined" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
+            </Container> 
+            </div>  
 
-            <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
+
+            {/* <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
                 <ButtonGroup >
                     <Button variant='text' size='large' sx={{color: 'white'}}> Начало </Button>
                     <Button variant='text' size='large' sx={{color: 'white'}}> Мастер поиск </Button>
@@ -75,15 +126,12 @@ export default function MainFormBar({changeState} : any) {
                     <Button variant='text' size='large'sx={{color: 'white'}}>Выйти </Button>
 
                 </ButtonGroup>
-            </Container>
+            </Container> */}
 
-        </Toolbar>
-      </AppBar>
+        {/* </Toolbar> */}
+      {/* </AppBar> */}
       <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
-
-
-
 
   );
 }
