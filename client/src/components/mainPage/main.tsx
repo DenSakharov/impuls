@@ -12,6 +12,7 @@ import BreadcrumbNew from "./breadcrumb";
 import Knowbase from "./knowbase";
 import Todos from "./todos";
 //import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
+//import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
 // import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
 // import Typography from '@mui/material/Typography';
@@ -188,6 +189,7 @@ function Main({changeState} : any) {
                        <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
                           <Menu.Button className="relative rounded-md px-3 py-2 text-sm font-medium">
+                           <a href="/" target="" rel="noreferrer"> Сервисы </a>
                           <a href="/" target="" rel="noreferrer"> Сервисы </a>
                           </Menu.Button>
                         </div>
@@ -492,7 +494,7 @@ function Main({changeState} : any) {
            <div id='foot'>
             <p>  <About/> | <Contacts/> </p>
               <p id="copyright">
-                <a href="#" target="" rel="noreferrer">© Impulse Team 2024</a>
+                <a href="/" target="" rel="noreferrer">© Impulse Team 2024</a>
               </p>
           </div>
           </div>
