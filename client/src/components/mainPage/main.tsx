@@ -28,48 +28,48 @@ import ProjectDialog from './muiDialog';
 // import MainSidebar from "./sidebar";
 // import Report from "./report";
 
-const ImpulseButton = styled(Button)({
-  boxShadow: 'none',
-  textTransform: 'none',
-  fontSize: 10,
-  padding: '6px 12px',
-  border: '1.5px solid',
-  lineHeight: 1.5,
-  backgroundColor: '#075985',
-  borderColor: '#0070AC',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    backgroundColor: '#075985',
-    borderColor: '#0489D1',
-    boxShadow: 'none',
-  },
-  '&:active': {
-    boxShadow: 'none',
-    backgroundColor: '#075985',
-    borderColor: '#FCFCFC',
-  },
-  '&:focus': {
-    boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
-  },
-});
+// const ImpulseButton = styled(Button)({
+//   boxShadow: 'none',
+//   textTransform: 'none',
+//   fontSize: 10,
+//   padding: '6px 12px',
+//   border: '1.5px solid',
+//   lineHeight: 1.5,
+//   backgroundColor: '#075985',
+//   borderColor: '#0070AC',
+//   fontFamily: [
+//     '-apple-system',
+//     'BlinkMacSystemFont',
+//     '"Segoe UI"',
+//     'Roboto',
+//     '"Helvetica Neue"',
+//     'Arial',
+//     'sans-serif',
+//     '"Apple Color Emoji"',
+//     '"Segoe UI Emoji"',
+//     '"Segoe UI Symbol"',
+//   ].join(','),
+//   '&:hover': {
+//     backgroundColor: '#075985',
+//     borderColor: '#0489D1',
+//     boxShadow: 'none',
+//   },
+//   '&:active': {
+//     boxShadow: 'none',
+//     backgroundColor: '#075985',
+//     borderColor: '#FCFCFC',
+//   },
+//   '&:focus': {
+//     boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
+//   },
+// });
 
 
-const service = {
-  name: 'serv',
-  email: 'ii@rosatom.ru',
-  imageUrl: '../../img/settings2_32px.png',
-}
+// const service = {
+//   name: 'serv',
+//   email: 'ii@rosatom.ru',
+//   imageUrl: '../../img/settings2_32px.png',
+// }
 
 const user = {
   name: 'Иванов Иван',
@@ -421,8 +421,10 @@ function Main({changeState} : any) {
           {/* Your content */}
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
            <div id='foot'>
-              <p> <About/> | <Contacts/> </p>
-              <p id="copyright"><a href="#" target="" rel="noreferrer">© Impulse Team 2024</a></p>
+            <p>  <About/> | <Contacts/> </p>
+              <p id="copyright">
+                <a href="#" target="" rel="noreferrer">© Impulse Team 2024</a>
+              </p>
           </div>
           </div>
           </footer>
