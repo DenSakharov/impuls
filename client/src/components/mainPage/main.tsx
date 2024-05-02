@@ -13,6 +13,8 @@ import Knowbase from "./knowbase";
 import Todos from "./todos";
 //import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
 // import Typography from '@mui/material/Typography';
+import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
+// import Typography from '@mui/material/Typography';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
@@ -22,6 +24,10 @@ import MuiPopup from '../muiPopup/muiPopup';
 // import { Container } from '@mui/system';
 // import Grid from '@mui/system/Unstable_Grid';
 //import styled from '@mui/system/styled';
+// import Box from '@mui/system/Box';
+// import { Container } from '@mui/system';
+// import Grid from '@mui/system/Unstable_Grid';
+import styled from '@mui/system/styled';
 // import Box from '@mui/system/Box';
 import ProjectDialog from './muiDialog';
 
@@ -63,6 +69,42 @@ import ProjectDialog from './muiDialog';
 //     boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
 //   },
 // });
+const ImpulseButton = styled(Button)({
+  boxShadow: 'none',
+  textTransform: 'none',
+  fontSize: 10,
+  padding: '6px 12px',
+  border: '1.5px solid',
+  lineHeight: 1.5,
+  backgroundColor: '#075985',
+  borderColor: '#0070AC',
+  fontFamily: [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(','),
+  '&:hover': {
+    backgroundColor: '#075985',
+    borderColor: '#0489D1',
+    boxShadow: 'none',
+  },
+  '&:active': {
+    boxShadow: 'none',
+    backgroundColor: '#075985',
+    borderColor: '#FCFCFC',
+  },
+  '&:focus': {
+    boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
+  },
+});
+
 
 
 // const service = {
@@ -102,9 +144,11 @@ function classNames(...classes) {
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
 
+
     const [projectData, setProjectData] = React.useState(data.tree[0]);
   
     const [formOpen, setFormOpen] = React.useState(false);  
+
 
     const handleCloseForm = () => {
     setFormOpen(false);
@@ -141,12 +185,15 @@ function Main({changeState} : any) {
                     <div className="flex-shrink-0">
                       <MuiMenu changeState={setProjectData}/>
                     </div>   
+                      <MuiMenu changeState={setProjectData}/>
+                    </div>   
                     {/* End Выбор проекта */}
 
                     {/* Вывод меню */}
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
+                          <a 
                           <a 
                             key={item.name}
                             href={item.href}
@@ -166,7 +213,13 @@ function Main({changeState} : any) {
 
                        {/* Выбор проекта     */}
                        <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>                    
+                       {/* End Вывод меню */}                    
+
+                       {/* Выбор проекта     */}
+                       <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>                    
                        
+                       {/* Выпадающее меню Сервисы */}            
+                       <Menu as="div" className="relative ml-3">
                        {/* Выпадающее меню Сервисы */}            
                        <Menu as="div" className="relative ml-3">
                         <div className="rounded-md flex items-baseline space-x-4 text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -204,10 +257,15 @@ function Main({changeState} : any) {
                        </Menu> 
                        {/* Ссылка на старую страницу */}
                        <a href="/mainpage" target="" rel="noreferrer">old MainPage</a> 
+                       </Menu> 
+                       {/* Ссылка на старую страницу */}
+                       <a href="/mainpage" target="" rel="noreferrer">old MainPage</a> 
                       </div>
                     </div>
               </div>
+              </div>
 
+              <div className="hidden md:block">
               <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
@@ -218,6 +276,8 @@ function Main({changeState} : any) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />                       
                       </button>
+                
+                {/* Выпадающее меню Profile */}
                 
                 {/* Выпадающее меню Profile */}
                       <Menu as="div" className="relative ml-3">
@@ -264,7 +324,12 @@ function Main({changeState} : any) {
               </div>
               <div className="-mr-2 flex md:hidden">
               {/* END Profile dropdown */}
+              </div>
+              <div className="-mr-2 flex md:hidden">
+              {/* END Profile dropdown */}
 
+               {/* Mobile menu button */}
+               <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                {/* Mobile menu button */}
                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-0.5" />
@@ -274,6 +339,11 @@ function Main({changeState} : any) {
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
+               </Disclosure.Button>
+              </div>
+            </div>
+      </div>
+        <Disclosure.Panel className="md:hidden">
                </Disclosure.Button>
               </div>
             </div>
@@ -324,8 +394,12 @@ function Main({changeState} : any) {
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
+
 
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
@@ -345,8 +419,24 @@ function Main({changeState} : any) {
       )}
       </Disclosure>
       {/* END Mobile menu button */}
+        </Disclosure.Panel>
+      </>
+      )}
+      </Disclosure>
+      {/* END Mobile menu button */}
 
         <header className="bg-white shadow">
+        <div className="h-[2dvh] bg-gray-100"> 
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div className="flex h-16 items-center justify-between">
+              <div className="flex items-center">
+               <div className="flex-shrink-0">          
+                 {/* структура вложенности объектов модели данных */}
+                  <BreadcrumbNew />
+               </div>       
+              </div>       
+             </div>       
+            </div> 
         <div className="h-[2dvh] bg-gray-100"> 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
              <div className="flex h-16 items-center justify-between">
@@ -361,6 +451,8 @@ function Main({changeState} : any) {
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             {/* Your content */}   
           </div>        
+            {/* Your content */}   
+          </div>        
         </div>
         </header>
    
@@ -368,7 +460,13 @@ function Main({changeState} : any) {
         
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"> 
+        <main className="m-1">    
+        
+        {/* <div className="flex flex-col items-center gap-8 "> */}
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"> 
         <div className='container-app'>
+
+        {/* Сайдбар с деревом объектов */}        
 
         {/* Сайдбар с деревом объектов */}        
         <div className="aside">
@@ -376,6 +474,13 @@ function Main({changeState} : any) {
    	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
   	    </div>
 
+        {/* <MainSidebar/> */}
+        <div className="content">       
+        
+        {/* Открытие карточки объекта  */}
+        <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+          <MuiPopup {...popupData}/>
+        </Dialog>
         {/* <MainSidebar/> */}
         <div className="content">       
         
