@@ -69,42 +69,6 @@ import ProjectDialog from './muiDialog';
 //     boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
 //   },
 // });
-const ImpulseButton = styled(Button)({
-  boxShadow: 'none',
-  textTransform: 'none',
-  fontSize: 10,
-  padding: '6px 12px',
-  border: '1.5px solid',
-  lineHeight: 1.5,
-  backgroundColor: '#075985',
-  borderColor: '#0070AC',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    backgroundColor: '#075985',
-    borderColor: '#0489D1',
-    boxShadow: 'none',
-  },
-  '&:active': {
-    boxShadow: 'none',
-    backgroundColor: '#075985',
-    borderColor: '#FCFCFC',
-  },
-  '&:focus': {
-    boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
-  },
-});
-
 
 
 // const service = {
@@ -528,7 +492,7 @@ function Main({changeState} : any) {
            <div id='foot'>
             <p>  <About/> | <Contacts/> </p>
               <p id="copyright">
-                <a href="/" target="" rel="noreferrer">© Impulse Team 2024</a>
+                <a href="#" target="" rel="noreferrer">© Impulse Team 2024</a>
               </p>
           </div>
           </div>
