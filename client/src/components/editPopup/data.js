@@ -49,23 +49,25 @@
     avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
 }],
     tree : [{
-        name : "Project №1",
+
+        name : "АСУ ТП для АЭС МАРС1",
+
         objects: [
                 {
-                name: "Объект 1",
+                name: "Архитектура АСУ ТП",
                 },
             ],
                 documents: [{
-                    name: "Объект 152",
+                    name: "План разработки АСУ ТП",
                 },
                 {
-                    name: "Объект 253",
+                    name: "Контракт № 342",
                     
                 },
                 {
-                    name: "Объект 360",
+                    name: "Проектные документы",
                     data: [{
-                        name: "Документ 10000",
+                        name: "Техническое задание",
                         object :{
                         id: 10000,
                         name: "Документ под названием “Объект 1.2”",
@@ -129,7 +131,7 @@
             }],
     },
     {
-        name : "Project №2",
+        name : "Ледокол Иван Сусанин",
         objects: [{
             name: "Объект 11",
             },
