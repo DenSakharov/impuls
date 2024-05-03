@@ -95,14 +95,7 @@ export default function MainFormBar({changeState} : any) {
                 <Typography variant="h5" component="div" > IMS IMPULS </Typography>
                 {/*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице*/}
                 <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
-            {/* </Container> */}
-
-
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-             <Typography variant="subtitle1" component="div" sx={{maxHeight: 30,color: 'white'}} > IMS IMPULSE </Typography>                          
-             <ImpulseButton size="small" variant="outlined" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
-            </Container> 
-            </div>  
+            </Container>
 
 
             {/* <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
