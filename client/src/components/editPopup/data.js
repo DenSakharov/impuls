@@ -8,7 +8,7 @@
     date_created: new Date("2024-01-01"),
     date_changed: new Date("2024-03-01"),
     type: "Основной документ",
-    priority: "всевышний",
+    priority: "Высокий",
     path: "S://impuls/client/src/components/testPage/testPage.tsx",
     links: ["https://learn.javascript.ru/","https://google.com"],
     tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
@@ -49,7 +49,9 @@
     avatar: "https://avatars.mds.yandex.net/get-yapic/23186/enc-fcff59d213e265d10a2cccb679221e95c9b92a7e71c02c7c269cd6e384249449/islands-retina-middle"
 }],
     tree : [{
+
         name : "АСУ ТП для АЭС МАРС1",
+
         objects: [
                 {
                 name: "Архитектура АСУ ТП",
@@ -59,8 +61,7 @@
                     name: "План разработки АСУ ТП",
                 },
                 {
-                    name: "Контракт № 342",
-                    
+                    name: "Контракт № 342",                  
                 },
                 {
                     name: "Проектные документы",
@@ -75,7 +76,7 @@
                         date_created: new Date("2024-01-01"),
                         date_changed: new Date("2024-03-01"),
                         type: "Основной документ",
-                        priority: "всевышний",
+                        priority: "Средний",
                         path: "S://impuls/client/src/components/testPage/testPage.tsx",
                         links: ["https://learn.javascript.ru/","https://google.com"],
                         tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
@@ -92,7 +93,7 @@
                             date_created: new Date("2024-02-01"),
                             date_changed: new Date("2024-03-01"),
                             type: "Основной документ",
-                            priority: "всевышний",
+                            priority: "Высокий",
                             path: "S://impuls/client/src/components/testPage/testPage.tsx",
                             links: ["https://learn.javascript.ru/","https://google.com"],
                             tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],

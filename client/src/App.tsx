@@ -21,7 +21,7 @@ function App() {
         <Route path='' Component={LoginPage}></Route>
           <Route path='/registration' Component={Registration}></Route>
           <Route path='/main' Component ={Main}> </Route>
-          <Route path='/mainPage' Component={MainPage}></Route>
+          <Route path='/mainPage' Component={MainPage}>  </Route>
           <Route path='/about' Component={About}></Route>
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
