@@ -3,6 +3,11 @@ import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
+import React from 'react';
+import './stylesMainPage.css';
+import MuiMenu from './muiMenu';
+import MuiTree from './muiTree';
+import MuiButTree from './muiButTree';
 import About from '../about/about';
 import Contacts from '../about/contacts_teem';
 
@@ -59,8 +64,28 @@ function MainPage() {
     }
   const handleOpenForm = () => {
   setFormOpen(true);
+  const handleOpenForm = () => {
+  setFormOpen(true);
     }
 
+
+  return (
+<div className="mainApp mainApp-push-bottom">
+
+<MuiMenu changeState={setProjectData}/>
+
+<Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+  <MuiPopup {...popupData}/>
+</Dialog>
+<div className ="clear"/>
+
+<main className='section'>
+  <div className='container-app'>
+
+    <div className="aside">
+      <MuiButTree/>
+   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+  	</div>
 
   return (
 <div className="mainApp mainApp-push-bottom">
@@ -120,7 +145,63 @@ function MainPage() {
         <Box sx={{ bgcolor: '#FFFFFF', height: '70vh' }} >
         <h1 className="text-3xl font-bold underline"> Ключевые показатели  </h1>
           <div className="container-kpi1">
+	  <div className="content">
+      <div id="containerHeader">
+
+      <div id="mainHeader">
+			  <div className="content-text-block">
+   			  <span> Рабочий стол </span>
+			  </div>
+    	</div>
+       <Container fixed>
+        <Box sx={{ bgcolor: '#F5F5F5', height: '10vh' }} >
+        <div className="container-news">
+        <h1 className="text-3xl font-bold underline"> Новости </h1>
+         <Box sx={{ width: '100%' }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+        <Grid xs={6}>
+          <Item>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
+       	    </div>
+        </Box>
+      </Container>
+
+       <Container fixed>
+        <Box sx={{ bgcolor: '#FFFFFF', height: '70vh' }} >
+        <h1 className="text-3xl font-bold underline"> Ключевые показатели  </h1>
+          <div className="container-kpi1">
            </div>
+        </Box>
+      </Container>
+
+      <Container fixed>
+        <Box sx={{ bgcolor: '#F5F5F5', height: '10vh'}} >
+        <div className="container-proj">
+        <h1 className="text-3xl font-bold underline"> Информация проекта</h1>
+   	  </div>
+        </Box>
+      </Container>
+    </div>
+	</div>
+  </div>
+</main>
+
+<div className ="clear"/>
         </Box>
       </Container>
 
