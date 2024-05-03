@@ -2,12 +2,14 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
+import { Alert, AlertTitle, Collapse, Container } from "@mui/material";
 import logo from "./logo_reg.png"
 import {Close} from '@mui/icons-material';
 import { IconButton} from '@mui/material';
 //TODO см loginpage
 import "./style.css";
+import {useState} from 'react';
+import axios from "axios";
 
 
 export default function Registration() {
@@ -19,6 +21,25 @@ export default function Registration() {
       password: data.get("password"),
     });
   };
+
+  const [loginInput, setLoginInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordRepeatInput, setPasswordRepeatInput] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const checkPassword = () => {
+    if(passwordInput === passwordRepeatInput) {
+      console.log('password=OK')
+    } else {
+      setOpen(true);
+      setTimeout(handleClose, 2000);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="lg">
@@ -76,6 +97,7 @@ export default function Registration() {
                   name="login"
                   autoComplete="login"
                   autoFocus
+                  onChange={(newLogin) => setLoginInput(newLogin.target.value)}
                 />
                 <TextField
                   margin="normal"
@@ -85,6 +107,7 @@ export default function Registration() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={(newEmail) => setEmailInput(newEmail.target.value)}
                 />
                 <TextField
                   margin="normal"
@@ -94,6 +117,8 @@ export default function Registration() {
                   label="Пароль"
                   type="password"
                   id="password"
+                  onChange={(newPassword) => setPasswordInput(newPassword.target.value)}
+                  
                 />
                 <TextField
                   margin="normal"
@@ -103,17 +128,44 @@ export default function Registration() {
                   label="Повторите пароль"
                   type="password"
                   id="password_repeat"
+                  onChange={(newPasswordRepeat) => setPasswordRepeatInput(newPasswordRepeat.target.value)}
                 />
                 </Box>
+
+                <Collapse in={open}>
+                  <Alert severity="error"> 
+                      <AlertTitle>Error</AlertTitle> 
+                      Пароли должны совпадать! Проверьте ещё раз.
+                  </Alert>
+                </Collapse>
+                
                 <Button
                   type="submit"
                   variant="contained"
                   className="req-page-button"
+                  onClick={() => {
+                    console.log(loginInput);
+                    console.log(emailInput);
+                    console.log(passwordInput);
+                    console.log(passwordRepeatInput);
+                    console.log(checkPassword());
+                    axios({
+                      method: 'post',
+                      url: 'http://localhost:3000/users/create',
+                      data: {
+                        userlogin: loginInput,
+                        userEmail: emailInput,
+                        password: passwordInput,
+                        firstname: 'aaa',
+                        surname: 'aaa'
+                      }
+                    });
+                  }}
                   sx={{ 
                     mt: 3, 
                     mb: 2
                   }}
-                  href="/main"
+                  //href="/main"
                   style={{
                     backgroundColor: "#F5F5F5",
                     borderRadius: 15,
