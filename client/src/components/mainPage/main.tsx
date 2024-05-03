@@ -347,17 +347,17 @@ function Main({changeState} : any) {
       {/* END Mobile menu button */}
 
         <header className="bg-white shadow">
-        <div className="h-[2dvh] bg-gray-100"> 
+        <div className="h-[2dvh] bg-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
              <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
-               <div className="flex-shrink-0">          
+               <div className="flex-shrink-0">
                  {/* структура вложенности объектов модели данных */}
                   <BreadcrumbNew />
-               </div>       
-              </div>       
-             </div>       
-            </div> 
+               </div>
+              </div>
+             </div>
+            </div>
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             {/* Your content */}   
           </div>        
