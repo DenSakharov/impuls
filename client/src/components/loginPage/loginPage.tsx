@@ -6,10 +6,12 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+//TODO идут импорты из material разных объектов, почему бы их не объединить в один? @RusDa256
 import { Container } from "@mui/material";
 import logo from "./logo.png"
 import {Close} from '@mui/icons-material';
 import { IconButton} from '@mui/material';
+//TODO hover можно передать в sx props https://smartdevpreneur.com/4-mui-sx-hover-examples/ @RusDa256
 import "./style.css";
 
 
@@ -40,6 +42,7 @@ export default function SignInSide() {
             color="default"
             sx={{ ml: 135}}
             onClick={() => window.open('/main', '_self')}>
+              {/*TODO Фон темный иконка черная + уезжает за экран при уменьшение ширины вьюпорта*/ }
               <Close fontSize='large'/>
             </IconButton>
         </Box>
@@ -117,6 +120,7 @@ export default function SignInSide() {
                     </Link>
                   </Grid>
                   <Grid item>
+                    {/*TODO переход на страницу восстановления пароля @RusDa256 */}
                     <Link href="#" underline="none" variant="body2">
                       Забыли пароль?
                     </Link>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 // import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -82,26 +83,20 @@ export default function MainFormBar({changeState} : any) {
                 sx={{
                 height: 150,
                 width: 150,
-                maxHeight: { xs: 150, md: 50 },
-                maxWidth: { xs: 150, md: 50 },
+                maxHeight: { xs: 50, md: 70 },
+                maxWidth: { xs: 50, md: 70 },
                 marginRight: '10px',
                 }}
                 alt="impuls"
                 src="./img/logo.png"
             /> */}
 
-            <div className="flex-shrink-0">
-            {/* <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-                <Typography variant="h5" component="div" > IMS IMPULS </Typography>
-                <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
-            </Container> */}
-
-
+            {/* <div className="flex-shrink-0"> */}
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-             <Typography variant="subtitle1" component="div" sx={{maxHeight: 30,color: 'white'}} > IMS IMPULSE </Typography>                          
-             <ImpulseButton size="small" variant="outlined" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
-            </Container> 
-            </div>  
+                <Typography variant="h5" component="div" > IMS IMPULS </Typography>
+                {/* {/*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице */}
+                <Button variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </Button>
+            </Container>
 
 
             {/* <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
