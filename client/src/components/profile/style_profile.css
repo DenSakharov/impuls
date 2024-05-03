@@ -141,6 +141,11 @@
     flex-direction: row;
   }
 }
+@media (max-width: 500px) {
+  #infoProfile #editPhoto {
+    height: 25%;
+  }
+}
 #infoProfile #editPhoto img {
   width: 90%;
   height: 340px;
@@ -163,6 +168,13 @@
   #infoProfile #editPhoto img {
     width: 160px;
     height: 160px;
+  }
+}
+@media (max-width: 400px) {
+  #infoProfile #editPhoto img {
+    width: 130px;
+    height: 130px;
+    margin: 15px 0px 15px 15px;
   }
 }
 
@@ -245,6 +257,20 @@
     left: 0;
   }
 }
+@media (max-width: 400px) {
+  #infoProfile #editPhoto .input-file{
+    width: 90px;
+    top: 20%;
+  }
+}
+@media (max-width: 400px) {
+  #infoProfile #editPhoto .input-file span{
+    font-size: 8px;
+    padding: 5px 0px 0px 0px;
+    height: 30px;
+    left: 0;
+  }
+}
 #infoProfile #editPhoto #bDelImg {
   font-size: 14px;
   background-color: #ffffff;
@@ -277,6 +303,15 @@
     font-size: 10px;
   }
 }
+@media (max-width: 400px) {
+  #infoProfile #editPhoto #bDelImg {
+    width: 55px;
+    top: 20%;
+    left: 25%;
+    font-size: 9px;
+    height: 30px;
+  }
+}
 
 #infoUser {
   display: grid;
@@ -298,6 +333,11 @@
   #infoUser {
     grid-template-rows: repeat(7, 70px);
     gap: 10px;
+  }
+}
+@media (max-width: 400px) {
+  #infoUser {
+    top: 0;
   }
 }
 #infoUser .infoUserValues {
