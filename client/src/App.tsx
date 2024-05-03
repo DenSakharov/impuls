@@ -12,13 +12,17 @@ import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
 import { v4 as uuidV4 } from 'uuid';
+import MainNavBar from './components/mainPage/mainNavBar';
 
 
 function App() {
   return (
       <BrowserRouter>
+        if (1 == 0) {
+           <MainNavBar/>
+        }
         <Routes>
-        <Route path='' Component={LoginPage}></Route>
+          <Route path='' Component={LoginPage}></Route>
           <Route path='/registration' Component={Registration}></Route>
           <Route path='/main' Component ={Main}> </Route>
           <Route path='/mainPage' Component={MainPage}>  </Route>
@@ -29,11 +33,12 @@ function App() {
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
-          <Route path="/documents/:id" element ={<TextEditor />} />         
+          <Route path="/documents/:id" element ={<TextEditor />} />
 
           <Route></Route>
         </Routes>
       </BrowserRouter>
+
   );
 }
 
