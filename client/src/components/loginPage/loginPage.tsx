@@ -31,18 +31,18 @@ export default function SignInSide() {
         sx={{
           backgroundColor: 'white',
         }}>
-        <Box height={50}
-        sx={{
+        <Box height={50} sx={{
           backgroundColor: '#157298',
-          mb: 3
+          mb: 3,
+          display:'flex',
+          justifyContent: 'flex-end'
         }}>
           <IconButton
-            size="large"
-            edge="end"
-            color="default"
-            sx={{ ml: 135}}
+            sx={{
+              color: 'white',
+              mr: '50'
+            }}
             onClick={() => window.open('/main', '_self')}>
-              {/*TODO Фон темный иконка черная + уезжает за экран при уменьшение ширины вьюпорта*/ }
               <Close fontSize='large'/>
             </IconButton>
         </Box>
