@@ -29,13 +29,15 @@ export default function Registration() {
         <Box height={50}
         sx={{
           backgroundColor: '#157298',
-          mb: 2
+          mb: 2,
+          display:'flex',
+          justifyContent: 'flex-end'
         }}>
           <IconButton
-            size="large"
-            edge="end"
-            color="default"
-            sx={{ ml: 135 }}
+            sx={{
+              color: 'white',
+              mr: '50'
+            }}
             onClick={() => window.open('/', '_self')}>
               <Close fontSize='large'/>
             </IconButton>
