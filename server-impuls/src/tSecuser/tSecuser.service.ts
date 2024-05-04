@@ -18,6 +18,7 @@ export class tSecuserService {
       await this.tSecuserRepository.create({
         userid: userUUID,
         userlogin: newUser.userlogin,
+        userEmail: newUser.userEmail,
         firstname: newUser.firstname,
         surname: newUser.surname,
         department: newUser.department,
