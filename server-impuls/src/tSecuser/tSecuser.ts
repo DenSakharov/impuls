@@ -13,6 +13,7 @@ import {
 export interface tSecuserAttributes {
   userid: UUID;
   userlogin: string;
+  userEmail: string;
   firstname: string;
   surname: string;
   department?: string;
@@ -35,6 +36,9 @@ export class tSecuser
 
   @Column({ allowNull: false, type: DataType.STRING(50) })
   firstname: string;
+
+  @Column({ allowNull: false, type: DataType.STRING(50) })
+  userEmail: string;
 
   @Column({ allowNull: false, type: DataType.STRING(50) })
   surname: string;
