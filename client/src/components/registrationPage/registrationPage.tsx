@@ -1,12 +1,6 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { Alert, AlertTitle, Collapse, Container } from "@mui/material";
+import { Alert, AlertTitle, Collapse, Container, IconButton, Button, TextField, Box, Typography} from "@mui/material";
 import logo from "./logo_reg.png"
 import {Close} from '@mui/icons-material';
-import { IconButton} from '@mui/material';
-//TODO см loginpage
 import "./style.css";
 import {useState} from 'react';
 import axios from "axios";
