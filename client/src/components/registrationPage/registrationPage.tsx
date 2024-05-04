@@ -12,6 +12,8 @@ import {useState} from 'react';
 import axios from "axios";
 
 
+
+
 export default function Registration() {
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault();
@@ -21,7 +23,7 @@ export default function Registration() {
       password: data.get("password"),
     });
   };
-
+  const backend = axios.create({baseURL: 'http://localhost:3010'})
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -149,16 +151,16 @@ export default function Registration() {
                     console.log(passwordInput);
                     console.log(passwordRepeatInput);
                     console.log(checkPassword());
-                    axios({
+                    backend({
                       method: 'post',
-                      url: 'http://localhost:3000/users/create',
+                      url: '/users/create',
                       data: {
                         userlogin: loginInput,
                         userEmail: emailInput,
                         password: passwordInput,
-                        firstname: 'aaa',
-                        surname: 'aaa'
-                      }
+                        firstname: 'Имя',
+                        surname: 'Фамилия'
+                      },
                     });
                   }}
                   sx={{ 
