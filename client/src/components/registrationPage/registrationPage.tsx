@@ -6,6 +6,8 @@ import {useState} from 'react';
 import axios from "axios";
 
 
+
+
 export default function Registration() {
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault();
@@ -15,7 +17,7 @@ export default function Registration() {
       password: data.get("password"),
     });
   };
-
+  const backend = axios.create({baseURL: 'http://localhost:3010'})
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
