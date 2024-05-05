@@ -23,17 +23,43 @@ export default function Registration() {
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordRepeatInput, setPasswordRepeatInput] = useState('');
   const [open, setOpen] = useState(false);
+  const [regSuccess, setRegSuccess] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
+    setRegSuccess(false);
   };
 
   const checkPassword = () => {
     if(passwordInput === passwordRepeatInput) {
       console.log('password=OK')
+      return true
     } else {
       setOpen(true);
       setTimeout(handleClose, 2000);
+      return false
+    }
+  }
+  const redirect = () => {
+    window.open("/main");
+  }
+
+  const registrationUser = () => {
+    if(checkPassword()) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/users/create',
+        data: {
+          userlogin: loginInput,
+          userEmail: emailInput,
+          password: passwordInput,
+          firstname: 'defaultName',
+          surname: 'defaultSurname'
+        }
+      });
+      setRegSuccess(true);
+      setTimeout(handleClose, 2000);
+      setTimeout(redirect, 2000);
     }
   }
 
@@ -134,29 +160,19 @@ export default function Registration() {
                       Пароли должны совпадать! Проверьте ещё раз.
                   </Alert>
                 </Collapse>
+
+                <Collapse in={regSuccess}>
+                  <Alert severity="success"> 
+                      <AlertTitle>Success</AlertTitle> 
+                      Регистрация успешно завершена! Через 2 секунды Вы перейдёте на главную страницу
+                  </Alert>
+                </Collapse>
                 
                 <Button
                   type="submit"
                   variant="contained"
                   className="req-page-button"
-                  onClick={() => {
-                    console.log(loginInput);
-                    console.log(emailInput);
-                    console.log(passwordInput);
-                    console.log(passwordRepeatInput);
-                    console.log(checkPassword());
-                    backend({
-                      method: 'post',
-                      url: '/users/create',
-                      data: {
-                        userlogin: loginInput,
-                        userEmail: emailInput,
-                        password: passwordInput,
-                        firstname: 'Имя',
-                        surname: 'Фамилия'
-                      },
-                    });
-                  }}
+                  onClick={registrationUser}    
                   sx={{ 
                     mt: 3, 
                     mb: 2
