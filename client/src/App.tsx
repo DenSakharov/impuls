@@ -14,13 +14,26 @@ import TableData from './components/CordinationPage/table';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
 
-
 function App() {
+
+  // условие для отображения navbarComponent
+  const currentPath = window.location.pathname;
+  let navbarComponent;   
+  if (currentPath === '/main') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/projects') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/TableData') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/documents') {
+    navbarComponent = <MainNavBar/>
+  }  
+  else {
+    navbarComponent = null
+  }  
   return (
       <BrowserRouter>
-        if (1 == 0) {
-           <MainNavBar/>
-        }
+        {navbarComponent}
         <Routes>
           <Route path='' Component={LoginPage}></Route>
           <Route path='/registration' Component={Registration}></Route>
