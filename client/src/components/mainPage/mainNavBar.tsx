@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
 
+// man https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 
 const user = {
   name: 'Иванов Иван',
