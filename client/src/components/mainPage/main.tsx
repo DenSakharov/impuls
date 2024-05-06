@@ -126,13 +126,14 @@ function Main({changeState} : any) {
     return (
       <>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+
       <div className="min-h-full">
         {/* <MainNavBar /> */}
 
         <header className="bg-white shadow">
-        <div className="h-[2dvh] bg-gray-100">
+        <div className="h-[3dvh] bg-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-             <div className="flex h-16 items-center justify-between">
+             <div className="flex h-10 items-center justify-between">
               <div className="flex items-center">
                <div className="flex-shrink-0">
                  {/* структура вложенности объектов модели данных */}
@@ -150,7 +151,7 @@ function Main({changeState} : any) {
         <main className="m-1">
 
         {/* <div className="flex flex-col items-center gap-8 "> */}
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
         <div className='container-app'>
 
         {/* Сайдбар с деревом объектов */}
@@ -174,7 +175,7 @@ function Main({changeState} : any) {
               <h2 className="text-3xl font-bold tracking-tight text-gray-100">Дашборд</h2>
 			      </div>
           </div>
-
+           <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2>
            <div className="flex flex-wrap items-center gap-8 ">
             <div> 1 </div>
             <div> 2 </div>
