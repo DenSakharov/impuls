@@ -12,13 +12,13 @@ export function CreateTodo({
       onClose={onClose}
       aria-labelledby="todo-title"
       aria-describedby="todo-description"
-      className="rounded mt-10 p-4"
+      className="modal rounded mt-40 p-4"
     >
       <h3 id="todo-title" className="font-bold text-lg mb-2">
         Создать запись
       </h3>
       <p id="todo-description" className="mb-2">
-       Введите описание 
+       Введите описание
       </p>
       <form method="dialog">
         <div className="mb-4">
