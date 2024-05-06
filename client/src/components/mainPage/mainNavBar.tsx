@@ -14,6 +14,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
 
+
+
 // man https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 
 const user = {
@@ -39,6 +41,8 @@ const userNavigation = [
   { name: 'О проекте', href: '/About' },
   { name: 'Выйти', href: '/' },
 ]
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -86,7 +90,7 @@ function MainNavBar({changeState} : any) {
 
                       <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
                         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-                           <Typography variant="h5" component="div" > IMS IMPULS </Typography>
+                           <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
                         </Container>
                       </Box>
 
