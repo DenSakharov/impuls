@@ -32,7 +32,7 @@ git pull
 **#3 - Запуск проекта** 
 - Перейти в терминале в папку ``.\client`` в вашей рабочей директории
 ```
-cd ./impuls/client  
+cd ./client  
 npm run start
 ```
 
