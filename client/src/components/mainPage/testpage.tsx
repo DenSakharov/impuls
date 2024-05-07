@@ -73,37 +73,9 @@ export default function Testpage() {
                                         <span> Рабочий стол </span>
                                     </div>
                                 </div>
+
                                 <Container fixed>
                                     <MuiNews></MuiNews>
-                                    <Box sx={{bgcolor: '#F5F5F5', height: '10vh'}}>
-                                        <div className="container-news">
-                                            <h1 className="text-3xl font-bold underline"> Новости111 </h1>
-                                            <Box sx={{width: '100%'}}>
-                                                <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}}>
-                                                    <Grid xs={6}>
-                                                        <Item>Lorem Ipsum - это текст-"рыба", часто используемый в
-                                                            печати и вэб-дизайне.
-                                                        </Item>
-                                                    </Grid>
-                                                    <Grid xs={6}>
-                                                        <Item>Lorem Ipsum - это текст-"рыба", часто используемый в
-                                                            печати и вэб-дизайне.
-                                                        </Item>
-                                                    </Grid>
-                                                    <Grid xs={6}>
-                                                        <Item>Lorem Ipsum - это текст-"рыба", часто используемый в
-                                                            печати и вэб-дизайне.
-                                                        </Item>
-                                                    </Grid>
-                                                    <Grid xs={6}>
-                                                        <Item>Lorem Ipsum - это текст-"рыба", часто используемый в
-                                                            печати и вэб-дизайне.
-                                                        </Item>
-                                                    </Grid>
-                                                </Grid>
-                                            </Box>
-                                        </div>
-                                    </Box>
                                 </Container>
 
                                 <Container fixed>
