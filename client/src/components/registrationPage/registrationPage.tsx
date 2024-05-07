@@ -17,7 +17,6 @@ export default function Registration() {
       password: data.get("password"),
     });
   };
-  const backend = axios.create({baseURL: 'http://localhost:3010'})
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
