@@ -27,7 +27,7 @@ function Todos() {
           </ul>
             <button
                onClick={() => setOpen(true)}
-               className="bg-black text-white p-2 rounded"
+               className="bg-gray-900 text-white p-2 rounded rounded-md px-3 py-2 text-sm font-medium"
             >
              Добавить
             </button>
