@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Card, CardContent, Typography, Container, Box } from '@mui/material';
 import MuiNewsModal from "./muiNewsModal";
 import './styles/muiNews.scss';
 
@@ -18,18 +19,22 @@ const MuiNews: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div className="news-container">
-            <h1>Новости</h1>
+        <Container maxWidth="md">
+            <Typography variant="h4" gutterBottom>Новости</Typography>
             {newsData.map((item, index) => (
-                <div key={index} className="news-item">
-                    <h2>{item.date}</h2>
-                    <h3>{item.title}</h3>
-                    <p>{item.content}</p>
-                </div>
+                <Card key={index} variant="outlined" sx={{ mb: 2 }}>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>{item.date}</Typography>
+                        <Typography variant="h5">{item.title}</Typography>
+                        <Typography>{item.content}</Typography>
+                    </CardContent>
+                </Card>
             ))}
-            <button className="add-button" onClick={() => setShowModal(true)}>+</button>
+            <Box textAlign="right" mt={2}>
+                <Button variant="contained" color="primary" onClick={() => setShowModal(true)}>+</Button>
+            </Box>
             {showModal && <MuiNewsModal onClose={() => setShowModal(false)} />}
-        </div>
+        </Container>
     );
 };
 
