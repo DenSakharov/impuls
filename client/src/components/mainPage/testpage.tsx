@@ -20,6 +20,7 @@ import {Container} from '@mui/system';
 import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
 import Box from '@mui/system/Box';
+import MuiNews from "./muiNews";
 
 const Item = styled('div')(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -73,6 +74,7 @@ export default function Testpage() {
                                     </div>
                                 </div>
                                 <Container fixed>
+                                    <MuiNews></MuiNews>
                                     <Box sx={{bgcolor: '#F5F5F5', height: '10vh'}}>
                                         <div className="container-news">
                                             <h1 className="text-3xl font-bold underline"> Новости111 </h1>
