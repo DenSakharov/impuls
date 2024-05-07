@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/muiNews.scss';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Typography } from '@mui/material';
 
 interface AddNewsModalProps {
     onClose: () => void;
@@ -24,24 +24,50 @@ const MuiNewsModal: React.FC<AddNewsModalProps> = ({ onClose }) => {
     };
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <label>Дата:
-                    <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                </label>
-                <label>Заголовок:
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                </label>
-                <label>Текст новости:
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)}></textarea>
-                </label>
-                <label>Картинка:
-                    <input type="file" onChange={handleFileChange} />
-                </label>
-                <button onClick={handleSubmit}>Добавить</button>
-                <button onClick={onClose}>Отмена</button>
-            </div>
-        </div>
+        <Dialog open onClose={onClose} fullWidth maxWidth="sm">
+            <DialogTitle>Добавление новости</DialogTitle>
+            <DialogContent>
+                <TextField
+                    label=""
+                    type="date"
+                    fullWidth
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    sx={{ mb: 2 }}
+                />
+                <TextField
+                    label="Заголовок"
+                    fullWidth
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    sx={{ mb: 2 }}
+                />
+                <TextField
+                    label="Текст новости"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    sx={{ mb: 2 }}
+                />
+                <Button
+                    variant="contained"
+                    component="label"
+                >
+                    Загрузить изображение
+                    <input
+                        type="file"
+                        hidden
+                        onChange={handleFileChange}
+                    />
+                </Button>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={onClose}>Отмена</Button>
+                <Button onClick={onClose} color="primary">Добавить</Button>
+            </DialogActions>
+        </Dialog>
     );
 };
 
