@@ -1,11 +1,12 @@
 import  React  from 'react';
 import { CreateTodo } from "./create_todo";
+//const [links, setLinks] = React.useState(props.links)
 
 const initialTodos = [
-  "Ссылка на Figmu проекта ",
-  "Ссылка на GitHub проекта ",
-  "Ссылка на БД проекта ",
-  "Ссылка на проект ",
+  "Figma проекта ",
+  "GitHub проекта ",
+  "БД проекта ",
+  "Задачи проекта ",
 ];
 
 function Favorites() {
@@ -18,16 +19,23 @@ function Favorites() {
           {/* Your content */}
         
           <h1 id="title" className="text-lg font-bold mb-2">
-           Избранное
+           Ссылки
           </h1>
           <ul aria-labelledby="title" className="list-disc list-inside mb-4">
              {todos.map((todo) => (
-              <li key={todo}>{todo}</li>
+               <li key= {todo}> <a> {todo} </a> </li> 
+              // <li key= {todos.indexOf(todo)} > <a href={todo} key={todos.indexOf(todo)}> </a> </li> 
+              // <li key= {todo}> <a href={todo} key={todo}> </a> </li> 
+
+            //   {links.map((link) => (
+            //     <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
+            // ))}
+
              ))}
           </ul>
           <button
-               onClick={() => setOpen(true)}
-               className="bg-black text-white p-2 rounded"
+               onClick={() => setOpen(true)}              
+               className="bg-gray-900 text-white p-2 rounded rounded-md px-3 py-2 text-sm font-medium"
             >
              Добавить
             </button>

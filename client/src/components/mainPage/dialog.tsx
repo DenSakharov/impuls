@@ -34,5 +34,6 @@ export default function Dialog(props: DialogProps) {
     <dialog ref={dialogRef} onClose={handleClose} {...rest}>
       {children}
     </dialog>
+
   );
 }

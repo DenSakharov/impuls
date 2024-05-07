@@ -1,20 +1,19 @@
 import  React  from 'react';
 import './../../globals.css';
 
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon, ArrowLeftStartOnRectangleIcon, StopCircleIcon } from '@heroicons/react/24/outline';
 import About from '../about/about';
 import { Dialog } from '@mui/material';
 import data from '../editPopup/data';
 import ProjectDialog from './muiDialog';
-import SelectProjects from './selectProjects';
+// import SelectProjects from './selectProjects';
 import Box from '@mui/material/Box';
 // import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
-
-
+import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 
 // man https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 
@@ -42,8 +41,6 @@ const userNavigation = [
   { name: 'Выйти', href: '/' },
 ]
 
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -56,9 +53,9 @@ function MainNavBar({changeState} : any) {
     const handleCloseForm = () => {
     setFormOpen(false);
     }
-    const handleOpenForm = () => {
-    setFormOpen(true);
-    }
+    // const handleOpenForm = () => {
+    // setFormOpen(true);
+    // }
 
     // Выбор проекта
     const changeProps = (value : any) => {
@@ -70,6 +67,23 @@ function MainNavBar({changeState} : any) {
     return (
     <>
       <div className="min-h-full">
+      {/* Mobile aside button */}  
+      <Disclosure as="nav" className="bg-cyan-700">
+          {({ open }) => (                        
+              <div className="-mr-2 flex md:hidden">
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="absolute -inset-0.5" />
+                      <span className="sr-only">Open aside menu</span>
+                      {open ? (
+                        <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true" />
+                      ) : (
+                        <MultipleStopIcon className="block h-6 w-6" aria-hidden="true" />
+                      )}
+                </Disclosure.Button>
+              </div>            
+          )}
+        </Disclosure>
+
         <Disclosure as="nav" className="bg-cyan-700">
           {({ open }) => (
             <>
@@ -160,9 +174,9 @@ function MainNavBar({changeState} : any) {
                        <a href="/mainPage" target="" rel="noreferrer">old MainPage</a>
                       </div>
                     </div>
-              </div>
+                  </div>
 
-              <div className="hidden md:block">
+                  <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
@@ -173,7 +187,7 @@ function MainNavBar({changeState} : any) {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
 
-                {/* Выпадающее меню Profile */}
+                      {/* Выпадающее меню Profile */}
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -206,7 +220,6 @@ function MainNavBar({changeState} : any) {
                                     <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
                                       <About />
                                     </Dialog>
-
                                   </a>
                                 )}
                               </Menu.Item>
@@ -215,12 +228,13 @@ function MainNavBar({changeState} : any) {
                         </Transition>
                       </Menu>
                     </div>
-              </div>
-              <div className="-mr-2 flex md:hidden">
-              {/* END Profile dropdown */}
+                  </div>
+                  {/* END Profile dropdown */}
 
-               {/* Mobile menu button */}
-               <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+
+                  {/* Mobile menu button */}
+                  <div className="-mr-2 flex md:hidden">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -228,11 +242,13 @@ function MainNavBar({changeState} : any) {
                       ) : (
                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
-               </Disclosure.Button>
+                  </Disclosure.Button>
+                  </div>
+                </div>
               </div>
-            </div>
-      </div>
-        <Disclosure.Panel className="md:hidden">
+
+
+              <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
@@ -294,13 +310,13 @@ function MainNavBar({changeState} : any) {
                     ))}
                   </div>
                 </div>
-        </Disclosure.Panel>
-      </>
-      )}
+              </Disclosure.Panel>
+            </>
+          )}
         </Disclosure>
         {/* END Mobile menu button */}
       </div>
     </>
-    );
-  }
+  );  
+}
   export default MainNavBar;
