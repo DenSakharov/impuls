@@ -1,4 +1,5 @@
 import React from 'react';
+import './animations/animations.css'
 import data from '../editPopup/data';
 import { Drawer, IconButton, Container, Divider, TextField } from '@mui/material';
 import MuiMessage from './muiMessage';
@@ -25,6 +26,7 @@ export default function MuiChat() {
     return (    
             <>
                 <IconButton
+                className='fade-in'
                 size="large"
                 edge="start"
                 color="inherit"
