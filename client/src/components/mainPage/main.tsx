@@ -11,8 +11,10 @@ import Favorites from "./favorites";
 import BreadcrumbNew from "./breadcrumb";
 import Knowbase from "./knowbase";
 import Todos from "./todos";
-//import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
-// import Typography from '@mui/material/Typography';
+import { Navbar, Typography, IconButton, Button, Input } from '@material-tailwind/react';
+
+// import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
+//import Typography from '@mui/material/Typography';
 //import MuiMenu from './muiMenu';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
@@ -27,9 +29,8 @@ import MuiPopup from '../muiPopup/muiPopup';
 import SelectProjects from './selectProjects';
 // import MainNavBar from './mainNavBar';
 import MainFooter from './mainFooter';
-
-// import MainSidebar from "./sidebar";
-// import Report from "./report";
+import MainSidebar from "./sidebar";
+import Report from "./report";
 
 // const ImpulseButton = styled(Button)({
 //   boxShadow: 'none',
@@ -131,7 +132,7 @@ function Main({changeState} : any) {
         {/* <MainNavBar /> */}
 
         <header className="bg-white shadow">
-        <div className="h-[3dvh] bg-gray-100">
+        <div className="h-[4dvh] bg-gray-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
              <div className="flex h-10 items-center justify-between">
               <div className="flex items-center">
@@ -155,10 +156,39 @@ function Main({changeState} : any) {
         <div className='container-app'>
 
         {/* Сайдбар с деревом объектов */}
-        <div className="aside">
-            <SelectProjects changeState={setProjectData}/>
+        <div className="max-w-64 hidden md:block">
+            <SelectProjects changeState={setProjectData}/>        
             <MuiButTree/>
    	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+            
+            {/* поиск компонент */}
+            {/* <Navbar
+              variant="gradient"
+              color="blue-gray"
+              className="mx-auto max-w-screen-xl from-blue-gray-900 to-blue-gray-800 px-4 py-3"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
+                <div className="relative flex w-full gap-2 md:w-max">
+                  <Input
+                  type="search"
+                  color="white"
+                  label="Type here..."
+                  className="pr-20"
+                  containerProps={{
+                  className: "min-w-[288px]",
+                  }}
+                  />
+                  <Button
+                    size="sm"
+                    color="white"
+                    className="!absolute right-1 top-1 rounded"
+                  >
+                  Search
+                 </Button>
+                </div>
+              </div>
+            </Navbar> */}
+
   	    </div>
 
         {/* <MainSidebar/> */}
