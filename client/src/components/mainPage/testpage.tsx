@@ -8,31 +8,15 @@ import Contacts from '../about/contacts_teem';
 import data from '../editPopup/data';
 import {Dialog} from '@mui/material';
 
-// import Favorites from "./favorites";
-// import BreadcrumbNew from "./breadcrumb";
-// import Knowbase from "./knowbase";
-// import Todos from "./todos";
-// import MainSidebar from "./sidebar";
-// import Report from "./report";
-
 import MuiPopup from '../muiPopup/muiPopup';
 import {Container} from '@mui/system';
-import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
 import Box from '@mui/system/Box';
 import MuiNews from "./muiNews";
 
-const Item = styled('div')(({theme}) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    border: '1px solid #F5F5F5',
-    borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
-    padding: theme.spacing(1),
-    borderRadius: '4px',
-    textAlign: 'left',
-}));
-
 export const closeDialog = React.createContext<Function>(() => {
 });
+
 export default function Testpage() {
     const [popupData, setPopupData] = React.useState(data.object);
     const [projectData, setProjectData] = React.useState(data.tree[0]);
