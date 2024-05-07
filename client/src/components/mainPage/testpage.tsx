@@ -10,9 +10,8 @@ import {Dialog} from '@mui/material';
 
 import MuiPopup from '../muiPopup/muiPopup';
 import {Container} from '@mui/system';
-import styled from '@mui/system/styled';
-import Box from '@mui/system/Box';
 import MuiNews from "./muiNews";
+import MuiDashboard from "./muiDashboard";
 
 export const closeDialog = React.createContext<Function>(() => {
 });
@@ -63,20 +62,9 @@ export default function Testpage() {
                                 </Container>
 
                                 <Container fixed>
-                                    <Box sx={{bgcolor: '#FFFFFF', height: '70vh'}}>
-                                        <h1 className="text-3xl font-bold underline"> Ключевые показатели </h1>
-                                        <div className="container-kpi1">
-                                        </div>
-                                    </Box>
+                                    <MuiDashboard></MuiDashboard>
                                 </Container>
 
-                                <Container fixed>
-                                    <Box sx={{bgcolor: '#F5F5F5', height: '10vh'}}>
-                                        <div className="container-proj">
-                                            <h1 className="text-3xl font-bold underline"> Информация проекта</h1>
-                                        </div>
-                                    </Box>
-                                </Container>
                             </div>
                         </div>
                     </div>
