@@ -1,10 +1,9 @@
 import React from 'react';
+import './animations/animations.css'
 import data from '../editPopup/data';
 import { Drawer, IconButton, Container } from '@mui/material';
 import MuiHistRecord from './muiHistRecord';
 import { WorkHistory } from '@mui/icons-material';
-
-
 
 export default function MuiHistChngs() {
     const [isDrawerOpen, setisDrawerOpen] = React.useState(false);
@@ -12,6 +11,7 @@ export default function MuiHistChngs() {
     return (    
             <>
                 <IconButton
+                className='fade-in'
                 size="large"
                 edge="start"
                 color="inherit"
