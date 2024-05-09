@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, Container, Divider, Menu, MenuItem } from '@mui/material';
 import ProjectDialog from './muiDialog';
 import data from '../editPopup/data';
+import MuiSrchPpp from './muiSrchPpp';
 
 export default function MainFormBar({changeState} : any) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -57,6 +58,7 @@ export default function MainFormBar({changeState} : any) {
             <Container sx={{display:'flex', alignItems: 'stretch', justifyContent: 'flex-end'}}>
               {/*TODO Заменить группу кнопок на кнопку с выпадющим списком, либо по своему усмотрению  @SergeyKozhevnikov*/}
                 <ButtonGroup >
+                    <MuiSrchPpp/>
                     <Button variant='text' size='large' sx={{color: 'white'}}> Начало </Button>
                     <Button variant='text' size='large' sx={{color: 'white'}}> Мастер поиск </Button>
                     <Button variant='text' size='large' sx={{color: 'white'}}  onMouseOver={handleHover}> Сервисы </Button>
