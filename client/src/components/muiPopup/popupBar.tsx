@@ -1,4 +1,5 @@
 import React from 'react';
+import './animations/animations.css'
 import { Typography, IconButton, Box, Toolbar, AppBar, Container } from '@mui/material';
 import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight  } from '@mui/icons-material';
 import data from '../editPopup/data';
@@ -33,7 +34,7 @@ export default function PopupBar(props: EditPopupProps = data.object) {
           >
             <ArrowDropDown fontSize='large'/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'block' } }}>
+          <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
             № {props.id}
           </Typography>
           <IconButton 
@@ -41,16 +42,16 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ml:'auto', mr: 2, display:{md: 'none', xs: 'block'}}}
+            sx={{ml:'auto', mr: 2, display:{md: 'none', xs: 'flex'}}}
             onClick={() => setSmallMenu(!smallMenu)}    
             >
-            {smallMenu ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft/>}
+            {smallMenu ? <KeyboardDoubleArrowRight className='roll-in-left'/> : <KeyboardDoubleArrowLeft />}
           </IconButton>
-          {/*TODO @imk-student добавить анимацию при нажатии на стрелки */}
           <Container disableGutters sx={{ alignContent:'right', display:{md: 'contents', xs: smallMenu ? 'contents' : 'none'}}}>
             <MuiChat/>
             <MuiHistChngs/>
             <IconButton
+            className='fade-in'
             size="large"
             edge="start"
             color="inherit"

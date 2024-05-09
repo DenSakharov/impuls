@@ -8,6 +8,7 @@ import axios from "axios";
 export default function Registration() {
   
   const backend = axios.create({baseURL: 'http://localhost:3010'})
+  
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');

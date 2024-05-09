@@ -1,15 +1,15 @@
 import React from 'react';
+import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
+import { Add, AssignmentOutlined } from '@mui/icons-material';
+import { ThemeProvider } from '@emotion/react';
+import { v4 as uuidV4 } from 'uuid';
+import impulsTheme from '../../muiTheme';
+import SuccessAlert from './successAlert';
 import EditPopupProps from '../interfaces/editPopupProps';
 import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
 import data from '../editPopup/data';
-import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
-import { Add, AssignmentOutlined } from '@mui/icons-material';
-import impulsTheme from '../../muiTheme';
-import { ThemeProvider } from '@emotion/react';
-import { v4 as uuidV4 } from 'uuid'
-import SuccessAlert from './successAlert';
 
 
 
@@ -114,9 +114,9 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                 }
             }}>
                 <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
-                    <Container disableGutters  sx={{paddingTop:'10px',display:'flex', flexDirection:'row', alignItems:'flex-start'}}>
+                    <Container disableGutters  sx={{paddingTop:'10px', display:'flex', flexDirection:{xs:'column', md:'row'}, alignItems:'flex-start'}}>
                         <Typography variant='h5' style={{wordWrap: 'break-word'}} >{props.name}</Typography>
-                        <Button sx={{marginLeft:'auto', minWidth:'150px'}} variant='outlined' onClick={() => setFormApproval(true)}>Отправить на согласование</Button>
+                        <Button sx={{marginLeft:{md:'auto', xs:'0'}, minWidth:'150px'}} variant='outlined' onClick={() => setFormApproval(true)}>Отправить на согласование</Button>
                     </Container>
                         <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
                             <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
