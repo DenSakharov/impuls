@@ -3,6 +3,7 @@ import {Close} from '@mui/icons-material';
 import {IconButton , Container, Button, TextField, FormControlLabel, 
   Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
+import axios from "axios";
 
 
 export default function SignInSide() {
@@ -14,6 +15,15 @@ export default function SignInSide() {
       password: data.get("password"),
     });
   };
+
+  function chechUser() {
+    axios({
+      method: 'get',
+      url: 'http://localhost:3000/users:userlogin',
+      data: {
+      }
+    });
+  }
 
   return (
     <Container component="main" maxWidth="lg">
