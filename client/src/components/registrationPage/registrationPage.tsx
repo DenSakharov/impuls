@@ -5,18 +5,8 @@ import "./style.css";
 import {useState} from 'react';
 import axios from "axios";
 
-
-
-
 export default function Registration() {
-  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  
   const backend = axios.create({baseURL: 'http://localhost:3010'})
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
@@ -48,7 +38,7 @@ export default function Registration() {
     if(checkPassword()) {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/users/create',
+        url: 'http://localhost:30000/users/create',
         data: {
           userlogin: loginInput,
           userEmail: emailInput,
@@ -107,7 +97,6 @@ export default function Registration() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
                 <TextField
