@@ -1,31 +1,47 @@
 import logo from "./logo.png"
+import React from 'react'
 import {Close} from '@mui/icons-material';
 import {IconButton , Container, Button, TextField, FormControlLabel, 
   Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { JWToken } from '../../Context'
 
 
 export default function SignInSide() {
+
+
+  const [userlogin, setUser] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const token = React.useContext(JWToken)
+
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
+      username: data.get("email"),
       password: data.get("password"),
     });
   };
 
   function chechUser() {
     axios({
-      method: 'get',
-      url: 'http://localhost:3000/users:userlogin',
+      method: 'post',
+      url: 'http://localhost:3010/auth/login',
       data: {
+        username: userlogin,
+        password: password
       }
-    });
+    }).then((response: AxiosResponse) => {
+      token.setToken(response.data.accessToken)
+      window.open('/main', "_self")
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    })
   }
 
   return (
+  
     <Container component="main" maxWidth="lg">
       <Box
         sx={{
@@ -72,6 +88,8 @@ export default function SignInSide() {
                 sx={{ mt: 1 }}
               >
                 <TextField
+                  value={userlogin}
+                  onChange={(e) => setUser(e.target.value)}
                   margin="normal"
                   required
                   fullWidth
@@ -79,9 +97,11 @@ export default function SignInSide() {
                   label="Email"
                   name="email"
                   autoComplete="email"
-                  autoFocus
+                  autoFocus                  
                 />
                 <TextField
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   margin="normal"
                   required
                   fullWidth
@@ -103,7 +123,7 @@ export default function SignInSide() {
                     mt: 3, 
                     mb: 2
                     }}
-                  href="/main"
+                  //href="/main"
                   className="login-page-button"
                   style={{
                     backgroundColor: "#F5F5F5",
@@ -111,6 +131,7 @@ export default function SignInSide() {
                     fontSize: "18px",
                     color: '#157298',
                   }}
+                  onClick={chechUser}
                 >
                   Войти
                 </Button>
@@ -136,5 +157,6 @@ export default function SignInSide() {
         
       </Box>
     </Container>
+  
   );
 }
