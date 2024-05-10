@@ -14,7 +14,6 @@ export class tSecuserService {
       const hashedPassword = await bcrypt.hash(newUser.password, 10);
       const userUUID = crypto.randomUUID();
       try {
-        
       await this.tSecuserRepository.create({
         userid: userUUID,
         userlogin: newUser.userlogin,
