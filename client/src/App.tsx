@@ -12,10 +12,13 @@ import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
 import { v4 as uuidV4 } from 'uuid';
+import { JWToken } from './Context'
 
 
 function App() {
+  const [token, setToken] = React.useState('')
   return (
+    <JWToken.Provider value={{token, setToken}}>
       <BrowserRouter>
         <Routes>
         <Route path='' Component={LoginPage}></Route>
@@ -30,10 +33,9 @@ function App() {
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
           <Route path='/test' Component ={Testpage}> </Route>
-
-          <Route></Route>
         </Routes>
       </BrowserRouter>
+    </JWToken.Provider>
   );
 }
 
