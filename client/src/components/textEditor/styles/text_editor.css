@@ -17,6 +17,12 @@ body{
 
 }
 
+.container .ql-toolbar.ql-snow .ql-formats {
+    width: fit-content;
+    height: 50%;
+    margin-right: 5px;
+}
+
 .container .ql-container.ql-snow{
     border: none;
     display: flex;
@@ -25,11 +31,12 @@ body{
 
 .container .ql-toolbar.ql-snow{
     display: flex;
+
     justify-content: center;
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: #f3f3f3;
+    background-color: #ffffff;
     border: none;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
 }
@@ -53,5 +60,52 @@ body{
 
     .container .ql-toolbar.ql-snow{
         display: none;
+    }
+}
+
+#butAdaptive {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    border: none;
+    background: transparent;
+    width: 40px;
+    height: 26px;
+    margin: 30px auto;
+    display: none;
+}
+#butAdaptive::before,
+#butAdaptive::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background: #000;
+}
+
+#butSaveLoad {
+    margin-left: 80px;
+}
+@media (max-width: 1023px) {
+    #butSaveLoad {
+        margin-left: 20px;
+    }
+}
+@media (max-width: 650px) {
+    #butSaveLoad {
+        margin-left: 0px;
+    }
+}
+@media (max-width: 380px) {
+    .ql-toolbar{
+        height: 140px;
+    }
+    #butSaveLoad {
+        position: absolute;
+        right: 0px;
+        top: 110px
     }
 }
