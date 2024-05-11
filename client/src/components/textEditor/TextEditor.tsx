@@ -13,15 +13,11 @@ const SAVE_INTERVAL_MS = 2000
 
 
 const TOOLBAR_OPTIONS=[
-    [{header:[1,2,3,4,5,6,false]}],
-    [{font:[]}],
-    [{list:"ordered"},{list:"bullet"}],
+    [{header:[1,2,3,4,5,6,false]}, {font:[]}, {list:"ordered"},{list:"bullet"}],
     ["bold", "italic", "underline"],
-    [{color:[]}, {background:[]}],
-    [{script:"sub"},{script:"super"}],
-    [{align:[]}],
+    [{color:[]}, {background:[]}, "clean"],
+    [{script:"sub"},{script:"super"}, {align:[]}],
     ["image", "blockquote", "code-block"],
-    ["clean"],
 ]
 
 export default function TextEditor(){
@@ -49,19 +45,19 @@ export default function TextEditor(){
         socket.emit('get-document', documentId)
     },[socket, quill, documentId])
 
-useEffect(() => {
-    if (socket == null || quill == null) return
-    const interval = setInterval(()=>{
-        socket.emit('save-document', quill.getContents())
+    useEffect(() => {
+        if (socket == null || quill == null) return
+        const interval = setInterval(()=>{
+            socket.emit('save-document', quill.getContents())
 
-    }, SAVE_INTERVAL_MS)
+        }, SAVE_INTERVAL_MS)
 
-    return () => {
-        clearInterval(interval)
-    }
-}, [socket, quill])
+        return () => {
+            clearInterval(interval)
+        }
+    }, [socket, quill])
 
-   useEffect(() => {
+    useEffect(() => {
         if (socket == null || quill == null) return
          const handler = (delta:Object, oldDelta:Object, source:string) => {
             if (source !== 'user') return 
@@ -116,40 +112,41 @@ useEffect(() => {
     //    q.disable()
       //  q.setText('Loading...')
         setQuill(q)
-      
+        
         let posButton = document.createElement('span');
-        let posButton1 = document.createElement('span');
+        //let posButton1 = document.createElement('span');
         posButton.classList.add(
             'ql-formats'
            );
-           posButton.setAttribute('id', 'butSave');
+        posButton.setAttribute('id', 'butSaveLoad');
         let customButton = document.createElement('button');
         customButton.innerHTML = 'Сохранить';
-        customButton.addEventListener('click', function() {
-       
-        saver(q);
-            });
+        customButton.addEventListener('click', function() {saver(q);});
 
-            customButton.classList.add(
-                'ql-align', 
-                'ql-picker', 
-                'ql-icon-picker',
-                'ql-save'
-            );
-            customButton.style.width='70px';
-            posButton.appendChild(customButton);
+        customButton.classList.add(
+            'ql-align', 
+            'ql-picker', 
+            'ql-icon-picker',
+            'ql-save'
+        );
+        customButton.style.width='75px';
+        customButton.style.margin='0px 5px';
 
-            posButton1.classList.add(
-                'ql-formats'
-               );
-               posButton1.setAttribute('id', 'butLoad');
-            let customButton1 = document.createElement('input');
-            customButton1.type="file"
-            customButton1.id="customButton1"
-            
-            customButton1.innerHTML = 'Загрузить';
-            customButton1.style.width='110px';
+        
 
+        // posButton1.classList.add(
+        //     'ql-formats'
+        // );
+        //posButton1.setAttribute('id', 'butLoad');
+        let customButton1 = document.createElement('input');
+        customButton1.type="file"
+        customButton1.id="customButton1"
+        
+        customButton1.style.width='120px';
+        customButton1.style.height='28px';
+
+        posButton.appendChild(customButton);
+        posButton.appendChild(customButton1);
 
 /*            
   customButton1.addEventListener('change', (event) => {
@@ -189,16 +186,15 @@ useEffect(() => {
                     'ql-icon-picker',
                     'ql-save'
                 );
-                posButton1.appendChild(customButton1);
+                //posButton1.appendChild(customButton1);
 
 
 
 // Add the button to your desired location in the DOM
-const doc = document.getElementById("container");
-if (doc?.hasChildNodes){
-   const panel = doc.getElementsByTagName('div')[0];
-   panel.appendChild(posButton);
-   panel.appendChild(posButton1);
+    const doc = document.getElementById("container");
+    if (doc?.hasChildNodes){
+        const panel = doc.getElementsByTagName('div')[0];
+        panel.appendChild(posButton);
     }
     }, [])
 
