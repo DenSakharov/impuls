@@ -3,7 +3,7 @@ import logo from "./logo_reg.png"
 import {Close} from '@mui/icons-material';
 import "./style.css";
 import {useState} from 'react';
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export default function Registration() {
   
@@ -13,11 +13,12 @@ export default function Registration() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordRepeatInput, setPasswordRepeatInput] = useState('');
-  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [regSuccess, setRegSuccess] = useState(false);
 
   const handleClose = () => {
-    setOpen(false);
+    setError(false);
     setRegSuccess(false);
   };
 
@@ -26,7 +27,8 @@ export default function Registration() {
       console.log('password=OK')
       return true
     } else {
-      setOpen(true);
+      setErrorMessage('Пароли должны совпадать! Проверьте ещё раз.')
+      setError(true);
       setTimeout(handleClose, 2000);
       return false
     }
@@ -47,10 +49,18 @@ export default function Registration() {
           firstname: 'defaultName',
           surname: 'defaultSurname'
         }
+      }).then((response: AxiosResponse) => {
+        if(response.data === 'This login already exists'){
+          setErrorMessage('Данный login уже занят!')
+          setError(true);
+          setTimeout(handleClose, 2000);
+        } else {
+          setRegSuccess(true);
+          setTimeout(handleClose, 2000);
+          setTimeout(redirect, 2000);
+        }
+
       });
-      setRegSuccess(true);
-      setTimeout(handleClose, 2000);
-      setTimeout(redirect, 2000);
     }
   }
 
@@ -144,10 +154,10 @@ export default function Registration() {
                 />
                 </Box>
 
-                <Collapse in={open}>
+                <Collapse in={error}>
                   <Alert severity="error"> 
                       <AlertTitle>Error</AlertTitle> 
-                      Пароли должны совпадать! Проверьте ещё раз.
+                      {errorMessage}
                   </Alert>
                 </Collapse>
 
