@@ -9,22 +9,11 @@ import { JWToken } from '../../Context'
 
 
 export default function SignInSide() {
-
-
   const [userlogin, setUser] = React.useState("")
   const [password, setPassword] = React.useState("")
   const token = React.useContext(JWToken)
 
-  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
-  function chechUser() {
+  function checkUser() {
     axios({
       method: 'post',
       url: 'http://localhost:3010/auth/login',
@@ -84,7 +73,6 @@ export default function SignInSide() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
                 <TextField
@@ -131,7 +119,7 @@ export default function SignInSide() {
                     fontSize: "18px",
                     color: '#157298',
                   }}
-                  onClick={chechUser}
+                  onClick={checkUser}
                 >
                   Войти
                 </Button>
