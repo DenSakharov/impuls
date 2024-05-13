@@ -18,12 +18,14 @@ function App() {
 
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
-  let navbarComponent;   
+  let navbarComponent;
   if (currentPath === '/main') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/projects') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/TableData') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/report') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/documents') {
     navbarComponent = <MainNavBar/>
