@@ -1,5 +1,5 @@
 import React from 'react';
-import record from '../interfaces/recordProps';
+import record from '#/components/interfaces/recordProps';
 import { Avatar, Container, TextField} from '@mui/material';
 
 export default function MuiHistRecord(props: record) {
