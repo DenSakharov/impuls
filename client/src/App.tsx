@@ -11,11 +11,12 @@ import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
+import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
+import { JWToken } from './Context'
 import MainNavBar from './components/mainPage/mainNavBar';
 
 function App() {
-
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
   let navbarComponent;
@@ -29,11 +30,15 @@ function App() {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/documents') {
     navbarComponent = <MainNavBar/>
-  }  
+  }
   else {
     navbarComponent = null
-  }  
+  }
+
+  const [token, setToken] = React.useState('')
+
   return (
+    <JWToken.Provider value={{token, setToken}}>
       <BrowserRouter>
         {navbarComponent}
         <Routes>
@@ -49,11 +54,10 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
-
-          <Route></Route>
+          <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
-
+    </JWToken.Provider>
   );
 }
 
