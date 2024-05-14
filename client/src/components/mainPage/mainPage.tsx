@@ -107,6 +107,8 @@ export default function MainPage() {
         <Box sx={{ bgcolor: '#F5F5F5', height: '10vh'}} >
         <div className="container-proj">
         <h1 className="text-3xl font-bold underline"> Информация проекта</h1>
+        
+              
    	  </div>
         </Box>
       </Container>
