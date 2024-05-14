@@ -23,7 +23,7 @@ function Favorites() {
           </h1>
           <ul aria-labelledby="title" className="list-disc list-inside mb-4">
              {todos.map((todo) => (
-               <li key= {todo}> <a> {todo} </a> </li> 
+               <li key= {todo}> {todo} </li> 
               // <li key= {todos.indexOf(todo)} > <a href={todo} key={todos.indexOf(todo)}> </a> </li> 
               // <li key= {todo}> <a href={todo} key={todo}> </a> </li> 
 
