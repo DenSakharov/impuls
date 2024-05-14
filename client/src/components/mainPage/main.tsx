@@ -11,7 +11,7 @@ import Favorites from "./favorites";
 import BreadcrumbNew from "./breadcrumb";
 import Knowbase from "./knowbase";
 import Todos from "./todos";
-import { Navbar, Typography, IconButton, Button, Input } from '@material-tailwind/react';
+//import { Navbar, Typography, IconButton, Button, Input } from '@material-tailwind/react';
 
 // import { Button, ButtonGroup, Divider,MenuItem } from '@mui/material';
 //import Typography from '@mui/material/Typography';
@@ -29,8 +29,8 @@ import MuiPopup from '../muiPopup/muiPopup';
 import SelectProjects from './selectProjects';
 // import MainNavBar from './mainNavBar';
 import MainFooter from './mainFooter';
-import MainSidebar from "./sidebar";
-import Report from "./report";
+//import MainSidebar from "./sidebar";
+//import Report from "./report";
 
 // const ImpulseButton = styled(Button)({
 //   boxShadow: 'none',

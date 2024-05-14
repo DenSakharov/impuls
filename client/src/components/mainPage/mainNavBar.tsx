@@ -37,7 +37,7 @@ const serviceNavigation = [
 ]
 const userNavigation = [
   { name: 'Профиль', href: '/userProfile' },
-  { name: 'О проекте', href: '/About' },
+  // { name: 'О проекте', href: '/About' },
   { name: 'Выйти', href: '/' },
 ]
 
