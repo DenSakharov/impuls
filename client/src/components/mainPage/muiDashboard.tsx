@@ -70,10 +70,10 @@ const MuiDashboard: React.FC = () => {
 
     // Данные для диаграммы
     const pieData2: DocumentData[] = [
+        { name: 'Новые', value: 300 },
+        { name: 'Проверены', value: 100 },
         { name: 'На согласовании', value: 50 },
         { name: 'Отклонены', value: 150 },
-        { name: 'Новые', value: 300 },
-        { name: 'Проверены', value: 100 }
     ];
 
     return (
@@ -91,11 +91,10 @@ const MuiDashboard: React.FC = () => {
             </Card>
             <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
             <Card sx={{ padding: '20px', margin: '20px' }}>
-                <Typography variant="h5" gutterBottom>Задачи</Typography>
-                <Typography>С низким приоритетом: 300</Typography>
-                <Typography>С средним приоритетом: 200</Typography>
-                <Typography>С высоким приоритетом: 150</Typography>
-                <Typography>С критическим приоритетом: 100</Typography>
+                <Typography variant="h5" gutterBottom>Приоритеты задач</Typography>
+                {pieData.map((entry, index) => (
+                    <Typography>{entry.name}: {entry.value}</Typography>
+                ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>
                         <Pie
@@ -118,11 +117,10 @@ const MuiDashboard: React.FC = () => {
                 </Box>
             </Card>
             <Card sx={{ padding: '20px', margin: '20px' }}>
-                <Typography variant="h5" gutterBottom>Документы</Typography>
-                <Typography>На согласовании: 50</Typography>
-                <Typography>Отклонены: 150</Typography>
-                <Typography>Новые: 300</Typography>
-                <Typography>Проверены: 100</Typography>
+                <Typography variant="h5" gutterBottom>Статусы документов</Typography>
+                {pieData2.map((entry, index) => (
+                    <Typography>{entry.name}: {entry.value}</Typography>
+                ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>
                         <Pie
