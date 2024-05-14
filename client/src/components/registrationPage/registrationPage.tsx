@@ -1,24 +1,68 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
+import { Alert, AlertTitle, Collapse, Container, IconButton, Button, TextField, Box, Typography} from "@mui/material";
 import logo from "./logo_reg.png"
 import {Close} from '@mui/icons-material';
-import { IconButton} from '@mui/material';
-//TODO см loginpage
 import "./style.css";
-
+import {useState} from 'react';
+import axios, { AxiosResponse } from "axios";
 
 export default function Registration() {
-  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  
+  const backend = axios.create({baseURL: 'http://localhost:3010'})
+  
+  const [loginInput, setLoginInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordRepeatInput, setPasswordRepeatInput] = useState('');
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [regSuccess, setRegSuccess] = useState(false);
+
+  const handleClose = () => {
+    setError(false);
+    setRegSuccess(false);
   };
+
+  const checkPassword = () => {
+    if(passwordInput === passwordRepeatInput) {
+      console.log('password=OK')
+      return true
+    } else {
+      setErrorMessage('Пароли должны совпадать! Проверьте ещё раз.')
+      setError(true);
+      setTimeout(handleClose, 2000);
+      return false
+    }
+  }
+  const redirect = () => {
+    window.open("/main");
+  }
+
+  const registrationUser = () => {
+    if(checkPassword()) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:3010/users/create',
+        data: {
+          userlogin: loginInput,
+          userEmail: emailInput,
+          password: passwordInput,
+          firstname: 'defaultName',
+          surname: 'defaultSurname'
+        }
+      }).then((response: AxiosResponse) => {
+        if(response.data === 'This login already exists'){
+          setErrorMessage('Данный login уже занят!')
+          setError(true);
+          setTimeout(handleClose, 2000);
+        } else {
+          setRegSuccess(true);
+          setTimeout(handleClose, 2000);
+          setTimeout(redirect, 2000);
+        }
+
+      });
+    }
+  }
 
   return (
     <Container component="main" maxWidth="lg">
@@ -29,13 +73,15 @@ export default function Registration() {
         <Box height={50}
         sx={{
           backgroundColor: '#157298',
-          mb: 2
+          mb: 2,
+          display:'flex',
+          justifyContent: 'flex-end'
         }}>
           <IconButton
-            size="large"
-            edge="end"
-            color="default"
-            sx={{ ml: 135 }}
+            sx={{
+              color: 'white',
+              mr: '50'
+            }}
             onClick={() => window.open('/', '_self')}>
               <Close fontSize='large'/>
             </IconButton>
@@ -62,7 +108,6 @@ export default function Registration() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
                 <TextField
@@ -74,6 +119,7 @@ export default function Registration() {
                   name="login"
                   autoComplete="login"
                   autoFocus
+                  onChange={(newLogin) => setLoginInput(newLogin.target.value)}
                 />
                 <TextField
                   margin="normal"
@@ -83,6 +129,7 @@ export default function Registration() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={(newEmail) => setEmailInput(newEmail.target.value)}
                 />
                 <TextField
                   margin="normal"
@@ -92,6 +139,8 @@ export default function Registration() {
                   label="Пароль"
                   type="password"
                   id="password"
+                  onChange={(newPassword) => setPasswordInput(newPassword.target.value)}
+                  
                 />
                 <TextField
                   margin="normal"
@@ -101,17 +150,34 @@ export default function Registration() {
                   label="Повторите пароль"
                   type="password"
                   id="password_repeat"
+                  onChange={(newPasswordRepeat) => setPasswordRepeatInput(newPasswordRepeat.target.value)}
                 />
                 </Box>
+
+                <Collapse in={error}>
+                  <Alert severity="error"> 
+                      <AlertTitle>Error</AlertTitle> 
+                      {errorMessage}
+                  </Alert>
+                </Collapse>
+
+                <Collapse in={regSuccess}>
+                  <Alert severity="success"> 
+                      <AlertTitle>Success</AlertTitle> 
+                      Регистрация успешно завершена! Через 2 секунды Вы перейдёте на главную страницу
+                  </Alert>
+                </Collapse>
+                
                 <Button
                   type="submit"
                   variant="contained"
                   className="req-page-button"
+                  onClick={registrationUser}    
                   sx={{ 
                     mt: 3, 
                     mb: 2
                   }}
-                  href="/main"
+                  //href="/main"
                   style={{
                     backgroundColor: "#F5F5F5",
                     borderRadius: 15,
