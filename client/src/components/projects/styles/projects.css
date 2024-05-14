@@ -11,6 +11,7 @@
 
 #projects .mdl-data-table {
   width: 100%;
+  font-size: 12pt;
 }
 
 @media (max-width: 1024px) {
@@ -56,6 +57,10 @@
   -webkit-appearance: none; /* Убирает стандартные стили для WebKit/Blink */
   -moz-appearance: none; /* Убирает стандартные стили для Firefox */
   border: 1px solid #ccc; /* Граница для select */
+}
+
+#projects .mdl-layout-href {
+  color: darkgoldenrod;
 }
 
 /*# sourceMappingURL=projects.css.map */
