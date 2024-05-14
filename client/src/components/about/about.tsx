@@ -124,8 +124,8 @@ function About() {
           <Typography>
           3. Список объектов модели данных проекта в виде структуры (Папки и объекты).
           </Typography>
-          <Typography> 4. Карточка объекта с базовым набором полей </Typography>
-                <Accordion>
+          <Typography> 4. Карточка объекта с набором полей </Typography>
+                {/* <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel3-content"
@@ -140,7 +140,7 @@ function About() {
                 <Typography>- Инструмент для формирования задач в рамках проработки объекта модели данных. </Typography>
                 <Typography>- Поддержка типизации объектов. </Typography>
                 </AccordionDetails>
-                </Accordion>
+                </Accordion> */}
           <Typography>
           5. Вложение документов в карточку объекта, с возможностью редактирования (без онлайн редакторов, в много пользовательском режиме). Редактировании документа онлайн несколькими пользователями.
           </Typography>

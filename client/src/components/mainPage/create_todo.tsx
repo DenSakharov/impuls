@@ -6,6 +6,7 @@ export function CreateTodo({
   onClose,
 }: Pick<DialogProps, "open" | "onClose">) {
   const [value, setValue] = useState("");
+  
   return (
     <Dialog
       open={open}
