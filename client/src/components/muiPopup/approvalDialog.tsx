@@ -1,10 +1,5 @@
 import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Button , ButtonGroup, TextField, InputAdornment } from '@mui/material';
+import { Button , ButtonGroup, TextField, InputAdornment, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUser}: any){
@@ -35,12 +30,12 @@ export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUs
         },
         }}
         >  
-        <DialogTitle>Отправить на согласование</DialogTitle>
+        <DialogTitle sx={{width:{md:300, xs:200}}}>Отправить на согласование</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText sx={{width: {md:300, xs:200}}} >
             Кому отправить на согласования
           </DialogContentText>
-          <TextField sx={{height: 80, width: 300}} 
+          <TextField sx={{height: 80, width: {md:300, xs:200}}} 
           size='small' 
           value={searchQuery} 
           onChange={(event) => {setSearchQuery(event.target.value)}}
@@ -51,7 +46,7 @@ export default function ApprovalDialog ({formOpen, handleCloseForm, setApproveUs
           )}}>
             </TextField>
           <ButtonGroup sx={{display: 'flex', flexDirection: 'column'}} variant="text">
-            {searchUsers.map((user: string) => <Button sx={{width: 300}}  key={user} type='submit' onClick={() => setApproveUser(user)}>{user}</Button>)}
+            {searchUsers.slice(0,10).map((user: string) => <Button sx={{width: {md:300, xs:200}, border: 1}}  key={user} type='submit' onClick={() => setApproveUser(user)}>{user}</Button>)}
           </ButtonGroup>
         </DialogContent>
         <DialogActions>

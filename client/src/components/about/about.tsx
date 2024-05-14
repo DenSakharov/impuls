@@ -12,8 +12,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-import Paper, { PaperProps } from '@mui/material/Paper';
+//import Paper, { PaperProps } from '@mui/material/Paper';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -93,14 +92,11 @@ function About() {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header">
-          <Typography>Где мы черпали энергию и каких добились результатов </Typography>
+          <Typography>Ссылки на ресурсы проекта </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography gutterBottom>
-            Частично, идея для создания проекта, была позаимствована с проекта prolaborate5 - <a href='https://prolaborate.sparxsystems.com/prolaborate5' target="_blank" rel="noreferrer"> Смотреть ... </a>
-        </Typography>
         <Typography gutterBottom>
-            И немного из отраслевой  системы управления инженерными данными от Неолант "Неосинтез".<a href='https://www.neolant-srv.ru/product/neosyntez/' target="_blank" rel="noreferrer"> Смотреть ...</a>
+            GitHub проекта <a href='https://github.com/DenSakharov/impuls.git' target="_blank" rel="noreferrer"> Смотреть ... </a>
         </Typography>
         <Typography gutterBottom>
             ER диаграмма базы данных проекта <a href='https://www.figma.com/file/vewdlcyelMrWVBgxarOSlN/DB-diagram?type=whiteboard&node-id=0-1&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer"> Смотреть ... </a>

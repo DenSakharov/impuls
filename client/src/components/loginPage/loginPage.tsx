@@ -1,48 +1,53 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-//TODO идут импорты из material разных объектов, почему бы их не объединить в один? @RusDa256
-import { Container } from "@mui/material";
 import logo from "./logo.png"
+import React from 'react'
 import {Close} from '@mui/icons-material';
-import { IconButton} from '@mui/material';
-//TODO hover можно передать в sx props https://smartdevpreneur.com/4-mui-sx-hover-examples/ @RusDa256
+import {IconButton , Container, Button, TextField, FormControlLabel, 
+  Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { JWToken } from '../../Context'
 
 
 export default function SignInSide() {
-  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const [userlogin, setUser] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const token = React.useContext(JWToken)
+
+  function checkUser() {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3010/auth/login',
+      data: {
+        username: userlogin,
+        password: password
+      }
+    }).then((response: AxiosResponse) => {
+      token.setToken(response.data.accessToken)
+      window.open('/main', "_self")
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    })
+  }
 
   return (
+  
     <Container component="main" maxWidth="lg">
       <Box
         sx={{
           backgroundColor: 'white',
         }}>
-        <Box height={50}
-        sx={{
+        <Box height={50} sx={{
           backgroundColor: '#157298',
-          mb: 3
+          mb: 3,
+          display:'flex',
+          justifyContent: 'flex-end'
         }}>
           <IconButton
-            size="large"
-            edge="end"
-            color="default"
-            sx={{ ml: 135}}
+            sx={{
+              color: 'white',
+              mr: '50'
+            }}
             onClick={() => window.open('/main', '_self')}>
-              {/*TODO Фон темный иконка черная + уезжает за экран при уменьшение ширины вьюпорта*/ }
               <Close fontSize='large'/>
             </IconButton>
         </Box>
@@ -68,10 +73,11 @@ export default function SignInSide() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
                 <TextField
+                  value={userlogin}
+                  onChange={(e) => setUser(e.target.value)}
                   margin="normal"
                   required
                   fullWidth
@@ -79,9 +85,11 @@ export default function SignInSide() {
                   label="Email"
                   name="email"
                   autoComplete="email"
-                  autoFocus
+                  autoFocus                  
                 />
                 <TextField
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   margin="normal"
                   required
                   fullWidth
@@ -101,8 +109,9 @@ export default function SignInSide() {
                   variant="contained"
                   sx={{ 
                     mt: 3, 
-                    mb: 2}}
-                  href="/main"
+                    mb: 2
+                    }}
+                  //href="/main"
                   className="login-page-button"
                   style={{
                     backgroundColor: "#F5F5F5",
@@ -110,6 +119,7 @@ export default function SignInSide() {
                     fontSize: "18px",
                     color: '#157298',
                   }}
+                  onClick={checkUser}
                 >
                   Войти
                 </Button>
@@ -135,5 +145,6 @@ export default function SignInSide() {
         
       </Box>
     </Container>
+  
   );
 }

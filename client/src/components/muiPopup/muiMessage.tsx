@@ -1,5 +1,5 @@
 import React from 'react';
-import message from '../interfaces/messageProps';
+import message from '#/components/interfaces/messageProps';
 import { Avatar, Container, TextField} from '@mui/material';
 
 export default function MuiMessage(props: message) {
