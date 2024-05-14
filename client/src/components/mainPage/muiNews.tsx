@@ -20,7 +20,7 @@ const MuiNews: React.FC = () => {
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h4" gutterBottom>Новости</Typography>
+            <Typography variant="h5" gutterBottom>Новости</Typography>
             {newsData.map((item, index) => (
                 <Card key={index} variant="outlined" sx={{ mb: 2 }}>
                     <CardContent>

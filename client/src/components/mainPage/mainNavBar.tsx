@@ -1,9 +1,8 @@
 import  React  from 'react';
 import './../../globals.css';
-
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon, ArrowLeftStartOnRectangleIcon, StopCircleIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, BellIcon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import About from '../about/about';
 import { Dialog } from '@mui/material';
 import data from '../editPopup/data';
@@ -26,12 +25,12 @@ const user = {
 
 const navigation = [
   { name: 'Дашборд', href: '/main', current: true },
-  { name: 'Поиск', href: '/find', current: false },
+  { name: 'Поиск', href: '/searchpage', current: false },
   { name: 'Отчеты', href: '/report', current: false },
 ]
 const serviceNavigation = [
   { name: 'Проекты и задачи', href: '/projects' },
-  { name: 'История согласований', href: '/TableData' },
+  { name: 'История согласований', href: '/table' },
   { name: 'Импорт/Экспорт', href: '#' },
   { name: 'Текстовый редактор', href: '/documents' },
 ]
@@ -46,7 +45,7 @@ function classNames(...classes) {
 }
 
 function MainNavBar({changeState} : any) {
-    const [popupData, setPopupData] = React.useState(data.object);
+    // const [popupData, setPopupData] = React.useState(data.object);
     const [projectData, setProjectData] = React.useState(data.tree[0]);
     const [formOpen, setFormOpen] = React.useState(false);
 
