@@ -13,8 +13,8 @@ const MuiFavourites: React.FC = () => {
             <Box height={250}>
              <div className="flex flex-wrap items-center gap-8 ">
                 <Favorites />
-                <Knowbase />
-                <Todos />
+                {/* <Knowbase /> */}
+                {/* <Todos /> */}
              </div>
             </Box>
         </Card>

@@ -1,7 +1,7 @@
 import  React  from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
-import { Dialog} from '@mui/material';
+import { Dialog } from '@mui/material';
 import BreadcrumbNew from "./breadcrumb";
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
@@ -11,14 +11,12 @@ import SelectProjects from './selectProjects';
 import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
-import MuiFavourites from "./muiFavourites";
 import MuiStartpage from './muiStartpage';
+import MuiFavourites from './muiFavourites';
 
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
-
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
-  
+    const [projectData, setProjectData] = React.useState(data.tree[0]);  
     const [formOpen, setFormOpen] = React.useState(false);  
 
     const handleCloseForm = () => {
@@ -53,7 +51,6 @@ function Main({changeState} : any) {
         </header>
 
         <main className="m-1">
-
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
         <div className='container-app'>
@@ -62,11 +59,8 @@ function Main({changeState} : any) {
         <div className="max-w-64 hidden md:block">
             <SelectProjects changeState={setProjectData}/>        
             <MuiButTree/>
-   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
-            
+   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>            
             {/* поиск компонент */}
-
-
   	    </div>
 
         {/* <MainSidebar/> */}
@@ -108,7 +102,7 @@ function Main({changeState} : any) {
            {/* <Typography variant="h4" gutterBottom>Избранное</Typography> */}
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
-           <Container fixed>
+           <Container fixed>              
               <MuiFavourites ></MuiFavourites >
             </Container>
           </div>

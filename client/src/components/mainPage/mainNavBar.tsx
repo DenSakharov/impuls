@@ -30,7 +30,7 @@ const navigation = [
 ]
 const serviceNavigation = [
   { name: 'Проекты и задачи', href: '/projects' },
-  { name: 'История согласований', href: '/table' },
+  { name: 'История согласований', href: '/TableData' },
   { name: 'Импорт/Экспорт', href: '#' },
   { name: 'Текстовый редактор', href: '/documents' },
 ]

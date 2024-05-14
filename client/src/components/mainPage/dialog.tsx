@@ -1,10 +1,4 @@
-
-import {
-  ComponentPropsWithoutRef,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { ComponentPropsWithoutRef, useCallback, useEffect, useRef } from "react";
 
 export type DialogProps = Omit<
   ComponentPropsWithoutRef<"dialog">,
