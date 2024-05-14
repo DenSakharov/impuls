@@ -42,14 +42,22 @@ const options = {
     }
 };
 
-// Тип для элемента данных
+// Статусы задач
 interface TaskData {
     name: string; // Название приоритета
     value: number; // Количество задач
 }
 
+// Статусы документов
+interface DocumentData {
+    name: string; // Название статуса документа
+    value: number; // Количество документов
+}
+
 // Цвета для разных приоритетов
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+const COLORS2 = ['#0088AA', '#00569F', '#FFAA28', '#778042'];
 
 const MuiDashboard: React.FC = () => {
     // Данные для диаграммы
@@ -59,6 +67,15 @@ const MuiDashboard: React.FC = () => {
         { name: 'Высокий', value: 150 },
         { name: 'Критический', value: 100 }
     ];
+
+    // Данные для диаграммы
+    const pieData2: DocumentData[] = [
+        { name: 'На согласовании', value: 50 },
+        { name: 'Отклонены', value: 150 },
+        { name: 'Новые', value: 300 },
+        { name: 'Проверены', value: 100 }
+    ];
+
     return (
         <Box>
             <Card sx={{ padding: '20px', margin: '20px' }}>
@@ -72,6 +89,7 @@ const MuiDashboard: React.FC = () => {
                     <Bar data={data} options={options} />
                 </Box>
             </Card>
+            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Задачи</Typography>
                 <Typography>С низким приоритетом: 300</Typography>
@@ -99,6 +117,34 @@ const MuiDashboard: React.FC = () => {
                     </PieChart>
                 </Box>
             </Card>
+            <Card sx={{ padding: '20px', margin: '20px' }}>
+                <Typography variant="h5" gutterBottom>Документы</Typography>
+                <Typography>На согласовании: 50</Typography>
+                <Typography>Отклонены: 150</Typography>
+                <Typography>Новые: 300</Typography>
+                <Typography>Проверены: 100</Typography>
+                <Box height={400}>
+                    <PieChart width={400} height={400}>
+                        <Pie
+                            dataKey="value"
+                            isAnimationActive={false}
+                            data={pieData2}
+                            cx={200}
+                            cy={200}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            label
+                        >
+                            {pieData2.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />
+                            ))}
+                        </Pie>
+                        <RechartsTooltip />
+                        <RechartsLegend />
+                    </PieChart>
+                </Box>
+            </Card>
+            </Box>
         </Box>
     );
 };
