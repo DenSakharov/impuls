@@ -17,6 +17,7 @@ import { JWTMiddleware } from './middleware/jwt.middleware';
   providers: [AppService],
   exports: [],
 })
+
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
     consumer
