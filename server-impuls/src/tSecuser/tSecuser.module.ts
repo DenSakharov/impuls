@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TSecuserController } from '#/tSecuser/t-secuser.controller';
+import { TSecuserController } from '#/tSecuser/tSecuser.controller';
 import { tSecuserService } from '#/tSecuser/tSecuser.service';
 import { tSecUserProviders } from '#/tSecuser/tSecuser.provider';
 
