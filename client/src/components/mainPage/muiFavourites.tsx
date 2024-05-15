@@ -10,11 +10,11 @@ const MuiFavourites: React.FC = () => {
         <Card sx={{ padding: '20px', margin: '20px' }}>
             <Typography variant="h5" gutterBottom>Избранное</Typography>
             {/* <Typography>&nbsp;</Typography>             */}
-            <Box height={250}>
+            <Box>
              <div className="flex flex-wrap items-center gap-8 ">
                 <Favorites />
-                {/* <Knowbase /> */}
-                {/* <Todos /> */}
+                <Knowbase />
+                <Todos />
              </div>
             </Box>
         </Card>
