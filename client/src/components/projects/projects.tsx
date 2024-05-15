@@ -15,8 +15,41 @@ function Projects() {
 
     const containerRef = useRef<HTMLDivElement>(null);
 
+    // Функция для обработки клика внутри контейнера
     useEffect(() => {
-        // Функция для обработки клика внутри контейнера
+
+        // on window resize => collapse tables
+        const handleResize = () => {
+            const tables = document.querySelectorAll('.mdl-data-table');
+            tables.forEach(table => {
+
+                const cellsHdrs = table.querySelectorAll('th');
+                const cells = table.querySelectorAll('th, td');
+                const cellsCnt = cellsHdrs.length;
+
+                if (window.innerWidth < 1000) {
+                    // Скрываем все колонки, кроме первой
+                    cells.forEach((cell, index) => {
+                        // Приведение к типу HTMLElement для доступа к свойству style
+                        const htmlCell = cell as HTMLElement;
+                        htmlCell.style.display = (index % cellsCnt && (index + 1) % cellsCnt ? 'none' : '');
+                    });
+                } else {
+                    // Показываем все колонки, если ширина больше
+                    cells.forEach(cell => {
+                        const htmlCell = cell as HTMLElement;
+                        htmlCell.style.display = '';
+                    });
+                }
+            });
+        };
+
+        // Вызов функции при монтировании компонента
+        handleResize();
+
+        // Добавление слушателя изменения размера окна
+        window.addEventListener('resize', handleResize);
+
         const handleEvent = (event: Event) => {
             const target = event.target as HTMLElement;
 
@@ -41,6 +74,7 @@ function Projects() {
         return () => {
             container?.removeEventListener('change', handleEvent);
             container?.removeEventListener('click', handleEvent);
+            window.removeEventListener('resize', handleResize); // Очистка слушателя при размонтировании компонента
         };
     }, []);
 
