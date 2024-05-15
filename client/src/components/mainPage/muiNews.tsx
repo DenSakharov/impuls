@@ -37,6 +37,8 @@ const MuiNews: React.FC = () => {
     const pageNumbers = Array.from({ length: numPages }, (_, i) => i + 1);
 
     return (
+        <Card sx={{ padding: '20px', margin: '20px' }}>
+      
         <Container maxWidth="md">
             <Typography variant="h5" gutterBottom>Новости</Typography>
             {currentNews.map((item, index) => (
@@ -60,6 +62,8 @@ const MuiNews: React.FC = () => {
             </Box>
             {showModal && <MuiNewsModal onClose={() => setShowModal(false)} />}
         </Container>
+      
+    </Card>
     );
 };
 
