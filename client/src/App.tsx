@@ -26,7 +26,7 @@ function App() {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/projects') {
     navbarComponent = <MainNavBar/>
-  } else if (currentPath === '/table') {
+  } else if (currentPath === '/TableData') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/report') {
     navbarComponent = <MainNavBar/>
