@@ -29,7 +29,7 @@ import MuiPopup from '../muiPopup/muiPopup';
 import SelectProjects from './selectProjects';
 // import MainNavBar from './mainNavBar';
 import MainFooter from './mainFooter';
-import MainSidebar from "./sidebar";
+import MainSidebar from "./muiSidebar";
 import Report from "./report";
 
 // const ImpulseButton = styled(Button)({
