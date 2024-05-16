@@ -7,12 +7,11 @@ import About from '../about/about';
 import { Dialog } from '@mui/material';
 import data from '../editPopup/data';
 import ProjectDialog from './muiDialog';
-// import SelectProjects from './selectProjects';
 import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
+import BreadcrumbNew from "./breadcrumb";
 
 // man https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 
@@ -315,6 +314,25 @@ function MainNavBar({changeState} : any) {
         </Disclosure>
         {/* END Mobile menu button */}
       </div>
+      
+      {/* header начало */}
+      <header className="bg-white shadow">
+        <div className="h-[4dvh] bg-gray-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div className="flex h-10 items-center justify-between">
+              <div className="flex items-center">
+               <div className="flex-shrink-0">
+                 {/* структура вложенности объектов модели данных */}
+                  <BreadcrumbNew />
+               </div>
+              </div>
+             </div>
+            </div>
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            {/* Your content */}
+          </div>
+        </div>
+        </header>
     </>
   );  
 }
