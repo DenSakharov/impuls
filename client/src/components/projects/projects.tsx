@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
 import "./styles/materialize.css";
@@ -6,6 +6,7 @@ import "./styles/material.indigo-pink.css";
 import './styles/projects.css';
 import Header from './header';
 import data from './data'
+import TaskModal from './taskModal';
 
 function Projects() {
 
@@ -78,6 +79,14 @@ function Projects() {
         };
     }, []);
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [currentTask, setCurrentTask] = useState<any>(null);
+
+    const openModal = (task?: any) => {
+        setCurrentTask(task);
+        setModalOpen(true);
+    };
+
     return(
         /*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице client\src\components\mainPage\muiMenu.tsx*/
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef} id="projects">
@@ -117,16 +126,23 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>
+                                        <i className="material-icons">edit</i>
+                                    </button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>
+                                        <i className="material-icons">delete</i>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
-                        Добавить документ
+                        <i className="material-icons">add</i>
                     </button>
+
+                    <hr />
+
                     <h4>Задачи</h4>
                     <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                         <tbody>
@@ -144,16 +160,23 @@ function Projects() {
                                 <td>{record.executives}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updTaskBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                            id={"updTaskBtn_" + record.id}
+                                            onClick={() => openModal({ name: record.name, executor: '1', priority: record.priority })}>
+                                        <i className="material-icons">edit</i>
+                                    </button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>
+                                        <i className="material-icons">delete</i>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn">
-                        Добавить задачу
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn" onClick={() => openModal()}>
+                        <i className="material-icons">add</i>
                     </button>
+                    <TaskModal isOpen={modalOpen} onClose={() => setModalOpen(false)} task={currentTask} />
                 </div>
             </main>
         </div>
