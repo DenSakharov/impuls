@@ -13,6 +13,12 @@ import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import MuiStartpage from './muiStartpage';
 import MuiFavourites from './muiFavourites';
+import { Sidebar } from 'flowbite-react';
+import { IconButton, Drawer } from '@mui/material';
+
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
+import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
@@ -26,51 +32,65 @@ function Main({changeState} : any) {
     setFormOpen(true);
     }
 
+    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+    const openDrawer = () => setIsDrawerOpen(true);
+    const closeDrawer = () => setIsDrawerOpen(false);
+
     return (
       <>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <div className="min-h-full">
-        {/* <MainNavBar /> */}
-
-        {/* <header className="bg-white shadow">
-        <div className="h-[4dvh] bg-gray-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-             <div className="flex h-10 items-center justify-between">
-              <div className="flex items-center">
-               <div className="flex-shrink-0"> */}
-                  {/* структура вложенности объектов модели данных */}
-                  {/* <BreadcrumbNew />
-               </div>
-              </div>
-             </div>
-            </div>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"> */}
-            {/* Your content */}
-          {/* </div>
-        </div>
-        </header> */}
 
         <main className="m-1">
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
         <div className='container-app'>
 
+        <Disclosure as="nav" >
+          {({ open }) => ( 
+            <>
+              {/* <div className="-mr-2 flex md:hidden"> */}
+                          <Disclosure.Button onClick={openDrawer} className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <span className="absolute -inset-0.5" />
+                                <span className="sr-only">Open aside menu</span>
+                                {isDrawerOpen ? (
+                                  <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true" />
+                                ) : (
+                                  <MultipleStopIcon className="block h-6 w-6" aria-hidden="true" />
+                                )}
+                          </Disclosure.Button>
+              {/* </div>             */}
+            </>                         
+           )}
+        </Disclosure>
+
+        {/* <IconButton onClick={openDrawer}>
+        {isDrawerOpen ? (
+          <XMarkIcon className="h-6 w-6 stroke-2" />
+        ) : (
+          <Bars3Icon className="h-6 w-6 stroke-2" />
+        )}
+        </IconButton> */}
+
+        
         {/* Сайдбар с деревом объектов */}
         <div className="max-w-64 hidden md:block">
+        <Drawer open={isDrawerOpen} onClose={closeDrawer}>
+
             <SelectProjects changeState={setProjectData}/>        
             <MuiButTree/>
-   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>            
-            {/* поиск компонент */}
+   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>                   
+        </ Drawer>
+            {/* Открытие карточки объекта  */}
+            <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+              <MuiPopup {...popupData}/>
+            </Dialog>
+        
   	    </div>
 
-        {/* <MainSidebar/> */}
-        <div className="content">       
-        
-        {/* Открытие карточки объекта  */}
-        <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-          <MuiPopup {...popupData}/>
-        </Dialog>
 
+{/* содержимое страницы Дашборд */}
+        <div className="content">    
           {/* Заголовок для дашборда */}
           <div id="mainHeader">
 			      <div className="content-text-block">
@@ -111,9 +131,9 @@ function Main({changeState} : any) {
         </div>  
         </main>
 
+
         {/* footer страницы */}
         <MainFooter/>
-
       </div>
     </>
 

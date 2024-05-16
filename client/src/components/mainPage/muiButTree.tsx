@@ -6,7 +6,7 @@ import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
-
+import MuiSidebar from './muiSidebar';
 
 function MuiButTree() {
     // const classes = useStyles()
@@ -28,7 +28,7 @@ function MuiButTree() {
             <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
             <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
-            <IconButton aria-label="settings" color='default' size="small">                                     <Settings fontSize="small"/></IconButton>
+            {/* <IconButton aria-label="settings" color='default' size="small">                                     <Settings fontSize="small"/></IconButton> */}
 
             {/* <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddDirectory}><CreateNewFolder fontSize="small"/></IconButton>
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddObject}><Add fontSize="small"/></IconButton>
@@ -39,7 +39,9 @@ function MuiButTree() {
 
             <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
             <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+            <MuiSidebar />
         </Stack>
+        
     );
   }
 
