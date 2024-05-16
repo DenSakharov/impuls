@@ -20,6 +20,10 @@ export default function BreadcrumbNew() {
       BreadcrumbName = 'Расширенный поиск'
     } else if (currentPath === '/documents') {
       BreadcrumbName = 'Текстовый редактор'
+    } else if (currentPath === '/integration') {
+      BreadcrumbName = 'Импорт и экспорт данных'
+    } else if (currentPath === '/admin') {
+      BreadcrumbName = 'Администрирование'
     }
     else {
       BreadcrumbName = 'Дашборд'
