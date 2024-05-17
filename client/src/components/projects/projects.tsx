@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
 import "./styles/materialize.css";
@@ -6,6 +6,9 @@ import "./styles/material.indigo-pink.css";
 import './styles/projects.css';
 import Header from './header';
 import data from './data'
+import TaskModal from './taskModal';
+import {Dialog} from "@mui/material";
+import MuiPopup from '../muiPopup/muiPopup';
 
 function Projects() {
 
@@ -14,6 +17,16 @@ function Projects() {
     const tasks = data.tasks
 
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Documents popup
+    const [popupData, setPopupData] = React.useState(data.object);
+    const [formOpen, setFormOpen] = React.useState(false);
+    const handleCloseForm = () => {
+        setFormOpen(false);
+    }
+    const handleOpenForm = () => {
+        setFormOpen(true);
+    }
 
     // Функция для обработки клика внутри контейнера
     useEffect(() => {
@@ -55,7 +68,12 @@ function Projects() {
 
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
-                alert(`Клик кнопки: ${target.id}`);
+                if(target.id == "addTaskBtn" || target.id.startsWith("updTaskBtn_", 0) ||
+                    target.id=="addDocumentBtn" || target.id.startsWith("updDocumentBtn_", 0)) {
+                    openModal();
+                } else {
+                    alert(`Клик кнопки: ${target.id}`);
+                }
             }
 
             // Обработка изменений в выпадающих списках
@@ -77,6 +95,14 @@ function Projects() {
             window.removeEventListener('resize', handleResize); // Очистка слушателя при размонтировании компонента
         };
     }, []);
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [currentTask, setCurrentTask] = useState<any>(null);
+
+    const openModal = (task?: any) => {
+        setCurrentTask(task);
+        setModalOpen(true);
+    };
 
     return(
         /*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице client\src\components\mainPage\muiMenu.tsx*/
@@ -117,16 +143,27 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id} onClick={() => handleOpenForm()}>
+                                        <i className="material-icons">edit</i>
+                                    </button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>
+                                        <i className="material-icons">delete</i>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
-                        Добавить документ
+                        <i className="material-icons" onClick={() => handleOpenForm()}>add</i>
                     </button>
+                    {/* Открытие карточки документа  */}
+                    <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                        <MuiPopup {...popupData}/>
+                    </Dialog>
+
+                    <hr />
+
                     <h4>Задачи</h4>
                     <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                         <tbody>
@@ -144,16 +181,23 @@ function Projects() {
                                 <td>{record.executives}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updTaskBtn_" + record.id}>Ред.</button>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>Удал.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                            id={"updTaskBtn_" + record.id}
+                                            onClick={() => openModal({ name: record.name, executor: '1', priority: record.priority })}>
+                                        <i className="material-icons">edit</i>
+                                    </button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>
+                                        <i className="material-icons">delete</i>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn">
-                        Добавить задачу
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn" onClick={() => openModal()}>
+                        <i className="material-icons">add</i>
                     </button>
+                    <TaskModal isOpen={modalOpen} onClose={() => setModalOpen(false)} task={currentTask} />
                 </div>
             </main>
         </div>
