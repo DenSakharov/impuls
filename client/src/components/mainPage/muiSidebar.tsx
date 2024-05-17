@@ -55,7 +55,7 @@ export function MuiSidebar() {
         )}
       </IconButton>
 
-      <Drawer open={isDrawerOpen} onClose={closeDrawer}>
+      <Drawer anchor={'right'} open={isDrawerOpen} onClose={closeDrawer}>
         <Card sx={{ maxWidth: 300 }}>
           <div className="mb-2 flex items-center gap-4 p-4">
             <img
