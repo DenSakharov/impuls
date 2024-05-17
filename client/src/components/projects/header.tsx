@@ -1,6 +1,8 @@
 import React from 'react';
 
 function Header() {
+    return(<header></header>)
+/*
     return(
         <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
@@ -10,6 +12,7 @@ function Header() {
             </div>
         </header>
     )
+ */
 }
 
 export default Header;
