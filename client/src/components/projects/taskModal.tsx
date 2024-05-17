@@ -43,15 +43,19 @@ const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
                 />
                 <TextField
                     fullWidth
+                    label="Дата начала"
                     type="date"
                     defaultValue={task?.startDate}
                     margin="normal"
+                    variant="filled"
                 />
                 <TextField
                     fullWidth
+                    label="Дата окончания"
                     type="date"
                     defaultValue={task?.endDate}
                     margin="normal"
+                    variant="filled"
                 />
                 <FormControl fullWidth margin="normal">
                     <InputLabel>Исполнители</InputLabel>
