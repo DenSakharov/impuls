@@ -19,6 +19,7 @@ import { IconButton, Drawer } from '@mui/material';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
+import { styled, useTheme } from '@mui/material/styles';
 
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
@@ -36,6 +37,16 @@ function Main({changeState} : any) {
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
 
+    const DrawerHeader = styled('div')(({ theme }) => ({
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    }));
+
+
     return (
       <>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -44,53 +55,76 @@ function Main({changeState} : any) {
         <main className="m-1">
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
-        <div className='container-app'>
+        <div className='container-app'>            
 
-        <Disclosure as="nav" >
-          {({ open }) => ( 
+        <Disclosure as="nav" >          
             <>
-              {/* <div className="-mr-2 flex md:hidden"> */}
-                          <Disclosure.Button onClick={openDrawer} className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                <span className="absolute -inset-0.5" />
-                                <span className="sr-only">Open aside menu</span>
-                                {isDrawerOpen ? (
-                                  <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true" />
-                                ) : (
-                                  <MultipleStopIcon className="block h-6 w-6" aria-hidden="true" />
-                                )}
-                          </Disclosure.Button>
-              {/* </div>             */}
-            </>                         
-           )}
+              {/* Start */}
+              <div className="hidden md:block">
+                      {/* <div className="ml-10 flex items-baseline space-x-4"> */}
+                      <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                        {/* FullPage панель !!!  */}
+                        {/* Сайдбар с деревом объектов */}
+                        {/* <div className="max-w-64 hidden md:block"> */}
+                          <SelectProjects changeState={setProjectData}/>        
+                          <MuiButTree/>
+                          <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>                   
+
+                        {/* Открытие карточки объекта 
+                        <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                          <MuiPopup {...popupData}/>
+                        </Dialog> */}
+                       </div>
+                      {/* </div>  */}
+              </div>                                  
+              {/* End */}  
+
+              <div className="-mr-2 flex md:hidden">
+                <Disclosure.Button onClick={openDrawer} className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <span className="absolute -inset-0.5" />
+                    <span className="sr-only">Open aside menu</span>
+                    {isDrawerOpen ? (
+                        <XMarkIcon className="block h-6 w-6 stroke-2" aria-hidden="true" />
+                        ) : (
+                        <Bars3Icon className="block h-6 w-6 stroke-2" aria-hidden="true" />
+                        )}
+                </Disclosure.Button>
+              </div> 
+ 
+
+              
+              {/* Start */}
+              <Disclosure.Panel className="md:hidden">
+                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">                  
+            {/* Mobile панель ! */}
+            {/* Сайдбар с деревом объектов */}
+            {/* <div className="max-w-64 hidden md:block"> */}
+              <SelectProjects changeState={setProjectData}/>        
+              <MuiButTree/>
+              <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>                   
+
+            {/* Открытие карточки объекта 
+            <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+              <MuiPopup {...popupData}/>
+            </Dialog> */}
+
+            </div>
+
+                {/* </div>  */}
+                
+              </Disclosure.Panel>
+              {/* End */} 
+              </>   
         </Disclosure>
 
-        {/* <IconButton onClick={openDrawer}>
-        {isDrawerOpen ? (
-          <XMarkIcon className="h-6 w-6 stroke-2" />
-        ) : (
-          <Bars3Icon className="h-6 w-6 stroke-2" />
-        )}
-        </IconButton> */}
-
-        
-        {/* Сайдбар с деревом объектов */}
-        <div className="max-w-64 hidden md:block">
-        <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-
-            <SelectProjects changeState={setProjectData}/>        
-            <MuiButTree/>
-   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>                   
-        </ Drawer>
             {/* Открытие карточки объекта  */}
             <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
               <MuiPopup {...popupData}/>
             </Dialog>
-        
-  	    </div>
-
 
 {/* содержимое страницы Дашборд */}
-        <div className="content">    
+        <div className="content">   
+
           {/* Заголовок для дашборда */}
           <div id="mainHeader">
 			      <div className="content-text-block">
@@ -108,14 +142,14 @@ function Main({changeState} : any) {
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              <MuiNews></MuiNews>
+              {/* <MuiNews></MuiNews> */}
             </Container>
            </div>
 
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              <MuiDashboard></MuiDashboard>
+              {/* <MuiDashboard></MuiDashboard> */}
             </Container>
            </div>
 
@@ -123,7 +157,8 @@ function Main({changeState} : any) {
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
            <Container fixed>              
-              <MuiFavourites ></MuiFavourites >
+              <MuiFavourites ></MuiFavourites > 
+               {/* TODO переделать, что было одинаково c SatrtPage */}
             </Container>
           </div>
           </div>
