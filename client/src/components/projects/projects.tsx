@@ -7,6 +7,8 @@ import './styles/projects.css';
 import Header from './header';
 import data from './data'
 import TaskModal from './taskModal';
+import {Dialog} from "@mui/material";
+import MuiPopup from '../muiPopup/muiPopup';
 
 function Projects() {
 
@@ -15,6 +17,16 @@ function Projects() {
     const tasks = data.tasks
 
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Documents popup
+    const [popupData, setPopupData] = React.useState(data.object);
+    const [formOpen, setFormOpen] = React.useState(false);
+    const handleCloseForm = () => {
+        setFormOpen(false);
+    }
+    const handleOpenForm = () => {
+        setFormOpen(true);
+    }
 
     // Функция для обработки клика внутри контейнера
     useEffect(() => {
@@ -56,7 +68,8 @@ function Projects() {
 
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
-                if(target.id == "addTaskBtn" || target.id.startsWith("updDocumentBtn_", 0)) {
+                if(target.id == "addTaskBtn" || target.id.startsWith("updTaskBtn_", 0) ||
+                    target.id=="addDocumentBtn" || target.id.startsWith("updDocumentBtn_", 0)) {
                     openModal();
                 } else {
                     alert(`Клик кнопки: ${target.id}`);
@@ -130,7 +143,7 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id} onClick={() => handleOpenForm()}>
                                         <i className="material-icons">edit</i>
                                     </button>
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>
@@ -142,8 +155,12 @@ function Projects() {
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
-                        <i className="material-icons">add</i>
+                        <i className="material-icons" onClick={() => handleOpenForm()}>add</i>
                     </button>
+                    {/* Открытие карточки документа  */}
+                    <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                        <MuiPopup {...popupData}/>
+                    </Dialog>
 
                     <hr />
 
