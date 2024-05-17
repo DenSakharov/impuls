@@ -56,7 +56,7 @@ function Projects() {
 
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
-                if(target.id == "addTaskBtn") {
+                if(target.id == "addTaskBtn" || target.id.startsWith("updDocumentBtn_", 0)) {
                     openModal();
                 } else {
                     alert(`Клик кнопки: ${target.id}`);
