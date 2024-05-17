@@ -56,7 +56,11 @@ function Projects() {
 
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
-                alert(`Клик кнопки: ${target.id}`);
+                if(target.id == "addTaskBtn") {
+                    openModal();
+                } else {
+                    alert(`Клик кнопки: ${target.id}`);
+                }
             }
 
             // Обработка изменений в выпадающих списках
