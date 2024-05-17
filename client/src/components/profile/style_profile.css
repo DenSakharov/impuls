@@ -23,8 +23,11 @@
     margin-left: 15px;
   }
 }
-#header-profile a {
+#profile-bBack {
+  display: inline-block;
   text-decoration: none;
+  position: relative;
+  top: 30%;
 }
 #header-profile img {
   width: 25px;
@@ -50,6 +53,8 @@
   margin-left: 20px;
   position: relative;
   top: 30%;
+  font-size: 25px;
+  font-weight: 700;
 }
 @media (max-width: 600px) {
   #header-profile h1 {
