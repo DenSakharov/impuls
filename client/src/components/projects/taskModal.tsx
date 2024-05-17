@@ -1,47 +1,77 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Modal, Box, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 interface TaskModalProps {
     isOpen: boolean;
     onClose: () => void;
-    task?: any; // Тип данных задачи можно определить подробнее в зависимости от вашей модели данных
+    task?: any;
 }
 
-const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
-    if (!isOpen) return null;
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
-    // Функция для обработки отправки формы
+const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Здесь можно добавить логику обработки данных формы
         console.log('Form submitted');
-        onClose(); // Закрыть модальное окно после отправки
+        onClose();
     };
 
     return (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-            <div className="modal-content" style={{ backgroundColor: 'white', padding: 20, borderRadius: 5, maxWidth: 500, margin: '40px auto' }}>
-                <form onSubmit={handleSubmit}>
-                    <h4>Задача</h4>
-                    <label>Название:</label>
-                    <input type="text" defaultValue={task?.name} />
-                    <label>Сроки выполнения:</label>
-                    <input type="date" defaultValue={task?.startDate} /> - <input type="date" defaultValue={task?.endDate} />
-                    <label>Исполнители:</label>
-                    <select defaultValue={task?.executor}>
-                        <option value="1">Иванов И.В.</option>
-                        <option value="2">Петров П.П.</option>
-                    </select>
-                    <label>Приоритет:</label>
-                    <select defaultValue={task?.priority}>
-                        <option value="high">Высокий</option>
-                        <option value="medium">Средний</option>
-                        <option value="low">Низкий</option>
-                    </select>
-                    <button type="submit">Сохранить</button>
-                    <button type="button" onClick={onClose}>Отмена</button>
-                </form>
-            </div>
-        </div>
+        <Modal
+            open={isOpen}
+            onClose={onClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={style} component="form" onSubmit={handleSubmit}>
+                <h4>Задача</h4>
+                <TextField
+                    fullWidth
+                    label="Название"
+                    defaultValue={task?.name}
+                    margin="normal"
+                />
+                <TextField
+                    fullWidth
+                    type="date"
+                    defaultValue={task?.startDate}
+                    margin="normal"
+                />
+                <TextField
+                    fullWidth
+                    type="date"
+                    defaultValue={task?.endDate}
+                    margin="normal"
+                />
+                <FormControl fullWidth margin="normal">
+                    <InputLabel>Исполнители</InputLabel>
+                    <Select defaultValue={task?.executor} label="Исполнители">
+                        <MenuItem value="1">Иванов И.В.</MenuItem>
+                        <MenuItem value="2">Петров П.П.</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth margin="normal">
+                    <InputLabel>Приоритет</InputLabel>
+                    <Select defaultValue={task?.priority} label="Приоритет">
+                        <MenuItem value="high">Высокий</MenuItem>
+                        <MenuItem value="medium">Средний</MenuItem>
+                        <MenuItem value="low">Низкий</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button type="submit" color="primary" variant="contained">Сохранить</Button>
+                <Button type="button" color="secondary" variant="contained" onClick={onClose} style={{ marginLeft: 8 }}>Отмена</Button>
+            </Box>
+        </Modal>
     );
 };
 
