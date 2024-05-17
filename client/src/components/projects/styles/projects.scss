@@ -24,6 +24,9 @@
 #projects .mdl-button {
   margin-top: 15px;
   margin-left: 10px;
+  min-width: 35px !important;
+  width: 35px !important;
+  padding-left: 5px !important;
 }
 
 /* material select */
