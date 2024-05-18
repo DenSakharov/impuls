@@ -7,7 +7,8 @@ services:
     expose:
       - '3000'
     depends_on:
-      - back
+      - back-mongo
+      - back-nestjs
     develop:
       watch:
         - action: sync
@@ -19,8 +20,8 @@ services:
       - integration
     tty: true
     stdin_open: true
-  back:
-    container_name: backend
+  back-nestjs:
+    container_name: backend-nestjs
     build: ./server-impuls
     ports:
       - "3010:3010"
@@ -35,6 +36,20 @@ services:
           path: package.json
     networks:
       - integration
+  back-mongo:
+    container_name: backend-mongo
+    build: ./mongo
+    ports:
+      - "3001:3001"
+    expose:
+      - '3001'
+    develop:
+      watch:
+        - action: sync  
+          path: ./mongo
+          target: ./mongo            
+    networks:
+      - integration      
 networks:
   integration:
     driver: bridge
