@@ -7,7 +7,7 @@ import {DefaultEventsMap} from "@socket.io/component-emitter"
 import { useParams } from 'react-router-dom';
 import saver from './FileSaver';
 import './styles/text_editor.css'
-import mammoth from 'mammoth'
+//import mammoth from 'mammoth'
    
   
 const SAVE_INTERVAL_MS = 2000
