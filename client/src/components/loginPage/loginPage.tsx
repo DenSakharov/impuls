@@ -104,7 +104,7 @@ export default function SignInSide() {
                   label="Запомнить меня"
                 />
                 <Button
-                  type="submit"
+                  
                   fullWidth
                   variant="contained"
                   sx={{ 
