@@ -47,7 +47,7 @@ services:
       watch:
         - action: sync  
           path: ./mongo
-          target: ./mongo            
+          target: ./mongo
     networks:
       - integration      
 networks:
