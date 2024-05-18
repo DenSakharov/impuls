@@ -77,6 +77,7 @@ export default function SignInSide() {
               >
                 <TextField
                   value={userlogin}
+                  onKeyDown={(e) => e.key === "Enter" && checkUser()}
                   onChange={(e) => setUser(e.target.value)}
                   margin="normal"
                   required
@@ -89,6 +90,7 @@ export default function SignInSide() {
                 />
                 <TextField
                   value={password}
+                  onKeyDown={(e) => e.key === "Enter" && checkUser()}
                   onChange={(e) => setPassword(e.target.value)}
                   margin="normal"
                   required
