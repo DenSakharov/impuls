@@ -95,25 +95,6 @@ console.log(oldDelta)
         }
     }, [socket, quill])
 
-
-/*
-    useEffect(() => {
-
-        if (socket == null || quill == null) return
-
-        const handler = (delta:Object, oldDelta:Object, source:string) => {
-            if (source !== 'user') return
-            socket?.emit("send-changes", delta)
-        }
-        quill.on('text-change', handler)
-
-        return () => {
-            quill.off('text-change', handler)
-        }
-    }, [socket, quill])
-  */
-
-
     const wrapperRef = useCallback((wrapper:HTMLDivElement)=> {
         if (wrapper==null) return
         wrapper.innerHTML = ""
@@ -131,23 +112,11 @@ console.log(oldDelta)
            );
            posButton.setAttribute('id', 'butSaveLoad');
         let customButton = document.createElement('button');
-        customButton.innerHTML = 'Сохранить';
+       // customButton.innerHTML = 'Сохранить';
         customButton.addEventListener('click', function() {
        
         saver(q);
             });
-
-								   
-						
-						 
-							 
-					 
-		  
-										
-											
-
-		
-
             customButton.classList.add(
                 'ql-align', 
                 'ql-picker', 
@@ -155,20 +124,10 @@ console.log(oldDelta)
                 'ql-save'
             );
    
-												   
-															
-								 
-										
+        //customButton.style.width='75px';
+       // customButton.style.margin='0px 5px';
 		
-        customButton.style.width='75px';
-        customButton.style.margin='0px 5px';
-		
-		       
-										  
-
             posButton.appendChild(customButton);
-		   
-
             posButton1.classList.add(
                 'ql-formats'
                );
@@ -178,7 +137,7 @@ console.log(oldDelta)
             customButton1.id="customButton1"
             
             customButton1.innerHTML = 'Загрузить';
-            customButton1.style.width='110px';
+            customButton1.style.width='28px';
 
 let mammoth = require("mammoth");
             
@@ -229,7 +188,6 @@ if (fileExtention=="doc" || fileExtention=="docx"){
     reader.readAsArrayBuffer(file);
 }
   });
-
                 customButton1.classList.add(
                     'ql-align', 
                     'ql-picker', 
