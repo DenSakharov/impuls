@@ -41,7 +41,7 @@ export default function Registration() {
     if(checkPassword()) {
       axios({
         method: 'post',
-        url: 'http://localhost:3010/users/create',
+        url: `http://${window.location.hostname.toString()}:3010/users/create`,
         data: {
           userlogin: loginInput,
           userEmail: emailInput,
