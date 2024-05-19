@@ -16,7 +16,7 @@ export default function SignInSide() {
   function checkUser() {
     axios({
       method: 'post',
-      url: 'http://localhost:3010/auth/login',
+      url: `http://${window.location.hostname.toString()}:3010/auth/login`,
       data: {
         username: userlogin,
         password: password

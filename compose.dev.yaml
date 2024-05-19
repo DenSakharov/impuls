@@ -1,0 +1,61 @@
+services:
+  front:
+    container_name: frontend
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./client
+    ports:
+      - "3000:3000"
+    expose:
+      - '3000'
+    depends_on:
+      - back-mongo
+      - back-nestjs
+    develop:
+      watch:
+        - action: sync
+          path: ./client/src
+          target: ./client/src
+        - action: rebuild
+          path: package.json
+    networks:
+      - integration
+    tty: true
+    stdin_open: true
+  back-nestjs:
+    container_name: backend-nestjs
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./server-impuls        
+    ports:
+      - "3010:3010"
+    expose:
+      - '3010'
+    develop:
+      watch:
+        - action: sync  
+          path: ./server-impuls/src
+          target: ./server-impuls/src
+        - action: rebuild
+          path: package.json
+    networks:
+      - integration
+  back-mongo:
+    container_name: backend-mongo
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mongo   
+    ports:
+      - "3001:3001"
+    expose:
+      - '3001'
+    develop:
+      watch:
+        - action: sync  
+          path: ./mongo
+          target: ./mongo
+    networks:
+      - integration      
+networks:
+  integration:
+    driver: bridge

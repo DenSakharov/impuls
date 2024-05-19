@@ -1,0 +1,13 @@
+# build environment
+FROM node:lts-slim as build
+WORKDIR /server-impuls
+COPY . .
+RUN npm install
+RUN npm run build
+
+# production environment
+FROM node:lts-slim
+WORKDIR /server-impuls
+COPY --from=build /server-impuls ./
+EXPOSE 3010
+CMD ["npm", "run", "start:prod"]
