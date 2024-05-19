@@ -1,7 +1,9 @@
 services:
   front:
     container_name: frontend
-    build: ./client
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./client
     ports:
       - "3000:3000"
     expose:
@@ -22,7 +24,9 @@ services:
     stdin_open: true
   back-nestjs:
     container_name: backend-nestjs
-    build: ./server-impuls
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./server-impuls        
     ports:
       - "3010:3010"
     expose:
@@ -38,7 +42,9 @@ services:
       - integration
   back-mongo:
     container_name: backend-mongo
-    build: ./mongo
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mongo   
     ports:
       - "3001:3001"
     expose:
