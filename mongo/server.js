@@ -11,11 +11,13 @@ mongoose.connect(process.env.DB_Mongo)
 
 const cors=require('cors');
 
+console.log(`turning on cors on ${process.env.HOST}`)
 const io = require('socket.io')(3001, {
     cors:{
-        origin: 'http://localhost:3000',
+        origin: [`${process.env.HOST}`,"http://localhost:3000"],
         methods: ['GET', 'POST']
     },
+
 })
 
 const defaultValue = ""
