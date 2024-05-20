@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { read_cookie } from 'sfcookies';
 
 function Profile() {
 
@@ -30,9 +31,9 @@ function Profile() {
   function getUser() {
     axios({
       method: 'get',
-      url: 'http://localhost:3010/users/User'
+      url: url_getUser,
+      headers: { Authorization: 'Bearer ' + token}
     }).then((response: AxiosResponse) => {
-      console.log(response.data)
 
       var User = response.data
       setUserLogin(User.userlogin)
@@ -40,17 +41,27 @@ function Profile() {
       setUserFirstname(User.firstname)
       setUserEmail(User.userEmail)
       setUserDepartment(User.department)
-
-      handleClick()
     }).catch((reason: AxiosError) => {
       console.log(reason)
     })
   }
 
+  const cookie_key = 'namedOFCookie'
+  const cookie_token = 'token'
+
+  var userLoginFromCookie: string
+  var url_getUser: string
+  var token: string
+
   useEffect(() => {
     let userReceived = false;
     
-    if (!userReceived)  getUser()
+    if (!userReceived) {
+      userLoginFromCookie = read_cookie(cookie_key)
+      token = read_cookie(cookie_token)
+      url_getUser = 'http://localhost:3010/users/' + userLoginFromCookie
+      getUser()
+    } 
     return () => { userReceived = true; }
     },[]);
 
@@ -128,7 +139,7 @@ function Profile() {
           <div id="replacePas_Save">
               {/* что думаешь насчет диалогового окна @RusDa256? */}
               <a href="/replace_password" id="bReplacePas">Изменить пароль</a>
-              <button id="bSave" type="button">Сохранить</button>
+              <button onClick={() => {handleClick()}}id="bSave" type="button">Сохранить</button>
           </div>
         </div>
       </div>
