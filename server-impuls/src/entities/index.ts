@@ -1,5 +1,5 @@
 export * from './tTaggedvalue';
-export * from './tDocuments';
+export * from '#/tDocuments/tDocuments';
 export * from './tFiles';
 export * from './tGlossary';
 export * from './tObject';
