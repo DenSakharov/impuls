@@ -14,8 +14,7 @@ import {Container} from '@mui/system';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 
-export const closeDialog = React.createContext<Function>(() => {
-});
+
 
 export default function Testpage() {
     const [popupData, setPopupData] = React.useState(data.object);
@@ -31,7 +30,7 @@ export default function Testpage() {
 
 
     return (
-        <closeDialog.Provider value={handleCloseForm}>
+        
             <div className="mainApp mainApp-push-bottom">
 
                 <MuiMenu changeState={setProjectData}/>
@@ -80,6 +79,5 @@ export default function Testpage() {
                     </div>
                 </footer>
             </div>
-        </closeDialog.Provider>
     );
 }
