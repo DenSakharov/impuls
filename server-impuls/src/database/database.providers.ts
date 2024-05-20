@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as dotenv from 'dotenv';
 import { tSecuser } from '#/tSecuser/tSecuser';
-
+import { tDocuments } from '#/entities';
 
 dotenv.config();
 
@@ -19,6 +19,7 @@ export const databaseProviders = [
       });
       sequelize.addModels([
         tSecuser, 
+        tDocuments
       ]);
       await sequelize.sync();
       return sequelize;
