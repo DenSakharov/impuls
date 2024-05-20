@@ -38,11 +38,29 @@ export class tDocumentsService {
     return this.tDocumentsRepository.findAll<tDocuments>();
   }
 
-  async findByPk(uuid: string): Promise<tDocuments | undefined> {
-    return this.tDocumentsRepository.findByPk<tDocuments>(uuid);
-  }
 
   async findOne(objectId: string): Promise<tDocuments | undefined>{
-    return this.tDocumentsRepository.findOne<tDocuments>({where: { objectId: objectId}});
+    return this.tDocumentsRepository.findOne<tDocuments>({where: { docId: objectId}});
   }
+
+  async update(newDocument: Partial<tDocuments>): Promise<tDocuments> {
+    const document = await this.findOne(newDocument.docId);
+    newDocument.dateEdited = new Date();
+    return document.update(newDocument);
+  }
+
+  async delete(newDocument: Partial<tDocuments>): Promise<string> {
+    try {
+      const document = await this.findOne(newDocument.docId);
+
+      if (!document) {
+        throw new Error('Document not found');
+      }
+      
+      document.destroy();
+      return `deleted document uuid = ${newDocument.docId}`  
+  } catch(error) {
+      return error;
+  }
+}
 }

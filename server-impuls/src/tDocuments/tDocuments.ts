@@ -71,7 +71,7 @@ export class tDocuments
   @Column({field:'date_created', allowNull: true, type: DataType.DATE(6) })
   dateCreated?: Date;
 
-  @Column({field:'date_created', allowNull: true, type: DataType.DATE(6) })
+  @Column({field:'date_edited', allowNull: true, type: DataType.DATE(6) })
   dateEdited?: Date;
 
   @ForeignKey(() => tObject)
