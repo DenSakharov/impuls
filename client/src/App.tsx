@@ -16,6 +16,8 @@ import { v4 as uuidV4 } from 'uuid';
 import { JWToken } from './Context'
 import MainNavBar from './components/mainPage/mainNavBar';
 import Report from "./components/mainPage/report";
+import Admin from "./components/mainPage/admin";
+import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/searchpage";
 
 function App() {
@@ -33,6 +35,10 @@ function App() {
   } else if (currentPath === '/searchpage') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/documents') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/integration') {
+    navbarComponent = <MainNavBar/>
+  } else if (currentPath === '/admin') {
     navbarComponent = <MainNavBar/>
   }
   else {
@@ -56,6 +62,8 @@ function App() {
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/projects' Component={Projects}></Route>
+          <Route path='/admin' Component={Admin}></Route>
+          <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />

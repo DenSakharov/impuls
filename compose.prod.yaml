@@ -1,0 +1,38 @@
+services:
+  nginx-react:
+    container_name: ngixreactapp
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    networks:
+      - integration      
+  nest-node:
+    container_name: nestNodeApp
+    build:
+      context: ./server-impuls
+      dockerfile: Dockerfile.prod
+    ports:
+      - 3010:3010
+    networks:
+      - integration      
+  back-mongo:
+    container_name: backend-mongo
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mongo   
+    ports:
+      - "3001:3001"
+    expose:
+      - '3001'
+    develop:
+      watch:
+        - action: sync  
+          path: ./mongo
+          target: ./mongo
+    networks:
+      - integration      
+networks:
+  integration:
+    driver: bridge      

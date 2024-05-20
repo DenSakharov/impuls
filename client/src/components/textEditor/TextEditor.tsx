@@ -9,15 +9,20 @@ import saver from './FileSaver';
 import './styles/text_editor.css'
 //import mammoth from 'mammoth'
    
+  
 const SAVE_INTERVAL_MS = 2000
 
 
 const TOOLBAR_OPTIONS=[
+								   
+				
     [{header:[1,2,3,4,5,6,false]}, {font:[]}, {list:"ordered"},{list:"bullet"}],
     ["bold", "italic", "underline"],
     [{color:[]}, {background:[]}, "clean"],
     [{script:"sub"},{script:"super"}, {align:[]}],
+				 
     ["image", "blockquote", "code-block"],
+			  
 ]
 
 export default function TextEditor(){
@@ -26,9 +31,10 @@ export default function TextEditor(){
     const [quill, setQuill] = useState<any>(null)
     console.log(documentId)
 
+
     useEffect(()=>{
         
-    const s = io("http://localhost:3001")
+    const s = io(`http://${window.location.hostname.toString()}:3001`)
         setSocket(s)
         return () => {
             s.disconnect()
@@ -45,21 +51,25 @@ export default function TextEditor(){
         socket.emit('get-document', documentId)
     },[socket, quill, documentId])
 
-    useEffect(() => {
-        if (socket == null || quill == null) return
-        const interval = setInterval(()=>{
-            socket.emit('save-document', quill.getContents())
+useEffect(() => {
+    if (socket == null || quill == null) return
+    const interval = setInterval(()=>{
+        socket.emit('save-document', quill.getContents())
 
-        }, SAVE_INTERVAL_MS)
+    }, SAVE_INTERVAL_MS)
 
-        return () => {
-            clearInterval(interval)
-        }
-    }, [socket, quill])
+    return () => {
+        clearInterval(interval)
+    }
+}, [socket, quill])
 
-    useEffect(() => {
+   useEffect(() => {
         if (socket == null || quill == null) return
          const handler = (delta:Object, oldDelta:Object, source:string) => {
+
+            console.log(delta)
+console.log(oldDelta)
+
             if (source !== 'user') return 
             socket.emit("send-changes", delta)
         }
@@ -85,24 +95,6 @@ export default function TextEditor(){
         }
     }, [socket, quill])
 
-
-    useEffect(() => {
-
-        if (socket == null || quill == null) return
-
-        const handler = (delta:Object, oldDelta:Object, source:string) => {
-            if (source !== 'user') return
-            socket?.emit("send-changes", delta)
-        }
-        quill.on('text-change', handler)
-
-        return () => {
-            quill.off('text-change', handler)
-        }
-    }, [socket, quill])
-  
-
-
     const wrapperRef = useCallback((wrapper:HTMLDivElement)=> {
         if (wrapper==null) return
         wrapper.innerHTML = ""
@@ -112,43 +104,43 @@ export default function TextEditor(){
     //    q.disable()
       //  q.setText('Loading...')
         setQuill(q)
-        
+      
         let posButton = document.createElement('span');
-        //let posButton1 = document.createElement('span');
+        let posButton1 = document.createElement('span');
         posButton.classList.add(
             'ql-formats'
            );
-        posButton.setAttribute('id', 'butSaveLoad');
+           posButton.setAttribute('id', 'butSaveLoad');
         let customButton = document.createElement('button');
-        customButton.innerHTML = 'Сохранить';
-        customButton.addEventListener('click', function() {saver(q);});
+       // customButton.innerHTML = 'Сохранить';
+        customButton.addEventListener('click', function() {
+       
+        saver(q);
+            });
+            customButton.classList.add(
+                'ql-align', 
+                'ql-picker', 
+                'ql-icon-picker',
+                'ql-save'
+            );
+   
+        //customButton.style.width='75px';
+       // customButton.style.margin='0px 5px';
+		
+            posButton.appendChild(customButton);
+            posButton1.classList.add(
+                'ql-formats'
+               );
+               posButton1.setAttribute('id', 'butLoad');
+            let customButton1 = document.createElement('input');
+            customButton1.type="file"
+            customButton1.id="customButton1"
+            
+            customButton1.innerHTML = 'Загрузить';
+            customButton1.style.width='28px';
 
-        customButton.classList.add(
-            'ql-align', 
-            'ql-picker', 
-            'ql-icon-picker',
-            'ql-save'
-        );
-        customButton.style.width='75px';
-        customButton.style.margin='0px 5px';
-
-        
-
-        // posButton1.classList.add(
-        //     'ql-formats'
-        // );
-        //posButton1.setAttribute('id', 'butLoad');
-        let customButton1 = document.createElement('input');
-        customButton1.type="file"
-        customButton1.id="customButton1"
-        
-        customButton1.style.width='120px';
-        customButton1.style.height='28px';
-
-        posButton.appendChild(customButton);
-        posButton.appendChild(customButton1);
-
-/*            
+let mammoth = require("mammoth");
+            
   customButton1.addEventListener('change', (event) => {
 
     const file = (event.target as HTMLInputElement).files![0];
@@ -162,7 +154,12 @@ export default function TextEditor(){
     reader.onloadend = function(event) {
       let arrayBuffer = reader.result;
       // debugger
-      if (arrayBuffer instanceof ArrayBuffer) {
+      let arrayOfStrings = file.name.split(".");
+      let fileExtention = arrayOfStrings[arrayOfStrings.length - 1]
+      console.log(fileExtention);
+//если файл word
+
+if (fileExtention=="doc" || fileExtention=="docx"){
       mammoth.convertToHtml({arrayBuffer: arrayBuffer}).then(function (resultObject:any) {
         document.getElementsByClassName("ql-editor")[0].innerHTML = resultObject.value
       
@@ -172,29 +169,41 @@ export default function TextEditor(){
         
         console.log(error);
         });
-      console.timeEnd();
     }
+    else if (fileExtention=="xlsx" || fileExtention=="xls"){
+        var XLSX = require("xlsx");
+
+            var options = { type: 'array' };
+    var workbook = XLSX.read(arrayBuffer, options);
+    console.timeEnd();
+
+    var sheetName = workbook.SheetNames
+    var sheet = workbook.Sheets[sheetName]
+        document.getElementsByClassName("ql-editor")[0].innerHTML =XLSX.utils.sheet_to_html(sheet)
+    }
+      console.timeEnd();
+	 
     };
 
     reader.readAsArrayBuffer(file);
 }
   });
-*/
                 customButton1.classList.add(
                     'ql-align', 
                     'ql-picker', 
                     'ql-icon-picker',
                     'ql-save'
                 );
-                //posButton1.appendChild(customButton1);
+                posButton1.appendChild(customButton1);
 
 
 
 // Add the button to your desired location in the DOM
-    const doc = document.getElementById("container");
-    if (doc?.hasChildNodes){
-        const panel = doc.getElementsByTagName('div')[0];
-        panel.appendChild(posButton);
+const doc = document.getElementById("container");
+if (doc?.hasChildNodes){
+   const panel = doc.getElementsByTagName('div')[0];
+   panel.appendChild(posButton);
+   panel.appendChild(posButton1);
     }
     }, [])
 
@@ -203,3 +212,4 @@ export default function TextEditor(){
         
     )
 }
+
