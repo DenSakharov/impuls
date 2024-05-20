@@ -14,7 +14,6 @@ export default function SignInSide() {
   const token = React.useContext(JWToken)
 
   function checkUser() {
-    console.log('CLICK!')
     axios({
       method: 'post',
       url: 'http://localhost:3010/auth/login',
