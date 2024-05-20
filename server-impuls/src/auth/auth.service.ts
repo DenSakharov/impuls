@@ -18,7 +18,7 @@ export class AuthService {
   async signIn(
     userlogin: string,
     pass: string,
-  ): Promise<{ accessToken: string }> {
+  ): Promise<{ accessToken: string, userlogin: string }> {
 
     const user = await this.usersService.findOne(userlogin);
 
@@ -28,6 +28,6 @@ export class AuthService {
 
     const payload: JwtPayload = { userlogin };
     const accessToken: string = this.jwtService.sign(payload);
-    return { accessToken };
+    return { accessToken, userlogin };
   }
 }

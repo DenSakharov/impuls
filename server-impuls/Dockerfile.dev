@@ -1,5 +1,6 @@
-FROM node:lts-slim
+FROM node:alpine
 WORKDIR /server-impuls
 COPY ./ ./
 RUN npm install
+COPY . .
 CMD ["npm", "run", "start:dev"]
