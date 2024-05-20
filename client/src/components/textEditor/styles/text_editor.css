@@ -101,12 +101,17 @@ body{
 }
 @media (max-width: 380px) {
     .ql-toolbar{
-        height: 140px;
+        height: 120px;
     }
     #butSaveLoad {
         position: absolute;
         right: 0px;
-        top: 110px
+        top: 90px
+    }
+    #butLoad {
+        position: absolute;
+        right: 30px;
+        top: 90px
     }
 }
 
