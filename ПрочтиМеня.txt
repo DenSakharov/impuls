@@ -1,0 +1,85 @@
+Запуск проекта IMS Impulse
+
+1. Установить во все директории проекта /node_modules, 
+выполнить команду npm i:
+
+/client = PS D:\impuls\client>npm i
+/server-impuls = D:\impuls\server-impuls>npm i
+/mongo = D:\impuls\mongo>npm i
+
+2. Скопировать во все вышеописанные директории файлы, с настройками подключения к БД и gitignore
+.env
+.gitignore
+
+3. Запустить client
+PS D:\impuls\client> npm run start
+
+Результат==============
+
+Compiled successfully!
+
+You can now view client in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.1.223:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+No issues found.
+
+
+
+4. Запустить server-impuls
+D:\impuls\server-impuls>npm run start:dev
+
+Результат==============
+
+[23:34:00] Starting compilation in watch mode...
+
+[23:34:01] Found 0 errors. Watching for file changes.
+
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [NestFactory] Starting Nest application...
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] PassportModule dependencies initialized +42ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] ConfigHostModule dependencies initialized +1ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] AppModule dependencies initialized +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] ConfigModule dependencies initialized +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] JwtModule dependencies initialized +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] tSecuserModule dependencies initialized +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] tDocumentsModule dependencies initialized +1ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [InstanceLoader] AuthModule dependencies initialized +0ms
+Executing (default): SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 't_secuser'
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) A}: +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/auth/login, POST} route +1ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RoutesResolver] TSecuserController {/users}: +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/users/all, GET} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/users/create, POST} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/users/:userlogin, GET} route +1ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RoutesResolver] tDocumentsController {/documents}: +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/documents/all, GET} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/documents/create, POST} route +1ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/documents/:uuid/read, GET} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/documents/:uuid/update, POST} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [RouterExplorer] Mapped {/documents/:uuid/delete, POST} route +0ms
+[Nest] 22348  - 20.05.2024, 23:34:02     LOG [NestApplication] Nest application successfully started +2ms
+
+
+
+5. Запустить MongoDB
+PS D:\impuls\mongo>npm run devStart
+
+Результат==============
+
+> server@1.0.0 devStart
+> nodemon server.js
+
+[nodemon] 3.1.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node server.js`
+turning on cors on http://78.107.235.216
+connection success
+
+6. Зайти на http://localhost:3000 и зарегистрироваться
