@@ -119,8 +119,8 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                         <Button sx={{marginLeft:{md:'auto', xs:'0'}, minWidth:'150px'}} variant='outlined' onClick={() => setFormApproval(true)}>Отправить на согласование</Button>
                     </Container>
                         <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
-                            <Typography>Дата создания {props.date_created.toLocaleDateString()}</Typography>
-                            <Typography>Дата изменения {props.date_changed.toLocaleDateString()}</Typography>
+                            <Typography>Дата создания {props.date_created?.toLocaleDateString()}</Typography>
+                            <Typography>Дата изменения {props.date_changed?.toLocaleDateString()}</Typography>
                         </Stack>
                     <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
                     

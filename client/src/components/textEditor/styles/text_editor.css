@@ -101,11 +101,56 @@ body{
 }
 @media (max-width: 380px) {
     .ql-toolbar{
-        height: 140px;
+        height: 120px;
     }
     #butSaveLoad {
         position: absolute;
         right: 0px;
-        top: 110px
+        top: 90px
+    }
+    #butLoad {
+        position: absolute;
+        right: 30px;
+        top: 90px
     }
 }
+
+#butLoad{
+    background: url(./open-48.png) no-repeat;
+    float: left;
+    width: 28px;
+    height: 28px;
+    background-size: 26px 26px;
+}
+
+#butLoad:hover{
+    background: url(./open-48-hover.png) no-repeat;
+    float: left;
+    width: 28px;
+    height: 28px;
+    background-size: 26px 26px;
+    cursor: pointer;
+}
+
+#customButton1{
+    opacity: 0;
+    cursor: pointer;
+}
+
+#butSaveLoad{
+    background: url(./save-48.png) no-repeat;
+    float: left;
+    width: 28px;
+    height: 28px;
+    background-size: 26px 26px;
+}
+
+#butSaveLoad:hover{
+    background: url(./save-48-hover.png) no-repeat;
+    float: left;
+    width: 28px;
+    height: 28px;
+    background-size: 26px 26px;
+    cursor: pointer;
+}
+

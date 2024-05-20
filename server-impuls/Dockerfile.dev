@@ -1,0 +1,5 @@
+FROM node:lts-slim
+WORKDIR /server-impuls
+COPY ./ ./
+RUN npm install
+CMD ["npm", "run", "start:dev"]

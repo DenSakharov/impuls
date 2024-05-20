@@ -26,4 +26,7 @@ yarn-error.log*
 .ldb
 .eapx
 
+# dotenv environment variable files
+.env
+
 

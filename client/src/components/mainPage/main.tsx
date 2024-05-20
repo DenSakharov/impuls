@@ -15,7 +15,6 @@ import MuiStartpage from './muiStartpage';
 import MuiFavourites from './muiFavourites';
 import { Sidebar } from 'flowbite-react';
 import { IconButton, Drawer } from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
 
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
