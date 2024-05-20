@@ -1,7 +1,6 @@
-FROM node:lts-slim
+FROM node:alpine
 WORKDIR /server-impuls
-COPY package.json package-lock.json ./
+COPY ./ ./
 RUN npm install
-RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 COPY . .
 CMD ["npm", "run", "start:dev"]
