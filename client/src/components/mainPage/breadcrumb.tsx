@@ -23,7 +23,8 @@ export default function BreadcrumbNew() {
     } else if (currentPath === '/integration') {
       BreadcrumbName = 'Импорт и экспорт данных'
     } else if (currentPath === '/admin') {
-      BreadcrumbName = 'Администрирование'
+      // BreadcrumbName = 'Администрирование'
+      BreadcrumbName = null
     }
     else {
       BreadcrumbName = 'Дашборд'

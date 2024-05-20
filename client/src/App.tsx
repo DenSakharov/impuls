@@ -39,7 +39,8 @@ function App() {
   } else if (currentPath === '/integration') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/admin') {
-    navbarComponent = <MainNavBar/>
+    // navbarComponent = <MainNavBar/>
+    navbarComponent = null
   }
   else {
     navbarComponent = null

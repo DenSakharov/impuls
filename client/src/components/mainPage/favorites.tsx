@@ -1,6 +1,7 @@
 import  React  from 'react';
 import { CreateTodo } from "./create_todo";
 //const [links, setLinks] = React.useState(props.links)
+import Snackbar from '@mui/material/Snackbar';
 
 const initialTodos = [
   "Figma проекта ",
@@ -12,6 +13,17 @@ const initialTodos = [
 function Favorites() {
     const [todos, setTodos] = React.useState<string[]>(initialTodos);
     const [open, setOpen] = React.useState(false);
+    
+    const handleClick = () => {
+      setOpen(true);
+    };
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }  
+      setOpen(false);
+    };
+
 
     return (
                 
@@ -28,6 +40,13 @@ function Favorites() {
             >
              Добавить
             </button>
+
+            <Snackbar
+              open={open}
+              autoHideDuration={1000}
+              onClose={handleClose}
+              message="Меню скрыто"
+              />
 
             <CreateTodo
                open={open}
