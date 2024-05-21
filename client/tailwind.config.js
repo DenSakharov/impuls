@@ -9,6 +9,7 @@ module.exports = {
   ],
 
   theme: {
+<<<<<<< HEAD
     extend: {
       colors: {
         'main-blue': '#147298',
@@ -40,3 +41,7 @@ module.exports = {
 //   },
 //   plugins: [],
 // });
+=======
+  }
+}
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6

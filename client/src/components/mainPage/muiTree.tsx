@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { SimpleTreeView, TreeItem  } from '@mui/x-tree-view';
 import { Container, Menu, MenuItem } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -10,6 +11,14 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 
 export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
     
+=======
+import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
+import { Container } from '@mui/material';
+
+
+export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
+
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     const openPopup = (node: any) => {
         setPopupData(node.object)
         if (node.object && window.innerWidth < 700) {
@@ -23,6 +32,7 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
         }
 
         return null
+<<<<<<< HEAD
     }
     
     const initialState = {
@@ -47,11 +57,16 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
         setState(initialState);
     }
 
+=======
+    }   
+    const tree = data
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     const renderTree = (node: any) => (
         <TreeItem 
         itemId={node.name} 
         label={node.name} 
         key={node.name}
+<<<<<<< HEAD
         sx={{textAlign:"left", textDecoration: node.object ? "underline" : "none", cursor: 'context-menu'}}
         onClick={() => openPopup(node)}
         onContextMenu={onHandleRightClick}
@@ -92,16 +107,32 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
                 </MenuItem>
          </Menu>
         {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)}
+=======
+        sx={{textAlign:"left", textDecoration: node.object ? "underline" : "none"}}
+        onClick={() => openPopup(node)}
+        >
+            {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)}
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
         </TreeItem>
     )
   return (
     <Container disableGutters>
         <SimpleTreeView 
+<<<<<<< HEAD
         defaultExpandedItems={[data.name]}
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
             {renderTree(data)}
+=======
+        defaultExpandedItems={[tree.name]}
+        sx={{ flexGrow: 1, overflowY: 'auto' }}>
+            {renderTree(tree)}
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
         </SimpleTreeView>
     </Container>
     
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6

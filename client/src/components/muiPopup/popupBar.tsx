@@ -6,7 +6,11 @@ import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
 import EditPopupProps from '../interfaces/editPopupProps';
+<<<<<<< HEAD
 import { closeDialog } from '../mainPage/main';
+=======
+import { closeDialog } from '../mainPage/testpage';
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
 
 export default function PopupBar(props: EditPopupProps = data.object) {

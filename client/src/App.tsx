@@ -13,10 +13,16 @@ import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
 import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
+<<<<<<< HEAD
 import MainNavBar from './components/mainPage/mainNavBar';
 import Report from "./components/mainPage/report";
 import Admin from "./components/mainPage/admin";
 import Integration from "./components/mainPage/integration";
+=======
+import { JWToken } from './Context'
+import MainNavBar from './components/mainPage/mainNavBar';
+import Report from "./components/mainPage/report";
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 import Searchpage from "./components/mainPage/searchpage";
 
 function App() {
@@ -35,16 +41,25 @@ function App() {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/documents') {
     navbarComponent = <MainNavBar/>
+<<<<<<< HEAD
   } else if (currentPath === '/integration') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/admin') {
     navbarComponent = <MainNavBar/>
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
   }
   else {
     navbarComponent = null
   }
+<<<<<<< HEAD
+=======
+
+  const [token, setToken] = React.useState('')
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
   return (
+    <JWToken.Provider value={{token, setToken}}>
       <BrowserRouter>
         {navbarComponent}
         <Routes>
@@ -58,8 +73,11 @@ function App() {
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/projects' Component={Projects}></Route>
+<<<<<<< HEAD
           <Route path='/admin' Component={Admin}></Route>
           <Route path='/integration' Component={Integration}></Route>
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
@@ -67,6 +85,7 @@ function App() {
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
+    </JWToken.Provider>
   );
 }
 

@@ -1,11 +1,15 @@
 import './style_profile.css';
 import bBack from './img/bBack.svg'
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { read_cookie } from 'sfcookies';
 import { Value } from 'sass';
+=======
+import React from 'react';
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
 function Profile() {
 
@@ -163,6 +167,7 @@ function Profile() {
           <div id="replacePas_Save">
               {/* что думаешь насчет диалогового окна @RusDa256? */}
               <a href="/replace_password" id="bReplacePas">Изменить пароль</a>
+<<<<<<< HEAD
               <button onClick={() => {updateUser()}}id="bSave" type="button">Сохранить</button>
           </div>
         </div>
@@ -180,6 +185,12 @@ function Profile() {
             Изменения успешно сохранены!
           </Alert>
         </Snackbar>\
+=======
+              <button id="bSave" type="button">Сохранить</button>
+          </div>
+        </div>
+      </div>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     </div>
   )
 }

@@ -6,11 +6,19 @@ import { BorderAllRounded, Search } from '@mui/icons-material';
 import Close from '@mui/icons-material/Close';
 //import { Row } from 'react-bootstrap';
 //import { relative } from 'path';
+<<<<<<< HEAD
 //import { closeDialog } from '../mainPage/testpage';
 
 export default function MuiSrchPpp() {
     const [isDrawerOpen, setisDrawerOpen] = React.useState(false);
     //const closeParentDialog = React.useContext(closeDialog);
+=======
+import { closeDialog } from '../mainPage/testpage';
+
+export default function MuiSrchPpp() {
+    const [isDrawerOpen, setisDrawerOpen] = React.useState(false);
+    const closeParentDialog = React.useContext(closeDialog);
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     const sendMessage = (event: any) => {
         
         {/* if (event.key === "Enter" && event.target.value !== "") {

@@ -13,6 +13,7 @@ import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import MuiStartpage from './muiStartpage';
 import MuiFavourites from './muiFavourites';
+<<<<<<< HEAD
 import { Sidebar } from 'flowbite-react';
 import { IconButton, Drawer } from '@mui/material';
 
@@ -22,6 +23,9 @@ import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 
 export const closeDialog = React.createContext<Function>(() => {
 });
+=======
+
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
     const [projectData, setProjectData] = React.useState(data.tree[0]);  
@@ -34,6 +38,7 @@ function Main({changeState} : any) {
     setFormOpen(true);
     }
 
+<<<<<<< HEAD
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
@@ -43,12 +48,38 @@ function Main({changeState} : any) {
       <closeDialog.Provider value={handleCloseForm}>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <div className="min-h-full">
+=======
+    return (
+      <>
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <div className="min-h-full">
+        {/* <MainNavBar /> */}
+
+        <header className="bg-white shadow">
+        <div className="h-[4dvh] bg-gray-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div className="flex h-10 items-center justify-between">
+              <div className="flex items-center">
+               <div className="flex-shrink-0">
+                 {/* структура вложенности объектов модели данных */}
+                  <BreadcrumbNew />
+               </div>
+              </div>
+             </div>
+            </div>
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            {/* Your content */}
+          </div>
+        </div>
+        </header>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
         <main className="m-1">
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
         <div className='container-app'>
 
+<<<<<<< HEAD
         <Disclosure as="nav" >
           {({ open }) => ( 
             <>
@@ -94,6 +125,24 @@ function Main({changeState} : any) {
 
 {/* содержимое страницы Дашборд */}
         <div className="content">    
+=======
+        {/* Сайдбар с деревом объектов */}
+        <div className="max-w-64 hidden md:block">
+            <SelectProjects changeState={setProjectData}/>        
+            <MuiButTree/>
+   	        <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>            
+            {/* поиск компонент */}
+  	    </div>
+
+        {/* <MainSidebar/> */}
+        <div className="content">       
+        
+        {/* Открытие карточки объекта  */}
+        <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+          <MuiPopup {...popupData}/>
+        </Dialog>
+
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
           {/* Заголовок для дашборда */}
           <div id="mainHeader">
 			      <div className="content-text-block">
@@ -134,11 +183,18 @@ function Main({changeState} : any) {
         </div>  
         </main>
 
+<<<<<<< HEAD
 
         {/* footer страницы */}
         <MainFooter/>
       </div>
       </closeDialog.Provider>
+=======
+        {/* footer страницы */}
+        <MainFooter/>
+
+      </div>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     </>
 
     );

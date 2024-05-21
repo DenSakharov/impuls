@@ -3,8 +3,11 @@ import { Card, Typography, Box } from '@mui/material';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { PieChart, Pie, Tooltip as RechartsTooltip, Cell, Legend as RechartsLegend } from 'recharts';
+<<<<<<< HEAD
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 const data = {
@@ -78,10 +81,13 @@ const MuiDashboard: React.FC = () => {
         { name: 'Отклонены', value: 150 },
     ];
 
+<<<<<<< HEAD
     // for mobile version
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down(1000));
 
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     return (
         <Box>
             <Card sx={{ padding: '20px', margin: '20px' }}>
@@ -95,6 +101,7 @@ const MuiDashboard: React.FC = () => {
                     <Bar data={data} options={options} />
                 </Box>
             </Card>
+<<<<<<< HEAD
             <Box
                 display="flex"
                 justifyContent="space-between"
@@ -102,6 +109,9 @@ const MuiDashboard: React.FC = () => {
                 flexDirection={isMobile ? 'column' : 'row'}
                 mt={2}
             >
+=======
+            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Приоритеты задач</Typography>
                 {pieData.map((entry, index) => (

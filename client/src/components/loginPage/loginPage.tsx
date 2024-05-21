@@ -2,30 +2,49 @@ import logo from "./logo.png"
 import React from 'react'
 import {Close} from '@mui/icons-material';
 import {IconButton , Container, Button, TextField, FormControlLabel, 
+<<<<<<< HEAD
         Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { bake_cookie } from 'sfcookies';
+=======
+  Checkbox, Link, Box, Grid, Typography} from '@mui/material';
+import "./style.css";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { JWToken } from '../../Context'
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
 
 export default function SignInSide() {
   const [userlogin, setUser] = React.useState("")
   const [password, setPassword] = React.useState("")
+<<<<<<< HEAD
 
   const cookie_userlogin = 'userlogin';
   const cookie_token = 'token'
+=======
+  const token = React.useContext(JWToken)
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
   function checkUser() {
     axios({
       method: 'post',
+<<<<<<< HEAD
       url: `http://${window.location.hostname.toString()}:3010/auth/login`,
+=======
+      url: 'http://localhost:3010/auth/login',
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
       data: {
         username: userlogin,
         password: password
       }
     }).then((response: AxiosResponse) => {
+<<<<<<< HEAD
       bake_cookie(cookie_userlogin, response.data.userlogin)
       bake_cookie(cookie_token, response.data.accessToken)
+=======
+      token.setToken(response.data.accessToken)
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
       window.open('/main', "_self")
     }).catch((reason: AxiosError) => {
       console.log(reason)
@@ -80,7 +99,10 @@ export default function SignInSide() {
               >
                 <TextField
                   value={userlogin}
+<<<<<<< HEAD
                   onKeyDown={(e) => e.key === "Enter" && checkUser()}
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                   onChange={(e) => setUser(e.target.value)}
                   margin="normal"
                   required
@@ -93,7 +115,10 @@ export default function SignInSide() {
                 />
                 <TextField
                   value={password}
+<<<<<<< HEAD
                   onKeyDown={(e) => e.key === "Enter" && checkUser()}
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                   onChange={(e) => setPassword(e.target.value)}
                   margin="normal"
                   required
@@ -109,7 +134,11 @@ export default function SignInSide() {
                   label="Запомнить меня"
                 />
                 <Button
+<<<<<<< HEAD
                   
+=======
+                  type="submit"
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                   fullWidth
                   variant="contained"
                   sx={{ 

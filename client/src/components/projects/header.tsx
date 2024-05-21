@@ -1,8 +1,11 @@
 import React from 'react';
 
 function Header() {
+<<<<<<< HEAD
     return(<header></header>)
 /*
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     return(
         <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
@@ -12,7 +15,10 @@ function Header() {
             </div>
         </header>
     )
+<<<<<<< HEAD
  */
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 }
 
 export default Header;

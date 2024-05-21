@@ -1,4 +1,5 @@
 const data = {
+<<<<<<< HEAD
     object :{
         id: 10000,
         name: "Документ под названием “Объект 1.2”",
@@ -13,6 +14,8 @@ const data = {
         links: ["https://learn.javascript.ru/","https://google.com"],
         tags: [{ key: "Тэг1", value: "Значение тэга" }, { key: "Тэг2", value: 2 }],
     },
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     projects: [
         {
             id: 1,

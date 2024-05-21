@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from 'react';
+=======
+import React, { useEffect, useRef } from 'react';
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 import ProjectsScripts from './projectScripts';
 import "./styles/material_icons.css";
 import "./styles/materialize.css";
@@ -6,9 +10,12 @@ import "./styles/material.indigo-pink.css";
 import './styles/projects.css';
 import Header from './header';
 import data from './data'
+<<<<<<< HEAD
 import TaskModal from './taskModal';
 import {Dialog} from "@mui/material";
 import MuiPopup from '../muiPopup/muiPopup';
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 
 function Projects() {
 
@@ -18,6 +25,7 @@ function Projects() {
 
     const containerRef = useRef<HTMLDivElement>(null);
 
+<<<<<<< HEAD
     // Documents popup
     const [popupData, setPopupData] = React.useState(data.object);
     const [formOpen, setFormOpen] = React.useState(false);
@@ -28,6 +36,8 @@ function Projects() {
         setFormOpen(true);
     }
 
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     // Функция для обработки клика внутри контейнера
     useEffect(() => {
 
@@ -68,12 +78,16 @@ function Projects() {
 
             // Проверяем, что клик сделан именно по кнопке с классом 'button-class'
             if (target && target.tagName === 'BUTTON' && target.matches('.mdl-button') && event.type === 'click') {
+<<<<<<< HEAD
                 if(target.id == "addTaskBtn" || target.id.startsWith("updTaskBtn_", 0) ||
                     target.id=="addDocumentBtn" || target.id.startsWith("updDocumentBtn_", 0)) {
                     openModal();
                 } else {
                     alert(`Клик кнопки: ${target.id}`);
                 }
+=======
+                alert(`Клик кнопки: ${target.id}`);
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
             }
 
             // Обработка изменений в выпадающих списках
@@ -96,6 +110,7 @@ function Projects() {
         };
     }, []);
 
+<<<<<<< HEAD
     const [modalOpen, setModalOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState<any>(null);
 
@@ -104,6 +119,8 @@ function Projects() {
         setModalOpen(true);
     };
 
+=======
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     return(
         /*TODO @nujensait думаю стоит поместить вызов компонента на кнопку которая открывает список проектов на главное странице client\src\components\mainPage\muiMenu.tsx*/
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header" ref={containerRef} id="projects">
@@ -143,18 +160,24 @@ function Projects() {
                                 <td>{record.state}</td>
                                 <td>{record.priority}</td>
                                 <td>
+<<<<<<< HEAD
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id} onClick={() => handleOpenForm()}>
                                         <i className="material-icons">edit</i>
                                     </button>
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>
                                         <i className="material-icons">delete</i>
                                     </button>
+=======
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updDocumentBtn_" + record.id}>Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delDocumentBtn_" + record.id}>Удал.</button>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addDocumentBtn">
+<<<<<<< HEAD
                         <i className="material-icons" onClick={() => handleOpenForm()}>add</i>
                     </button>
                     {/* Открытие карточки документа  */}
@@ -164,6 +187,10 @@ function Projects() {
 
                     <hr />
 
+=======
+                        Добавить документ
+                    </button>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                     <h4>Задачи</h4>
                     <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                         <tbody>
@@ -181,6 +208,7 @@ function Projects() {
                                 <td>{record.executives}</td>
                                 <td>{record.priority}</td>
                                 <td>
+<<<<<<< HEAD
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                             id={"updTaskBtn_" + record.id}
                                             onClick={() => openModal({ name: record.name, executor: '1', priority: record.priority })}>
@@ -189,15 +217,25 @@ function Projects() {
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>
                                         <i className="material-icons">delete</i>
                                     </button>
+=======
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"updTaskBtn_" + record.id}>Ред.</button>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id={"delTaskBtn_" + record.id}>Удал.</button>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
+<<<<<<< HEAD
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn" onClick={() => openModal()}>
                         <i className="material-icons">add</i>
                     </button>
                     <TaskModal isOpen={modalOpen} onClose={() => setModalOpen(false)} task={currentTask} />
+=======
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="addTaskBtn">
+                        Добавить задачу
+                    </button>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
                 </div>
             </main>
         </div>

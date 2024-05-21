@@ -29,7 +29,11 @@ import MuiPopup from '../muiPopup/muiPopup';
 import SelectProjects from './selectProjects';
 // import MainNavBar from './mainNavBar';
 import MainFooter from './mainFooter';
+<<<<<<< HEAD
 import MainSidebar from "./muiSidebar";
+=======
+import MainSidebar from "./sidebar";
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
 import Report from "./report";
 
 // const ImpulseButton = styled(Button)({

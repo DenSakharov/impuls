@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 
 export default function BreadcrumbNew() {
+<<<<<<< HEAD
 
     // условие для отображения navbarComponent
     const currentPath = window.location.pathname;
@@ -33,6 +34,13 @@ export default function BreadcrumbNew() {
     <Breadcrumb aria-label="Breadcrumb project" >
       <BreadcrumbItem href="/main" icon={HiHome}> </BreadcrumbItem>
       <BreadcrumbItem href="/main"> {BreadcrumbName} </BreadcrumbItem>      
+=======
+  return (
+    <Breadcrumb aria-label="Breadcrumb project" >
+      <BreadcrumbItem href="/main" icon={HiHome}>  </BreadcrumbItem>
+      <BreadcrumbItem href="/main">Дашборд</BreadcrumbItem>
+      <BreadcrumbItem href="/Projects">Проекты и задачи</BreadcrumbItem>
+>>>>>>> abd075049a8ea3e42f7512c2a5e76efc5447b4b6
     </Breadcrumb>
   );
 }
