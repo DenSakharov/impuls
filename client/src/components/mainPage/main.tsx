@@ -60,7 +60,6 @@ function Main({changeState} : any) {
       }  
       setOpen(false);
     };
-
     
     return (
       <>
