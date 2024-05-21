@@ -2,7 +2,7 @@ import logo from "./logo.png"
 import React from 'react'
 import {Close} from '@mui/icons-material';
 import {IconButton , Container, Button, TextField, FormControlLabel, 
-  Checkbox, Link, Box, Grid, Typography} from '@mui/material';
+        Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { bake_cookie } from 'sfcookies';
@@ -12,7 +12,7 @@ export default function SignInSide() {
   const [userlogin, setUser] = React.useState("")
   const [password, setPassword] = React.useState("")
 
-  const cookie_key = 'namedOFCookie';
+  const cookie_userlogin = 'userlogin';
   const cookie_token = 'token'
 
   function checkUser() {
@@ -24,7 +24,7 @@ export default function SignInSide() {
         password: password
       }
     }).then((response: AxiosResponse) => {
-      bake_cookie(cookie_key, response.data.userlogin)
+      bake_cookie(cookie_userlogin, response.data.userlogin)
       bake_cookie(cookie_token, response.data.accessToken)
       window.open('/main', "_self")
     }).catch((reason: AxiosError) => {
