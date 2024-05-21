@@ -13,7 +13,6 @@ import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
 import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
-import { JWToken } from './Context'
 import MainNavBar from './components/mainPage/mainNavBar';
 import Report from "./components/mainPage/report";
 import Admin from "./components/mainPage/admin";
@@ -45,10 +44,7 @@ function App() {
     navbarComponent = null
   }
 
-  const [token, setToken] = React.useState('')
-
   return (
-    <JWToken.Provider value={{token, setToken}}>
       <BrowserRouter>
         {navbarComponent}
         <Routes>
@@ -71,7 +67,6 @@ function App() {
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
-    </JWToken.Provider>
   );
 }
 

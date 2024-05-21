@@ -5,14 +5,12 @@ import {IconButton , Container, Button, TextField, FormControlLabel,
   Checkbox, Link, Box, Grid, Typography} from '@mui/material';
 import "./style.css";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { JWToken } from '../../Context'
 import { bake_cookie } from 'sfcookies';
 
 
 export default function SignInSide() {
   const [userlogin, setUser] = React.useState("")
   const [password, setPassword] = React.useState("")
-  const token = React.useContext(JWToken)
 
   const cookie_key = 'namedOFCookie';
   const cookie_token = 'token'
@@ -26,7 +24,6 @@ export default function SignInSide() {
         password: password
       }
     }).then((response: AxiosResponse) => {
-      token.setToken(response.data.accessToken)
       bake_cookie(cookie_key, response.data.userlogin)
       bake_cookie(cookie_token, response.data.accessToken)
       window.open('/main', "_self")
