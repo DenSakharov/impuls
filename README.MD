@@ -24,8 +24,49 @@ server-impuls/.env
 mongo/.env
 ``` 
 
-**#3 - Установка docker-compose**
-- установите Docker: https://docs.docker.com/engine/install/  
+**#3 - Установка зависимостей**
+Установить во все директории проекта /node_modules, выполнить команду ``npm i``:
+```
+cd /client 
+npm i
+
+cd /server-impuls  
+npm i
+
+cd /mongo 
+npm i
+```
+
+**#4 - Запустить клиент (фронтенд)**
+```
+cd client
+npm run start
+```
+
+**#5 - Запустить сервер (бекенд)**
+```
+cd server-impuls
+npm run start:dev
+```
+
+**#6 - Запустить БД MongoDB**
+```
+cd mongo
+npm run devStart
+```
+
+**#7 - Проверка запуска**
+- открыть главную страницу проекта:
+http://localhost:3000/
+
+------------------------------------
+
+## Запуск проекта через docker-compose
+
+Вместо команд 4-6 выше можно выаполнить одну: 
+
+**Установка docker-compose**
+- установите Docker: https://docs.docker.com/engine/install/
 - убедиться, что в ОС установлена свежая версия docker-compose: версии ``2.26`` и выше:
 ``` 
 docker-compose -v
@@ -33,12 +74,12 @@ docker-compose -v
 ```
 Если версия ниже, скачать актуальную версию по ссылке:
 https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-Windows-x86_64.exe
-и сохранить в указанную папку: 
+и сохранить в указанную папку:
 ```
 C:\Program Files\Docker\cli-plugins\docker-compose.exe
 ``` 
-- 
-**#4 - Запуск проекта**
+
+**Запуск проекта**
 - перейти в корень проекта (там где лежит этот файлб README.MD)
 - выполнить запуск:
 ```
@@ -53,11 +94,7 @@ docker compose -f compose.dev.yaml watch
 Watch enabled
 ```
 
-**#5 - Проверка запуска**
-- открыть главную страницу проекта:
-http://localhost:3000/
-
-------------------------------------
+------------------------------
 
 ## Контакты
 
