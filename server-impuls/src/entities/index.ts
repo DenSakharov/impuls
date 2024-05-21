@@ -14,4 +14,4 @@ export * from './usysSystem';
 export * from './tChangehistory';
 export * from './tConnector';
 export * from './tPackage';
-export * from './tProject';
+export * from '#/tProject/tProject';

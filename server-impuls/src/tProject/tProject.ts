@@ -1,19 +1,21 @@
+import { UUID } from 'crypto';
 import {
   Model,
   Table,
   Column,
   DataType,
-  Index,
   Sequelize,
-  ForeignKey,
+  PrimaryKey,
 } from 'sequelize-typescript';
 
 export interface tProjectAttributes {
-  projectId: number;
+  projectId: UUID;
   name?: string;
   notes?: string;
   status?: string;
   imsGuid?: string;
+  dateEdited?: Date;
+  dateCreated?: Date;
 }
 
 @Table({ tableName: 't_project', timestamps: false })
@@ -21,15 +23,9 @@ export class tProject
   extends Model<tProjectAttributes, tProjectAttributes>
   implements tProjectAttributes
 {
-  @Column({
-    field: 'project_id',
-    allowNull: false,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal(
-      "nextval(('project_id_seq'::text)::regclass)",
-    ),
-  })
-  projectId: number;
+  @PrimaryKey
+  @Column({ field: 'doc_id', allowNull: false, type: DataType.STRING(40) })
+  projectId: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
   name?: string;
@@ -42,4 +38,20 @@ export class tProject
 
   @Column({ field: 'ims_guid', allowNull: true, type: DataType.STRING(40) })
   imsGuid?: string;
+
+  @Column({
+    field: 'date_created',
+    allowNull: false,
+    type: DataType.DATE(6),
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(6)'),
+  })
+  dateCreated?: Date;
+
+  @Column({
+    field: 'date_edited',
+    allowNull: false,
+    type: DataType.DATE(6),
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(6)'),
+  })
+  dateEdited?: Date;
 }
