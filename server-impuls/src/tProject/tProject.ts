@@ -24,7 +24,7 @@ export class tProject
   implements tProjectAttributes
 {
   @PrimaryKey
-  @Column({ field: 'doc_id', allowNull: false, type: DataType.STRING(40) })
+  @Column({ field: 'project_id', allowNull: false, type: DataType.STRING(40) })
   projectId: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
