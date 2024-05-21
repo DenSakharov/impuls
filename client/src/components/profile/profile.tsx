@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { read_cookie } from 'sfcookies';
 import { Value } from 'sass';
 
 function Profile() {
@@ -17,11 +16,6 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-
-  const cookie_userlogin = 'userlogin'
-  const cookie_token = 'token'
-  var userLoginFromCookie: string = read_cookie(cookie_userlogin)
-  var token: string = read_cookie(cookie_token)
 
   const handleClick = () => {
     setOpenSnackbar(true);
@@ -36,11 +30,11 @@ function Profile() {
   };
 
   function getUser() {
-    let url_getUser = 'http://localhost:3010/users/' + userLoginFromCookie
+    let url_getUser = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') 
     axios({
       method: 'get',
       url: url_getUser,
-      headers: { Authorization: 'Bearer ' + token}
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
     }).then((response: AxiosResponse) => {
 
       var User = response.data
@@ -69,7 +63,7 @@ function Profile() {
     setUserSurname((document.getElementById('el3_input') as HTMLInputElement).value)
     setUserFirstname((document.getElementById('el5_input') as HTMLInputElement).value)
 
-    let urlForUpdate = 'http://localhost:3010/users/' + userLoginFromCookie + '/update'
+    let urlForUpdate = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') + '/update'
     axios({
       method: 'post',
       url: urlForUpdate, 
@@ -80,7 +74,7 @@ function Profile() {
         firstname: userFirstname,
         surname: userSurname
       },
-      headers: { Authorization: 'Bearer ' + token}
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
     }).then((response: AxiosResponse) => {
       console.log(response)
       handleClick()
