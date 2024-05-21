@@ -20,6 +20,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 
+export const closeDialog = React.createContext<Function>(() => {
+});
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
     const [projectData, setProjectData] = React.useState(data.tree[0]);  
@@ -38,6 +40,7 @@ function Main({changeState} : any) {
 
     return (
       <>
+      <closeDialog.Provider value={handleCloseForm}>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <div className="min-h-full">
 
@@ -135,6 +138,7 @@ function Main({changeState} : any) {
         {/* footer страницы */}
         <MainFooter/>
       </div>
+      </closeDialog.Provider>
     </>
 
     );

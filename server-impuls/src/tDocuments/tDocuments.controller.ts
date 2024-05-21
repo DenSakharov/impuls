@@ -1,39 +1,55 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { tDocumentsService } from '#/tDocuments/tDocuments.service';
 import { tDocuments } from '#/tDocuments/tDocuments';
 import { AuthGuard } from '#/auth/auth.guard';
+import { IMessage } from '#/entities/Message';
 
 @Controller('/documents')
 export class tDocumentsController {
   constructor(private readonly tDocumentsService: tDocumentsService) {}
-  
+
   @UseGuards(AuthGuard)
-  @Get('/all')
+  @Get('/')
   findAll(): Promise<tDocuments[]> {
     return this.tDocumentsService.findAll();
   }
 
   @UseGuards(AuthGuard)
-  @Post('/create')
-  create( newDocument: tDocuments): Promise<string> {
+  @Post('/')
+  create(@Body() newDocument: tDocuments): Promise<IMessage> {
     return this.tDocumentsService.create(newDocument);
   }
 
   @UseGuards(AuthGuard)
-  @Get(':uuid/read')
-  findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string): Promise<tDocuments> {
+  @Get('/:uuid')
+  findOne(
+    @Param('uuid', new ParseUUIDPipe()) uuid: string,
+  ): Promise<tDocuments> {
     return this.tDocumentsService.findOne(uuid);
   }
 
   @UseGuards(AuthGuard)
-  @Post(':uuid/update')
-  update(@Body() newDocument: tDocuments): Promise<tDocuments> {
-    return this.tDocumentsService.update(newDocument);
+  @Put('/:uuid')
+  update(
+    @Param('uuid', new ParseUUIDPipe()) uuid: string,
+    @Body() newDocument: tDocuments,
+  ): Promise<tDocuments> {
+    return this.tDocumentsService.update(uuid, newDocument);
   }
 
   @UseGuards(AuthGuard)
-  @Post(':uuid/delete')
-  delete(@Body() newDocument: tDocuments): Promise<string> {
-    return this.tDocumentsService.delete(newDocument);
+  @Delete('/:uuid')
+  delete(@Param('uuid', new ParseUUIDPipe()) uuid: string): Promise<IMessage> {
+    return this.tDocumentsService.delete(uuid);
   }
 }

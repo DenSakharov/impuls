@@ -1,5 +1,5 @@
 import { UUID } from 'crypto';
-import { tObject } from '#/entities/index'
+import { tObject } from '#/entities/index';
 
 import {
   Model,
@@ -18,7 +18,7 @@ export interface tDocumentsAttributes {
   description?: string;
   status?: string;
   priority?: string;
-  doctype?: string,
+  doctype?: string;
   author?: string;
   filepath?: string;
   objectId?: UUID;
@@ -40,13 +40,13 @@ export class tDocuments
 
   @Column({ allowNull: true, type: DataType.STRING(100) })
   docname?: string;
-  
+
   @Column({ allowNull: true, type: DataType.STRING(255) })
   description?: string;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
   status?: string;
-  
+
   @Column({ allowNull: true, type: DataType.STRING(40) })
   priority?: string;
 
@@ -68,10 +68,10 @@ export class tDocuments
   @Column({ allowNull: true, type: DataType.JSON() })
   dependencies?: JSON;
 
-  @Column({field:'date_created', allowNull: true, type: DataType.DATE(6) })
+  @Column({ field: 'date_created', allowNull: true, type: DataType.DATE(6) })
   dateCreated?: Date;
 
-  @Column({field:'date_edited', allowNull: true, type: DataType.DATE(6) })
+  @Column({ field: 'date_edited', allowNull: true, type: DataType.DATE(6) })
   dateEdited?: Date;
 
   @ForeignKey(() => tObject)
