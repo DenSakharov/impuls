@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
-import { Add, AssignmentOutlined } from '@mui/icons-material';
+import { Add, ArrowDropDownCircle, AssignmentOutlined } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid';
 import impulsTheme from '../../muiTheme';
@@ -10,11 +10,19 @@ import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
 import data from '../editPopup/data';
+import axios from 'axios'
+
 
 
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
-    
+    axios.headers.common['Authorization'] = `Bearer ${props.token}`
+    axios.get(         
+        window.location.origin + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754'
+    )
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err))
+
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
     const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
