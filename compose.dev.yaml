@@ -17,7 +17,7 @@ services:
           path: ./client/src
           target: ./client/src
         - action: rebuild
-          path: package.json
+          path: ./client/package.json
     networks:
       - integration
     tty: true
@@ -37,7 +37,7 @@ services:
           path: ./server-impuls/src
           target: ./server-impuls/src
         - action: rebuild
-          path: package.json
+          path: ./server-impuls/package.json
     networks:
       - integration
   back-mongo:

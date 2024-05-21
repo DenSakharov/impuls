@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { read_cookie } from 'sfcookies';
+import { Value } from 'sass';
 
 function Profile() {
 
+  var [userID, setUserID] = useState('');
   var [userLogin, setUserLogin] = useState('');
   var [userSurname, setUserSurname] = useState('');
   var [userFirstname, setUserFirstname] = useState('');
@@ -14,6 +17,11 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const cookie_userlogin = 'userlogin'
+  const cookie_token = 'token'
+  var userLoginFromCookie: string = read_cookie(cookie_userlogin)
+  var token: string = read_cookie(cookie_token)
 
   const handleClick = () => {
     setOpenSnackbar(true);
@@ -28,20 +36,20 @@ function Profile() {
   };
 
   function getUser() {
+    let url_getUser = 'http://localhost:3010/users/' + userLoginFromCookie
     axios({
       method: 'get',
-      url: 'http://localhost:3010/users/User'
+      url: url_getUser,
+      headers: { Authorization: 'Bearer ' + token}
     }).then((response: AxiosResponse) => {
-      console.log(response.data)
 
       var User = response.data
+      setUserID(User.userid)
       setUserLogin(User.userlogin)
       setUserSurname(User.surname)
       setUserFirstname(User.firstname)
       setUserEmail(User.userEmail)
       setUserDepartment(User.department)
-
-      handleClick()
     }).catch((reason: AxiosError) => {
       console.log(reason)
     })
@@ -49,10 +57,37 @@ function Profile() {
 
   useEffect(() => {
     let userReceived = false;
-    
-    if (!userReceived)  getUser()
+    if (!userReceived) {
+      getUser()
+    } 
     return () => { userReceived = true; }
-    },[]);
+  },[]);
+
+  function updateUser() {
+    setUserLogin((document.getElementById('el1_input') as HTMLInputElement).value)
+    setUserEmail((document.getElementById('el2_input') as HTMLInputElement).value)
+    setUserSurname((document.getElementById('el3_input') as HTMLInputElement).value)
+    setUserFirstname((document.getElementById('el5_input') as HTMLInputElement).value)
+
+    let urlForUpdate = 'http://localhost:3010/users/' + userLoginFromCookie + '/update'
+    axios({
+      method: 'post',
+      url: urlForUpdate, 
+      data: {
+        userid: userID,
+        userlogin: userLogin,
+        userEmail: userEmail,
+        firstname: userFirstname,
+        surname: userSurname
+      },
+      headers: { Authorization: 'Bearer ' + token}
+    }).then((response: AxiosResponse) => {
+      console.log(response)
+      handleClick()
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    })
+  }
 
   return(
     <div id="page-profile">
@@ -85,15 +120,15 @@ function Profile() {
           <div id="infoUser">
             <div className="infoUserValues" id="el1">
               <label>Логин</label>
-              <input defaultValue={userLogin} type="text"/>
+              <input defaultValue={userLogin} type="text" id="el1_input"/>
             </div>
             <div className="infoUserValues" id="el2">
               <label>Email</label>
-              <input defaultValue={userEmail} type="text"/>
+              <input defaultValue={userEmail} type="text" id="el2_input"/>
             </div>
             <div className="infoUserValues" id="el3">
               <label>Фамилия</label>
-              <input defaultValue={userSurname} type="text"/>
+              <input defaultValue={userSurname} type="text" id="el3_input"/>
             </div>
             <div className="infoUserValues" id="el4">
               <label>Телефон</label>
@@ -101,7 +136,7 @@ function Profile() {
             </div>
             <div className="infoUserValues" id="el5">
               <label>Имя</label>
-              <input defaultValue={userFirstname} type="text"/>
+              <input defaultValue={userFirstname} type="text" id="el5_input"/>
             </div>
             <div className="infoUserValues" id="el6">
               <label>Должность</label>
@@ -128,7 +163,7 @@ function Profile() {
           <div id="replacePas_Save">
               {/* что думаешь насчет диалогового окна @RusDa256? */}
               <a href="/replace_password" id="bReplacePas">Изменить пароль</a>
-              <button id="bSave" type="button">Сохранить</button>
+              <button onClick={() => {updateUser()}}id="bSave" type="button">Сохранить</button>
           </div>
         </div>
       </div>
