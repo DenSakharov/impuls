@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { tSecuser } from '#/tSecuser/tSecuser';
 import * as bcrypt from 'bcrypt';
-
+import { IMessage } from '#/entities/Message';
 
 @Injectable()
 export class tSecuserService {
@@ -10,10 +10,10 @@ export class tSecuserService {
     private tSecuserRepository: typeof tSecuser,
   ) {}
 
-  async create(newUser: Partial<tSecuser>): Promise<string> {
-      const hashedPassword = await bcrypt.hash(newUser.password, 10);
-      const userUUID = crypto.randomUUID();
-      try {
+  async create(newUser: Partial<tSecuser>): Promise<IMessage> {
+    const hashedPassword = await bcrypt.hash(newUser.password, 10);
+    const userUUID = crypto.randomUUID();
+    try {
       await this.tSecuserRepository.create({
         userid: userUUID,
         userlogin: newUser.userlogin,
@@ -24,16 +24,13 @@ export class tSecuserService {
         password: hashedPassword,
         groupid: newUser.groupid,
       });
-      return `created new user with id = ${userUUID} `;
-
-    } catch(error) {
-
+      return { message: `created new user with id = ${userUUID} ` };
+    } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return 'This login already exists';
+        return { error: 'This login already exists' };
       } else {
-        return error.name;        
+        return { error: error.name };
       }
-
     }
   }
 
@@ -45,8 +42,10 @@ export class tSecuserService {
     return this.tSecuserRepository.findByPk<tSecuser>(uuid);
   }
 
-  async findOne(loginToFind: string): Promise<tSecuser | undefined>{
-    return this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: loginToFind}});
+  async findOne(loginToFind: string): Promise<tSecuser | undefined> {
+    return this.tSecuserRepository.findOne<tSecuser>({
+      where: { userlogin: loginToFind },
+    });
   }
 
   async update(userToUpdate: tSecuser): Promise<tSecuser | undefined> {
