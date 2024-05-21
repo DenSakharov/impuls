@@ -2,7 +2,7 @@ export * from './tTaggedvalue';
 export * from '#/tDocuments/tDocuments';
 export * from './tFiles';
 export * from './tGlossary';
-export * from './tObject';
+export * from '#/tObject/tObject';
 export * from './tObjectfiles';
 export * from './tSecgroup';
 export * from '#/tSecuser/tSecuser';

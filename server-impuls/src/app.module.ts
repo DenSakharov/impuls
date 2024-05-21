@@ -7,6 +7,7 @@ import { tDocumentsModule } from './tDocuments/tDocuments.module';
 import { AuthModule } from '#/auth/auth.module';
 import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
+import { tObjectModule } from './tObject/tObject.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { tProjectModule } from './tProject/tProject.module';
     tSecuserModule,
     tDocumentsModule,
     tProjectModule,
+    tObjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
