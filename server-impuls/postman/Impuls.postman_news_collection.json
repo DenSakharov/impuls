@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "News API",
+    "description": "Postman collection for CRUD operations on News API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create News",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pubdate\": \"2024-04-14T00:00:00.000Z\",\n  \"title\": \"Новые функции автоматизации в CRM\",\n  \"content\": \"Инновации для управления документами: как они могут улучшить ваш рабочий процесс...\",\n  \"userid\": null\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/news",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "news"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All News",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/news",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "news"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Single News",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/news/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "news",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update News",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pubdate\": \"2024-04-14T00:00:00.000Z\",\n  \"title\": \"Обновленные функции автоматизации в CRM\",\n  \"content\": \"Обновленные инновации для управления документами: как они могут улучшить ваш рабочий процесс...\",\n  \"userid\": null\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/news/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "news",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete News",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/news/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "news",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
