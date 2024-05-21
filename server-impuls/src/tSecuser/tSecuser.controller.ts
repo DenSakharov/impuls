@@ -23,4 +23,10 @@ export class TSecuserController {
   findOne(@Param('userlogin') userlogin: string): Promise<tSecuser> {
     return this.tSecuserService.findOne(userlogin);
   }
+
+  @UseGuards(AuthGuard)
+  @Post(':userlogin/update')
+  update(@Body() newUser: tSecuser): Promise<tSecuser> {
+    return this.tSecuserService.update(newUser);
+  }
 }

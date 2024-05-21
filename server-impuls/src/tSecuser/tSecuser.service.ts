@@ -48,4 +48,10 @@ export class tSecuserService {
   async findOne(loginToFind: string): Promise<tSecuser | undefined>{
     return this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: loginToFind}});
   }
+
+  async update(userToUpdate: tSecuser): Promise<tSecuser | undefined> {
+    const user = await this.findByPk(userToUpdate.userid);
+    console.log(user)
+    return user.update(userToUpdate);
+  }
 }
