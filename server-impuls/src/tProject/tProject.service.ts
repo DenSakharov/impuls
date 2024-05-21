@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { tProject } from '#/tProject/tProject';
+import { tProject } from './tProject';
+import { IMessage } from '#/entities/Message';
 
 @Injectable()
 export class tProjectService {
@@ -8,20 +9,24 @@ export class tProjectService {
     private tProjectRepository: typeof tProject,
   ) {}
 
-  async create(newProject: Partial<tProject>): Promise<string> {
+  async create(newProject: Partial<tProject>): Promise<IMessage> {
     const projectUUID = crypto.randomUUID();
     try {
       await this.tProjectRepository.create({
-        ...newProject,
         projectId: projectUUID,
-        dateCreated: new Date(),
+        name: newProject.name,
+        notes: newProject.notes,
+        status: newProject.status,
+        imsGuid: newProject.imsGuid,
       });
-      return `new project was created uuid = ${projectUUID} `;
+      return { message: `new project was created uuid = ${projectUUID} ` };
     } catch (error) {
+      console.log(error);
+
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return 'This UUID already exists';
+        return { error: 'This UUID already exists' };
       } else {
-        return error;
+        return { error: error.name };
       }
     }
   }
@@ -36,24 +41,28 @@ export class tProjectService {
     });
   }
 
-  async update(newProject: Partial<tProject>) {
-    const project = await this.findOne(newProject.projectId);
+  async update(newProject: Partial<tProject>): Promise<tProject>;
+  async update(newProject: Partial<tProject>, uuid: string): Promise<tProject>;
+  async update(
+    newProject: Partial<tProject>,
+    uuid?: string,
+  ): Promise<tProject> {
+    const project = await this.findOne(uuid ?? newProject.projectId);
     newProject.dateEdited = new Date();
-    return project.update(newProject);
+    return project.update({ uuid } && newProject);
   }
-
-  async delete(projectId: string): Promise<string> {
+  async delete(projectId: string): Promise<IMessage> {
     try {
       const project = await this.findOne(projectId);
 
       if (!project) {
-        throw new Error('Document not found');
+        throw new Error('Project not found');
       }
 
       project.destroy();
-      return `deleted document uuid = ${projectId}`;
+      return { message: `deleted project uuid = ${projectId}` };
     } catch (error) {
-      return error;
+      return { error };
     }
   }
 }
