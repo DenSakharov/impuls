@@ -29,4 +29,10 @@ export class TSecuserController {
   update(@Body() newUser: tSecuser): Promise<tSecuser> {
     return this.tSecuserService.update(newUser);
   }
+
+  @UseGuards(AuthGuard)
+  @Post('/replacepassword')
+  replacepassword(@Body() loginpas: any): Promise<tSecuser|string> {
+    return this.tSecuserService.replacePassword(loginpas.userlogin, loginpas.oldPass, loginpas.newPass);
+  }
 }

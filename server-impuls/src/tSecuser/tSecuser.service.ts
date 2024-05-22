@@ -52,7 +52,24 @@ export class tSecuserService {
 
   async update(userToUpdate: tSecuser): Promise<tSecuser | undefined> {
     const user = await this.findByPk(userToUpdate.userid);
-    console.log(user)
     return user.update(userToUpdate);
+  }
+
+  async replacePassword(userlogin: string, oldPass: string, newPass: string): Promise<tSecuser|string> {
+    let user = await this.tSecuserRepository.findOne<tSecuser>({where: { userlogin: userlogin }});
+
+    try {
+      if (!(await bcrypt.compare(oldPass, user.password))) {
+        throw new Error('Old password is incorrect!');
+      }
+    } catch (e) {
+      return 'Old password is incorrect!';
+    }
+    
+    const hashedPassword = await bcrypt.hash(newPass, 10);
+    const newUser = JSON.parse(JSON.stringify(user))
+    newUser.password = hashedPassword
+
+    return user.update(newUser);
   }
 }
