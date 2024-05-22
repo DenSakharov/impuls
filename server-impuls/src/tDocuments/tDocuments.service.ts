@@ -1,6 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { tDocuments } from '#/tDocuments/tDocuments';
-import { IMessage } from '#/entities/Message';
+import { TMessage } from '#/entities/Message';
 
 @Injectable()
 export class tDocumentsService {
@@ -9,7 +9,7 @@ export class tDocumentsService {
     private tDocumentsRepository: typeof tDocuments,
   ) {}
 
-  async create(newDocument: Partial<tDocuments>): Promise<IMessage> {
+  async create(newDocument: Partial<tDocuments>): Promise<TMessage> {
     const documentUUID = crypto.randomUUID();
     try {
       await this.tDocumentsRepository.create({
@@ -19,12 +19,19 @@ export class tDocumentsService {
         objectId: newDocument.objectId,
         dateCreated: new Date(),
       });
-      return { message: `new document created uuid = ${documentUUID} ` };
+      return {
+        message: `new document created uuid = ${documentUUID} `,
+        status: HttpStatus.CREATED,
+        uuid: documentUUID,
+      };
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return { error: 'This UUID already exists' };
+        return {
+          error: 'This UUID already exists',
+          status: HttpStatus.CONFLICT,
+        };
       } else {
-        return { error: error.name };
+        return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
       }
     }
   }
@@ -48,18 +55,22 @@ export class tDocumentsService {
     return document.update(newDocument);
   }
 
-  async delete(objectId: string): Promise<IMessage> {
+  async delete(objectId: string): Promise<TMessage> {
     try {
       const document = await this.findOne(objectId);
 
       if (!document) {
-        throw new Error('Document not found');
+        return { error: 'Document not found', status: HttpStatus.NOT_FOUND };
       }
 
       document.destroy();
-      return { message: `deleted document uuid = ${objectId}` };
+      return {
+        message: `deleted document uuid = ${objectId}`,
+        status: HttpStatus.NO_CONTENT,
+        uuid: objectId,
+      };
     } catch (error) {
-      return { error: error.name };
+      return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }
 }

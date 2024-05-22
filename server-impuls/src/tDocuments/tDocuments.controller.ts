@@ -12,7 +12,7 @@ import {
 import { tDocumentsService } from '#/tDocuments/tDocuments.service';
 import { tDocuments } from '#/tDocuments/tDocuments';
 import { AuthGuard } from '#/auth/auth.guard';
-import { IMessage } from '#/entities/Message';
+import { TMessage } from '#/entities/Message';
 
 @Controller('/documents')
 export class tDocumentsController {
@@ -26,7 +26,7 @@ export class tDocumentsController {
 
   @UseGuards(AuthGuard)
   @Post('/')
-  create(@Body() newDocument: tDocuments): Promise<IMessage> {
+  create(@Body() newDocument: tDocuments): Promise<TMessage> {
     return this.tDocumentsService.create(newDocument);
   }
 
@@ -49,7 +49,7 @@ export class tDocumentsController {
 
   @UseGuards(AuthGuard)
   @Delete('/:uuid')
-  delete(@Param('uuid', new ParseUUIDPipe()) uuid: string): Promise<IMessage> {
+  delete(@Param('uuid', new ParseUUIDPipe()) uuid: string): Promise<TMessage> {
     return this.tDocumentsService.delete(uuid);
   }
 }
