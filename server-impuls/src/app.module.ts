@@ -6,25 +6,27 @@ import { tSecuserModule } from '#/tSecuser/tSecuser.module';
 import { tDocumentsModule } from './tDocuments/tDocuments.module';
 import { AuthModule } from '#/auth/auth.module';
 import { JWTMiddleware } from './middleware/jwt.middleware';
-
-
+import { tProjectModule } from './tProject/tProject.module';
+import { tObjectModule } from './tObject/tObject.module';
+import { tPackageModule } from './tPackage/tPackage.module';
 
 @Module({
   imports: [
-    databaseModule, 
-    AuthModule, 
+    databaseModule,
+    AuthModule,
     tSecuserModule,
-    tDocumentsModule],
-  controllers: [AppController],
-  providers: [AppService],
+    tDocumentsModule,
+    tProjectModule,
+    tObjectModule,
+    tPackageModule,
+  ],
+  // controllers: [AppController],
+  // providers: [AppService],
   exports: [],
 })
-
-export class AppModule implements NestModule{
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-    .apply(JWTMiddleware)
-    .forRoutes('users')
+    consumer.apply(JWTMiddleware).forRoutes('users');
     /*.apply(JWTMiddleware)
     .forRoutes('documents')*/
   }

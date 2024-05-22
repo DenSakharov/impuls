@@ -1,30 +1,34 @@
+import { tPackage, tProject } from '#/entities';
+import { UUID } from 'crypto';
 import {
   Model,
   Table,
   Column,
   DataType,
-  Index,
   Sequelize,
+  PrimaryKey,
   ForeignKey,
 } from 'sequelize-typescript';
 
 export interface tObjectAttributes {
-  objectId: number;
+  objectId: UUID;
   objectType?: string;
   name?: string;
   alias?: string;
   author?: string;
   version?: string;
   note?: string;
-  packageId?: number;
+  packageId?: UUID;
   stereotype?: string;
   status?: string;
   imsGuid?: string;
-  propertyId?: number;
-  connectorId?: number;
+  propertyId?: number; //What is it?
+  connectorId?: number; //What is it?
   filename?: string;
   appliesto?: string;
-  projectId?: number;
+  projectId?: UUID;
+  dateEdited?: Date;
+  dateCreated?: Date;
 }
 
 @Table({ tableName: 't_object', timestamps: false })
@@ -32,15 +36,9 @@ export class tObject
   extends Model<tObjectAttributes, tObjectAttributes>
   implements tObjectAttributes
 {
-  @Column({
-    field: 'object_id',
-    allowNull: false,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal(
-      "nextval(('object_id_seq'::text)::regclass)",
-    ),
-  })
-  objectId: number;
+  @PrimaryKey
+  @Column({ field: 'object_id', allowNull: false, type: DataType.STRING(40) })
+  objectId: UUID;
 
   @Column({ field: 'object_type', allowNull: true, type: DataType.STRING(255) })
   objectType?: string;
@@ -64,13 +62,9 @@ export class tObject
   @Column({ allowNull: true, type: DataType.STRING })
   note?: string;
 
-  @Column({
-    field: 'package_id',
-    allowNull: true,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal('0'),
-  })
-  packageId?: number;
+  @ForeignKey(() => tPackage)
+  @Column({ field: 'package_id', allowNull: true, type: DataType.STRING(40) })
+  packageId?: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
   stereotype?: string;
@@ -93,6 +87,23 @@ export class tObject
   @Column({ allowNull: true, type: DataType.STRING(255) })
   appliesto?: string;
 
-  @Column({ field: 'project_id', allowNull: true, type: DataType.INTEGER })
-  projectId?: number;
+  @ForeignKey(() => tProject)
+  @Column({ field: 'project_id', allowNull: true, type: DataType.STRING(40) })
+  projectId?: UUID;
+
+  @Column({
+    field: 'date_created',
+    allowNull: false,
+    type: DataType.DATE(6),
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(6)'),
+  })
+  dateCreated?: Date;
+
+  @Column({
+    field: 'date_edited',
+    allowNull: false,
+    type: DataType.DATE(6),
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(6)'),
+  })
+  dateEdited?: Date;
 }

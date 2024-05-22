@@ -11,30 +11,31 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { tDocumentsService } from '#/tDocuments/tDocuments.service';
-import { tDocuments } from '#/tDocuments/tDocuments';
+
 import { AuthGuard } from '#/auth/auth.guard';
+import { tProjectService } from './tProject.service';
+import { tProject } from './tProject';
 import { Response } from 'express';
 
-@Controller('/documents')
-export class tDocumentsController {
-  constructor(private readonly tDocumentsService: tDocumentsService) {}
+@Controller('/projects')
+export class tProjectController {
+  constructor(private readonly tProjectService: tProjectService) {}
 
   @UseGuards(AuthGuard)
   @Get('/')
   async findAll(@Res() res: Response) {
-    const data = await this.tDocumentsService.findAll();
+    const data = await this.tProjectService.findAll();
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
-      res.status(HttpStatus.NOT_FOUND).send();
+      res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
     }
   }
 
   @UseGuards(AuthGuard)
   @Post('/')
-  async create(@Res() res: Response, @Body() newDocument: tDocuments) {
-    const data = await this.tDocumentsService.create(newDocument);
+  async create(@Res() res: Response, @Body() newProject: tProject) {
+    const data = await this.tProjectService.create(newProject);
     return res.status(data.status).json(data);
   }
 
@@ -44,7 +45,7 @@ export class tDocumentsController {
     @Res() res: Response,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    const data = await this.tDocumentsService.findOne(uuid);
+    const data = await this.tProjectService.findOne(uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
@@ -56,12 +57,12 @@ export class tDocumentsController {
 
   @UseGuards(AuthGuard)
   @Put('/:uuid')
-  async update(
+  async updateWithUID(
     @Res() res: Response,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
-    @Body() newDocument: tDocuments,
+    @Body() newProject: tProject,
   ) {
-    const data = await this.tDocumentsService.update(uuid, newDocument);
+    const data = await this.tProjectService.update(newProject, uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
@@ -72,12 +73,25 @@ export class tDocumentsController {
   }
 
   @UseGuards(AuthGuard)
+  @Put('/')
+  async update(@Res() res: Response, @Body() newProject: tProject) {
+    const data = await this.tProjectService.update(newProject);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Object not found' });
+    }
+  }
+  @UseGuards(AuthGuard)
   @Delete('/:uuid')
   async delete(
     @Res() res: Response,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    const data = await this.tDocumentsService.delete(uuid);
+    const data = await this.tProjectService.delete(uuid);
+
     return res.status(data.status).json(data);
   }
 }

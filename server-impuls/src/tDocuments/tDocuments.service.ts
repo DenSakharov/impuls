@@ -1,7 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { tDocuments } from '#/tDocuments/tDocuments';
-
-
+import { TMessage } from '#/entities/Message';
 
 @Injectable()
 export class tDocumentsService {
@@ -10,27 +9,30 @@ export class tDocumentsService {
     private tDocumentsRepository: typeof tDocuments,
   ) {}
 
-
-  async create(newDocument: Partial<tDocuments>): Promise<string> {
-      const documentUUID = crypto.randomUUID();
-      try {
-      await this.tDocumentsRepository.create({  
+  async create(newDocument: Partial<tDocuments>): Promise<TMessage> {
+    const documentUUID = crypto.randomUUID();
+    try {
+      await this.tDocumentsRepository.create({
         docId: documentUUID,
-        docname: newDocument.docname,        
+        docname: newDocument.docname,
         description: newDocument.description,
         objectId: newDocument.objectId,
         dateCreated: new Date(),
       });
-      return `new document created uuid = ${documentUUID} `;
-
-    } catch(error) {
-
+      return {
+        message: `new document created uuid = ${documentUUID} `,
+        status: HttpStatus.CREATED,
+        uuid: documentUUID,
+      };
+    } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return 'This UUID already exists';
+        return {
+          error: 'This UUID already exists',
+          status: HttpStatus.CONFLICT,
+        };
       } else {
-        return error;        
+        return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
       }
-
     }
   }
 
@@ -38,29 +40,37 @@ export class tDocumentsService {
     return this.tDocumentsRepository.findAll<tDocuments>();
   }
 
-
-  async findOne(objectId: string): Promise<tDocuments | undefined>{
-    return this.tDocumentsRepository.findOne<tDocuments>({where: { docId: objectId}});
+  async findOne(objectId: string): Promise<tDocuments | undefined> {
+    return this.tDocumentsRepository.findOne<tDocuments>({
+      where: { docId: objectId },
+    });
   }
 
-  async update(newDocument: Partial<tDocuments>): Promise<tDocuments> {
-    const document = await this.findOne(newDocument.docId);
+  async update(
+    objectId: string,
+    newDocument: Partial<tDocuments>,
+  ): Promise<tDocuments> {
+    const document = await this.findOne(objectId);
     newDocument.dateEdited = new Date();
     return document.update(newDocument);
   }
 
-  async delete(newDocument: Partial<tDocuments>): Promise<string> {
+  async delete(objectId: string): Promise<TMessage> {
     try {
-      const document = await this.findOne(newDocument.docId);
+      const document = await this.findOne(objectId);
 
       if (!document) {
-        throw new Error('Document not found');
+        return { error: 'Document not found', status: HttpStatus.NOT_FOUND };
       }
-      
+
       document.destroy();
-      return `deleted document uuid = ${newDocument.docId}`  
-  } catch(error) {
-      return error;
+      return {
+        message: `deleted document uuid = ${objectId}`,
+        status: HttpStatus.OK,
+        uuid: objectId,
+      };
+    } catch (error) {
+      return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
   }
-}
 }
