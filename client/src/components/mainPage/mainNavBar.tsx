@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import BreadcrumbNew from "./breadcrumb";
-
+import MuiSidebarMessage from './muiSidebarMessage';
 // https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 
 const user = {
@@ -49,6 +49,11 @@ function MainNavBar({changeState} : any) {
     const [projectData, setProjectData] = React.useState(data.tree[0]);
     const [formOpen, setFormOpen] = React.useState(false);
 
+    // openSBMessage
+    const [SBMessage, setSBMessage] = React.useState(false);
+        const openSBMessage = () => setSBMessage(true);
+        const closeSBMessage = () => setSBMessage(false);
+
     const handleCloseForm = () => {
     setFormOpen(false);
     }
@@ -63,13 +68,14 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
+
     return (
     <>
       <div className="min-h-full">
 
-      {/* Mobile aside button */}  
+      {/* Mobile aside button */}
         {/* <Disclosure as="nav" >
-          {({ open }) => ( 
+          {({ open }) => (
             <>
               <div className="-mr-2 flex md:hidden">
                           <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -185,6 +191,7 @@ function MainNavBar({changeState} : any) {
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
+                        onClick={openSBMessage}
                         type="button"
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
@@ -192,6 +199,8 @@ function MainNavBar({changeState} : any) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
+
+                <MuiSidebarMessage />
                       
                       <Menu as="div" className="relative ml-3">
                         <div>

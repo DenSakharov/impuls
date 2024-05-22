@@ -22,8 +22,8 @@ export default function SelectProjects({changeState} : any) {
   return (
 
     <Box sx={{ flexGrow: 0}}>
-        <div><Button variant="text" onClick={handleOpenForm}  > Открыть проект</Button></div>
-        <div><Button variant="text"  > Настроить проекты</Button></div>
+        <div><Button variant="text" onClick={handleOpenForm}  > Создать проект </Button></div>
+        <div><Button variant="text"  > Все проекты</Button></div>
         <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
   );
