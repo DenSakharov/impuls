@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { tSecuser } from '#/tSecuser/tSecuser';
 import * as bcrypt from 'bcrypt';
-import { IMessage } from '#/entities/Message';
+import { TMessage } from '#/entities/Message';
 
 @Injectable()
 export class tSecuserService {
@@ -10,7 +10,7 @@ export class tSecuserService {
     private tSecuserRepository: typeof tSecuser,
   ) {}
 
-  async create(newUser: Partial<tSecuser>): Promise<IMessage> {
+  async create(newUser: Partial<tSecuser>): Promise<TMessage> {
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
     const userUUID = crypto.randomUUID();
     try {
@@ -24,12 +24,19 @@ export class tSecuserService {
         password: hashedPassword,
         groupid: newUser.groupid,
       });
-      return { message: `created new user with id = ${userUUID} ` };
+      return {
+        message: `created new user with id = ${userUUID} `,
+        status: HttpStatus.CREATED,
+        uuid: userUUID,
+      };
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return { error: 'This login already exists' };
+        return {
+          error: 'This login already exists',
+          status: HttpStatus.CONFLICT,
+        };
       } else {
-        return { error: error.name };
+        return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
       }
     }
   }

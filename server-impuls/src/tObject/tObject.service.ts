@@ -1,6 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { tObject } from './tObject';
-import { IMessage } from '#/entities/Message';
+import { TMessage } from '#/entities/Message';
 import { UUID } from 'crypto';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class tObjectService {
   async create(
     projectId: string,
     newObject: Partial<tObject>,
-  ): Promise<IMessage> {
+  ): Promise<TMessage> {
     const objectUUID = crypto.randomUUID();
     try {
       await this.tObjectsRepository.create({
@@ -35,12 +35,19 @@ export class tObjectService {
         projectId: projectId as UUID,
         dateCreated: new Date(),
       });
-      return { message: `new object was created uuid = ${objectUUID} ` };
+      return {
+        message: `new object was created uuid = ${objectUUID} `,
+        status: HttpStatus.CREATED,
+        uuid: objectUUID,
+      };
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return { error: 'This UUID already exists' };
+        return {
+          error: 'This UUID already exists',
+          status: HttpStatus.CONFLICT,
+        };
       } else {
-        return { error: error.name };
+        return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
       }
     }
   }
@@ -76,18 +83,22 @@ export class tObjectService {
     return object.update(newObject);
   }
 
-  async delete(projectId: string, objectId: string): Promise<IMessage> {
+  async delete(projectId: string, objectId: string): Promise<TMessage> {
     try {
       const object = await this.findOne(projectId, objectId);
 
       if (!object) {
-        throw new Error('Object not found');
+        return { error: 'Object not found', status: HttpStatus.NOT_FOUND };
       }
 
       object.destroy();
-      return { message: `deleted object uuid = ${objectId}` };
+      return {
+        message: `deleted object uuid = ${objectId}`,
+        status: HttpStatus.NO_CONTENT,
+        uuid: objectId,
+      };
     } catch (error) {
-      return { error: error.name };
+      return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }
 }

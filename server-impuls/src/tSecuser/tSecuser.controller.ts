@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { tSecuserService } from '#/tSecuser/tSecuser.service';
 import { tSecuser } from '#/tSecuser/tSecuser';
 import { AuthGuard } from '#/auth/auth.guard';
-import { IMessage } from '#/entities/Message';
+import { TMessage } from '#/entities/Message';
 
 @Controller('/users')
 export class TSecuserController {
@@ -15,7 +15,7 @@ export class TSecuserController {
   }
 
   @Post('/')
-  create(@Body() newUser: tSecuser): Promise<IMessage> {
+  create(@Body() newUser: tSecuser): Promise<TMessage> {
     return this.tSecuserService.create(newUser);
   }
 
