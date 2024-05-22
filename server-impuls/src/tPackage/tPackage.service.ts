@@ -101,7 +101,7 @@ export class tPackageService {
         pack.destroy();
         return {
           message: `deleted package uuid = ${packageId}`,
-          status: HttpStatus.NO_CONTENT,
+          status: HttpStatus.OK,
           uuid: packageId,
         };
       } else {

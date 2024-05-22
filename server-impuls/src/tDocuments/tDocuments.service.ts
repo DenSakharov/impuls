@@ -66,7 +66,7 @@ export class tDocumentsService {
       document.destroy();
       return {
         message: `deleted document uuid = ${objectId}`,
-        status: HttpStatus.NO_CONTENT,
+        status: HttpStatus.OK,
         uuid: objectId,
       };
     } catch (error) {

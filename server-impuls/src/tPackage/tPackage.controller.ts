@@ -3,16 +3,19 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Param,
   ParseUUIDPipe,
   Post,
   Put,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 
 import { AuthGuard } from '#/auth/auth.guard';
 import { tPackageService } from './tPackage.service';
 import { tPackage } from './tPackage';
+import { Response } from 'express';
 
 @Controller('/projects/:projectId/packages')
 export class tPackageController {
@@ -20,57 +23,105 @@ export class tPackageController {
 
   @UseGuards(AuthGuard)
   @Get('/')
-  findAll(@Param('projectId', new ParseUUIDPipe()) projectId: string) {
-    return this.tPackageService.findAll(projectId);
+  async findAll(
+    @Res() res: Response,
+    @Param('projectId', new ParseUUIDPipe()) projectId: string,
+  ) {
+    const data = await this.tPackageService.findAll(projectId);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
+    }
   }
   @UseGuards(AuthGuard)
   @Get('/tree')
-  tree(@Param('projectId', new ParseUUIDPipe()) projectId: string) {
-    return this.tPackageService.tree(projectId);
+  async tree(
+    @Res() res: Response,
+    @Param('projectId', new ParseUUIDPipe()) projectId: string,
+  ) {
+    const data = await this.tPackageService.tree(projectId);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
+    }
   }
 
   @UseGuards(AuthGuard)
   @Post('/')
-  create(
+  async create(
+    @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Body() newPackage: tPackage,
   ) {
-    return this.tPackageService.create(projectId, newPackage);
+    const data = await this.tPackageService.create(projectId, newPackage);
+    return res.status(data.status).json(data);
   }
 
   @UseGuards(AuthGuard)
   @Get('/:uuid')
-  findOne(
+  async findOne(
+    @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    return this.tPackageService.findOne(projectId, uuid);
+    const data = await this.tPackageService.findOne(projectId, uuid);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
+    }
   }
 
   @UseGuards(AuthGuard)
   @Put('/:uuid')
-  updateWithUID(
+  async updateWithUID(
+    @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
     @Body() newPackage: tPackage,
   ) {
-    return this.tPackageService.update(projectId, newPackage, uuid);
+    const data = await this.tPackageService.update(projectId, newPackage, uuid);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
+    }
   }
   @UseGuards(AuthGuard)
   @Put('/')
-  update(
+  async update(
+    @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Body() newPackage: tPackage,
   ) {
-    return this.tPackageService.update(projectId, newPackage);
+    const data = await this.tPackageService.update(projectId, newPackage);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
+    }
   }
 
   @UseGuards(AuthGuard)
   @Delete('/:uuid')
-  delete(
+  async delete(
+    @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    return this.tPackageService.delete(projectId, uuid);
+    const data = await this.tPackageService.delete(projectId, uuid);
+    return res.status(data.status).json(data);
   }
 }

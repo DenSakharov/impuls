@@ -69,7 +69,7 @@ export class tProjectService {
       project.destroy();
       return {
         message: `deleted project uuid = ${projectId}`,
-        status: HttpStatus.NO_CONTENT,
+        status: HttpStatus.OK,
         uuid: projectId,
       };
     } catch (error) {

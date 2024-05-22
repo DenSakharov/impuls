@@ -94,7 +94,7 @@ export class tObjectService {
       object.destroy();
       return {
         message: `deleted object uuid = ${objectId}`,
-        status: HttpStatus.NO_CONTENT,
+        status: HttpStatus.OK,
         uuid: objectId,
       };
     } catch (error) {
