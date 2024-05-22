@@ -29,7 +29,7 @@
 }
 @media (max-width: 450px) {
   #mainForm {
-    width: 65%;
+    width: 80%;
   }
 }
 #mainForm #header-replacePas {
@@ -43,15 +43,19 @@
 #mainForm #header-replacePas h2 {
   display: inline;
   margin: 0 auto 0 10px;
+  font-size: 24px;
+  font-weight: 600;
 }
 @media (max-width: 800px) {
   #mainForm #header-replacePas h2 {
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: 500;
   }
 }
 @media (max-width: 450px) {
   #mainForm #header-replacePas h2 {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 400;
   }
 }
 #mainForm #header-replacePas img {
