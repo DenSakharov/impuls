@@ -30,7 +30,7 @@ function Profile() {
   };
 
   function getUser() {
-    let url_getUser = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') 
+    let url_getUser = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin')
     axios({
       method: 'get',
       url: url_getUser,
@@ -58,7 +58,7 @@ function Profile() {
   },[]);
 
   function updateUser() {
-    let urlForUpdate = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') + '/update'
+    let urlForUpdate = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin') + '/update'
     axios({
       method: 'post',
       url: urlForUpdate, 

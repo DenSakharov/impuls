@@ -29,7 +29,7 @@ const MuiNewsModal: React.FC<AddNewsModalProps> = ({ onClose }) => {
         };
 
         try {
-            const response = await fetch('http://localhost:3010/news', {
+            const response = await fetch(`http://${window.location.hostname.toString()}:3010/news`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

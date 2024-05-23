@@ -38,7 +38,7 @@ const MuiNews: React.FC = () => {
     // loa news list
     const fetchNewsData = async () => {
         try {
-            const response = await fetch('http://localhost:3010/news');
+            const response = await fetch(`http://${window.location.hostname.toString()}:3010/news`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -75,7 +75,7 @@ const MuiNews: React.FC = () => {
     };
 
     const handleNewsDeleteClick = async (newsId) => {
-        await axios.delete(`http://localhost:3010/news/${newsId}`);
+        await axios.delete(`http://${window.location.hostname.toString()}:3010/news/${newsId}`);
         fetchNewsData();
     };
 

@@ -14,7 +14,7 @@ const MuiNewsModalUpdate = ({ open, newsItem, onClose }) => {
     }, [newsItem]);
 
     const handleSave = async () => {
-        await axios.patch(`http://localhost:3010/news/${newsItem.news_id}`, {
+        await axios.patch(`http://${window.location.hostname.toString()}:3010/news/${newsItem.news_id}`, {
             title,
             content,
         });
