@@ -9,6 +9,7 @@ mongoose.connect(process.env.DB_Mongo)
 .then(() => console.log("connection success"))
 .catch((err) => console.log(err))
 
+
 const cors=require('cors');
 
 console.log(`turning on cors on ${process.env.HOST}`)
@@ -44,3 +45,32 @@ async function findOrCreateDocument(id){
     if (document) return document
     return await Document.create({_id: id, data: defaultValue, documentId:''})
 }
+
+
+async function findDocumentByObjectId(objectId){
+    if (objectId == null) return
+    const document = await Document.find({documentId: objectId})
+    if (document) return document
+}
+
+
+const express = require("express")
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/documents/:objectId", (req, res) => {
+  res.json({ data: findDocumentByObjectId(req.query.objectId) });
+});
+
+// set port, listen for requests
+const PORT = 3002;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

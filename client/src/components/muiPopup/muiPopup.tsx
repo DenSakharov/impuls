@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
 import { Add, ArrowDropDownCircle, AssignmentOutlined } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
@@ -13,16 +13,56 @@ import data from '../editPopup/data';
 import axios from 'axios'
 
 
-
+export interface tDocumentsAttributes {
+    docId: string;
+    docname?: string;
+    description?: string;
+    status?: string;
+    priority?: string;
+    doctype?: string;
+    author?: string;
+    filepath?: string;
+    objectId?: string;
+    dateEdited?: string;
+    dateCreated?: string;
+    links?: {values: string[]};
+    tags?: Object;
+    dependencies?: Object;
+    attachments?: {values: string[]};
+  }
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
-    axios.get(         
-        "http://" + window.location.hostname + ":3010" + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754',
-        {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
-    )
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err))
-
+    const [document, setDocument] = React.useState({
+        "docId": "06858a60-0059-41e4-9c88-963af22dc754",
+        "docname": "Документ 10000",
+        "description": "Какое то описание 42",
+        "status": '',
+        "priority": '',
+        "doctype": '',
+        "author": '',
+        "filepath": '',
+        "links": {"values": ['']},
+        "tags": {
+            "": "",
+        },
+        "dependencies": {},
+        "dateCreated": "2024-05-20T16:17:19.162Z",
+        "dateEdited": "2024-05-21T13:10:25.818Z",
+        "objectId": "6e624807-92f7-4688-9e69-37f9bfb8c1e8",
+    });
+    
+    useEffect(() => {
+        axios.get(         
+            "http://" + window.location.hostname + ":3010" + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754',
+            {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
+        )
+        .then((res) => {
+            setDocument(res.data)
+            console.log(res.data)
+        })    
+        .catch((err) => console.log(err))
+    }, [])
+    
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
     const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
@@ -30,31 +70,26 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                            {value: 'Утвердить', style: 'accept_button'},
                            {value: 'В разработке', style: 'inwork_button'}]
     const priorities = ['Высокий', 'Средний', 'Низкий']
-    const [tags, setTags] = React.useState(props.tags);
-    const [links, setLinks] = React.useState(props.links)
-    const [file, setFile] = React.useState(null)
     const [formOpenLink, setFormOpenLink] = React.useState(false);
     const [formApproval, setFormApproval] = React.useState(false);
-    const [status, setStatus] = React.useState(props.status);
-    const [docTypeValue, setDocTypeValue] = React.useState(props.type);
     const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
-    const [author, setAuthor] = React.useState(props.author);
-    const [priority, setPriority] = React.useState(props.priority);
     const [showAlert, setShowAlert] = React.useState(false);
     const [userApprove, setApproveUser] = React.useState('');
 
-    const addTags = (value: {key:string, value:string | number}) => {
-        setTags([...tags, value]);
+    const addTags = (value: {key:string, value:string | number}) => {        
+        setDocument({...document, tags: {...document.tags, [value.key]: value.value}});
     }
 
     const addLinks = (value : string) => {
-        let newLink = value;
+        let newLink = '';
         console.log(value)
-        if (newLink && (newLink.includes('https://') || newLink.includes('http://') )) {
-            setLinks([...links, newLink]);
+        if (value && (value.includes('https://') || value.includes('http://') )) {
+            newLink = value;
         } else if (newLink) {
-            setLinks([...links, 'https://'.concat(newLink)])
+            newLink = 'https://'.concat(newLink)
         }
+        
+        setDocument({...document, links: {...document.links, values: [...document.links.values, newLink]}});
     }
 
     
@@ -62,10 +97,10 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         const files = event.target.files;
         if (files.length > 0) {
             const file = files[0];
-            setFile(file);
+            setDocument({...document, filepath: file});
             console.log(file);
         } else {
-            setFile(null);
+            setDocument({...document, filepath: ''});
         }
     };
 
@@ -74,7 +109,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         const newUUID = uuidV4()
         window.open('/documents/'+ newUUID)
         if (newUUID) {
-            setAttachments([...attachments, {uuid: newUUID}]);
+            //setDocument({...document, attachments: {...document.attachments, values: [...document.attachments.values, newUUID]}});
         }
         
     };
@@ -123,12 +158,12 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
             }}>
                 <Stack spacing={2} sx={{backgroundColor:'EDF5FB'}}>
                     <Container disableGutters  sx={{paddingTop:'10px', display:'flex', flexDirection:{xs:'column', md:'row'}, alignItems:'flex-start'}}>
-                        <Typography variant='h5' style={{wordWrap: 'break-word'}} >{props.name}</Typography>
+                        <Typography variant='h5' style={{wordWrap: 'break-word'}} >{document.docname}</Typography>
                         <Button sx={{marginLeft:{md:'auto', xs:'0'}, minWidth:'150px'}} variant='outlined' onClick={() => setFormApproval(true)}>Отправить на согласование</Button>
                     </Container>
                         <Stack direction={'row'} spacing={10}  display={'flex'} flex={'flex-start'}>
-                            <Typography>Дата создания {props.date_created?.toLocaleDateString()}</Typography>
-                            <Typography>Дата изменения {props.date_changed?.toLocaleDateString()}</Typography>
+                            <Typography>Дата создания {new Date(document.dateCreated).toLocaleDateString()}</Typography>
+                            <Typography>Дата изменения {new Date(document.dateEdited).toLocaleDateString()}</Typography>
                         </Stack>
                     <Divider style={{marginTop: 0}}orientation='horizontal' variant='fullWidth' flexItem/>
                     
@@ -143,7 +178,8 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             multiline
                             fullWidth
                             rows={3}
-                            defaultValue={props.desc}                            
+                            value={document.description}
+                            onChange={(e) => setDocument({...document, description: e.target.value})}                            
                             variant="outlined">
                             </TextField>
                         </Grid>
@@ -153,7 +189,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Typography align='left'>Автор</Typography>
                         </Grid>
                         <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
-                        <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={author? author : ''}  onChange={(e) => setAuthor(e.target.value)}>
+                        <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={document.author? document.author : ''}  onChange={(e) => setDocument({...document, author: e.target.value})}>
                                     {authors.map((item) => <MenuItem key={item} value={item}>{item}</MenuItem>)}    
                                 </Select>
                         </Grid>
@@ -163,7 +199,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Typography align='left'>Статус</Typography>
                         </Grid>
                         <Grid item md={mdGridValue-3} xs={smGridValue-3} textAlign='left'>
-                                <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={status? status : ''}  onChange={(e) => setStatus(e.target.value)}>
+                                <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}} value={document.status? document.status : ''}  onChange={(e) => setDocument({...document, status: e.target.value})}>
                                     {statusButtons.map((status) => <MenuItem key={status.value} value={status.value}>{status.value}</MenuItem>)}    
                                 </Select>
                         </Grid>                            
@@ -174,7 +210,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Typography align='left'>Тип</Typography>
                         </Grid>
                         <Grid item md={mdGridValue-2} xs={smGridValue-3} textAlign='left'>
-                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={docTypeValue? docTypeValue : ''}  onChange={(e) => setDocTypeValue(e.target.value)}>
+                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={document.doctype? document.doctype : ''}  onChange={(e) => setDocument({...document, doctype: e.target.value})}>
                                     {docType.map((type) => <MenuItem key={type} value={type}>{type}</MenuItem>)}    
                                 </Select>
                         </Grid>
@@ -186,7 +222,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Typography align='left'>Приоритет</Typography>
                         </Grid>
                         <Grid item md={mdGridValue-3} textAlign='left' xs={smGridValue-3}>
-                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={priority? priority : ''}  onChange={(e) => setPriority(e.target.value)}>
+                            <Select size='small' id="outlined-basic" variant="outlined" sx={{minWidth: 120}}  value={document.priority? document.priority : ''}  onChange={(e) => setDocument({...document, priority: e.target.value})}>
                                     {priorities.map((item) => <MenuItem key={item} value={item}>{item}</MenuItem>)}    
                                 </Select>
                         </Grid>
@@ -198,7 +234,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Typography align='left'>Путь</Typography>
                         </Grid>
                         <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
-                            <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={props.path}/>
+                            <TextField  size='small' fullWidth id="outlined-basic" variant="outlined" defaultValue={document.filepath}/>
 
                         </Grid>
                         <Grid item md={mdGridSpace} textAlign='left' xs={4}>
@@ -226,7 +262,6 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                         </Grid>
                         <Grid item md={mdGridSpace} textAlign='left' xs={4}>
                             <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
-                            <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
                         </Grid>  
                     </Grid>
                 </Stack>
@@ -234,20 +269,21 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                 <Container sx={{marginTop:'50px'}}>
                         <Button onClick={()=>setFormOpenLink(true)} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить ссылку</Button>
                         <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
-                            {links.map((link) => (
-                                    <Typography  key={links.indexOf(link)} ><a href={link} key={links.indexOf(link)}>{link}</a></Typography>
+                            {document.links.values.map((link) => (
+                                    <Typography  key={document.links.values.indexOf(link)} ><a href={link} key={document.links.values.indexOf(link)}>{link}</a></Typography>
                                 ))}
                         </Stack>
                 </Container>
                 <Container>
-                        <Button onClick={() => addTags({key: 'Тэг'+(tags.length+1), value: ""})} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить тэг</Button>
+                        <Button onClick={() => addTags({key: 'Тэг'+(Object.keys(document.tags).length+1), value: ""})} sx={{display:'flex', margin:'10px'}}><Add fontSize='large'/>Добавить тэг</Button>
                         <Stack direction={'column'} spacing={1} textAlign={'left'} marginLeft={'60px'}>
-                            {tags.map((tag) => (
-                                <Stack direction={'row'} spacing={1} key={tags.indexOf(tag)} textAlign={'left'} >
-                                    <TextField id="standard-basic" key={tags.indexOf(tag)}defaultValue={tag.key} variant="standard" sx={{width:'60px'}}/>
-                                    <TextField size='small' id="outlined-basic" defaultValue={tag.value} variant="outlined" />
+                        {Object.keys(document.tags).map((key) => (                            
+                                <Stack direction={'row'} spacing={1} key={key} textAlign={'left'} >
+                                    <TextField id="standard-basic" key={key} defaultValue={key} variant="standard" sx={{width:'60px'}}/>
+                                    <TextField size='small' id="outlined-basic" defaultValue={document.tags[key]} variant="outlined" />
                                 </Stack>
-                                ))}
+                                    ))
+                            }
                         </Stack>
                 </Container>
                 <Container>
