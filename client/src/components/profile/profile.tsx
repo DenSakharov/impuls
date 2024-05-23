@@ -58,11 +58,6 @@ function Profile() {
   },[]);
 
   function updateUser() {
-    setUserLogin((document.getElementById('el1_input') as HTMLInputElement).value)
-    setUserEmail((document.getElementById('el2_input') as HTMLInputElement).value)
-    setUserSurname((document.getElementById('el3_input') as HTMLInputElement).value)
-    setUserFirstname((document.getElementById('el5_input') as HTMLInputElement).value)
-
     let urlForUpdate = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') + '/update'
     axios({
       method: 'post',
@@ -77,6 +72,7 @@ function Profile() {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
     }).then((response: AxiosResponse) => {
       console.log(response)
+      localStorage.setItem('userlogin', userLogin)
       handleClick()
     }).catch((reason: AxiosError) => {
       console.log(reason)
@@ -93,7 +89,7 @@ function Profile() {
           <h1>Мой профиль</h1>
         </div>
         <div id="header-mainInfo">
-          <p>Имя Фамилия</p>
+          <p>{userFirstname} {userSurname}</p>
           <p>пользователь/админ</p>
         </div>
       </header>
@@ -114,15 +110,15 @@ function Profile() {
           <div id="infoUser">
             <div className="infoUserValues" id="el1">
               <label>Логин</label>
-              <input defaultValue={userLogin} type="text" id="el1_input"/>
+              <input defaultValue={userLogin} type="text" onChange={(e) => {setUserLogin(e.target.value)}}/>
             </div>
             <div className="infoUserValues" id="el2">
               <label>Email</label>
-              <input defaultValue={userEmail} type="text" id="el2_input"/>
+              <input defaultValue={userEmail} type="text" onChange={(e) => {setUserEmail(e.target.value)}}/>
             </div>
             <div className="infoUserValues" id="el3">
               <label>Фамилия</label>
-              <input defaultValue={userSurname} type="text" id="el3_input"/>
+              <input defaultValue={userSurname} type="text" onChange={(e) => {setUserSurname(e.target.value)}}/>
             </div>
             <div className="infoUserValues" id="el4">
               <label>Телефон</label>
@@ -130,7 +126,7 @@ function Profile() {
             </div>
             <div className="infoUserValues" id="el5">
               <label>Имя</label>
-              <input defaultValue={userFirstname} type="text" id="el5_input"/>
+              <input defaultValue={userFirstname} type="text" onChange={(e) => {setUserFirstname(e.target.value)}}/>
             </div>
             <div className="infoUserValues" id="el6">
               <label>Должность</label>
@@ -163,7 +159,7 @@ function Profile() {
       </div>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={5000}
+        autoHideDuration={4000}
         onClose={handleClose}>
           <Alert
             onClose={handleClose}
@@ -173,7 +169,7 @@ function Profile() {
           >
             Изменения успешно сохранены!
           </Alert>
-        </Snackbar>\
+        </Snackbar>
     </div>
   )
 }

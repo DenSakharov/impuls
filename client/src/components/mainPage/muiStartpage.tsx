@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
+import AddProjects from './muiDialogAddProject';
 import data from '../editPopup/data';
 
 const MuiStartpage: React.FC = () => {
@@ -32,6 +33,7 @@ const MuiStartpage: React.FC = () => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Создать </Typography>
                   <Typography color="textSecondary" gutterBottom> Новый проект </Typography>
+                  <AddProjects />
                   <Typography color="textSecondary" gutterBottom> Все проекты </Typography>
                 </div>
                 <div className="max-w-7xl py-1 sm:px-6 lg:px-8">

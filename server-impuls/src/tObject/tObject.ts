@@ -1,4 +1,4 @@
-import { tProject } from '#/entities';
+import { tPackage, tProject } from '#/entities';
 import { UUID } from 'crypto';
 import {
   Model,
@@ -18,7 +18,7 @@ export interface tObjectAttributes {
   author?: string;
   version?: string;
   note?: string;
-  packageId?: number; //TODO: Should be UUID after editing of tPackage
+  packageId?: UUID;
   stereotype?: string;
   status?: string;
   imsGuid?: string;
@@ -62,13 +62,9 @@ export class tObject
   @Column({ allowNull: true, type: DataType.STRING })
   note?: string;
 
-  @Column({
-    field: 'package_id',
-    allowNull: true,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal('0'),
-  })
-  packageId?: number;
+  @ForeignKey(() => tPackage)
+  @Column({ field: 'package_id', allowNull: true, type: DataType.STRING(40) })
+  packageId?: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
   stereotype?: string;
@@ -92,7 +88,7 @@ export class tObject
   appliesto?: string;
 
   @ForeignKey(() => tProject)
-  @Column({ field: 'project_id', allowNull: true, type: DataType.INTEGER })
+  @Column({ field: 'project_id', allowNull: true, type: DataType.STRING(40) })
   projectId?: UUID;
 
   @Column({

@@ -5,6 +5,19 @@
 
 -----------------------------------------
 
+## Предарительные требования
+Для корректной работы системы, в ОС должны быть установлены программы следующих версий: 
+- NodeJs: 20.13  ~ https://nodejs.org/en/
+- Docker-Compose: v2.27.0 ~ https://docs.docker.com/engine/install/
+- npm: 6.14.4 ~ https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+
+Проверка соотв. установленных в ОС версий: 
+```
+node -v
+docker-compose -v
+npm -v
+```
+
 ## Установка/запуск проекта
 
 **#1 - Деплоймент**
@@ -25,7 +38,7 @@ mongo/.env
 ``` 
 
 **#3 - Установка зависимостей**
-Установить во все директории проекта /node_modules, выполнить команду ``npm i``:
+- Установить во все директории проекта ``/node_modules``:
 ```
 cd /client 
 npm i
@@ -43,16 +56,60 @@ cd client
 npm run start
 ```
 
+Вывод при успешном запуске:
+```
+Compiled successfully!
+
+You can now view client in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.56.1:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+No issues found.
+```
+
 **#5 - Запустить сервер (бекенд)**
 ```
 cd server-impuls
 npm run start:dev
 ```
 
+Вывод при успешном запуске:
+```
+> server-impuls@0.0.1 start
+> nest start
+
+[Nest] 15160  - 21.05.2024, 23:39:34     LOG [NestFactory] Starting Nest application...
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [InstanceLoader] PassportModule dependencies initialized +155ms
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [InstanceLoader] ConfigHostModule dependencies initialized +2ms
+....
+Executing (default): SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 't_secuser'
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 't_secuser' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 't_documents'
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [InstanceLoader] databaseModule dependencies initialized +306ms
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [RoutesResolver] AppController {/app}: +9ms
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [RouterExplorer] Mapped {/app/helloWorld, GET} route +1ms
+....
+[Nest] 15160  - 21.05.2024, 23:39:35     LOG [NestApplication] Nest application successfully started +3ms
+```
+
 **#6 - Запустить БД MongoDB**
 ```
 cd mongo
-npm run devStart
+npm run start
+```
+
+Вывод при успешном запуске:
+```
+> server@1.0.0 start
+> node server.js
+
+turning on cors on http://78.107.235.216
+connection success
 ```
 
 **#7 - Проверка запуска**

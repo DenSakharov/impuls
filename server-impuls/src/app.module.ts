@@ -8,6 +8,7 @@ import { AuthModule } from '#/auth/auth.module';
 import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
 import { tObjectModule } from './tObject/tObject.module';
+import { tPackageModule } from './tPackage/tPackage.module';
 
 @Module({
   imports: [
@@ -17,9 +18,10 @@ import { tObjectModule } from './tObject/tObject.module';
     tDocumentsModule,
     tProjectModule,
     tObjectModule,
+    tPackageModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  // controllers: [AppController],
+  // providers: [AppService],
   exports: [],
 })
 export class AppModule implements NestModule {
