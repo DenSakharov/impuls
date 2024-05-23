@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardContent, Typography, Container, Box, Modal, IconButton } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Typography, Container, Box, Modal, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import MuiNewsModal from "./muiNewsModal";
+import MuiNewsModalUpdate from "./muiNewsModalUpdate";
 import './styles/muiNews.scss';
+import axios from 'axios';
 
 interface NewsItem {
     news_id: string;
@@ -20,8 +24,10 @@ const truncateContent = (content: string, maxLength: number) => {
 };
 
 const MuiNews: React.FC = () => {
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [currentNewsUpdate, setCurrentNewsUpdate] = useState(null);
     const [showModalCreate, setShowModalCreate] = useState(false);
-    const [showModalNews, setShowModalNews] = useState(false);
+    const [showModalItem, setShowModalItem] = useState(false);
     const [newsData, setNewsData] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -29,27 +35,28 @@ const MuiNews: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const newsPerPage = 3; // Number of news items per page
 
+    // loa news list
+    const fetchNewsData = async () => {
+        try {
+            const response = await fetch('http://localhost:3010/news');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setNewsData(data);
+        } catch (err) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // load news list
     useEffect(() => {
-        const fetchNewsData = async () => {
-            try {
-                const response = await fetch('http://localhost:3010/news');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setNewsData(data);
-            } catch (err) {
-                if (err instanceof Error) {
-                    setError(err.message);
-                } else {
-                    setError('An unknown error occurred');
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchNewsData();
     }, []);
 
@@ -61,17 +68,35 @@ const MuiNews: React.FC = () => {
     // Change page
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+    // edit/delete news
+    const handleNewsEditClick = (newsItem) => {
+        setCurrentNewsUpdate(newsItem);
+        setShowModalUpdate(true);
+    };
+
+    const handleNewsDeleteClick = async (newsId) => {
+        await axios.delete(`http://localhost:3010/news/${newsId}`);
+        fetchNewsData();
+    };
+
     // popup with sinlge news
     const handleOpenModalNews = (news: NewsItem) => {
         setSelectedNews(news);
-        setShowModalNews(true);
+        setShowModalItem(true);
     };
 
     const handleCloseModalNews = () => {
-        setShowModalNews(false);
+        setShowModalItem(false);
         setSelectedNews(null);
     };
 
+    const handleCloseModalUpdate = () => {
+        setShowModalUpdate(false);
+        setCurrentNewsUpdate(null);
+        fetchNewsData();
+    };
+
+    // load news
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -84,6 +109,19 @@ const MuiNews: React.FC = () => {
         <Container>
             {currentNews.map((news) => (
                 <Card key={news.news_id} style={{ marginBottom: '20px' }}>
+                    <CardActions style={{ marginBottom: '-50px' }}>
+                        <IconButton
+                            aria-label="edit"
+                            onClick={() => handleNewsEditClick(news)}
+                            style={{ marginLeft: 'auto' }}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton
+                            aria-label="delete"
+                            onClick={() => handleNewsDeleteClick(news.news_id)}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </CardActions>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             {news.title}
@@ -92,7 +130,7 @@ const MuiNews: React.FC = () => {
                             {new Date(news.pubdate).toLocaleDateString()}
                         </Typography>
                         <Typography variant="body2" component="p">
-                            {truncateContent(news.content, 30)}
+                            {truncateContent(news.content, 200)}
                         </Typography>
                     </CardContent>
                     <Box display="flex" justifyContent="flex-end" padding="16px">
@@ -111,8 +149,9 @@ const MuiNews: React.FC = () => {
                 <Button variant="contained" color="primary" onClick={() => setShowModalCreate(true)}>+</Button>
             </Box>
             {showModalCreate && <MuiNewsModal onClose={() => setShowModalCreate(false)} />}
+            {showModalUpdate && <MuiNewsModalUpdate open={showModalUpdate} newsItem={currentNewsUpdate} onClose={handleCloseModalUpdate} />}
 
-            <Modal open={showModalNews} onClose={handleCloseModalNews}>
+            <Modal open={showModalItem} onClose={handleCloseModalNews}>
                 <Box sx={{
                     position: 'absolute',
                     top: '50%',
