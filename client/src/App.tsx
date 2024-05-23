@@ -15,9 +15,10 @@ import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
 import Report from "./components/mainPage/report";
-import Admin from "./components/mainPage/admin";
+import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/searchpage";
+import History from './components/history/muiHistory';
 
 function App() {
   // условие для отображения navbarComponent
@@ -59,6 +60,7 @@ function App() {
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/projects' Component={Projects}></Route>
+          <Route path='/history' Component={History}></Route>
           <Route path='/admin' Component={Admin}></Route>
           <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>

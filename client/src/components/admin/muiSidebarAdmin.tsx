@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import History from '../history/muiHistory';
 
 const drawerWidth = 240;
 
@@ -182,13 +183,14 @@ export default function MuiSidebarTree() {
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* <DrawerHeader />
+        <DrawerHeader />
         <Typography paragraph sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
-                  }}>
-          Глобальные параметры
+                  }}>         
+         <History />
+
         </Typography>
         <DrawerHeader />
         <Typography paragraph sx={{
@@ -196,8 +198,8 @@ export default function MuiSidebarTree() {
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
                   }}>
-          Настройки системы
-        </Typography> */}
+          Настройки
+        </Typography>
       </Box>
     </Box>
   );

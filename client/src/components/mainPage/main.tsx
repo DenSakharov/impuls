@@ -138,14 +138,14 @@ function Main({changeState} : any) {
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              {/* <MuiNews></MuiNews> */}
+              <MuiNews></MuiNews>
             </Container>
            </div>
 
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              {/* <MuiDashboard></MuiDashboard> */}
+              <MuiDashboard></MuiDashboard>
             </Container>
            </div>
 

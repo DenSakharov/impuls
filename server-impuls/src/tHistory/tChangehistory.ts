@@ -18,6 +18,7 @@ export interface tChangehistoryAttributes {
   logtype?: string;
   modules?: string;
   actions?: string;
+  dateEdited?:Date;
 }
 
 @Table({ tableName: 't_changehistory', timestamps: false })

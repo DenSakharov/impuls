@@ -5,7 +5,7 @@ const client = new Client({
     user: '',
     database: '',
     password: '',
-    port:0 ,
+    port:,
 });
 
 const insert = async (ulog_id,datetime, author, notes, object_id, logtype, modules, actions,date_edited) => {
@@ -23,7 +23,7 @@ const insert = async (ulog_id,datetime, author, notes, object_id, logtype, modul
     }
 };
 
-insertUser('3eb75e77-6c4b-4076-83b5-753032757f41','2024-05-21 12:56:25.709','UserName', 'test record','000001','error','addproj','Дублирование названия проекта',null).then(result => {
+insertRecord('1eb75e77-6h4b-4076-83b5-753032757f41','2024-05-21 12:56:25.709','UserName', 'test record','000001','error','addproj','Дублирование названия проекта',null).then(result => {
     if (result) {
         console.log('log record inserted');
     }

@@ -9,6 +9,7 @@ import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
 import { tObjectModule } from './tObject/tObject.module';
 import { tPackageModule } from './tPackage/tPackage.module';
+import { tChangehistoryModule } from './tHistory/tChangehistory.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { tPackageModule } from './tPackage/tPackage.module';
     tProjectModule,
     tObjectModule,
     tPackageModule,
+    tChangehistoryModule,
   ],
   // controllers: [AppController],
   // providers: [AppService],
