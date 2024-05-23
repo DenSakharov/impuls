@@ -12,6 +12,27 @@ mongoose.connect(process.env.DB_Mongo)
 
 const cors=require('cors');
 
+const express = require("express")
+const app = express();
+
+var corsOptions = {
+  origin: [`${process.env.HOST}`,"http://localhost:3000"]
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/documents/:objectId", async (req, res) => {
+  res.json(await findDocumentByObjectId(req.params.objectId));
+});
+
+const PORT = 3002;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
+
 console.log(`turning on cors on ${process.env.HOST}`)
 const io = require('socket.io')(3001, {
     cors:{
@@ -48,29 +69,9 @@ async function findOrCreateDocument(id){
 
 
 async function findDocumentByObjectId(objectId){
-    if (objectId == null) return
-    const document = await Document.find({documentId: objectId})
-    if (document) return document
+    if (objectId === null) return
+    const document = await Document.find({documentId: objectId}).select('__id')
+    return document
 }
 
 
-const express = require("express")
-const app = express();
-
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/documents/:objectId", (req, res) => {
-  res.json({ data: findDocumentByObjectId(req.query.objectId) });
-});
-
-// set port, listen for requests
-const PORT = 3002;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
