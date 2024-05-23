@@ -16,9 +16,9 @@ import axios from 'axios'
 
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
-    axios.headers.common['Authorization'] = `Bearer ${props.token}`
     axios.get(         
-        window.location.origin + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754'
+        "http://" + window.location.hostname + ":3010" + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754',
+        {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
     )
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err))
