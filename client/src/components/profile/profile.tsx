@@ -72,6 +72,7 @@ function Profile() {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
     }).then((response: AxiosResponse) => {
       console.log(response)
+      localStorage.setItem('userlogin', userLogin)
       handleClick()
     }).catch((reason: AxiosError) => {
       console.log(reason)
@@ -168,7 +169,7 @@ function Profile() {
           >
             Изменения успешно сохранены!
           </Alert>
-        </Snackbar>\
+        </Snackbar>
     </div>
   )
 }

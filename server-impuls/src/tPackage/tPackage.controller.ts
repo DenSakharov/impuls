@@ -13,13 +13,13 @@ import {
 } from '@nestjs/common';
 
 import { AuthGuard } from '#/auth/auth.guard';
-import { tObjectService } from './tObject.service';
-import { tObject } from './tObject';
+import { tPackageService } from './tPackage.service';
+import { tPackage } from './tPackage';
 import { Response } from 'express';
 
-@Controller('/projects/:projectId/objects')
-export class tObjectController {
-  constructor(private readonly tObjectService: tObjectService) {}
+@Controller('/projects/:projectId/packages')
+export class tPackageController {
+  constructor(private readonly tPackageService: tPackageService) {}
 
   @UseGuards(AuthGuard)
   @Get('/')
@@ -27,13 +27,28 @@ export class tObjectController {
     @Res() res: Response,
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
   ) {
-    const data = await this.tObjectService.findAll(projectId);
+    const data = await this.tPackageService.findAll(projectId);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
       return res
         .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+        .json({ message: 'Package not found' });
+    }
+  }
+  @UseGuards(AuthGuard)
+  @Get('/tree')
+  async tree(
+    @Res() res: Response,
+    @Param('projectId', new ParseUUIDPipe()) projectId: string,
+  ) {
+    const data = await this.tPackageService.tree(projectId);
+    if (data) {
+      return res.status(HttpStatus.OK).json(data);
+    } else {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'Package not found' });
     }
   }
 
@@ -41,11 +56,10 @@ export class tObjectController {
   @Post('/')
   async create(
     @Res() res: Response,
-
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
-    @Body() newObject: tObject,
+    @Body() newPackage: tPackage,
   ) {
-    const data = await this.tObjectService.create(projectId, newObject);
+    const data = await this.tPackageService.create(projectId, newPackage);
     return res.status(data.status).json(data);
   }
 
@@ -53,17 +67,16 @@ export class tObjectController {
   @Get('/:uuid')
   async findOne(
     @Res() res: Response,
-
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    const data = await this.tObjectService.findOne(projectId, uuid);
+    const data = await this.tPackageService.findOne(projectId, uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
       return res
         .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+        .json({ message: 'Package not found' });
     }
   }
 
@@ -71,35 +84,33 @@ export class tObjectController {
   @Put('/:uuid')
   async updateWithUID(
     @Res() res: Response,
-
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
-    @Body() newObject: tObject,
+    @Body() newPackage: tPackage,
   ) {
-    const data = await this.tObjectService.update(projectId, newObject, uuid);
+    const data = await this.tPackageService.update(projectId, newPackage, uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
       return res
         .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+        .json({ message: 'Package not found' });
     }
   }
   @UseGuards(AuthGuard)
   @Put('/')
   async update(
     @Res() res: Response,
-
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
-    @Body() newObject: tObject,
+    @Body() newPackage: tPackage,
   ) {
-    const data = await this.tObjectService.update(projectId, newObject);
+    const data = await this.tPackageService.update(projectId, newPackage);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
       return res
         .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+        .json({ message: 'Package not found' });
     }
   }
 
@@ -107,11 +118,10 @@ export class tObjectController {
   @Delete('/:uuid')
   async delete(
     @Res() res: Response,
-
     @Param('projectId', new ParseUUIDPipe()) projectId: string,
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ) {
-    const data = await this.tObjectService.delete(projectId, uuid);
+    const data = await this.tPackageService.delete(projectId, uuid);
     return res.status(data.status).json(data);
   }
 }
