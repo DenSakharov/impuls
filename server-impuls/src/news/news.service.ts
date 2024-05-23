@@ -13,7 +13,11 @@ export class NewsService {
     ) {}
 
     findAll(): Promise<News[]> {
-        return this.newsRepository.find();
+        return this.newsRepository.find({
+            order: {
+                pubdate: 'DESC',
+            },
+        });
     }
 
     findOne(id: string): Promise<News> {

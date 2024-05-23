@@ -96,6 +96,11 @@ const MuiNews: React.FC = () => {
         fetchNewsData();
     };
 
+    const handleCloseModalCreate = () => {
+        setShowModalCreate(false);
+        fetchNewsData();
+    };
+
     // load news
     if (loading) {
         return <div>Loading...</div>;
@@ -148,7 +153,7 @@ const MuiNews: React.FC = () => {
                 </Box>
                 <Button variant="contained" color="primary" onClick={() => setShowModalCreate(true)}>+</Button>
             </Box>
-            {showModalCreate && <MuiNewsModal onClose={() => setShowModalCreate(false)} />}
+            {showModalCreate && <MuiNewsModal onClose={handleCloseModalCreate} />}
             {showModalUpdate && <MuiNewsModalUpdate open={showModalUpdate} newsItem={currentNewsUpdate} onClose={handleCloseModalUpdate} />}
 
             <Modal open={showModalItem} onClose={handleCloseModalNews}>

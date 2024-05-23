@@ -39,13 +39,13 @@ const MuiNewsModalUpdate = ({ open, newsItem, onClose }) => {
                     p: 4,
                 }}>
                 <TextField
-                    label="Title"
+                    label="Заголовок"
                     fullWidth
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     margin="normal"/>
                 <TextField
-                    label="Content"
+                    label="Текст"
                     fullWidth
                     multiline
                     rows={4}
@@ -53,7 +53,7 @@ const MuiNewsModalUpdate = ({ open, newsItem, onClose }) => {
                     onChange={(e) => setContent(e.target.value)}
                     margin="normal"/>
                 <Button variant="contained" onClick={handleSave}>
-                    Save
+                   Сохранить
                 </Button>
             </Box>
         </Modal>
