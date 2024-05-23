@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Box, TextField, Button } from '@mui/material';
 import axios from 'axios';
 
-const MuiNewsModalUpdate = ({ open, newsItem, onClose }) => {
+const MuiNewsModal2 = ({ open, newsItem, onClose }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -60,4 +60,4 @@ const MuiNewsModalUpdate = ({ open, newsItem, onClose }) => {
     );
 };
 
-export default MuiNewsModalUpdate;
+export default MuiNewsModal2;

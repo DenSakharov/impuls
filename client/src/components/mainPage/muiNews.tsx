@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MuiNewsModal from "./muiNewsModal";
-import MuiNewsModalUpdate from "./muiNewsModalUpdate";
+import MuiNewsModal2 from "./muiNewsModal2";
 import './styles/muiNews.scss';
 import axios from 'axios';
 
@@ -154,7 +154,7 @@ const MuiNews: React.FC = () => {
                 <Button variant="contained" color="primary" onClick={() => setShowModalCreate(true)}>+</Button>
             </Box>
             {showModalCreate && <MuiNewsModal onClose={handleCloseModalCreate} />}
-            {showModalUpdate && <MuiNewsModalUpdate open={showModalUpdate} newsItem={currentNewsUpdate} onClose={handleCloseModalUpdate} />}
+            {showModalUpdate && <MuiNewsModal2 open={showModalUpdate} newsItem={currentNewsUpdate} onClose={handleCloseModalUpdate} />}
 
             <Modal open={showModalItem} onClose={handleCloseModalNews}>
                 <Box sx={{
