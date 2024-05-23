@@ -1,69 +1,154 @@
-import React, { useState } from 'react';
-import { Button, Card, CardContent, Typography, Container, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, CardContent, Typography, Container, Box, Modal, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import MuiNewsModal from "./muiNewsModal";
 import './styles/muiNews.scss';
 
 interface NewsItem {
-    date: string;
+    news_id: string;
+    pubdate: string;
     title: string;
     content: string;
+    userid: string | null;
 }
 
-const newsData: NewsItem[] = [
-    { date: '14.04.2024', title: 'Новые функции автоматизации в CRM', content: 'Инновации для управления документами: как они могут улучшить ваш рабочий процесс...' },
-    { date: '10.04.2024', title: 'Обновление системы', content: 'Улучшенная интеграция CRM с облачными хранилищами для оптимизации документооборота ...' },
-    { date: '18.03.2024', title: 'Интересное исследование', content: 'Исследование показывает, как эффективное управление документами повышает производительность на 40%' },
-    { date: '15.03.2024', title: 'Три ключевые стратегии безопасности для вашей CRM-системы', content: 'Защитите свои документы от утечек данных ...' },
-    { date: '12.11.2023', title: 'Инновации на каждом шагу', content: 'Как наша CRM помогает соблюдать GDPR при обработке документов: Практическое руководство...' },
-    { date: '11.11.2024', title: 'Пять лучших практик', content: 'Идеи для эффективной классификации и управления корпоративными документами в CRM...' },
-    { date: '12.10.2023', title: 'Самое главное', content: 'Оптимизация управления контрактами через обновленные функции нашей CRM...' },
-    { date: '15.09.2024', title: 'Новый модуль управления документами', content: 'Превращаем бумажный архив в цифровую фортецу...' },
-    { date: '12.09.2023', title: 'Интеграция искусственного интеллекта в CRM', content: 'Инновации для автоматической сортировки и анализа документов...' },
-];
+const truncateContent = (content: string, maxLength: number) => {
+    if (content.length <= maxLength)
+        return content;
+    const truncated = content.substr(0, maxLength);
+    return truncated.substr(0, truncated.lastIndexOf(' ')) + '...';
+};
 
 const MuiNews: React.FC = () => {
-    const [showModal, setShowModal] = useState(false);
-
+    const [showModalCreate, setShowModalCreate] = useState(false);
+    const [showModalNews, setShowModalNews] = useState(false);
+    const [newsData, setNewsData] = useState<NewsItem[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const newsPerPage = 3; // Количество новостей на странице
+    const newsPerPage = 3; // Number of news items per page
 
-    // Получаем текущие новости для страницы
+    // load news list
+    useEffect(() => {
+        const fetchNewsData = async () => {
+            try {
+                const response = await fetch('http://localhost:3010/news');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setNewsData(data);
+            } catch (err) {
+                if (err instanceof Error) {
+                    setError(err.message);
+                } else {
+                    setError('An unknown error occurred');
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchNewsData();
+    }, []);
+
+    // Get current news for the page
     const indexOfLastNews = currentPage * newsPerPage;
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
     const currentNews = newsData.slice(indexOfFirstNews, indexOfLastNews);
 
-    // Обработчик изменения страницы
-    const numPages = Math.ceil(newsData.length / newsPerPage);
-    const pageNumbers = Array.from({ length: numPages }, (_, i) => i + 1);
+    // Change page
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+    // popup with sinlge news
+    const handleOpenModalNews = (news: NewsItem) => {
+        setSelectedNews(news);
+        setShowModalNews(true);
+    };
+
+    const handleCloseModalNews = () => {
+        setShowModalNews(false);
+        setSelectedNews(null);
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <Card sx={{ padding: '20px', margin: '20px' }}>
-      
-        <Container maxWidth="md">
-            <Typography variant="h5" gutterBottom>Новости</Typography>
-            {currentNews.map((item, index) => (
-                <Card key={index} variant="outlined" sx={{ mb: 2 }}>
+        <Container>
+            {currentNews.map((news) => (
+                <Card key={news.news_id} style={{ marginBottom: '20px' }}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom>{item.date}</Typography>
-                        <Typography variant="h5">{item.title}</Typography>
-                        <Typography>{item.content}</Typography>
+                        <Typography variant="h5" component="div">
+                            {news.title}
+                        </Typography>
+                        <Typography color="textSecondary" gutterBottom>
+                            {new Date(news.pubdate).toLocaleDateString()}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                            {truncateContent(news.content, 30)}
+                        </Typography>
                     </CardContent>
+                    <Box display="flex" justifyContent="flex-end" padding="16px">
+                        <Button onClick={() => handleOpenModalNews(news)}>Подробнее</Button>
+                    </Box>
                 </Card>
             ))}
-            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+
+            {/* Pagination buttons */}
+            <Box display="flex" justifyContent="space-between" alignItems="center" marginY="20px">
                 <Box>
-                    {pageNumbers.map(number => (
-                        <Button key={number} variant="text" color="primary" onClick={() => setCurrentPage(number)} sx={{ mx: 0.5 }}>
-                            {number}
-                        </Button>
+                    {Array.from({ length: Math.ceil(newsData.length / newsPerPage) }, (_, i) => (
+                        <Button key={i + 1} onClick={() => paginate(i + 1)}>{i + 1}</Button>
                     ))}
                 </Box>
-                <Button variant="contained" color="primary" onClick={() => setShowModal(true)}>+</Button>
+                <Button variant="contained" color="primary" onClick={() => setShowModalCreate(true)}>+</Button>
             </Box>
-            {showModal && <MuiNewsModal onClose={() => setShowModal(false)} />}
+            {showModalCreate && <MuiNewsModal onClose={() => setShowModalCreate(false)} />}
+
+            <Modal open={showModalNews} onClose={handleCloseModalNews}>
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 800,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                    maxHeight: '80vh',
+                    overflow: 'auto'
+                }}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={handleCloseModalNews}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    ><CloseIcon />
+                    </IconButton>
+                    {selectedNews && (
+                        <>
+                            <Typography variant="h6" component="h2">
+                                {selectedNews.title}
+                            </Typography>
+                            <Typography sx={{ mt: 2 }}>
+                                {selectedNews.content}
+                            </Typography>
+                        </>
+                    )}
+                </Box>
+            </Modal>
         </Container>
-      
-    </Card>
     );
 };
 
