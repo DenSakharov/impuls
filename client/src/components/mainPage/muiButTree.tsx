@@ -6,7 +6,7 @@ import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import MuiSidebar from './muiSidebar';
+import MuiSidebarConf from './muiSidebarConf';
 
 function MuiButTree() {
     // const classes = useStyles()
@@ -39,7 +39,7 @@ function MuiButTree() {
 
             <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
             <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-            <MuiSidebar />
+            <MuiSidebarConf />
         </Stack>
         
     );
