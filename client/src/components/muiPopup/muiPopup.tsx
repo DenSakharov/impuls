@@ -95,11 +95,13 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
 
 
     const saveData = () => {
+        if (toUpdate) {
         axios.put(
             "http://" + window.location.hostname + ":3010" + '/documents/' + props.documentId,
             document,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
         )
+    }
     }
 
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
@@ -112,8 +114,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     const [formOpenLink, setFormOpenLink] = React.useState(false);
     const [formApproval, setFormApproval] = React.useState(false);
     const [showAlert, setShowAlert] = React.useState(false);
-    const [userApprove, setApproveUser] = React.useState('');
-	const [docId, setDocId] = React.useState(props.id)													  
+    const [userApprove, setApproveUser] = React.useState('');												  
 
     const addTags = (value: {key:string, value:string | number}) => {        
         setDocument({...document, tags: {...document.tags, [value.key]: value.value}});
@@ -145,7 +146,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     const inputRef = React.useRef<HTMLInputElement | null>(null)
     const handleAddAttachment = () => {
         const newUUID = uuidV4()
-        window.open('/documents/'+ newUUID + '?header=' + docId)
+        window.open('/documents/'+ newUUID + '?docId=' + document.docId)
         if (newUUID) {
             setAttachments([...attachments, {_id: newUUID}]);
         }
@@ -153,7 +154,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     };
 
     const handleOpenAttachment = (uuid: string) => {
-        window.open('/documents/'+ uuid + '?header=' + docId)
+        window.open('/documents/'+ uuid + '?docId=' + document.docId)
     }
 
     const handleAlert = (value: string) => {
