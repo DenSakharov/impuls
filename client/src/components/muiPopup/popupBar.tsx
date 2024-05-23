@@ -9,7 +9,7 @@ import EditPopupProps from '../interfaces/editPopupProps';
 import { closeDialog } from '../mainPage/main';
 
 
-export default function PopupBar(props: {id:string} = {id: 'null'}) {
+export default function PopupBar(props: {id:string, updateCallback: Function} = {id: 'null', updateCallback: () => {}}) {
   const [smallMenu, setSmallMenu] = React.useState(false);
   const closeParentDialog = React.useContext(closeDialog)
   return (
@@ -35,7 +35,7 @@ export default function PopupBar(props: {id:string} = {id: 'null'}) {
             <ArrowDropDown fontSize='large'/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
-            {props.id}
+            № {props.id}
           </Typography>
           <IconButton 
             size="large"
@@ -57,7 +57,15 @@ export default function PopupBar(props: {id:string} = {id: 'null'}) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => window.location.pathname === '/main' ? closeParentDialog() : window.open('/main', '_self')}>
+            onClick={() => {
+              if (window.location.pathname === '/main') {
+                props.updateCallback()
+                closeParentDialog()
+              } else {
+                closeParentDialog()
+                window.open('/main', '_self')
+              }
+            }}>
           
               <Close fontSize='large'/>
               </IconButton>

@@ -46,6 +46,7 @@ interface tDocumentsAttributes {
 
 
 export default function MuiPopup(props: { documentId : string} = {documentId : '06858a60-0059-41e4-9c88-963af22dc754'}) {
+    
     const [toUpdate, setToUpdate] = React.useState(false);
     const [attachments, setAttachments] = React.useState<attachment[]>([]);
     const [document, setDocument] = React.useState<tDocumentsAttributes>({
@@ -75,7 +76,6 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
             doc.tags = doc.tags ? doc.tags : []
             doc.links = doc.links ? doc.links : {"values": []}            
             setDocument(doc)
-            console.log(res.data)
         })    
         .catch((err) => console.log(err))
 
@@ -84,7 +84,6 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         )
         .then((res) => {
             setAttachments(res.data)
-            console.log(res.data)
         })    
         .catch((err) => console.log(err))
     }, [])
@@ -95,6 +94,14 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     }, [document])
 
 
+    const saveData = () => {
+        axios.put(
+            "http://" + window.location.hostname + ":3010" + '/documents/' + props.documentId,
+            document,
+            {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
+        )
+    }
+
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
     const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
@@ -104,7 +111,6 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     const priorities = ['Высокий', 'Средний', 'Низкий']
     const [formOpenLink, setFormOpenLink] = React.useState(false);
     const [formApproval, setFormApproval] = React.useState(false);
-    
     const [showAlert, setShowAlert] = React.useState(false);
     const [userApprove, setApproveUser] = React.useState('');
 
@@ -130,7 +136,6 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         if (files.length > 0) {
             const file = files[0];
             setDocument({...document, filepath: file});
-            console.log(file);
         } else {
             setDocument({...document, filepath: ''});
         }
@@ -172,9 +177,8 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         display:'flex',
         flexDirection: 'column',
         overflow: 'auto',
-        
     }}>
-        <PopupBar id={document.docId} />
+        <PopupBar id={document.docId} updateCallback={saveData} />
         <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
                 '&::-webkit-scrollbar': {
                     width: '5px'

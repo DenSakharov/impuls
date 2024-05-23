@@ -30,10 +30,10 @@ function Main({changeState} : any) {
     const [formOpen, setFormOpen] = React.useState(false);  
 
     const handleCloseForm = () => {
-    setFormOpen(false);
+      setFormOpen(false);
     }
     const handleOpenForm = () => {
-    setFormOpen(true);
+      setFormOpen(true);
     }
 
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -113,7 +113,7 @@ function Main({changeState} : any) {
         </Disclosure>
 
         {/* Открытие карточки объекта  */}
-        <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+        <Dialog maxWidth="lg" open={formOpen} onClose={() => {}}>
            <MuiPopup documentId={popupData.id}/>
         </Dialog>
 
