@@ -200,7 +200,7 @@ function MainNavBar({changeState} : any) {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
 
-                <MuiSidebarMessage />
+                      <MuiSidebarMessage />
                       
                       <Menu as="div" className="relative ml-3">
                         <div>
@@ -314,6 +314,7 @@ function MainNavBar({changeState} : any) {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
+
                   </div>
 
                   <div className="mt-3 space-y-1 px-2">

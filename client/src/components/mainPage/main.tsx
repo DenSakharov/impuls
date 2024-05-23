@@ -1,4 +1,4 @@
-import  React  from 'react';
+import  React, { useEffect }  from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
 import { Dialog } from '@mui/material';
@@ -11,7 +11,7 @@ import SelectProjects from './selectProjects';
 import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
-import MuiStartpage from './muiStartpage';
+import {MuiStartpage} from './muiStartpage';
 import MuiFavourites from './muiFavourites';
 import { Sidebar } from 'flowbite-react';
 import { IconButton, Drawer } from '@mui/material';
@@ -20,14 +20,22 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
+import { progress } from '@material-tailwind/react';
 
 
 export const closeDialog = React.createContext<Function>(() => {
 });
 function Main({changeState} : any) {
     const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);  
-    const [formOpen, setFormOpen] = React.useState(false);  
+
+    const [projectData, setProjectData] = React.useState("No-project");
+      // data.tree[0]);
+    useEffect(() => {
+      console.log(projectData);
+      },[projectData]
+    )
+
+    const [formOpen, setFormOpen] = React.useState(false);
 
     const handleCloseForm = () => {
     setFormOpen(false);
@@ -57,10 +65,15 @@ function Main({changeState} : any) {
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
       if (reason === 'clickaway') {
         return;
-      }  
+      }
       setOpen(false);
     };
-    
+
+    const handleselectproject = (value) => {
+      console.log(value);
+      setProjectData(value);
+    }
+
     return (
       <>
       <closeDialog.Provider value={handleCloseForm}>
@@ -76,9 +89,9 @@ function Main({changeState} : any) {
         <div className="hidden md:block">                      
                       <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">                        
                         {/* Сайдбар с деревом объектов */}                        
-                          <SelectProjects changeState={setProjectData}/>        
+                          <SelectProjects changeState={setProjectData}/>
                           <MuiButTree/>
-                          <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>                   
+                          <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
                        </div>                      
         </div>                                  
         {/* End */}  
@@ -103,9 +116,9 @@ function Main({changeState} : any) {
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">            
               {/* Сайдбар с деревом объектов */}            
-                    <SelectProjects changeState={setProjectData}/>        
+                    <SelectProjects changeState={setProjectData}/>
                     <MuiButTree/>
-                    <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>              
+                    <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
                  </div>
               </Disclosure.Panel>
             </>                     
@@ -131,7 +144,7 @@ function Main({changeState} : any) {
           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              <MuiStartpage />
+              <MuiStartpage chengedproject={handleselectproject} />
             </Container>
            </div>
 

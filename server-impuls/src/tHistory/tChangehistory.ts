@@ -26,7 +26,7 @@ export class tChangehistory
   extends Model<tChangehistoryAttributes, tChangehistoryAttributes>
   implements tChangehistoryAttributes
 {
-  @Column({ field: 'log_id', allowNull: false, type: DataType.STRING(40), primaryKey: true })
+  @Column({ field: 'log_id', allowNull: false, type: DataType.UUID, primaryKey: true })
   logId:UUID;
 
   @Column({ allowNull: true, type: DataType.DATE(6) })

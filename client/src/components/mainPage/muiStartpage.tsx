@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
 import AddProjects from './addProjects';
 import data from '../editPopup/data';
 
-const MuiStartpage: React.FC = () => {
+
+export const MuiStartpage = ({chengedproject}) => {
 
     // const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);  
+    const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
+
+    useEffect(() => {
+      // console.log(projectData)
+      chengedproject(projectData)
+    }
+    ,[projectData]
+  )
+
     // const [formOpen, setFormOpen] = React.useState(false);  
 
     // const handleCloseForm = () => {
@@ -47,4 +56,4 @@ const MuiStartpage: React.FC = () => {
     );
 };
 
-export default MuiStartpage;
+// export default MuiStartpage;

@@ -15,6 +15,7 @@ export default function SelectProjects({changeState} : any) {
           setFormOpen(true);
       }
       const changeProps = (value : any) => {
+        // console.log(value)
         setProjectData(value)
         changeState(value)
         handleCloseForm()

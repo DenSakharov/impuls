@@ -55,10 +55,16 @@ export default function SelectProjects({changeState} : any) {
           setFormOpen(true);
       }
       const changeProps = (value : any) => {
+        // console.log(value)
         setProjectData(value)
+
         changeState(value)
+
         handleCloseForm()
+
+
       }
+
   return (
 
     <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
