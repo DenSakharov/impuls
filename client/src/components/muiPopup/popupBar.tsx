@@ -9,7 +9,7 @@ import EditPopupProps from '../interfaces/editPopupProps';
 import { closeDialog } from '../mainPage/main';
 
 
-export default function PopupBar(props: EditPopupProps = data.object) {
+export default function PopupBar(props: {id:string} = {id: 'null'}) {
   const [smallMenu, setSmallMenu] = React.useState(false);
   const closeParentDialog = React.useContext(closeDialog)
   return (
@@ -35,7 +35,7 @@ export default function PopupBar(props: EditPopupProps = data.object) {
             <ArrowDropDown fontSize='large'/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
-            № {props.id}
+            {props.id}
           </Typography>
           <IconButton 
             size="large"

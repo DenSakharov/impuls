@@ -13,7 +13,20 @@ import data from '../editPopup/data';
 import axios from 'axios'
 
 
-export interface tDocumentsAttributes {
+
+type attachment = {
+    _id: string
+}
+
+type links = {
+    values: string[]
+}
+
+type tags = {
+    [key: string]: string
+}
+
+interface tDocumentsAttributes {
     docId: string;
     docname?: string;
     description?: string;
@@ -23,46 +36,65 @@ export interface tDocumentsAttributes {
     author?: string;
     filepath?: string;
     objectId?: string;
-    dateEdited?: string;
-    dateCreated?: string;
-    links?: {values: string[]};
-    tags?: Object;
+    dateEdited: Date | string;
+    dateCreated: Date | string;
+    links: links;
+    tags: tags[];
     dependencies?: Object;
-    attachments?: {values: string[]};
-  }
+}
 
-export default function MuiPopup(props: EditPopupProps = data.object) {
-    const [document, setDocument] = React.useState({
-        "docId": "06858a60-0059-41e4-9c88-963af22dc754",
-        "docname": "Документ 10000",
-        "description": "Какое то описание 42",
+
+
+export default function MuiPopup(props: { documentId : string} = {documentId : '06858a60-0059-41e4-9c88-963af22dc754'}) {
+    const [toUpdate, setToUpdate] = React.useState(false);
+    const [attachments, setAttachments] = React.useState<attachment[]>([]);
+    const [document, setDocument] = React.useState<tDocumentsAttributes>({
+        "docId": "",
+        "docname": "",
+        "description": "",
         "status": '',
         "priority": '',
         "doctype": '',
         "author": '',
         "filepath": '',
         "links": {"values": ['']},
-        "tags": {
-            "": "",
-        },
+        "tags": [{}],
         "dependencies": {},
-        "dateCreated": "2024-05-20T16:17:19.162Z",
-        "dateEdited": "2024-05-21T13:10:25.818Z",
-        "objectId": "6e624807-92f7-4688-9e69-37f9bfb8c1e8",
+        "dateCreated": new Date("2024-05-11T16:17:19.162Z"),
+        "dateEdited": new Date("2024-05-11T13:10:25.818Z"),
+        "objectId": props.documentId
     });
     
     useEffect(() => {
         axios.get(         
-            "http://" + window.location.hostname + ":3010" + '/documents/' + '06858a60-0059-41e4-9c88-963af22dc754',
+            "http://" + window.location.hostname + ":3010" + '/documents/' + props.documentId,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
         )
         .then((res) => {
-            setDocument(res.data)
+            let doc = res.data
+            doc.tags = doc.tags ? doc.tags : []
+            doc.links = doc.links ? doc.links : {"values": []}            
+            setDocument(doc)
+            console.log(res.data)
+        })    
+        .catch((err) => console.log(err))
+
+        axios.get(         
+            "http://" + window.location.hostname + ":3002" + '/documents/' + props.documentId,
+        )
+        .then((res) => {
+            setAttachments(res.data)
             console.log(res.data)
         })    
         .catch((err) => console.log(err))
     }, [])
     
+
+    useEffect(() => {
+        setToUpdate(true)
+    }, [document])
+
+
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
     const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
     const statusButtons = [{value: 'На утверждение', style: 'accept_offer_button'},
@@ -72,7 +104,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const priorities = ['Высокий', 'Средний', 'Низкий']
     const [formOpenLink, setFormOpenLink] = React.useState(false);
     const [formApproval, setFormApproval] = React.useState(false);
-    const [attachments, setAttachments] = React.useState<{uuid: string}[]>([]);
+    
     const [showAlert, setShowAlert] = React.useState(false);
     const [userApprove, setApproveUser] = React.useState('');
 
@@ -109,7 +141,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         const newUUID = uuidV4()
         window.open('/documents/'+ newUUID)
         if (newUUID) {
-            //setDocument({...document, attachments: {...document.attachments, values: [...document.attachments.values, newUUID]}});
+            setAttachments([...attachments, {_id: newUUID}]);
         }
         
     };
@@ -140,8 +172,9 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         display:'flex',
         flexDirection: 'column',
         overflow: 'auto',
+        
     }}>
-        <PopupBar {...props} />
+        <PopupBar id={document.docId} />
         <Container sx={{backgroundColor:'#EDF5FB', overflow:'auto', height:'100%', 
                 '&::-webkit-scrollbar': {
                     width: '5px'
@@ -252,11 +285,11 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                                 {attachments.map((attachment) => 
                                 <IconButton 
                                 
-                                key={attachment.uuid}
-                                onClick={() => handleOpenAttachment(attachment.uuid)}                                                                     
+                                key={attachment._id}
+                                onClick={() => handleOpenAttachment(attachment._id)}                                                                     
                                 sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
                                     <AssignmentOutlined />
-                                    <Typography sx={{color: 'black'}}>{attachment.uuid.slice(0, 8)}</Typography>
+                                    <Typography sx={{color: 'black'}}>{attachment._id.slice(0, 8)}</Typography>
                                 </IconButton> )}                                                                            
                             </Box>
                         </Grid>
