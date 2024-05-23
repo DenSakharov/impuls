@@ -34,6 +34,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [priority, setPriority] = React.useState(props.priority);
     const [showAlert, setShowAlert] = React.useState(false);
     const [userApprove, setApproveUser] = React.useState('');
+	const [docId, setDocId] = React.useState(props.id)													  
 
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
@@ -64,7 +65,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const inputRef = React.useRef<HTMLInputElement | null>(null)
     const handleAddAttachment = () => {
         const newUUID = uuidV4()
-        window.open('/documents/'+ newUUID)
+        window.open('/documents/'+ newUUID + '?header=' + docId)
         if (newUUID) {
             setAttachments([...attachments, {uuid: newUUID}]);
         }
@@ -72,7 +73,7 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     };
 
     const handleOpenAttachment = (uuid: string) => {
-        window.open('/documents/'+ uuid)
+        window.open('/documents/'+ uuid + '?header=' + docId)
     }
 
     const handleAlert = (value: string) => {
