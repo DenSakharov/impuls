@@ -9,12 +9,9 @@ import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
 import { tObjectModule } from './tObject/tObject.module';
 import { tPackageModule } from './tPackage/tPackage.module';
-import { DbModule } from '#/database/db.module';
-import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
-    DbModule,
     databaseModule,
     AuthModule,
     tSecuserModule,
@@ -22,10 +19,9 @@ import { NewsModule } from './news/news.module';
     tProjectModule,
     tObjectModule,
     tPackageModule,
-    NewsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  // controllers: [AppController],
+  // providers: [AppService],
   exports: [],
 })
 export class AppModule implements NestModule {

@@ -13,7 +13,7 @@ export class tDocumentsService {
     const documentUUID = crypto.randomUUID();
     try {
       await this.tDocumentsRepository.create({
-        docId: documentUUID as `${string}-${string}-${string}-${string}-${string}`,
+        docId: documentUUID,
         docname: newDocument.docname,
         description: newDocument.description,
         objectId: newDocument.objectId,

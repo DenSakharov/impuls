@@ -5,7 +5,6 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { Value } from 'sass';
-import Photo from './img/defaultPhoto.png'
 
 function Profile() {
 
@@ -17,12 +16,6 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-  const [selectredFile, setSelectedFile] = useState(null)
-
-  const handleChangeImage = (e) => {
-    console.log(e.target.files)
-    setSelectedFile(e.target.files[0])
-  }
 
   const handleClick = () => {
     setOpenSnackbar(true);
@@ -36,9 +29,8 @@ function Profile() {
     setOpenSnackbar(false);
   };
 
-
   function getUser() {
-    let url_getUser = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin')
+    let url_getUser = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') 
     axios({
       method: 'get',
       url: url_getUser,
@@ -58,7 +50,7 @@ function Profile() {
   }
 
   useEffect(() => {
-    let userReceived = false
+    let userReceived = false;
     if (!userReceived) {
       getUser()
     } 
@@ -66,7 +58,7 @@ function Profile() {
   },[]);
 
   function updateUser() {
-    let urlForUpdate = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin') + '/update'
+    let urlForUpdate = 'http://localhost:3010/users/' + localStorage.getItem('userlogin') + '/update'
     axios({
       method: 'post',
       url: urlForUpdate, 
@@ -104,10 +96,10 @@ function Profile() {
       <div id="infoProfile">
         {/* img строчный элемент, возможно стоит обернуть в div чтобы кнопки под картинку уехали @RusDa256*/}
         <div id="editPhoto">
-          <img src={Photo} alt="Аватар пользователя" id="userImage"/>
+          <img src="/img/UserImage.png" alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
             <label className="input-file">
-              <input type="file" name="file" onChange={handleChangeImage}/>		
+              <input type="file" name="file"/>		
               <span>Загрузить фото</span>
             </label>
             <button id="bDelImg" type="button">Удалить</button>

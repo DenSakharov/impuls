@@ -6,8 +6,8 @@ import {useState} from 'react';
 import axios, { AxiosResponse } from "axios";
 
 export default function Registration() {
-
-  const backend = axios.create({ baseURL: `http://${window.location.hostname.toString()}:3010` });
+  
+  const backend = axios.create({baseURL: 'http://localhost:3010'})
   
   const [loginInput, setLoginInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
