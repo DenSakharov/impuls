@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
-import { Add, ArrowDropDownCircle, AssignmentOutlined } from '@mui/icons-material';
+import { Add, AssignmentOutlined } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid';
 import impulsTheme from '../../muiTheme';
 import SuccessAlert from './successAlert';
-import EditPopupProps from '../interfaces/editPopupProps';
 import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
-import data from '../editPopup/data';
 import axios from 'axios'
 
 
@@ -68,7 +66,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     
     useEffect(() => {
         axios.get(         
-            "http://" + window.location.hostname + ":3010" + '/documents/' + props.documentId,
+            "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
         )
         .then((res) => {
@@ -80,13 +78,15 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         .catch((err) => console.log(err))
 
         axios.get(         
-            "http://" + window.location.hostname + ":3002" + '/documents/' + props.documentId,
+            "http://" + window.location.hostname + ":3002/documents/" + props.documentId,
         )
         .then((res) => {
             setAttachments(res.data)
         })    
         .catch((err) => console.log(err))
-    }, [])
+
+        setToUpdate(false)
+    }, [props.documentId])
     
 
     useEffect(() => {
@@ -97,7 +97,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     const saveData = () => {
         if (toUpdate) {
         axios.put(
-            "http://" + window.location.hostname + ":3010" + '/documents/' + props.documentId,
+            "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
             document,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
         )
@@ -132,18 +132,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         setDocument({...document, links: {...document.links, values: [...document.links.values, newLink]}});
     }
 
-    
-    const handleFileChange = (event: any) => {
-        const files = event.target.files;
-        if (files.length > 0) {
-            const file = files[0];
-            setDocument({...document, filepath: file});
-        } else {
-            setDocument({...document, filepath: ''});
-        }
-    };
 
-    const inputRef = React.useRef<HTMLInputElement | null>(null)
     const handleAddAttachment = () => {
         const newUUID = uuidV4()
         window.open('/documents/'+ newUUID + '?docId=' + document.docId)
