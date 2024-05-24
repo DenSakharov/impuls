@@ -24,8 +24,10 @@ services:
       context: ./mongo   
     ports:
       - "3001:3001"
+      - "3002:3002"
     expose:
       - '3001'
+      - '3002'
     develop:
       watch:
         - action: sync  

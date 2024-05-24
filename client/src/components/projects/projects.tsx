@@ -159,7 +159,7 @@ function Projects() {
                     </button>
                     {/* Открытие карточки документа  */}
                     <Dialog  maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-                        <MuiPopup {...popupData}/>
+                        <MuiPopup documentId={popupData.id}/>
                     </Dialog>
 
                     <hr />
