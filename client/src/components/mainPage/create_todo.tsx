@@ -1,12 +1,30 @@
+import  React  from 'react';
 import { useState } from "react";
 import Dialog, { DialogProps } from "./dialog";
+import Snackbar from '@mui/material/Snackbar';
 
 export function CreateTodo({
   open,
   onClose,
 }: Pick<DialogProps, "open" | "onClose">) {
+
   const [value, setValue] = useState("");
-  
+
+  const [open1, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+
+
   return (
     <Dialog
       open={open}
@@ -40,6 +58,15 @@ export function CreateTodo({
           <button formMethod="dialog" className="flex-1 rounded border p-2">
             Отмена
           </button>
+
+          <Snackbar
+              open={open}
+              autoHideDuration={5000}
+              onClose={handleClose}
+              message="Отменено добавление новой ссылки "
+            />
+
+
           <button
             value={value}
             disabled={!value}
@@ -47,6 +74,13 @@ export function CreateTodo({
           >
             Добавить
           </button>
+          <Snackbar
+              open={open}
+              autoHideDuration={5000}
+              onClose={handleClose}
+              message="Новая ссылка добавлена и сохранена"
+            />
+
         </div>
       </form>
     </Dialog>

@@ -85,7 +85,7 @@ const MuiDashboard: React.FC = () => {
     return (
         <Box>
             <Card sx={{ padding: '20px', margin: '20px' }}>
-                <Typography variant="h5" gutterBottom>Ключевые показатели</Typography>
+                <Typography variant="h5" gutterBottom>Проекты</Typography>
                 <Typography>Количество проектов: 34</Typography>
                 <Typography>Количество задач: 14</Typography>
                 <Typography>Количество документов: 67</Typography>

@@ -1,3 +1,5 @@
+import { tProject } from '#/entities';
+import { UUID } from 'crypto';
 import {
   Model,
   Table,
@@ -6,15 +8,16 @@ import {
   Index,
   Sequelize,
   ForeignKey,
+  PrimaryKey,
 } from 'sequelize-typescript';
 
 export interface tPackageAttributes {
-  packageId?: number;
+  packageId?: UUID;
   name?: string;
-  parentId?: number;
+  parentId?: UUID;
   notes?: string;
   imsGuid?: string;
-  projectId?: number;
+  projectId?: UUID;
 }
 
 @Table({ tableName: 't_package', timestamps: false })
@@ -22,26 +25,16 @@ export class tPackage
   extends Model<tPackageAttributes, tPackageAttributes>
   implements tPackageAttributes
 {
-  @Column({
-    field: 'package_id',
-    allowNull: false,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal(
-      "nextval(('package_id_seq'::text)::regclass)",
-    ),
-  })
-  packageId: number;
+  @PrimaryKey
+  @Column({ field: 'package_id', allowNull: false, type: DataType.STRING(40) })
+  packageId: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(255) })
   name?: string;
 
-  @Column({
-    field: 'parent_id',
-    allowNull: true,
-    type: DataType.INTEGER,
-    defaultValue: Sequelize.literal('0'),
-  })
-  parentId?: number;
+  @ForeignKey(() => tPackage)
+  @Column({ field: 'parent_id', allowNull: true, type: DataType.INTEGER })
+  parentId?: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING })
   notes?: string;
@@ -49,6 +42,7 @@ export class tPackage
   @Column({ field: 'ims_guid', allowNull: true, type: DataType.STRING(40) })
   imsGuid?: string;
 
+  @ForeignKey(() => tProject)
   @Column({ field: 'project_id', allowNull: true, type: DataType.INTEGER })
-  projectId?: number;
+  projectId?: UUID;
 }

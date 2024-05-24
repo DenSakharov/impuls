@@ -8,15 +8,21 @@ import { AuthModule } from '#/auth/auth.module';
 import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
 import { tObjectModule } from './tObject/tObject.module';
+import { tPackageModule } from './tPackage/tPackage.module';
+import { DbModule } from '#/database/db.module';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
+    DbModule,
     databaseModule,
     AuthModule,
     tSecuserModule,
     tDocumentsModule,
     tProjectModule,
     tObjectModule,
+    tPackageModule,
+    NewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
