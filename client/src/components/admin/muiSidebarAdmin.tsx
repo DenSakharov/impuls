@@ -1,3 +1,4 @@
+// Кожевников СЮ
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -133,7 +134,7 @@ export default function MuiSidebarTree() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Настройки', 'Дополнения', 'Безопасность', 'Обновления'].map((text, index) => (
+          {['Логирование', 'Безопасность', 'Обновления'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -158,7 +159,7 @@ export default function MuiSidebarTree() {
         </List>
         <Divider />
         <List>
-          {['Уведомления', 'Отработанные', 'Настройки'].map((text, index) => (
+          {['Все сообщения', 'Настройки'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -193,13 +194,13 @@ export default function MuiSidebarTree() {
 
         </Typography>
         <DrawerHeader />
-        <Typography paragraph sx={{
+        {/* <Typography paragraph sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
                   }}>
           Настройки
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   );

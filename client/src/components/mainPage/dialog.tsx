@@ -1,3 +1,4 @@
+// Кожевников СЮ
 import { ComponentPropsWithoutRef, useCallback, useEffect, useRef } from "react";
 
 export type DialogProps = Omit<
