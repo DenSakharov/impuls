@@ -2,10 +2,8 @@ import React from 'react';
 import './animations/animations.css'
 import { Typography, IconButton, Box, Toolbar, AppBar, Container } from '@mui/material';
 import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight  } from '@mui/icons-material';
-import data from '../editPopup/data';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
-import EditPopupProps from '../interfaces/editPopupProps';
 import { closeDialog } from '../mainPage/main';
 
 
