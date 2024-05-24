@@ -21,8 +21,13 @@ import Searchpage from "./components/mainPage/searchpage";
 import History from './components/history/muiHistory';
 
 function App() {
+  //Кожевников СЮ
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
+    //console.log(currentPath); // currentPathDoc
+    // const currentPathDoc: string = currentPath.slice(0, 36).concat('');  
+    //console.log(currentPathDoc); // currentPathDoc
+
   let navbarComponent;
   if (currentPath === '/main') {
     navbarComponent = <MainNavBar/>
@@ -34,7 +39,7 @@ function App() {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/searchpage') {
     navbarComponent = <MainNavBar/>
-  } else if (currentPath === '/documents') {
+  } else if (currentPath.includes('/documents'))  {  
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/integration') {
     navbarComponent = <MainNavBar/>
