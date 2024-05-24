@@ -498,10 +498,6 @@ ALTER TABLE public.t_object ADD CONSTRAINT "FK_t_object_t_stereotypes"
 	FOREIGN KEY (appliesto,stereotype) REFERENCES public.t_stereotypes (appliesto,stereotype) ON DELETE No Action ON UPDATE No Action
 ;
 
-ALTER TABLE public.t_objectfiles ADD CONSTRAINT "FK_t_objectfiles_t_object"
-	FOREIGN KEY (object_id) REFERENCES  () ON DELETE No Action ON UPDATE No Action
-;
-
 ALTER TABLE public.t_objectfiles ADD CONSTRAINT "FK_t_objectfiles_t_object_02"
 	FOREIGN KEY (object_id) REFERENCES public.t_object (object_id) ON DELETE No Action ON UPDATE No Action
 ;
