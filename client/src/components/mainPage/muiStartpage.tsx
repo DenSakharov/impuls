@@ -18,8 +18,8 @@ const MuiStartpage: React.FC = () => {
     // }
 
     return (
-        <Card sx={{ padding: '10px', margin: '10px' }}>
-            <Typography variant="h5" gutterBottom sx={{ flexGrow: 1, textAlign: "center"}}>Стартовая страница</Typography>
+        <Card sx={{ padding: '20px', margin: '20px' }}>
+            <Typography variant="h5" gutterBottom>Стартовая страница</Typography>
             <Box>
              <div className="flex flex-wrap items-center gap-8 ">
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
