@@ -53,7 +53,7 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
         label={node.name} 
         key={node.name}
         sx={{textAlign:"left", textDecoration: node.object ? "underline" : "none", cursor: 'context-menu'}}
-        onClick={() => openPopup(node)}
+        onClick={() => node.object? openPopup(node) : null}
         onContextMenu={onHandleRightClick}
         >
         <Menu

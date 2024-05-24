@@ -27,9 +27,9 @@ const TOOLBAR_OPTIONS=[
 
 export default function TextEditor(){
     const {id: documentId} = useParams()
+    const documentObjectId = document.location.search.split("=")[1]
     const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null)
     const [quill, setQuill] = useState<any>(null)
-    console.log(documentId)
 
 
     useEffect(()=>{
@@ -48,7 +48,7 @@ export default function TextEditor(){
             quill.setContents(document)
             quill.enable()
         })
-        socket.emit('get-document', documentId)
+        socket.emit('get-document', documentId, documentObjectId)
     },[socket, quill, documentId])
 
 useEffect(() => {
