@@ -17,16 +17,11 @@ function History() {
   return (
 <Card >           
    <Box sx={{ width: 1 }} height={400} style={{ textAlign: 'center' }}>    
-      <Typography variant="h5"  gutterBottom> История изменений </Typography>
-      <Container maxWidth="md" sx={{ mt: 5 }}>  
-
-    
-    <div className="app">
-    
-    </div>
-  
-      
-
+      <Typography variant="h5"  gutterBottom> Логирование </Typography>
+      <Container maxWidth="md" sx={{ mt: 5 }}>      
+        <div className="app">    
+        
+        </div>    
       </Container>       
    </Box>
   </Card>

@@ -20,6 +20,11 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import History from '../history/muiHistory';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import UpdateIcon from '@mui/icons-material/Update';
+import HomeIcon from '@mui/icons-material/Home';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
 const drawerWidth = 240;
 
@@ -107,6 +112,7 @@ export default function MuiSidebarTree() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -126,15 +132,18 @@ export default function MuiSidebarTree() {
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer variant="permanent" open={open}>
+
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
         <List>
-          {['Логирование', 'Безопасность', 'Обновления'].map((text, index) => (
+          {['Логирование', 'Безопасность'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -149,8 +158,8 @@ export default function MuiSidebarTree() {
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
                   }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                > 
+                  {index % 2 === 0 ? <WorkHistoryIcon /> : <AdminPanelSettingsIcon /> }
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -158,6 +167,7 @@ export default function MuiSidebarTree() {
           ))}
         </List>
         <Divider />
+
         <List>
           {['Все сообщения', 'Настройки'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -175,14 +185,42 @@ export default function MuiSidebarTree() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <MailIcon /> : <SettingsIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
+        <Divider />       
+
+        <List>
+          {['На главную'].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {index % 2 === 0 ? <HomeIcon /> : <AdminPanelSettingsIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography paragraph sx={{
@@ -191,8 +229,8 @@ export default function MuiSidebarTree() {
                     justifyContent: 'left',
                   }}>         
          <History />
-
         </Typography>
+        
         <DrawerHeader />
         {/* <Typography paragraph sx={{
                     minWidth: 0,

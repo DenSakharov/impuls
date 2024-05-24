@@ -8,7 +8,7 @@ function Admin() {
   return (
   <Card sx={{ padding: '20px', margin: '20px' }}>           
    <Box  style={{ textAlign: 'center' }}>    
-      <Typography variant="h5"  gutterBottom sx={{ mt: 5 }}> Администрирование </Typography>
+      {/* <Typography variant="h5"  gutterBottom sx={{ mt: 5 }}> Администрирование </Typography> */}
       <Container maxWidth="md" sx={{ mt: 0 }}>
 
       <MuiSidebarAdmin /> 
