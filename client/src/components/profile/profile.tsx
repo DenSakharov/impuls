@@ -5,6 +5,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { Value } from 'sass';
+import Photo from './img/defaultPhoto.png'
 
 function Profile() {
 
@@ -16,6 +17,12 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [selectredFile, setSelectedFile] = useState(null)
+
+  const handleChangeImage = (e) => {
+    console.log(e.target.files)
+    setSelectedFile(e.target.files[0])
+  }
 
   const handleClick = () => {
     setOpenSnackbar(true);
@@ -28,6 +35,7 @@ function Profile() {
 
     setOpenSnackbar(false);
   };
+
 
   function getUser() {
     let url_getUser = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin')
@@ -50,7 +58,7 @@ function Profile() {
   }
 
   useEffect(() => {
-    let userReceived = false;
+    let userReceived = false
     if (!userReceived) {
       getUser()
     } 
@@ -96,10 +104,10 @@ function Profile() {
       <div id="infoProfile">
         {/* img строчный элемент, возможно стоит обернуть в div чтобы кнопки под картинку уехали @RusDa256*/}
         <div id="editPhoto">
-          <img src="/img/UserImage.png" alt="Аватар пользователя" id="userImage"/>
+          <img src={Photo} alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
             <label className="input-file">
-              <input type="file" name="file"/>		
+              <input type="file" name="file" onChange={handleChangeImage}/>		
               <span>Загрузить фото</span>
             </label>
             <button id="bDelImg" type="button">Удалить</button>
