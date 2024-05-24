@@ -8,16 +8,17 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 
-export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
+
+export default function MuiTree({header, data, handleOpenForm, setPopupData} : any) {
     
     const openPopup = (node: any) => {
-        setPopupData(node.object)
-        if (node.object && window.innerWidth < 700) {
-            window.open('/Popup?id=' + node.object.id,"_self")
+        setPopupData(node)
+        if (node && window.innerWidth < 700) {
+            window.open('/Popup?id=' + node.id,"_self")
             return
         }
 
-        if (node.object) {
+        if (node) {
             handleOpenForm()    
             return
         }
@@ -46,14 +47,13 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
     const handlemyClose = () => {
         setState(initialState);
     }
-
-    const renderTree = (node: any) => (
+    const renderTree = (node: any,isObject: boolean, packages: any = [], objects: any = []) => 
         <TreeItem 
-        itemId={node.name} 
+        itemId={node.objectId || node.packageId} 
         label={node.name} 
         key={node.name}
-        sx={{textAlign:"left", textDecoration: node.object ? "underline" : "none", cursor: 'context-menu'}}
-        onClick={() => node.object? openPopup(node) : null}
+        sx={{textAlign:"left", textDecoration: isObject ? "underline" : "none", cursor: 'context-menu'}}
+        onClick={() => isObject? openPopup(node) : null}
         onContextMenu={onHandleRightClick}
         >
         <Menu
@@ -91,15 +91,18 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
                 <ListItemText primary="Удалить" />
                 </MenuItem>
          </Menu>
-        {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)}
+        {/* {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)} */}
+        {packages.map((child: any) => renderTree(child.packageObject, false, child.children, child.objects))}
+        {objects.map((child: any) => renderTree(child, true))}
         </TreeItem>
-    )
+    
+    
   return (
     <Container disableGutters>
         <SimpleTreeView 
-        defaultExpandedItems={[data.name]}
+        defaultExpandedItems={[header]}
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
-            {renderTree(data)}
+            {data.map((item: any) => renderTree(item.packageObject, false, item.children, item.objects))}
         </SimpleTreeView>
     </Container>
     

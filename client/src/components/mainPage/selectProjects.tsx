@@ -3,7 +3,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, Container, Stack, IconButton} from '@mui/material';
 import ProjectDialog from './muiDialog';
-import data from '../editPopup/data';
 import styled from '@mui/system/styled';
 import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
 
@@ -44,10 +43,10 @@ const ImpulseButton = styled(Button)({
 });
 
 
-export default function SelectProjects({changeState} : any) {
+export default function SelectProjects({projects, changeState} : any) {
 
     const [formOpen, setFormOpen] = React.useState(false);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
+    const [project, setProject] = React.useState(projects[0]);
     const handleCloseForm = () => {
           setFormOpen(false);
       }
@@ -55,7 +54,7 @@ export default function SelectProjects({changeState} : any) {
           setFormOpen(true);
       }
       const changeProps = (value : any) => {
-        setProjectData(value)
+        setProject(value)
         changeState(value)
         handleCloseForm()
       }
@@ -66,10 +65,10 @@ export default function SelectProjects({changeState} : any) {
 
             <Stack spacing={1} direction="row">
               <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton>
-              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
+              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {project.name} </ImpulseButton>
             </Stack>
             </Container>
-            <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
+            <ProjectDialog projects={projects} formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
   );
 }
