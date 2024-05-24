@@ -133,7 +133,7 @@ export default function SignInSide() {
                   </Grid>
                   <Grid item>
                     {/*TODO переход на страницу восстановления пароля @RusDa256 */}
-                    <Link href="#" underline="none" variant="body2">
+                    <Link href="/recovery_password" underline="none" variant="body2">
                       Забыли пароль?
                     </Link>
                   </Grid>

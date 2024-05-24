@@ -1,0 +1,113 @@
+#root-recoveryPas {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 30px 0;
+}
+
+#recoveryPas-mainForm {
+  background-color: #fff;
+  width: 45%;
+  min-width: 150px;
+  max-width: 600px;
+  height: 550px;
+  min-height: 200px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 14px 16px 9px -4px rgba(34, 60, 80, 0.34);
+}
+@media (max-width: 800px) {
+  #recoveryPas-mainForm {
+    width: 45%;
+  }
+}
+@media (max-width: 650px) {
+  #recoveryPas-mainForm {
+    width: 55%;
+  }
+}
+@media (max-width: 450px) {
+  #recoveryPas-mainForm {
+    width: 80%;
+  }
+}
+#recoveryPas-mainForm #header-recoveryPas {
+  background-color: #147298;
+  color: #fff;
+  height: 10%;
+  position: relative;
+  margin: 0;
+  padding-top: 10px;
+}
+#recoveryPas-mainForm #header-recoveryPas h2 {
+  display: inline;
+  margin: 0 auto 0 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+@media (max-width: 800px) {
+  #recoveryPas-mainForm #header-recoveryPas h2 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+@media (max-width: 450px) {
+  #recoveryPas-mainForm #header-recoveryPas h2 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+#recoveryPas-mainForm #header-recoveryPas img {
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin: 0 10px auto auto;
+}
+@media (max-width: 800px) {
+  #recoveryPas-mainForm #header-recoveryPas img {
+    width: 15px;
+    height: 15px;
+  }
+}
+#recoveryPas-mainForm .textFields .recoveryPas {
+  height: 40px;
+  width: 60%;
+  position: relative;
+  top: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto 0 30px;
+}
+@media (max-width: 650px) {
+  #recoveryPas-mainForm .textFields .recoveryPas {
+    width: 75%;
+  }
+}
+#recoveryPas-mainForm .textFields .recoveryPas input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin-top: 10px;
+}
+#recoveryPas-mainForm .textFields .recoveryPas input:hover {
+  border-bottom: 3px solid rgb(0, 0, 0);
+}
+#recoveryPas-mainForm p {
+  margin: 50px auto 0 30px;
+}
+#recoveryPas-mainForm #bSave {
+  font-size: 16px;
+  background-color: #147298;
+  width: 50%;
+  min-width: 120px;
+  max-width: 400px;
+  height: 40px;
+  border-radius: 25px;
+  position: relative;
+  left: 25%;
+  top: 5%;
+  color: #fff;
+  margin: 0 30px 0 0;
+  cursor: pointer;
+}
