@@ -32,8 +32,8 @@ export default function PopupBar(props: {id:string, updateCallback: Function} = 
           >
             <ArrowDropDown fontSize='large'/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
-            № {props.id}
+          <Typography variant="h6" component="div"  sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
+            № {window.outerWidth<700 ? props.id.substring(0,8) + "..." : props.id}
           </Typography>
           <IconButton 
             size="large"

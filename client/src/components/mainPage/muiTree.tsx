@@ -12,7 +12,7 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
     
     const openPopup = (node: any) => {
         setPopupData(node.object)
-        if (node.object && window.innerWidth < 700) {
+        if (node.object && window.outerWidth < 700) {
             window.open('/Popup?id=' + node.object.id,"_self")
             return
         }
