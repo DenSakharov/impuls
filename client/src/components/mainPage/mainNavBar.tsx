@@ -15,6 +15,8 @@ import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import BreadcrumbNew from "./breadcrumb";
 import MuiSidebarMessage from './muiSidebarMessage';
 // https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
+import Button from '@mui/material/Button';
+
 
 const user = {
   name: 'Иванов Иван',
@@ -69,6 +71,13 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     return (
     <>
@@ -117,6 +126,16 @@ function MainNavBar({changeState} : any) {
 
                       <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
                         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+                            {/* <Button
+                            id="fade-button"
+                            aria-controls={open ? 'fade-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={open ? 'true' : undefined}
+                              onClick={handleClickOpen}>
+                            IMS IMPULS
+                          </Button> */}
+                          {/* <About /> */}
+
                            <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
                         </Container>
                       </Box>

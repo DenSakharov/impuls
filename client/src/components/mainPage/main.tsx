@@ -12,7 +12,7 @@ import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import {MuiStartpage} from './muiStartpage';
-import MuiFavourites from './muiFavourites';
+import MuiFavourites from './favorites/muiFavourites';
 import { Sidebar } from 'flowbite-react';
 import { IconButton, Drawer } from '@mui/material';
 

@@ -1,4 +1,4 @@
-// Кожевников СЮ
+// Кожевников СЮ шаблон диалога для создания компонентов страницы избранное
 import { ComponentPropsWithoutRef, useCallback, useEffect, useRef } from "react";
 
 export type DialogProps = Omit<

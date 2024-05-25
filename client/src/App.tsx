@@ -14,10 +14,10 @@ import TableData from './components/CordinationPage/table';
 import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
-import Report from "./components/mainPage/report";
+import Report from "./components/mainPage/muiReport";
 import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
-import Searchpage from "./components/mainPage/searchpage";
+import Searchpage from "./components/mainPage/muiSearchpage";
 import History from './components/history/muiHistory';
 
 function App() {

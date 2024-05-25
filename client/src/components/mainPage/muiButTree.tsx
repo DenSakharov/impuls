@@ -29,21 +29,11 @@ function MuiButTree() {
             <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
             <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
-            {/* <IconButton aria-label="settings" color='default' size="small">                                     <Settings fontSize="small"/></IconButton> */}
-
-            {/* <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddDirectory}><CreateNewFolder fontSize="small"/></IconButton>
-            <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddObject}><Add fontSize="small"/></IconButton>
-            <IconButton aria-label="settings" color='default' size="small"><ContentCopy fontSize="small" /></IconButton>
-            <IconButton edge='end' aria-label="delete" color='default' size="small"> <DeleteIcon fontSize="small"/></IconButton>
-            <IconButton aria-label="info" color='default' size="small"><Info fontSize="small"/></IconButton>
-            <IconButton aria-label="settings" color='default' size="small"><Settings fontSize="small"/></IconButton> */}
-
             <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
             <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
             <MuiSidebarConf />
         </Stack>
-        
-    );
-  }
+
+    ); }
 
   export default MuiButTree;
