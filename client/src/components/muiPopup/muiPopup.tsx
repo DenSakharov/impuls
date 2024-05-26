@@ -9,7 +9,11 @@ import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
 import axios from 'axios'
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 
 type attachment = {
@@ -134,12 +138,20 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
 
 
     const handleAddAttachment = () => {
-        const newUUID = uuidV4()
-        window.open('/documents/'+ newUUID + '?docId=' + document.docId)
-        if (newUUID) {
-            setAttachments([...attachments, {_id: newUUID}]);
-        }
-        
+            const newUUID = uuidV4()
+            window.open('/documents/'+ newUUID + '?docId=' + document.docId)
+            if (newUUID) {
+                setAttachments([...attachments, {_id: newUUID}]);
+            }    
+    };
+    const handleAddAttachmentExcel = () => {
+        //const newUUID = uuidV4()
+        const { Example } = require("../excelEditor/Collabration.stories");
+        window.open('/worksheet/1e4147f1-88b5-4345-95f4-205aad08c34a?docId=' + document.docId)
+
+															 
+		 
+		
     };
 
     const handleOpenAttachment = (uuid: string) => {
@@ -289,6 +301,18 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
                             </Box>
                         </Grid>
                         <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                            <FormControl>
+                            <RadioGroup
+                                row
+                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                name="row-radio-buttons-group"
+                            >
+                                <FormControlLabel value="word" control={<Radio />} label="Добавить Word" onClick={handleAddAttachment} />
+                                <FormControlLabel value="excel" control={<Radio />} label="Добавить Excel" onClick={handleAddAttachmentExcel} />
+                            </RadioGroup>
+                            </FormControl>
+                        </Grid>  
+                        <Grid item md={mdGridSpace} textAlign='left' xs={6}>
                             <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
                         </Grid>  
                     </Grid>

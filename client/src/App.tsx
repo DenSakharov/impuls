@@ -22,6 +22,7 @@ import Searchpage from "./components/mainPage/searchpage";
 function App() {
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
+  const { Example } = require("./components/excelEditor/Collabration.stories");
   let navbarComponent;
   if (currentPath === '/main') {
     navbarComponent = <MainNavBar/>
@@ -65,6 +66,7 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
+          <Route path="/worksheet" element={ <Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
