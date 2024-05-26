@@ -20,16 +20,15 @@ interface AddProjectsModalProps
 
 
 const AddProjectsModal: React.FC<AddProjectsModalProps> = ({ onClose }) => {
-    const [dateCreated, setDate] = useState('');
     const [name, setTitle] = useState('');
     const [notes, setContent] = useState('');
+    const [status, setStatus] = useState('');
 
     const handleSubmit = async () => {
-
         const data = {
-            dateCreated,
             name,
             notes,
+            status,
         };
 
         try {
@@ -51,6 +50,14 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({ onClose }) => {
         }
 };
 
+// useEffect(() => {
+//     console.log(name)
+//     console.log(notes)
+//     console.log(status)
+//     setTitle('');
+//     setContent('');
+//     setStatus('');
+// }, [name, notes, status]);
 
 return (
     <Dialog open onClose={onClose} fullWidth maxWidth="sm">
@@ -58,10 +65,10 @@ return (
     <DialogContent>
         <TextField
             label=""
-            type="date"
+            type="status"
             fullWidth
-            value={dateCreated}
-            onChange={(e) => setDate(e.target.value)}
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
             sx={{ mb: 2 }}
         />
         <TextField
@@ -85,6 +92,7 @@ return (
     <DialogActions>
         <Button onClick={onClose}>Отмена</Button>
         <Button onClick={handleSubmit} color="primary">Создать</Button>
+
     </DialogActions>
 </Dialog>
 

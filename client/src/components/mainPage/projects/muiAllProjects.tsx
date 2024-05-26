@@ -18,10 +18,21 @@ import axios from 'axios';
     // dateEdited: Date
     // dateCreated: Date
 
+    // {
+    //     "projectId": "d97a9e36-b48d-4ff2-9363-03f8c7ed8c1c",
+    //     "name": "Project1",
+    //     "notes": "Description",
+    //     "status": "Ready",
+    //     "imsGuid": null,
+    //     "dateCreated": "2024-05-21T09:22:35.942Z",
+    //     "dateEdited": "2024-05-21T09:22:35.942Z"
+    // },
+
 
 interface projectsItem {
     projectId: string;
-    dateCreated: string;
+    status: string;
+    // dateCreated: string;
     name: string;
     notes: string;
     userid: string | null;
@@ -50,6 +61,7 @@ const MuiAllProjects: React.FC = () => {
     const fetchProjectsData = async () => {
         try {
             const response = await fetch(`http://${window.location.hostname.toString()}:3010/projects`);
+            //console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -69,6 +81,8 @@ const MuiAllProjects: React.FC = () => {
     // load projects list
     useEffect(() => {
         fetchProjectsData();
+        console.log(ProjectsData);
+        console.log("1");
     }, []);
 
     // Get current Projects for the page
@@ -143,7 +157,8 @@ const MuiAllProjects: React.FC = () => {
                             {projects.name}
                         </Typography>
                         <Typography color="textSecondary" gutterBottom>
-                            {new Date(projects.dateCreated).toLocaleDateString()}
+                            {/* {new Date(projects.dateCreated).toLocaleDateString()} */}
+                            {projects.status}
                         </Typography>
                         <Typography variant="body2" component="p">
                             {truncateContent(projects.notes, 200)}

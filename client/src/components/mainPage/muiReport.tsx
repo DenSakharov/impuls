@@ -5,12 +5,12 @@ import { Container } from "@mui/material";
 
 function Report() {
   return (
-<Card sx={{ padding: '20px', margin: '20px' }}>           
-   <Box height={400} style={{ textAlign: 'center' }}>    
+<Card sx={{ padding: '20px', margin: '20px' }}>
+   <Box height={400} style={{ textAlign: 'center' }}>
       <Typography variant="h5"  gutterBottom>Отчеты</Typography>
       <Container maxWidth="md" sx={{ mt: 5 }}>
-      
-      </Container>       
+
+      </Container>
    </Box>
   </Card>
 

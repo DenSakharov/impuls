@@ -10,7 +10,8 @@ import data from '../editPopup/data';
 export const MuiStartpage = ({chengedproject}) => {
 
     // const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
+    const [projectData, setProjectData] = React.useState(data.tree[0]);
+    // const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
 
     useEffect(() => {
       // console.log(projectData)

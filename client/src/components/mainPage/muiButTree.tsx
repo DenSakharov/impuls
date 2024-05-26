@@ -1,7 +1,7 @@
 // Кожевников СЮ кнопки управления деревом проектных данных
 
 import React, { useState } from 'react';
-import { IconButton, Stack } from '@mui/material';
+import { IconButton, Stack, Container, Box } from '@mui/material';
 import { Settings, Info, ContentCopy, Add, CreateNewFolder } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MuiAddDirectory from "./muiAddDirectory";
@@ -24,17 +24,24 @@ function MuiButTree() {
     const closeModalAddObject = () => setModalAddObjectOpen(false);
 
     return (
-        <Stack spacing={1} direction="row">
+
+    <Box sx={{ flexGrow: 0}}>
+        <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250}}>
+
+         <Stack spacing={1} direction="row">
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddDirectory}>     <CreateNewFolderIcon fontSize="small"/></IconButton>
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddObject}>        <NoteAddIcon fontSize="small"/></IconButton>
             <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
             <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
+
             <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
             <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
             <MuiSidebarConf />
-        </Stack>
 
+         </Stack>
+        </Container>
+    </Box>
     ); }
 
   export default MuiButTree;

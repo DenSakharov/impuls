@@ -15,7 +15,7 @@ export default function BreadcrumbNew() {
 
     if (currentPath === '/main') {
       BreadcrumbName = 'Дашборд'
-    } else if (currentPath === '/projects') {
+    } else if (currentPath === '/project') {
       BreadcrumbName = 'Проекты и задачи'
     } else if (currentPath === '/TableData') {
       BreadcrumbName = 'История согласований'

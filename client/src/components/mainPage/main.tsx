@@ -23,7 +23,7 @@ import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
 import { progress } from '@material-tailwind/react';
-
+import MuiAllProjects from '../mainPage/projects/muiAllProjects';
 
 export const closeDialog = React.createContext<Function>(() => {
 });
@@ -33,7 +33,7 @@ function Main({changeState} : any) {
     const [projectData, setProjectData] = React.useState("No-project");
       // data.tree[0]);
     useEffect(() => {
-      console.log(projectData);
+      // console.log(projectData);
       },[projectData]
     )
 
@@ -89,7 +89,7 @@ function Main({changeState} : any) {
 
         {/* Start */} {/* FullPage панель !!!  */}
         <div className="hidden md:block">                      
-                      <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">                        
+                      <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3">
                         {/* Сайдбар с деревом объектов */}                        
                           <SelectProjects changeState={setProjectData}/>
                           <MuiButTree/>
@@ -99,31 +99,31 @@ function Main({changeState} : any) {
         {/* End */}  
         
         {/* Start */} {/* Mobile панель ! */}
-        <Disclosure as="nav" >          
+        <Disclosure as="nav" >
         {({ open }) => (
             <>            
-              <div className="-mr-2 flex md:hidden">
+              <div className="mr-1 flex md:hidden">
               <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                            <span className="absolute -inset-0.5" />
                            <span className="sr-only">Open main menu</span>
                            {open ? (
-                             <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true" />
+                             <ArrowLeftStartOnRectangleIcon className="block h-5 w-5" aria-hidden="true" />
                             ) : (
-                             <MultipleStopIcon className="block h-6 w-6" aria-hidden="true" />
+                             <MultipleStopIcon className="block h-5 w-5" aria-hidden="true" />
                             )}
               </Disclosure.Button>
 
               </div>
 
               <Disclosure.Panel className="md:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">            
+                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3" >
               {/* Сайдбар с деревом объектов */}
                     <SelectProjects changeState={setProjectData}/>
                     <MuiButTree/>
                     <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
                  </div>
               </Disclosure.Panel>
-            </>                     
+            </>
         )}        
         </Disclosure>
 
@@ -147,20 +147,21 @@ function Main({changeState} : any) {
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
               <MuiStartpage chengedproject={handleselectproject} />
+              <MuiAllProjects />
             </Container>
            </div>
 
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              <MuiNews></MuiNews>
+              {/* <MuiNews></MuiNews> */}
             </Container>
            </div>
 
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              <MuiDashboard></MuiDashboard>
+              {/* <MuiDashboard></MuiDashboard> */}
             </Container>
            </div>
 

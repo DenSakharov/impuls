@@ -11,8 +11,10 @@ import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithC
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
-  fontSize: 12,
-  padding: '6px 0px',
+  fontSize: 14,
+  height: 40,
+  padding: 0,
+  margin: 0,
   border: '1.5px solid',
   lineHeight: 1.5,
   backgroundColor: '#147298',
@@ -64,12 +66,14 @@ export default function SelectProjects({changeState} : any) {
 
   return (
 
-    <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+    <Box sx={{ flexGrow: 0, backgroundColor: '#147298', margin  : '0px'}}>
+            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: 40, justifyContent:'center'}}>
 
             <Stack spacing={1} direction="row">
-              <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton>
+              {/* <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton> */}
               <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
+
+              {/* <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > Проект не выбран</ImpulseButton> */}
             </Stack>
             </Container>
             <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>

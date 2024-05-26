@@ -19,6 +19,7 @@ import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/muiSearchpage";
 import History from './components/history/muiHistory';
+import AllProjects from './components/mainPage/projects/muiAllProjects';
 
 function App() {
   //Кожевников СЮ
@@ -31,7 +32,7 @@ function App() {
   let navbarComponent;
   if (currentPath === '/main') {
     navbarComponent = <MainNavBar/>
-  } else if (currentPath === '/projects') {
+  } else if (currentPath === '/project') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/TableData') {
     navbarComponent = <MainNavBar/>
@@ -64,8 +65,9 @@ function App() {
           <Route path='/searchpage' Component={Searchpage}></Route>          
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
-          <Route path='/projects' Component={Projects}></Route>
+          <Route path='/project' Component={Projects}></Route>
           <Route path='/history' Component={History}></Route>
+          {/* <Route path='/allprojects' Component={AllProjects}></Route> */}
           <Route path='/admin' Component={Admin}></Route>
           <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
