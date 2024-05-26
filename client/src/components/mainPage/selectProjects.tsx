@@ -68,15 +68,13 @@ export default function SelectProjects({changeState} : any) {
 
     <Box sx={{ flexGrow: 0, backgroundColor: '#147298', margin  : '0px'}}>
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: 40, justifyContent:'center'}}>
-
-            <Stack spacing={1} direction="row">
-              {/* <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton> */}
-              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
-
-              {/* <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > Проект не выбран</ImpulseButton> */}
-            </Stack>
+              <Stack spacing={1} direction="row">
+                <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
+              </Stack>
             </Container>
-            <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
+
+         {/* Диалог выбора проекта     */}
+        <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
   );
 }

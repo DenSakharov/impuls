@@ -18,15 +18,16 @@ import Report from "./components/mainPage/muiReport";
 import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/muiSearchpage";
-import History from './components/history/muiHistory';
-import AllProjects from './components/mainPage/projects/muiAllProjects';
+import History from './components/history/muiHistory1';
+import muiAllProjects from './components/mainPage/projects/muiAllProjects';
+import MuiNews from './components/mainPage/muiNews';
 
 function App() {
   //Кожевников СЮ
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
     //console.log(currentPath); // currentPathDoc
-    // const currentPathDoc: string = currentPath.slice(0, 36).concat('');  
+    // const currentPathDoc: string = currentPath.slice(0, 36).concat('');
     //console.log(currentPathDoc); // currentPathDoc
 
   let navbarComponent;
@@ -67,8 +68,9 @@ function App() {
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/project' Component={Projects}></Route>
           <Route path='/history' Component={History}></Route>
-          {/* <Route path='/allprojects' Component={AllProjects}></Route> */}
+          <Route path='/allprojects' Component={muiAllProjects}></Route>
           <Route path='/admin' Component={Admin}></Route>
+          <Route path='/allnews' Component={MuiNews}></Route>
           <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>

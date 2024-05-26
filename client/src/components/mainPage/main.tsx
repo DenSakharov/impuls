@@ -4,7 +4,6 @@ import  React, { useEffect }  from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
 import { Dialog } from '@mui/material';
-import BreadcrumbNew from "./breadcrumb";
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import data from '../editPopup/data';
@@ -15,14 +14,10 @@ import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import {MuiStartpage} from './muiStartpage';
 import MuiFavourites from './favorites/muiFavourites';
-import { Sidebar } from 'flowbite-react';
-import { IconButton, Drawer } from '@mui/material';
-
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
-import { progress } from '@material-tailwind/react';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
 
 export const closeDialog = React.createContext<Function>(() => {
@@ -147,14 +142,21 @@ function Main({changeState} : any) {
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
               <MuiStartpage chengedproject={handleselectproject} />
+            </Container>
+           </div>
+
+          {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
+          <div className="flex flex-wrap items-center gap-8 ">
+            <Container fixed>
               <MuiAllProjects />
             </Container>
            </div>
 
+
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              {/* <MuiNews></MuiNews> */}
+              <MuiNews></MuiNews>
             </Container>
            </div>
 

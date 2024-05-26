@@ -32,7 +32,6 @@ import axios from 'axios';
 interface projectsItem {
     projectId: string;
     status: string;
-    // dateCreated: string;
     name: string;
     notes: string;
     userid: string | null;
@@ -64,6 +63,7 @@ const MuiAllProjects: React.FC = () => {
             //console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
+                // console.log(response);
             }
             const data = await response.json();
             setProjectsData(data);
@@ -77,12 +77,9 @@ const MuiAllProjects: React.FC = () => {
             setLoading(false);
         }
     };
-
-    // load projects list
+    // load news list
     useEffect(() => {
         fetchProjectsData();
-        console.log(ProjectsData);
-        console.log("1");
     }, []);
 
     // Get current Projects for the page

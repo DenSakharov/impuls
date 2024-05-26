@@ -17,7 +17,7 @@ export const databaseProviders = [
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
       });
-      sequelize.addModels([tSecuser, tDocuments, tProject, tObject, tPackage,tChangehistory]);
+      sequelize.addModels([tSecuser, tDocuments, tProject, tObject, tPackage, tChangehistory]);
       await sequelize.sync();
       return sequelize;
     },
