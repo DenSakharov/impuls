@@ -96,6 +96,16 @@
 #recoveryPas-mainForm p {
   margin: 50px auto 0 30px;
 }
+@media (max-width: 850px) {
+  #recoveryPas-mainForm p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 450px) {
+  #recoveryPas-mainForm p {
+    font-size: 10px;
+  }
+}
 #recoveryPas-mainForm #bSave {
   font-size: 16px;
   background-color: #147298;

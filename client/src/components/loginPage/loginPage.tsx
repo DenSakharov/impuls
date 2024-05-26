@@ -1,8 +1,10 @@
 import logo from "./logo.png"
-import React from 'react'
+import React, { useState } from 'react'
 import {Close} from '@mui/icons-material';
 import {IconButton , Container, Button, TextField, FormControlLabel, 
-        Checkbox, Link, Box, Grid, Typography} from '@mui/material';
+        Checkbox, Link, Box, Grid, Typography,
+        Snackbar,
+        Alert} from '@mui/material';
 import "./style.css";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
@@ -10,6 +12,14 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 export default function SignInSide() {
   const [userlogin, setUser] = React.useState("")
   const [password, setPassword] = React.useState("")
+  const [openSnackbarError, setOpenSnackbarError] = useState(false)
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbarError(false)
+  };
 
 
   function checkUser() {
@@ -26,6 +36,9 @@ export default function SignInSide() {
       window.open('/main', "_self")
     }).catch((reason: AxiosError) => {
       console.log(reason)
+      if(reason.message === "Request failed with status code 401") {
+        setOpenSnackbarError(true);
+      }
     })
   }
 
@@ -144,8 +157,20 @@ export default function SignInSide() {
               </Typography>
           </Box>
         </Box>
-        
       </Box>
+      <Snackbar
+        open={openSnackbarError}
+        autoHideDuration={4000}
+        onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="error"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            Неправильные Логин или Пароль!
+          </Alert>
+    </Snackbar>
     </Container>
   
   );

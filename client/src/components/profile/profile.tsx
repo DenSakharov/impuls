@@ -17,11 +17,56 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-  const [selectredFile, setSelectedFile] = useState(null)
+  const [selectedFile, setSelectedFile] = useState<Blob>()
 
-  const handleChangeImage = (e) => {
-    console.log(e.target.files)
-    setSelectedFile(e.target.files[0])
+  const handleChangeImage = async (e) => {
+    //console.log(e.target.files)
+    //setSelectedFile(e.target.files[0])
+    console.log(e.target.files[0])
+    
+    /*const formData = new FormData();
+    await formData.set("selectedFile", e.target.files[0]);
+    console.log(formData)
+    try {
+      const response = await axios({
+        method: "post",
+        url: `http://${window.location.hostname.toString()}:3010/users/loadphoto`,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    } catch(error) {
+      console.log(error)
+    }
+    */
+
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    const res = await axios.post(
+            `http://${window.location.hostname.toString()}:3010/users/loadphoto`,
+            formData,
+            {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              },
+            }
+        );
+
+    /*axios({
+      method: 'get',
+      url: '',
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
+      data: {
+
+      }
+    }).then((response: AxiosResponse) => {
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    }) */
   }
 
   const handleClick = () => {

@@ -40,7 +40,7 @@ function RecoveryPassword() {
     }
     axios({
       method: 'post',
-      url: 'http://localhost:3010/users/replacepassword', 
+      url: 'http://localhost:3010/users/recoverypassword', 
       data: {
         userlogin: userLogin,
         userName: userName,
@@ -50,8 +50,11 @@ function RecoveryPassword() {
     }).then((response: AxiosResponse) => {
       console.log(response)
 
-      if(response.data === 'User data is incorrect!') {
-        setErrorText('Введённые данные пользователя неверные!')
+      if(response.data.error === 'This user does not exist') {
+        setErrorText('Данного пользователя не существует')
+        handleClickError()
+      } if(response.data.error === 'UserName or UserSurname is incorrect') {
+        setErrorText('Имя или фамилия пользователя введены неверно')
         handleClickError()
       } else {
         handleClickSuccess()
@@ -105,7 +108,7 @@ function RecoveryPassword() {
             variant="filled"
             sx={{ width: '100%' }}
           >
-            Пароль успешно изменён! 
+            Пароль успешно восстановлен! 
           </Alert>
     </Snackbar>
     <Snackbar
