@@ -5,8 +5,8 @@
     display: inline-block;
     animation: bounce .5s ease infinite alternate;
     font-size: 14px;
-    color: rgb(243, 206, 23);
-    -webkit-text-stroke: 0.5px red;
+    color: rgb(4, 87, 169);
+    -webkit-text-stroke: 0.5px rgb(6, 130, 158);
     text-shadow: 0 1px 0 #d2cece,
     0 2px 0 #d2cece,
     0 3px 0 #d2cece,

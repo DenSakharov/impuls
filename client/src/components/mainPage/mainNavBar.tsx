@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ главное меню
+
 import  React  from 'react';
 import './../../globals.css';
 import { Fragment } from 'react';

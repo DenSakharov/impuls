@@ -1,4 +1,4 @@
-// Кожевников СЮ
+// Кожевников СЮ стили для анимации
 import React from 'react';
 import './animation.css';
 

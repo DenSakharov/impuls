@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ сайдбар для вывода всех уведомлений пользователю
+
 import React from "react";
 import { useState } from "react";
 // import { Sidebar } from "flowbite-react";

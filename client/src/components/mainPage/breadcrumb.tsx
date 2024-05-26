@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ компонент для вывода навигационной цепочки по страницам
+
 import  React  from 'react';
 import { Breadcrumb, BreadcrumbItem } from "flowbite-react";
 import { HiHome } from "react-icons/hi";

@@ -1,3 +1,5 @@
+//Кожевников СЮ главная страница
+
 import  React, { useEffect }  from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
@@ -83,7 +85,7 @@ function Main({changeState} : any) {
         <main className="m-1">
         {/* <div className="flex flex-col items-center gap-8 "> */}
         <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
-        <div className='container-app'>            
+        <div className='container-app'>
 
         {/* Start */} {/* FullPage панель !!!  */}
         <div className="hidden md:block">                      
@@ -115,7 +117,7 @@ function Main({changeState} : any) {
 
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">            
-              {/* Сайдбар с деревом объектов */}            
+              {/* Сайдбар с деревом объектов */}
                     <SelectProjects changeState={setProjectData}/>
                     <MuiButTree/>
                     <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>

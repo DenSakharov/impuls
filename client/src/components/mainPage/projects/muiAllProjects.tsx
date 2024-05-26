@@ -1,4 +1,4 @@
-//Kожевников СЮ
+//Kожевников СЮ вывод всех проектов
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardActions, CardContent, Typography, Container, Box, Modal, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';

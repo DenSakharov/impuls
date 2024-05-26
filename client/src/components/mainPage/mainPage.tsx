@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ старая главная страница
+
 import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';

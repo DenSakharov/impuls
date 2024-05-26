@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ страница создания проекта
+
 import React, { useEffect, useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 

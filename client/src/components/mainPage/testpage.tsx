@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ тестовая станица
+
 import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';

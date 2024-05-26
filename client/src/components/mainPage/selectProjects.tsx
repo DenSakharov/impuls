@@ -1,5 +1,5 @@
+// Кожевников СЮ выбор проекта из дерева
 
-// Кожевников СЮ
 import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, Container, Stack, IconButton} from '@mui/material';
@@ -58,12 +58,8 @@ export default function SelectProjects({changeState} : any) {
       const changeProps = (value : any) => {
         // console.log(value)
         setProjectData(value)
-
         changeState(value)
-
         handleCloseForm()
-
-
       }
 
   return (
