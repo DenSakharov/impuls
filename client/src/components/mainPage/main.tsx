@@ -27,19 +27,10 @@ export const closeDialog = React.createContext<Function>(() => {});
 function Main({ changeState }: any) {
     const getTree = useCallback(
         (projectId: string) => {
-            axios
-                .get(
-                    "http://" +
-                        window.location.hostname +
-                        ":3010" +
-                        "/projects/" +
-                        projectId +
-                        "/packages/tree",
+            axios.get(`http://${window.location.hostname}:3010/projects/${projectId}/packages/tree`,
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem(
-                                "token"
-                            )}`,
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
                         },
                     }
                 )
@@ -48,7 +39,6 @@ function Main({ changeState }: any) {
                     setProjectData(data);
                 })
                 .catch((err) => console.log(err));
-    
         },
         [],
     )
@@ -59,17 +49,11 @@ function Main({ changeState }: any) {
     const [projects, setProjects] = useState<tProjectAttributes[]>([]);
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
-    useEffect(()=>{
-        axios.get(
-                "http://" +
-                    window.location.hostname +
-                    ":3010" +
-                    "/projects",
+    useEffect(()=>{        
+        axios.get(`http://${window.location.hostname}:3010/projects`,
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }
             )
@@ -77,7 +61,7 @@ function Main({ changeState }: any) {
                 setProjects(data);
                 if(data.length)setProject(data[0]);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log("Get projects error", err) );
     }, [])
     useEffect(() => {
         if (!project?.projectId) {
@@ -106,21 +90,9 @@ function Main({ changeState }: any) {
       justifyContent: 'flex-end',
     }));
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-      setOpen(true);
-    };
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen(false);
-    };
-
     const handleselectproject = (value) => {
       console.log(value);
-      setProjectData(value);
+      setProject(value);
     }
 
     return (
@@ -138,7 +110,7 @@ function Main({ changeState }: any) {
                                 <div className="hidden md:block">
                                     <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                         {/* Сайдбар с деревом объектов */}
-                                        {projects.length > 0 && <SelectProjects changeState={setProjectData} projects={projects} />}
+                                        {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
                                         <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
                                         <MuiTree data={projectData} handleOpenForm={handleOpenForm}
                                                  setPopupData={setPopupData}/>

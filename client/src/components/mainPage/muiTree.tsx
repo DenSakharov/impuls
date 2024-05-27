@@ -10,6 +10,8 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
+import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 
 
 export default function MuiTree({header, data, handleOpenForm, setPopupData} : any) {
@@ -120,6 +122,7 @@ export default function MuiTree({header, data, handleOpenForm, setPopupData} : a
         </TreeItem>
     
     
+  // TODO: add submit handlers and projectId
   return (
     <Container disableGutters>
         <SimpleTreeView 
@@ -127,8 +130,8 @@ export default function MuiTree({header, data, handleOpenForm, setPopupData} : a
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
             {data.map((item: any) => renderTree(item.packageObject, false, item.children, item.objects))}
         </SimpleTreeView>
-        <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-        <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+        <MuiAddObject projectId="" onSubmit={(newObject: tObjectAttributes) => {}} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+        <MuiAddDirectory projectId="" onSubmit={(newObject: tPackageAttributes) => {}} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
     </Container>
     
   );
