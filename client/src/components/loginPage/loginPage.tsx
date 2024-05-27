@@ -82,10 +82,10 @@ export default function SignInSide() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Имя пользователя"
+                  name="username"
+                  autoComplete="username"
                   autoFocus                  
                 />
                 <TextField
