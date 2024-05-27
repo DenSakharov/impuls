@@ -9,8 +9,11 @@ import MuiAddObject from "./muiAddObject";
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import MuiSidebarConf from './muiSidebarConf';
+import { tPackageAttributes } from '#/dtos/tPackageAttributes';
+import axios from 'axios';
+import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 
-function MuiButTree() {
+function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?: (string)=>void}) {
     // const classes = useStyles()
 
     // addDirectory
@@ -23,6 +26,34 @@ function MuiButTree() {
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
 
+    const addDirectory = (newPackage: tPackageAttributes) => {
+        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/packages`, newPackage, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((response) => {
+            console.log(response);
+            closeModalAddDirectory();
+            updateTree && updateTree(projectId);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+    const addObject = (newObject: tObjectAttributes) => {
+        console.log(newObject);
+        
+        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/objects`, newObject, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((response) => {
+            console.log(response);
+            closeModalAddObject();
+            updateTree && updateTree(projectId);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     return (
 
     <Box sx={{ flexGrow: 0}}>
@@ -34,9 +65,10 @@ function MuiButTree() {
             <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
             <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
+           
 
-            <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
-            <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+            <MuiAddDirectory projectId={projectId} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} onSubmit={addDirectory}/>
+            <MuiAddObject projectId={projectId} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} onSubmit={addObject}/>
             <MuiSidebarConf />
 
          </Stack>

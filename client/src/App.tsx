@@ -19,6 +19,7 @@ import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/muiSearchpage";
 import Demo from './components/history/Demo';
+import History from './components/history/muiHistory';
 import muiAllProjects from './components/mainPage/projects/muiAllProjects';
 import MuiNews from './components/mainPage/muiNews';
 import MuiHistory from './components/history/muiHistory';
