@@ -6,42 +6,17 @@ const Demo = () => {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
-
-  // function getUser() {
-  //   let url_getUser = 'http://${window.location.hostname.toString()}:3010/projects/'
-  //   axios({
-  //     method: 'get',
-  //     url: url_getUser,
-  //     headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
-  //   }).then((response: AxiosResponse) => {
-
-  //     // var User = response.data
-  //     setNotes(response.data);
-  //     // setUserID(User.userid)
-  //     // setUserLogin(User.userlogin)
-  //     // setUserSurname(User.surname)
-  //     // setUserFirstname(User.firstname)
-  //     // setUserEmail(User.userEmail)
-  //     // setUserDepartment(User.department)
-  //   }).catch((reason: AxiosError) => {
-  //     console.log(reason)
-  //     console.log('1')
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   let userReceived = false
-  //   if (!userReceived) {
-  //     getUser()
-  //     console.log('2')
-  //   } 
-  //   return () => { userReceived = true; }
-  // },[]);
-
+  
   const fetchData = () => {
      axios
-       .get('http://jsonplaceholder.typicode.com/posts')
+       //.get('http://jsonplaceholder.typicode.com/posts')
+       .get(`http://${window.location.hostname}:3010/projects`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            }
+        )
        .then((response) => {
         setIsLoading(false);
         setNotes(response.data);
