@@ -1,6 +1,6 @@
 import { Alert, AlertTitle, Collapse, Container, IconButton, Button, TextField, Box, Typography} from "@mui/material";
 import logo from "./logo_reg.png"
-import {Close, Email} from '@mui/icons-material';
+import {Close} from '@mui/icons-material';
 import "./style.css";
 import {useState} from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -50,16 +50,12 @@ export default function Registration() {
 
   const registrationUser = () => {
     if(checkPassword() && checkEmail()) {
-      axios({
-        method: 'post',
-        url: `http://${window.location.hostname.toString()}:3010/users`,
-        data: {
-          userlogin: loginInput,
-          userEmail: emailInput,
-          password: passwordInput,
-          firstname: 'defaultName',
-          surname: 'defaultSurname'
-        }
+      backend.post('/users', {
+        userlogin: loginInput,
+        userEmail: emailInput,
+        password: passwordInput,
+        firstname: 'defaultName',
+        surname: 'defaultSurname'        
       }).then((response: AxiosResponse) => {
         const data = response.data
         if(data?.status === 201){
