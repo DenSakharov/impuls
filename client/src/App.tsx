@@ -29,6 +29,7 @@ function App() {
     //console.log(currentPath); // currentPathDoc
     // const currentPathDoc: string = currentPath.slice(0, 36).concat('');
     //console.log(currentPathDoc); // currentPathDoc
+  const { Example } = require("./components/excelEditor/Collabration.stories");
 
   let navbarComponent;
   if (currentPath === '/main') {
@@ -76,6 +77,7 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
+          <Route path="/worksheet" element={ <Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
