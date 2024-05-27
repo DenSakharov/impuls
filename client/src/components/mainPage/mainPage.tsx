@@ -58,7 +58,7 @@ export default function MainPage() {
 
     <div className="aside">
       <MuiButTree/>
-   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+   	  {/* <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/> */}
   	</div>
 
 	  <div className="content">
