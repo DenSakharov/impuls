@@ -10,6 +10,7 @@ import React, {
   import { Workbook, WorkbookInstance } from "@fortune-sheet/react";
   import { v4 as uuidv4 } from "uuid";
   import { hashCode } from "./utils";
+  import { useParams } from 'react-router-dom';
   
   export default {
     component: Workbook,
@@ -25,9 +26,12 @@ import React, {
       const _userId = uuidv4();
       return { username: `User-${_userId.slice(0, 3)}`, userId: _userId };
     }, []);
+    const {id: documentId} = useParams()
+    const documentObjectId = new URL(document.location.href).searchParams.get("docId")
   
     useEffect(() => {
-      const socket = new WebSocket("ws://localhost:8081/ws");
+      console.log("documentObjectId ", documentObjectId)
+      const socket = new WebSocket(`ws://localhost:8081/ws`);
       wsRef.current = socket;
   
       socket.onopen = () => {
@@ -99,7 +103,7 @@ import React, {
           <p>Failed to connect to websocket server.</p>
           <p>
             Please note that this collabration demo connects to a local websocket
-            server (ws://localhost:8081/ws).
+            server (ws://localhost:8081/workbook).
           </p>
           <p>
             To make this work:
