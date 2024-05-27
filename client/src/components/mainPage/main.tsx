@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./../../globals.css";
 import { Container } from "@mui/system";
 import { Dialog, Typography, Card, Box } from "@mui/material";
@@ -25,31 +25,44 @@ import {
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import { styled, useTheme } from "@mui/material/styles";
 import axios from "axios";
+import { tProjectAttributes } from '#/dtos/tProjectAttributes';
+import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 
 export const closeDialog = React.createContext<Function>(() => {});
 
-interface tProjectAttributes {
-    projectId: string;
-    name?: string;
-    dateEdited: Date | string;
-    dateCreated: Date | string;
-}
-interface tObjectAttributes{
-    objectId: string;
-    name?: string;
-    packageId?: string;
-    dateEdited: Date | string;
-    dateCreated: Date | string;
-}
-interface tPackageAttributes {
-    packageId: string;
-    name?: string;
-    parentId?: string;
-    children?: tPackageAttributes[];
-    objects?: tObjectAttributes[];
-}
+
 function Main({ changeState }: any) {
-    const [popupData, setPopupData] = useState(data.object);
+    const getTree = useCallback(
+        (projectId: string) => {
+            axios
+                .get(
+                    "http://" +
+                        window.location.hostname +
+                        ":3010" +
+                        "/projects/" +
+                        projectId +
+                        "/packages/tree",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                "token"
+                            )}`,
+                        },
+                    }
+                )
+                .then(({ data }) => {
+                    console.log(data);
+                    setProjectData(data);
+                })
+                .catch((err) => console.log(err));
+    
+        },
+        [],
+    )
+    
+   
+    const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
     const [projectData, setProjectData] = useState<tPackageAttributes[]>([]);
     const [projects, setProjects] = useState<tProjectAttributes[]>([]);
     const [project, setProject] = useState<tProjectAttributes | null>(null);
@@ -79,32 +92,8 @@ function Main({ changeState }: any) {
             setProjectData([]);
             return;
         }
-        axios
-            .get(
-                "http://" +
-                    window.location.hostname +
-                    ":3010" +
-                    "/projects/" +
-                    project.projectId +
-                    "/packages/tree",
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            )
-            //.then((res) => res.data.json())
-            .then(({ data }) => {
-                console.log(data);
-                setProjectData(data);
-                //             doc.tags = doc.tags ? doc.tags : [];
-                //             doc.links = doc.links ? doc.links : { values: [] };
-                //             setDocument(doc);
-            })
-            .catch((err) => console.log(err));
-    }, [project?.projectId]);
+        getTree(project?.projectId)
+    }, [getTree, project?.projectId]);
     const handleCloseForm = () => {
         setFormOpen(false);
     };
@@ -161,11 +150,11 @@ function Main({ changeState }: any) {
                                             projects={projects}
                                         />
                                         }
-                                        <MuiButTree />
+                                        <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
                                         <MuiTree
                                             data={projectData}
                                             handleOpenForm={handleOpenForm}
-                                            setPopupData={setPopupData}
+                                            setPopupData={(data: tObjectAttributes)=>{console.log(data); setPopupData(data)}}
                                         />
                                     </div>
                                 </div>
@@ -203,16 +192,13 @@ function Main({ changeState }: any) {
                                                         }
                                                         projects={projects}
                                                     />}
-                                                    <MuiButTree />
+                                                    <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
                                                     <MuiTree
                                                         header={project?.name}
                                                         data={projectData}
-                                                        handleOpenForm={
-                                                            handleOpenForm
-                                                        }
-                                                        setPopupData={
-                                                            setPopupData
-                                                        }
+                                                        handleOpenForm={handleOpenForm}
+                                                        
+                                                        setPopupData={(data: tObjectAttributes)=>{console.log(data); setPopupData(data)}}
                                                     />
                                                 </div>
                                             </Disclosure.Panel>

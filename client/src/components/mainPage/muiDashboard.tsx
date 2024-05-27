@@ -105,7 +105,7 @@ const MuiDashboard: React.FC = () => {
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Приоритеты задач</Typography>
                 {pieData.map((entry, index) => (
-                    <Typography>{entry.name}: {entry.value}</Typography>
+                    <Typography key={index}>{entry.name}: {entry.value}</Typography>
                 ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>
@@ -131,7 +131,7 @@ const MuiDashboard: React.FC = () => {
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Статусы документов</Typography>
                 {pieData2.map((entry, index) => (
-                    <Typography>{entry.name}: {entry.value}</Typography>
+                    <Typography key={index}>{entry.name}: {entry.value}</Typography>
                 ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>
