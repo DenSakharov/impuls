@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ выбор проекта на StartPage
+
 import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, Container, Stack, IconButton} from '@mui/material';
@@ -23,7 +24,7 @@ export default function SelectProjects({changeState} : any) {
       }
   return (
 
-    <Box sx={{ flexGrow: 0}}>
+    <Box sx={{ flexGrow: 0 }}>
         <div><Button variant="text" onClick={handleOpenForm}  > Открыть проект</Button></div>
         <div><Button variant="text"  > Настроить проекты</Button></div>
         <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>

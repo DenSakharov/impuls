@@ -1,15 +1,17 @@
-// Кожевников СЮ
+// Кожевников СЮ раздел стартовая страница для главной страницы
+
 import React, { useEffect } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
-import AddProjects from './addProjects';
+import AddProjects from './projects/muiAddProjects';
 import data from '../editPopup/data';
 
 
 export const MuiStartpage = ({chengedproject}) => {
 
     // const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
+    const [projectData, setProjectData] = React.useState(data.tree[0]);
+    // const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
 
     useEffect(() => {
       // console.log(projectData)

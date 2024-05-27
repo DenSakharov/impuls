@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { SimpleTreeView, TreeItem  } from '@mui/x-tree-view';
 import { Container, Menu, MenuItem } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -7,6 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import MuiAddDirectory from "./muiAddDirectory";
+import MuiAddObject from "./muiAddObject";
+import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
 
 export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
     
@@ -47,6 +50,16 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
         setState(initialState);
     }
 
+    // addDirectory
+    const [isModalAddDirectoryOpen, setModalAddDirectoryOpen] = useState(false);
+    const openModalAddDirectory = () => setModalAddDirectoryOpen(true);
+    const closeModalAddDirectory = () => setModalAddDirectoryOpen(false);
+
+    // addObject
+    const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
+    const openModalAddObject = () => setModalAddObjectOpen(true);
+    const closeModalAddObject = () => setModalAddObjectOpen(false);
+
     const renderTree = (node: any) => (
         <TreeItem 
         itemId={node.name} 
@@ -66,18 +79,28 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
             ? { top: state.mouseY, left: state.mouseX }
             : undefined
         }
+
+
         >       <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <SettingsSystemDaydreamIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Свойства"/>
+                </MenuItem>
+               <MenuItem onClick={handlemyClose}>
                     <ListItemIcon>
                         <CreateNewFolderIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText primary="Добавить папку" />
+                    <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
                 </MenuItem>
+
                 <MenuItem onClick={handlemyClose}>
                 <ListItemIcon>
                         <NoteAddIcon fontSize="small" />
                     </ListItemIcon>
-                <ListItemText primary="Добавить объект" />
+                <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
                 </MenuItem>
+
                 <MenuItem onClick={handlemyClose}>
                 <ListItemIcon>
                         <ContentCopy fontSize="small" />
@@ -91,16 +114,19 @@ export default function MuiTree({data, handleOpenForm, setPopupData} : any) {
                 <ListItemText primary="Удалить" />
                 </MenuItem>
          </Menu>
+
         {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)}
         </TreeItem>
     )
   return (
     <Container disableGutters>
         <SimpleTreeView 
-        defaultExpandedItems={[data.name]}
-        sx={{ flexGrow: 1, overflowY: 'auto' }}>
+            defaultExpandedItems={[data.name]}
+             sx={{ flexGrow: 1, overflowY: 'auto' }}>
             {renderTree(data)}
         </SimpleTreeView>
+        <MuiAddObject isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+        <MuiAddDirectory isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
     </Container>
     
   );

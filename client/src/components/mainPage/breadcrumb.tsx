@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ компонент для вывода навигационной цепочки по страницам
+
 import  React  from 'react';
 import { Breadcrumb, BreadcrumbItem } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
@@ -14,7 +15,7 @@ export default function BreadcrumbNew() {
 
     if (currentPath === '/main') {
       BreadcrumbName = 'Дашборд'
-    } else if (currentPath === '/projects') {
+    } else if (currentPath === '/project') {
       BreadcrumbName = 'Проекты и задачи'
     } else if (currentPath === '/TableData') {
       BreadcrumbName = 'История согласований'

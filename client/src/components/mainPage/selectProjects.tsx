@@ -1,5 +1,5 @@
+// Кожевников СЮ выбор проекта из дерева
 
-// Кожевников СЮ
 import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, Container, Stack, IconButton} from '@mui/material';
@@ -11,8 +11,10 @@ import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithC
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
-  fontSize: 12,
-  padding: '6px 0px',
+  fontSize: 14,
+  height: 40,
+  padding: 0,
+  margin: 0,
   border: '1.5px solid',
   lineHeight: 1.5,
   backgroundColor: '#147298',
@@ -58,25 +60,21 @@ export default function SelectProjects({changeState} : any) {
       const changeProps = (value : any) => {
         // console.log(value)
         setProjectData(value)
-
         changeState(value)
-
         handleCloseForm()
-
-
       }
 
   return (
 
-    <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-
-            <Stack spacing={1} direction="row">
-              <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton>
-              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
-            </Stack>
+    <Box sx={{ flexGrow: 0, backgroundColor: '#147298', margin  : '0px'}}>
+            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: 40, justifyContent:'center'}}>
+              <Stack spacing={1} direction="row">
+                <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {projectData.name} </ImpulseButton>
+              </Stack>
             </Container>
-            <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
+
+         {/* Диалог выбора проекта     */}
+        <ProjectDialog formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
     </Box>
   );
 }

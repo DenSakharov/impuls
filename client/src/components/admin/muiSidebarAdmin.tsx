@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Button} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -17,14 +17,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import History from '../history/muiHistory';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import UpdateIcon from '@mui/icons-material/Update';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import MuiAllProjects from '../mainPage/projects/muiAllProjects';
+
+
 
 const drawerWidth = 240;
 
@@ -110,9 +111,11 @@ export default function MuiSidebarTree() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
-      
+
+      {/* навбар страницы */}
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -133,6 +136,7 @@ export default function MuiSidebarTree() {
         </Toolbar>
       </AppBar>
 
+      {/* Левое меню  */}
       <Drawer variant="permanent" open={open}>
 
         <DrawerHeader>
@@ -203,7 +207,9 @@ export default function MuiSidebarTree() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={() => window.open('/main', '_self')}
               >
+                {/* <Button variant="contained" onClick={() => console.log('Button clicked')}></Button> */}
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
@@ -221,24 +227,32 @@ export default function MuiSidebarTree() {
 
       </Drawer>
 
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography paragraph sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'left',
-                  }}>         
-         <History />
-        </Typography>
-        
-        <DrawerHeader />
-        {/* <Typography paragraph sx={{
-                    minWidth: 0,
+                    minWidth: 240,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
                   }}>
-          Настройки
-        </Typography> */}
+                  {/* Все события системы       */}
+                  <History />
+        </Typography>
+
+
+
+        <DrawerHeader />
+
+        <Typography paragraph sx={{
+                    minWidth: 240,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'left',
+                  }}>
+        </Typography>
+
+        {/* Список проектов           */}
+        {/* <MuiAllProjects /> */}
+
       </Box>
     </Box>
   );

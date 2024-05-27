@@ -1,4 +1,5 @@
-// Кожевников СЮ
+// Кожевников СЮ главное меню
+
 import  React  from 'react';
 import './../../globals.css';
 import { Fragment } from 'react';
@@ -15,6 +16,8 @@ import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import BreadcrumbNew from "./breadcrumb";
 import MuiSidebarMessage from './muiSidebarMessage';
 // https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
+import Button from '@mui/material/Button';
+
 
 const user = {
   name: 'Иванов Иван',
@@ -29,7 +32,7 @@ const navigation = [
   { name: 'Отчеты', href: '/report', current: false },
 ]
 const serviceNavigation = [
-  { name: 'Проекты и задачи', href: '/projects' },
+  { name: 'Проекты и задачи', href: '/project' },
   { name: 'История согласований', href: '/TableData' },
   { name: 'Текстовый редактор', href: '/documents' },
   { name: 'Импорт/Экспорт', href: '/integration' },
@@ -69,6 +72,13 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     return (
     <>
@@ -117,6 +127,16 @@ function MainNavBar({changeState} : any) {
 
                       <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
                         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+                            {/* <Button
+                            id="fade-button"
+                            aria-controls={open ? 'fade-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={open ? 'true' : undefined}
+                              onClick={handleClickOpen}>
+                            IMS IMPULS
+                          </Button> */}
+                          {/* <About /> */}
+
                            <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
                         </Container>
                       </Box>
@@ -179,10 +199,10 @@ function MainNavBar({changeState} : any) {
                             ))}
                           </Menu.Items>
                         </Transition>
-                       </Menu> 
+                       </Menu>
 
                        {/* Ссылка на старую страницу */}
-                       <a href="/mainPage" target="" rel="noreferrer">old MainPage</a>
+                       {/* <a href="/mainPage" target="" rel="noreferrer">old MainPage</a> */}
                       </div>
                     </div>
                     {/* End Вывод меню */}  
@@ -191,18 +211,18 @@ function MainNavBar({changeState} : any) {
                   {/* Выпадающее меню Profile */}
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <button
-                        onClick={openSBMessage}
+                      {/* <button
+                        //onClick={openSBMessage}
                         type="button"
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+                      </button> */}
 
                       <MuiSidebarMessage />
-                      
+
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

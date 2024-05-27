@@ -1,4 +1,4 @@
-// Кожевников СЮ
+// Кожевников СЮ компонент для создание заметок на закладке избранное
 import  React  from 'react';
 import { CreateTodo } from "./create_todo";
 
