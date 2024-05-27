@@ -65,18 +65,17 @@ function Main({ changeState }: any) {
     }
 
     return (
-        <>
-            <closeDialog.Provider value={handleCloseForm}>
-                <meta name='viewport' content='width=device-width, initial-scale=1'/>
-                <div className="min-h-full">
+    <>
+    <closeDialog.Provider value={handleCloseForm}>
+       <meta name='viewport' content='width=device-width, initial-scale=1'/>
+       <div className="min-h-full">
+        <main className="m-1">
+            {/* <div className="flex flex-col items-center gap-8 "> */}
+           <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
+            <div className='container-app'>
 
-                    <main className="m-1">
-                        {/* <div className="flex flex-col items-center gap-8 "> */}
-                        <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
-                            <div className='container-app'>
-
-                                {/* Start */} {/* FullPage панель !!!  */}
-                                <div className="hidden md:block">
+            {/* Start */} {/* FullPage панель !!!  */}
+            <div className="hidden md:block">
                                     <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                         {/* Сайдбар с деревом объектов */}
                                         {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
@@ -84,12 +83,12 @@ function Main({ changeState }: any) {
                                         <MuiTree data={tree} handleOpenForm={handleOpenForm}
                                                  setPopupData={setPopupData}/>
                                     </div>
-                                </div>
-                                {/* End */}
+            </div>
+            {/* End */}
 
-                                {/* Start */} {/* Mobile панель ! */}
-                                <Disclosure as="nav">
-                                    {({open}) => (
+            {/* Start */} {/* Mobile панель ! */}
+            <Disclosure as="nav">
+                    {({open}) => (
                                         <>
                                             <div className="-mr-2 flex md:hidden">
                                                 <Disclosure.Button
@@ -103,7 +102,6 @@ function Main({ changeState }: any) {
                                                         <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
                                                     )}
                                                 </Disclosure.Button>
-
                                             </div>
 
                                             <Disclosure.Panel className="md:hidden">
@@ -116,25 +114,22 @@ function Main({ changeState }: any) {
                                                 </div>
                                             </Disclosure.Panel>
                                         </>
-                                    )}
-                                </Disclosure>
+                    )}
+            </Disclosure>
 
-                                {/* Открытие карточки объекта  */}
-                                <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-                                    <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
-                                </Dialog>
+            {/* Открытие карточки объекта  */}
+            <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
+            </Dialog>
 
-
-                                {/* содержимое страницы Дашборд */}
-                                <div className="content">
-
-                                    {/* Заголовок для дашборда */}
-                                    <div id="mainHeader">
-                                        <div className="content-text-block">
-                                            <h2 className="text-3xl font-bold tracking-tight text-gray-100">Рабочий
-                                                стол</h2>
-                                        </div>
-                                    </div>
+          {/* содержимое страницы Дашборд */}
+          <div className="content">
+            {/* Заголовок для дашборда */}
+                <div id="mainHeader">
+                 <div className="content-text-block">
+                   <h2 className="text-3xl font-bold tracking-tight text-gray-100">Рабочий стол</h2>
+                 </div>
+                </div>
 
           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
@@ -142,14 +137,12 @@ function Main({ changeState }: any) {
               <MuiStartpage chengedproject={handleselectproject} />
             </Container>
            </div>
-
-          {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
-          <div className="flex flex-wrap items-center gap-8 ">
+         
+          {/* <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
               <MuiAllProjects />
             </Container>
-           </div>
-
+           </div> */}
 
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
@@ -174,17 +167,14 @@ function Main({ changeState }: any) {
             </Container>
           </div>
           </div>
-        </div>
-        </div>  
+            </div>
+           </div>  
         </main>
-
-
         {/* footer страницы */}
         <MainFooter/>
-      </div>
-      </closeDialog.Provider>
+       </div>
+    </closeDialog.Provider>
     </>
-
     );
   }
   export default Main;
