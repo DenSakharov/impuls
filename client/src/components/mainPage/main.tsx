@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
 import {Dialog} from '@mui/material';
@@ -16,59 +16,29 @@ import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
-import axios from "axios";
 import { tProjectAttributes } from '#/dtos/tProjectAttributes';
 import { tObjectAttributes } from '#/dtos/tObjectAttributes';
-import { tPackageAttributes } from '#/dtos/tPackageAttributes';
+import useProjects from '../../hooks/useProjects';
+import useTree from '../../hooks/useTree';
 
 export const closeDialog = React.createContext<Function>(() => {});
 
 
 function Main({ changeState }: any) {
-    const getTree = useCallback(
-        (projectId: string) => {
-            axios.get(`http://${window.location.hostname}:3010/projects/${projectId}/packages/tree`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                )
-                .then(({ data }) => {
-                    console.log(data);
-                    setProjectData(data);
-                })
-                .catch((err) => console.log(err));
-        },
-        [],
-    )
-       
+    
+    
+   
     const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
-    const [projectData, setProjectData] = useState<tPackageAttributes[]>([]);
-    const [projects, setProjects] = useState<tProjectAttributes[]>([]);
+    const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
-    useEffect(()=>{        
-        axios.get(`http://${window.location.hostname}:3010/projects`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            )
-            .then(({ data }) => {
-                setProjects(data);
-                if(data.length)setProject(data[0]);
-            })
-            .catch((err) => console.log("Get projects error", err) );
-    }, [])
+    const {tree, getTree} = useTree(project?.projectId);
+    
     useEffect(() => {
-        if (!project?.projectId) {
-            setProjectData([]);
-            return;
+        if(projects?.length > 0) {
+            setProject(projects[0]);
         }
-        getTree(project?.projectId)
-    }, [getTree, project?.projectId]);
+    }, [projects])
     const handleCloseForm = () => {
         setFormOpen(false);
     };
@@ -110,7 +80,7 @@ function Main({ changeState }: any) {
                                         {/* Сайдбар с деревом объектов */}
                                         {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
                                         <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                        <MuiTree data={projectData} handleOpenForm={handleOpenForm}
+                                        <MuiTree data={tree} handleOpenForm={handleOpenForm}
                                                  setPopupData={setPopupData}/>
                                     </div>
             </div>
@@ -137,9 +107,9 @@ function Main({ changeState }: any) {
                                             <Disclosure.Panel className="md:hidden">
                                                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                                     {/* Сайдбар с деревом объектов */}
-                                                    {projects.length > 0 &&<SelectProjects changeState={setProjectData} projects={projects}/>}
+                                                    {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
                                                     <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                                    <MuiTree data={projectData} handleOpenForm={handleOpenForm}
+                                                    <MuiTree data={tree} handleOpenForm={handleOpenForm}
                                                              setPopupData={setPopupData}/>
                                                 </div>
                                             </Disclosure.Panel>

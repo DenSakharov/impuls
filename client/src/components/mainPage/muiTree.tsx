@@ -13,13 +13,19 @@ import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydre
 import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 
+export type MuiTreeProps = {
+    header?: string,
+    data: tPackageAttributes[],
+    handleOpenForm: () => void,
+    setPopupData: (node: tObjectAttributes)=>void
+}
 
-export default function MuiTree({header, data, handleOpenForm, setPopupData} : any) {
+export default function MuiTree({header = "Header", data, handleOpenForm, setPopupData} : MuiTreeProps) {
     
-    const openPopup = (node: any) => {
+    const openPopup = (node: tObjectAttributes) => {
         setPopupData(node)
         if (node && window.innerWidth < 700) {
-            window.open('/Popup?id=' + node.id,"_self")
+            window.open('/Popup?id=' + node.objectId,"_self")
             return
         }
 
@@ -62,65 +68,69 @@ export default function MuiTree({header, data, handleOpenForm, setPopupData} : a
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
-    const renderTree = (node: any,isObject: boolean, packages: any = [], objects: any = []) => 
-        <TreeItem 
-        itemId={node.objectId || node.packageId} 
-        label={node.name} 
-        key={node.objectId || node.packageId} 
-        sx={{textAlign:"left", textDecoration: isObject ? "underline" : "none", cursor: 'context-menu'}}
-        onClick={() => isObject? openPopup(node) : null}
-        onContextMenu={onHandleRightClick}
-        >
-        <Menu
-        keepMounted
-        open={state.mouseY !== null}
-        onClose={handlemyClose}
-        anchorReference="anchorPosition"
-        anchorPosition={
-          state.mouseY !== null && state.mouseX !== null
-            ? { top: state.mouseY, left: state.mouseX }
-            : undefined
-        }
+    const renderTree = (node: tPackageAttributes|tObjectAttributes) => {
+        const isObject = "objectId" in node;
+        const id = isObject ? node.objectId : node.packageId;
+        return (
+            <TreeItem 
+            itemId={id}        
+            label={node.name} 
+            key={id} 
+            sx={{textAlign:"left", textDecoration: isObject ? "underline" : "none", cursor: 'context-menu'}}
+            onClick={() => isObject? openPopup(node) : null}
+            onContextMenu={onHandleRightClick}
+            >
+                <Menu
+                keepMounted
+                open={state.mouseY !== null}
+                onClose={handlemyClose}
+                anchorReference="anchorPosition"
+                anchorPosition={
+                state.mouseY !== null && state.mouseX !== null
+                    ? { top: state.mouseY, left: state.mouseX }
+                    : undefined
+                }
 
 
-        >       <MenuItem onClick={handlemyClose}>
-                    <ListItemIcon>
-                        <SettingsSystemDaydreamIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Свойства"/>
-                </MenuItem>
-               <MenuItem onClick={handlemyClose}>
-                    <ListItemIcon>
-                        <CreateNewFolderIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
-                </MenuItem>
+                >       <MenuItem onClick={handlemyClose}>
+                            <ListItemIcon>
+                                <SettingsSystemDaydreamIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Свойства"/>
+                        </MenuItem>
+                    <MenuItem onClick={handlemyClose}>
+                            <ListItemIcon>
+                                <CreateNewFolderIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
+                        </MenuItem>
 
-                <MenuItem onClick={handlemyClose}>
-                <ListItemIcon>
-                        <NoteAddIcon fontSize="small" />
-                    </ListItemIcon>
-                <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
-                </MenuItem>
+                        <MenuItem onClick={handlemyClose}>
+                        <ListItemIcon>
+                                <NoteAddIcon fontSize="small" />
+                            </ListItemIcon>
+                        <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
+                        </MenuItem>
 
-                <MenuItem onClick={handlemyClose}>
-                <ListItemIcon>
-                        <ContentCopy fontSize="small" />
-                    </ListItemIcon>
-                <ListItemText primary="Создать копию" />
-                </MenuItem>
-                <MenuItem onClick={handlemyClose}>
-                <ListItemIcon>
-                        <DeleteIcon fontSize="small" />
-                    </ListItemIcon>
-                <ListItemText primary="Удалить" />
-                </MenuItem>
-         </Menu>
-        {/* {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)} */}
-        {packages.map((child: any) => renderTree(child.packageObject, false, child.children, child.objects))}
-        {objects.map((child: any) => renderTree(child, true))}
-        </TreeItem>
-    
+                        <MenuItem onClick={handlemyClose}>
+                        <ListItemIcon>
+                                <ContentCopy fontSize="small" />
+                            </ListItemIcon>
+                        <ListItemText primary="Создать копию" />
+                        </MenuItem>
+                        <MenuItem onClick={handlemyClose}>
+                        <ListItemIcon>
+                                <DeleteIcon fontSize="small" />
+                            </ListItemIcon>
+                        <ListItemText primary="Удалить" />
+                        </MenuItem>
+                </Menu>
+                {/* {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)} */}
+                {!isObject && node.children?.map((child: tPackageAttributes) => renderTree(child))}
+                {!isObject && node.objects?.map((child: tObjectAttributes) => renderTree(child))}
+            </TreeItem>
+        )
+    }
     
   // TODO: add submit handlers and projectId
   return (
@@ -128,7 +138,7 @@ export default function MuiTree({header, data, handleOpenForm, setPopupData} : a
         <SimpleTreeView 
         defaultExpandedItems={[header]}
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
-            {data.map((item: any) => renderTree(item.packageObject, false, item.children, item.objects))}
+            {data.map((item: tPackageAttributes) => renderTree(item))}
         </SimpleTreeView>
         <MuiAddObject projectId="" onSubmit={(newObject: tObjectAttributes) => {}} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
         <MuiAddDirectory projectId="" onSubmit={(newObject: tPackageAttributes) => {}} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
