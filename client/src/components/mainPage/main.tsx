@@ -11,11 +11,11 @@ import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import {MuiStartpage} from './muiStartpage';
 import MuiFavourites from './favorites/muiFavourites';
+import MuiAllProjects from '../mainPage/projects/muiAllProjects';
 import { Disclosure} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
-import MuiAllProjects from '../mainPage/projects/muiAllProjects';
 import { tProjectAttributes } from '#/dtos/tProjectAttributes';
 import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import useProjects from '../../hooks/useProjects';
@@ -23,11 +23,8 @@ import useTree from '../../hooks/useTree';
 
 export const closeDialog = React.createContext<Function>(() => {});
 
-
 function Main({ changeState }: any) {
-    
-    
-   
+
     const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
     const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
@@ -76,45 +73,42 @@ function Main({ changeState }: any) {
 
             {/* Start */} {/* FullPage панель !!!  */}
             <div className="hidden md:block">
-                                    <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                                        {/* Сайдбар с деревом объектов */}
-                                        {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
-                                        <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                        <MuiTree data={tree} handleOpenForm={handleOpenForm}
-                                                 setPopupData={setPopupData}/>
-                                    </div>
+              <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3"  style={{ width: 300 }}>
+              {/* Сайдбар с деревом объектов */}
+                {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
+                <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                <MuiTree data={tree} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+              </div>
             </div>
             {/* End */}
 
             {/* Start */} {/* Mobile панель ! */}
             <Disclosure as="nav">
-                    {({open}) => (
-                                        <>
-                                            <div className="-mr-2 flex md:hidden">
-                                                <Disclosure.Button
-                                                    className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                                    <span className="absolute -inset-0.5"/>
-                                                    <span className="sr-only">Open main menu</span>
-                                                    {open ? (
-                                                        <ArrowLeftStartOnRectangleIcon className="block h-6 w-6"
-                                                                                       aria-hidden="true"/>
-                                                    ) : (
-                                                        <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
-                                                    )}
-                                                </Disclosure.Button>
-                                            </div>
-
-                                            <Disclosure.Panel className="md:hidden">
-                                                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                                                    {/* Сайдбар с деревом объектов */}
-                                                    {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
-                                                    <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                                    <MuiTree data={tree} handleOpenForm={handleOpenForm}
-                                                             setPopupData={setPopupData}/>
-                                                </div>
-                                            </Disclosure.Panel>
-                                        </>
-                    )}
+            {({open}) => (
+            <>
+                <div className="mr-1 flex md:hidden">
+                  <Disclosure.Button
+                    className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                         <span className="absolute -inset-0.5"/>
+                         <span className="sr-only">Open main menu</span>
+                          {open ? (
+                            <ArrowLeftStartOnRectangleIcon className="block h-6 w-6"
+                             aria-hidden="true"/>
+                             ) : (
+                             <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
+                          )}
+                  </Disclosure.Button>
+                </div>
+                <Disclosure.Panel className="md:hidden">
+                  <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3" >
+                   {/* Сайдбар с деревом объектов */}
+                   {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
+                   <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                   <MuiTree data={tree} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+                  </div>
+                </Disclosure.Panel>
+             </>
+            )}
             </Disclosure>
 
             {/* Открытие карточки объекта  */}
@@ -137,7 +131,7 @@ function Main({ changeState }: any) {
               <MuiStartpage chengedproject={handleselectproject} />
             </Container>
            </div>
-         
+
           {/* <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
               <MuiAllProjects />

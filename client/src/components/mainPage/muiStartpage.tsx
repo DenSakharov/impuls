@@ -1,24 +1,34 @@
 // Кожевников СЮ раздел стартовая страница для главной страницы
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
 import AddProjects from './projects/muiAddProjects';
 import data from '../editPopup/data';
-
+import { tProjectAttributes } from '#/dtos/tProjectAttributes';
+import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import useProjects from '../../hooks/useProjects';
 
 export const MuiStartpage = ({chengedproject}) => {
 
     // const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
+    const {projects} = useProjects();
+    const [project, setProject] = useState<tProjectAttributes | null>(null);
+    //const [projectData, setProjectData] = React.useState(data.tree[0]);
     // const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
 
     useEffect(() => {
-      // console.log(projectData)
-      chengedproject(projectData)
-    }
-    ,[projectData]
-  )
+      if(projects?.length > 0) {
+          setProject(projects[0]);
+      }
+  }, [projects])
+
+  //   useEffect(() => {
+  //     // console.log(projectData)
+  //     chengedproject(projectData)
+  //   }
+  //   ,[projectData]
+  // )
 
     // const [formOpen, setFormOpen] = React.useState(false);  
 
@@ -37,7 +47,8 @@ export const MuiStartpage = ({chengedproject}) => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
                   <Typography color="textSecondary" gutterBottom>
-                    <SelectProjectsNew changeState={setProjectData}/>
+                    {/* <SelectProjectsNew changeState={setProjectData}/> */}
+                    {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>}
                   </Typography>
                   {/* <Typography color="textSecondary" gutterBottom> Настроить </Typography> */}
                </div>

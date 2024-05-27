@@ -10,7 +10,7 @@ import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithC
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
-  fontSize: 14,
+  fontSize: 16,
   height: 40,
   padding: 0,
   margin: 0,
@@ -65,11 +65,11 @@ export default function SelectProjects({projects, changeState} : any) {
   return (
 
     <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250}}>
 
             <Stack spacing={1} direction="row">
-              <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton>
-              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30,color: 'white'}} > {project.name} </ImpulseButton>
+              {/* <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton> */}
+              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30, color: 'white'}} > {project.name} </ImpulseButton>
             </Stack>
             </Container>
             <ProjectDialog projects={projects} formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>
