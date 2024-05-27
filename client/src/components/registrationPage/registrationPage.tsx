@@ -1,9 +1,9 @@
 import { Alert, AlertTitle, Collapse, Container, IconButton, Button, TextField, Box, Typography} from "@mui/material";
 import logo from "./logo_reg.png"
-import {Close} from '@mui/icons-material';
+import {Close, Email} from '@mui/icons-material';
 import "./style.css";
 import {useState} from 'react';
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 export default function Registration() {
 
@@ -23,25 +23,36 @@ export default function Registration() {
   };
 
   const checkPassword = () => {
-    if(passwordInput === passwordRepeatInput) {
-      console.log('password=OK')
-      return true
-    } else {
+    if(passwordInput === "") {
+      setErrorMessage('Заполните пароль!')
+    }else if(passwordInput !== passwordRepeatInput) {
       setErrorMessage('Пароли должны совпадать! Проверьте ещё раз.')
+      setError(true);
+      setTimeout(handleClose, 2000);
+    } else {
+      console.log('password=OK')
+      return true      
+    }
+    return false
+  }
+  const checkEmail = () => {
+    if(emailInput === "") {
+      setErrorMessage('Заполните адрес электронной почты!')
       setError(true);
       setTimeout(handleClose, 2000);
       return false
     }
+    return true
   }
   const redirect = () => {
-    window.open("/main");
+    window.open("/main", "_self");
   }
 
   const registrationUser = () => {
-    if(checkPassword()) {
+    if(checkPassword() && checkEmail()) {
       axios({
         method: 'post',
-        url: `http://${window.location.hostname.toString()}:3010/users/create`,
+        url: `http://${window.location.hostname.toString()}:3010/users`,
         data: {
           userlogin: loginInput,
           userEmail: emailInput,
@@ -50,16 +61,24 @@ export default function Registration() {
           surname: 'defaultSurname'
         }
       }).then((response: AxiosResponse) => {
-        if(response.data === 'This login already exists'){
-          setErrorMessage('Данный login уже занят!')
-          setError(true);
-          setTimeout(handleClose, 2000);
-        } else {
+        const data = response.data
+        if(data?.status === 201){
           setRegSuccess(true);
           setTimeout(handleClose, 2000);
           setTimeout(redirect, 2000);
+        }else{
+          throw new AxiosError('Что-то пошло не так!')          
         }
-
+      }).catch((error: AxiosError) => {       
+        let message = ""
+        if(error.response?.status === 409) {
+          message = 'Данный login уже занят!'   
+        }else{
+          message = error.message
+        }
+        setErrorMessage(message)
+        setError(true);
+        setTimeout(handleClose, 2000);
       });
     }
   }
