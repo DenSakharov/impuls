@@ -24,21 +24,68 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({ onClose }) => {
     const [notes, setContent] = useState('');
     const [status, setStatus] = useState('');
 
+    // const [state, setState] = useState({
+    //     modules: '',
+    //     logtype: '',
+    //     author: '',
+    //     notes_log: '',
+    //     datetime: '',
+    // });
+    // const [id, setId] = useState('');
+    // const [modules, setModules] = useState('');
+    // const [logtype, setLogtype] = useState('');
+    // const [author, setAuthor] = useState('');
+    // const [notes_log, setNotes_log] = useState('');
+    // const [datetime, setDatetime] = useState('');
+
     const handleSubmit = async () => {
         const data = {
             name,
             notes,
             status,
         };
+        const syslog = {
+            // id:'',
+            modules: 'Projects',
+            logtype: 'OK',
+            author: localStorage.getItem('userlogin'),
+            notes: 'Add project',
+            actions: 'OK:Create new project',
+            // datetime: '',
+        };
 
+        // создание проекта
         try {
             const response = await fetch(`http://${window.location.hostname.toString()}:3010/projects`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify(data),
             });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // handle success, e.g., clear form, show success message, etc.
+            onClose();
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+            // handle error, e.g., show error message, etc.
+        }
+
+        // запись системного лога о событии
+        try {
+            const response = await fetch(`http://${window.location.hostname.toString()}:3010/history`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(syslog),
+            });
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -49,15 +96,6 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({ onClose }) => {
             // handle error, e.g., show error message, etc.
         }
 };
-
-// useEffect(() => {
-//     console.log(name)
-//     console.log(notes)
-//     console.log(status)
-//     setTitle('');
-//     setContent('');
-//     setStatus('');
-// }, [name, notes, status]);
 
 return (
     <Dialog open onClose={onClose} fullWidth maxWidth="sm">
@@ -92,9 +130,17 @@ return (
     <DialogActions>
         <Button onClick={onClose}>Отмена</Button>
         <Button onClick={handleSubmit} color="primary">Создать</Button>
-
     </DialogActions>
 </Dialog>
+
+
+                // setId({id});
+                // setModules({modules});
+                // setLogtype({logtype});
+                // setAuthor({author});
+                // setNotes_log({notes_log});
+                // setDatetime({datetime});
+
 
 );
 

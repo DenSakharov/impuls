@@ -433,7 +433,7 @@ export default function EnhancedTable() {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label="Убрать отступы в таблице "
       />
     </Box>
   );
