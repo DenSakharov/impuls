@@ -15,16 +15,9 @@ import { TMessage } from '#/entities/Message';
 import { Response } from 'express';
 import { UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import multer from 'multer';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-import * as fs from 'fs';
 
-function toBase_64(filePath) {
-  const img = fs.readFileSync(filePath);
 
-  return Buffer.from(img).toString('base64');
-}
+
 
 @Controller('/users')
 export class TSecuserController {
@@ -75,24 +68,9 @@ export class TSecuserController {
     return this.tSecuserService.recoveryPassword(userInfo.userlogin, userInfo.userName, userInfo.userSurname, userInfo.newPass);
   }
 
-  @Post('/loadphoto')
-  @UseInterceptors(
-    FileInterceptor('file', {storage: diskStorage({
-      destination: 'E:/uploads/', 
-      filename: (req, file, cb) => {
-        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-        cb(null, `${randomName}${extname(file.originalname)}`)
-      }
-    })}
-    )
-  )
+  
 
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
 
-    const base64String = toBase_64('E:/uploads/' + file.filename);
-    return base64String;
-  }
   
 
 }

@@ -20,6 +20,7 @@ const defaultData = {
   pivotTable: null,
   isPivotTable: false,
   status: 0,
+  documentId:""
 };
 
 const dbName = "google-docs-clone";
