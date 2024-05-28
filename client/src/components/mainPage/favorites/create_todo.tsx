@@ -1,3 +1,4 @@
+// Кожевников СЮ
 import  React  from 'react';
 import { useState } from "react";
 import Dialog, { DialogProps } from "./dialog";

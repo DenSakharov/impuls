@@ -1,67 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
-import {Dialog, Typography, Card, Box} from '@mui/material';
-import BreadcrumbNew from "./breadcrumb";
+import {Dialog} from '@mui/material';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
-import data from '../editPopup/data';
 import MuiPopup from '../muiPopup/muiPopup';
 import SelectProjects from './selectProjects';
 import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
-import MuiStartpage from './muiStartpage';
-import MuiFavourites from './muiFavourites';
-import {Sidebar} from 'flowbite-react';
-import {IconButton, Drawer} from '@mui/material';
-
-import {Disclosure, Menu, Transition} from '@headlessui/react';
-import {Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon} from '@heroicons/react/24/outline';
+import {MuiStartpage} from './muiStartpage';
+import MuiFavourites from './favorites/muiFavourites';
+import { Disclosure} from '@headlessui/react';
+import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
-import {styled, useTheme} from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
+import MuiAllProjects from '../mainPage/projects/muiAllProjects';
+import { tProjectAttributes } from '#/dtos/tProjectAttributes';
+import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import useProjects from '../../hooks/useProjects';
+import useTree from '../../hooks/useTree';
+
+export const closeDialog = React.createContext<Function>(() => {});
 
 
-export const closeDialog = React.createContext<Function>(() => {
-});
-
-function Main({changeState}: any) {
-    const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);
-    const [formOpen, setFormOpen] = React.useState(false);
-
+function Main({ changeState }: any) {
+    
+    
+   
+    const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
+    const {projects} = useProjects();
+    const [project, setProject] = useState<tProjectAttributes | null>(null);
+    const [formOpen, setFormOpen] = useState(false);
+    const {tree, getTree} = useTree(project?.projectId);
+    
+    useEffect(() => {
+        if(projects?.length > 0) {
+            setProject(projects[0]);
+        }
+    }, [projects])
     const handleCloseForm = () => {
+      if (window.location.pathname === '/main') {
         setFormOpen(false);
-    }
+      } else {
+        window.open('/main', '_self')
+      }
+    };
     const handleOpenForm = () => {
         setFormOpen(true);
-    }
+    };
 
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
     const [isAuth, setIsAuth] = useState(false)
 
-    const DrawerHeader = styled('div')(({theme}) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+    const DrawerHeader = styled('div')(({ theme }) => ({
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
     }));
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
+    const handleselectproject = (value) => {
+      console.log(value);
+      setProject(value);
+    }
 
     useEffect(() => {
         if(localStorage.getItem('token') != null) {
@@ -76,31 +82,30 @@ function Main({changeState}: any) {
     }
 
     return (
-        <>
-            <closeDialog.Provider value={handleCloseForm}>
-                <meta name='viewport' content='width=device-width, initial-scale=1'/>
-                <div className="min-h-full">
+    <>
+    <closeDialog.Provider value={handleCloseForm}>
+       <meta name='viewport' content='width=device-width, initial-scale=1'/>
+       <div className="min-h-full">
+        <main className="m-1">
+            {/* <div className="flex flex-col items-center gap-8 "> */}
+           <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
+            <div className='container-app'>
 
-                    <main className="m-1">
-                        {/* <div className="flex flex-col items-center gap-8 "> */}
-                        <div className="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
-                            <div className='container-app'>
-
-                                {/* Start */} {/* FullPage панель !!!  */}
-                                <div className="hidden md:block">
+            {/* Start */} {/* FullPage панель !!!  */}
+            <div className="hidden md:block">
                                     <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                         {/* Сайдбар с деревом объектов */}
-                                        <SelectProjects changeState={setProjectData}/>
-                                        <MuiButTree/>
-                                        <MuiTree data={projectData} handleOpenForm={handleOpenForm}
+                                        {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
+                                        <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                                        <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                  setPopupData={setPopupData}/>
                                     </div>
-                                </div>
-                                {/* End */}
+            </div>
+            {/* End */}
 
-                                {/* Start */} {/* Mobile панель ! */}
-                                <Disclosure as="nav">
-                                    {({open}) => (
+            {/* Start */} {/* Mobile панель ! */}
+            <Disclosure as="nav">
+                    {({open}) => (
                                         <>
                                             <div className="-mr-2 flex md:hidden">
                                                 <Disclosure.Button
@@ -114,85 +119,79 @@ function Main({changeState}: any) {
                                                         <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
                                                     )}
                                                 </Disclosure.Button>
-
                                             </div>
 
                                             <Disclosure.Panel className="md:hidden">
                                                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                                     {/* Сайдбар с деревом объектов */}
-                                                    <SelectProjects changeState={setProjectData}/>
-                                                    <MuiButTree/>
-                                                    <MuiTree data={projectData} handleOpenForm={handleOpenForm}
+                                                    {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
+                                                    <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                                                    <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                              setPopupData={setPopupData}/>
                                                 </div>
                                             </Disclosure.Panel>
                                         </>
-                                    )}
-                                </Disclosure>
+                    )}
+            </Disclosure>
 
-                                {/* Открытие карточки объекта  */}
-                                <Dialog maxWidth="lg" open={formOpen} onClose={() => {}}>
-                                    <MuiPopup documentId={popupData.id}/>
-                                </Dialog>
+            {/* Открытие карточки объекта  */}
+            <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+                <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
+            </Dialog>
 
-
-                                {/* содержимое страницы Дашборд */}
-                                <div className="content">
-
-                                    {/* Заголовок для дашборда */}
-                                    <div id="mainHeader">
-                                        <div className="content-text-block">
-                                            <h2 className="text-3xl font-bold tracking-tight text-gray-100">Рабочий
-                                                стол</h2>
-                                        </div>
-                                    </div>
-
-                                    {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
-                                    <div className="flex flex-wrap items-center gap-8 ">
-                                        <Container fixed>
-                                            <MuiStartpage/>
-                                        </Container>
-                                    </div>
-
-                                    <Card sx={{ padding: '10px', margin: '10px' }}>
-                                        <Typography variant="h5" gutterBottom sx={{ flexGrow: 1, textAlign: "center"}}>Новости</Typography>
-                                        <div className="flex flex-wrap items-center gap-8 ">
-                                            <Container fixed>
-                                                <MuiNews></MuiNews>
-                                            </Container>
-                                        </div>
-                                    </Card>
-
-                                    <Card sx={{ padding: '10px', margin: '10px' }}>
-                                        <Typography variant="h5" gutterBottom sx={{ flexGrow: 1, textAlign: "center"}}>Ключевые показатели</Typography>
-                                        <div className="flex flex-wrap items-center gap-8 ">
-                                            <Container fixed>
-                                                <MuiDashboard></MuiDashboard>
-                                            </Container>
-                                        </div>
-                                    </Card>
-
-                                    {/* <Typography variant="h4" gutterBottom>Избранное</Typography> */}
-                                    {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2> */}
-                                    <div className="flex flex-wrap items-center gap-8 ">
-                                        <Container fixed>
-                                            <MuiFavourites></MuiFavourites>
-                                            {/* TODO переделать, что было одинаково c SatrtPage */}
-                                        </Container>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-
-
-                    {/* footer страницы */}
-                    <MainFooter/>
+          {/* содержимое страницы Дашборд */}
+          <div className="content">
+            {/* Заголовок для дашборда */}
+                <div id="mainHeader">
+                 <div className="content-text-block">
+                   <h2 className="text-3xl font-bold tracking-tight text-gray-100">Рабочий стол</h2>
+                 </div>
                 </div>
-            </closeDialog.Provider>
-        </>
 
+          {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Стартовая страница</h2> */}
+           <div className="flex flex-wrap items-center gap-8 ">
+            <Container fixed>
+              <MuiStartpage chengedproject={handleselectproject} />
+            </Container>
+           </div>
+         
+          {/* <div className="flex flex-wrap items-center gap-8 ">
+            <Container fixed>
+              <MuiAllProjects />
+            </Container>
+           </div> */}
+
+           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Новости</h2> */}
+           <div className="flex flex-wrap items-center gap-8 ">
+            <Container fixed>
+              <MuiNews></MuiNews>
+            </Container>
+           </div>
+
+           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
+           <div className="flex flex-wrap items-center gap-8 ">
+            <Container fixed>
+              {/* <MuiDashboard></MuiDashboard> */}
+            </Container>
+           </div>
+
+           {/* <Typography variant="h4" gutterBottom>Избранное</Typography> */}
+           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Избранное</h2> */}
+           <div className="flex flex-wrap items-center gap-8 ">
+           <Container fixed>              
+              <MuiFavourites ></MuiFavourites > 
+               {/* TODO переделать, что было одинаково c SatrtPage */}
+            </Container>
+          </div>
+          </div>
+            </div>
+           </div>  
+        </main>
+        {/* footer страницы */}
+        <MainFooter/>
+       </div>
+    </closeDialog.Provider>
+    </>
     );
-}
-
-export default Main;
+  }
+  export default Main;

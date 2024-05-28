@@ -1,3 +1,5 @@
+// Кожевников СЮ старая главная страница
+
 import React from 'react';
 import './stylesMainPage.css';
 import MuiMenu from './muiMenu';
@@ -56,7 +58,7 @@ export default function MainPage() {
 
     <div className="aside">
       <MuiButTree/>
-   	  <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+   	  {/* <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/> */}
   	</div>
 
 	  <div className="content">

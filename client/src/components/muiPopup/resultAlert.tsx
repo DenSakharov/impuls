@@ -1,25 +1,26 @@
 import React from "react"
 import { Stack, Fade, Alert } from '@mui/material';
 
-export default function SuccessAlert ({user, showAlert, setShowAlert}: any){
+export type WhichAlert = 'success' | 'info' | 'warning' | 'error'
 
+export default function ResultAlert (props: {type: WhichAlert, message: string, showAlert: boolean, setShowAlert: Function}){
     
     React.useEffect(() => {
         const timeId = setTimeout(() => {
-          setShowAlert(false)
+            props.setShowAlert()
         }, 3000)
     
         return () => {
             clearTimeout(timeId)
           }
-      }, [showAlert, setShowAlert]);
+      }, [props]);
 
 
     return (
     <>
         <Stack sx={{ position: 'fixed', top: '90%', left: '5%'}}>            
-            <Fade in={showAlert}>
-                <Alert severity="success">Отправлено на согласование пользователю {user}.</Alert>             
+            <Fade in={props.showAlert}>
+                <Alert severity={props.type}>{props.message}</Alert>             
             </Fade>
         </Stack>
     </>            

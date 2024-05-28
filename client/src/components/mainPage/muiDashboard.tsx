@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 const data = {
-    labels: ['Январь', 'Февраль', 'Март'],
+    labels: ['Апрель', 'Май', 'Июнь'],
     datasets: [
         {
             label: 'Количество проектов',
@@ -85,7 +85,7 @@ const MuiDashboard: React.FC = () => {
     return (
         <Box>
             <Card sx={{ padding: '20px', margin: '20px' }}>
-                <Typography variant="h5" gutterBottom>Проекты</Typography>
+                <Typography variant="h5" gutterBottom>Ключевые показатели проекта</Typography>
                 <Typography>Количество проектов: 34</Typography>
                 <Typography>Количество задач: 14</Typography>
                 <Typography>Количество документов: 67</Typography>
@@ -105,7 +105,7 @@ const MuiDashboard: React.FC = () => {
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Приоритеты задач</Typography>
                 {pieData.map((entry, index) => (
-                    <Typography>{entry.name}: {entry.value}</Typography>
+                    <Typography key={index}>{entry.name}: {entry.value}</Typography>
                 ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>
@@ -131,7 +131,7 @@ const MuiDashboard: React.FC = () => {
             <Card sx={{ padding: '20px', margin: '20px' }}>
                 <Typography variant="h5" gutterBottom>Статусы документов</Typography>
                 {pieData2.map((entry, index) => (
-                    <Typography>{entry.name}: {entry.value}</Typography>
+                    <Typography key={index}>{entry.name}: {entry.value}</Typography>
                 ))}
                 <Box height={400}>
                     <PieChart width={400} height={400}>

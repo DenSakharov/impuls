@@ -1,0 +1,9 @@
+/* Кожевников СЮ  подсветка анимации  */
+$main-color: #036;
+
+@for $i from 1 through 100 {
+  $count: $i;
+  .square-#{$count} {
+    color:rgb($count, 256-$count, 0);
+  }
+}

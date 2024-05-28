@@ -1,3 +1,5 @@
+// Кожевников СЮ сайдбар с настройками для дерева объектов
+
 import React from "react";
 import { useState } from "react";
 // import { Sidebar } from "flowbite-react";

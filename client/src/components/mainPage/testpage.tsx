@@ -1,3 +1,4 @@
+// Кожевников СЮ тестовая станица
 
 import React from 'react';
 import './stylesMainPage.css';
@@ -45,7 +46,7 @@ export default function Testpage() {
 
                         <div className="aside">
                             <MuiButTree/>
-                            <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+                            {/* <MuiTree data={projectData} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/> */}
                         </div>
 
                         <div className="content">

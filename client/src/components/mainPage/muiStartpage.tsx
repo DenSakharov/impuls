@@ -1,13 +1,25 @@
-import React from 'react';
+// Кожевников СЮ раздел стартовая страница для главной страницы
+
+import React, { useEffect } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
-import AddProjects from './muiDialogAddProject';
+import AddProjects from './projects/muiAddProjects';
 import data from '../editPopup/data';
 
-const MuiStartpage: React.FC = () => {
+
+export const MuiStartpage = ({chengedproject}) => {
 
     // const [popupData, setPopupData] = React.useState(data.object);
-    const [projectData, setProjectData] = React.useState(data.tree[0]);  
+    const [projectData, setProjectData] = React.useState(data.tree[0]);
+    // const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
+
+    useEffect(() => {
+      // console.log(projectData)
+      chengedproject(projectData)
+    }
+    ,[projectData]
+  )
+
     // const [formOpen, setFormOpen] = React.useState(false);  
 
     // const handleCloseForm = () => {
@@ -24,17 +36,17 @@ const MuiStartpage: React.FC = () => {
              <div className="flex flex-wrap items-center gap-8 ">
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
-                  <Typography color="textSecondary" gutterBottom>                                       
-                    <SelectProjectsNew changeState={setProjectData}/>             
+                  <Typography color="textSecondary" gutterBottom>
+                    <SelectProjectsNew changeState={setProjectData}/>
                   </Typography>
-                   
-                  <Typography color="textSecondary" gutterBottom> Настроить </Typography>
+                  {/* <Typography color="textSecondary" gutterBottom> Настроить </Typography> */}
                </div>
                <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Создать </Typography>
-                  <Typography color="textSecondary" gutterBottom> Новый проект </Typography>
-                  <AddProjects />
-                  <Typography color="textSecondary" gutterBottom> Все проекты </Typography>
+                  <Typography color="textSecondary" gutterBottom>
+                      <AddProjects />
+                  </Typography>
+                  {/* <Typography color="textSecondary" gutterBottom> Все проекты </Typography> */}
                 </div>
                 <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                  <Typography variant="h6" color="colorPrimary" gutterBottom> Популярные </Typography>
@@ -47,4 +59,4 @@ const MuiStartpage: React.FC = () => {
     );
 };
 
-export default MuiStartpage;
+// export default MuiStartpage;

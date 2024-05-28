@@ -1,3 +1,4 @@
+// Кожевников СЮ компонент для создание ссылок на базы знаний на закладке избранное
 import  React  from 'react';
 import { CreateTodo } from "./create_todo";
 

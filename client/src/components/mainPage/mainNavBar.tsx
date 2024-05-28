@@ -12,8 +12,10 @@ import Typography from '@mui/material/Typography';
 import { Container} from '@mui/material';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import BreadcrumbNew from "./breadcrumb";
-
+import MuiSidebarMessage from './muiSidebarMessage';
 // https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
+import Button from '@mui/material/Button';
+
 
 const user = {
   name: 'Иванов Иван',
@@ -28,7 +30,7 @@ const navigation = [
   { name: 'Отчеты', href: '/report', current: false },
 ]
 const serviceNavigation = [
-  { name: 'Проекты и задачи', href: '/projects' },
+  { name: 'Проекты и задачи', href: '/project' },
   { name: 'История согласований', href: '/TableData' },
   { name: 'Текстовый редактор', href: '/documents' },
   { name: 'Импорт/Экспорт', href: '/integration' },
@@ -49,6 +51,11 @@ function MainNavBar({changeState} : any) {
     const [projectData, setProjectData] = React.useState(data.tree[0]);
     const [formOpen, setFormOpen] = React.useState(false);
     const [isAuth, setIsAuth] = React.useState(false)
+
+    // openSBMessage
+    const [SBMessage, setSBMessage] = React.useState(false);
+        const openSBMessage = () => setSBMessage(true);
+        const closeSBMessage = () => setSBMessage(false);
 
     const handleCloseForm = () => {
     setFormOpen(false);
@@ -75,14 +82,21 @@ function MainNavBar({changeState} : any) {
         window.open('/', "_self")
         return (<div></div>)
     }
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     return (
     <>
       <div className="min-h-full">
 
-      {/* Mobile aside button */}  
+      {/* Mobile aside button */}
         {/* <Disclosure as="nav" >
-          {({ open }) => ( 
+          {({ open }) => (
             <>
               <div className="-mr-2 flex md:hidden">
                           <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -123,6 +137,16 @@ function MainNavBar({changeState} : any) {
 
                       <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
                         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
+                            {/* <Button
+                            id="fade-button"
+                            aria-controls={open ? 'fade-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={open ? 'true' : undefined}
+                              onClick={handleClickOpen}>
+                            IMS IMPULS
+                          </Button> */}
+                          {/* <About /> */}
+
                            <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
                         </Container>
                       </Box>
@@ -185,10 +209,10 @@ function MainNavBar({changeState} : any) {
                             ))}
                           </Menu.Items>
                         </Transition>
-                       </Menu> 
+                       </Menu>
 
                        {/* Ссылка на старую страницу */}
-                       <a href="/mainPage" target="" rel="noreferrer">old MainPage</a>
+                       {/* <a href="/mainPage" target="" rel="noreferrer">old MainPage</a> */}
                       </div>
                     </div>
                     {/* End Вывод меню */}  
@@ -197,15 +221,18 @@ function MainNavBar({changeState} : any) {
                   {/* Выпадающее меню Profile */}
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <button
+                      {/* <button
+                        //onClick={openSBMessage}
                         type="button"
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
-                      
+                      </button> */}
+
+                      <MuiSidebarMessage />
+
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -318,6 +345,7 @@ function MainNavBar({changeState} : any) {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
+
                   </div>
 
                   <div className="mt-3 space-y-1 px-2">

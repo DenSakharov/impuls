@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button , Dialog ,TextField, DialogActions, DialogContent, DialogContentText,DialogTitle } from '@mui/material';
 
-export default function AddLinkDialog ({formOpen, handleCloseForm, addLinks}: any){
+export default function AddLinkDialog (props: {formOpen: boolean, handleCloseForm: Function, addLinks: Function}){
     
     return (
      <Dialog
-        open={formOpen}
-        onClose={handleCloseForm}
+        open={props.formOpen}
+        onClose={() => props.handleCloseForm}
         PaperProps={{
         component: 'form',
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
@@ -15,8 +15,8 @@ export default function AddLinkDialog ({formOpen, handleCloseForm, addLinks}: an
             const formJson = Object.fromEntries((formData as any).entries());
             const link = formJson.link;
             console.log(link);
-            addLinks(link);
-            handleCloseForm();
+            props.addLinks(link);
+            props.handleCloseForm();
         },
         }}
         >  
@@ -39,7 +39,7 @@ export default function AddLinkDialog ({formOpen, handleCloseForm, addLinks}: an
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseForm}>Отмена</Button>
+          <Button onClick={() => props.handleCloseForm}>Отмена</Button>
           <Button type="submit">Подтвердить</Button>
         </DialogActions>
       </Dialog>

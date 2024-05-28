@@ -1,3 +1,5 @@
+// Кожевников СЮ footer для главной страницы
+
 import  React  from 'react';
 import './../../globals.css';
 import About from '../about/about';

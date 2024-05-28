@@ -1,3 +1,5 @@
+// Кожевников СЮ компонент для создание ссылок на закладке избранное
+
 import  React  from 'react';
 import { CreateTodo } from "./create_todo";
 //const [links, setLinks] = React.useState(props.links)

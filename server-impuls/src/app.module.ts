@@ -9,6 +9,7 @@ import { JWTMiddleware } from './middleware/jwt.middleware';
 import { tProjectModule } from './tProject/tProject.module';
 import { tObjectModule } from './tObject/tObject.module';
 import { tPackageModule } from './tPackage/tPackage.module';
+import { tChangehistoryModule } from './tHistory/tChangehistory.module';
 import { DbModule } from '#/database/db.module';
 import { NewsModule } from './news/news.module';
 
@@ -22,6 +23,7 @@ import { NewsModule } from './news/news.module';
     tProjectModule,
     tObjectModule,
     tPackageModule,
+    tChangehistoryModule,
     NewsModule,
   ],
   controllers: [AppController],

@@ -15,18 +15,27 @@ import TableData from './components/CordinationPage/table';
 import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
-import Report from "./components/mainPage/report";
-import Admin from "./components/mainPage/admin";
+import Report from "./components/mainPage/muiReport";
+import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
-import Searchpage from "./components/mainPage/searchpage";
+import Searchpage from "./components/mainPage/muiSearchpage";
+import History from './components/history/muiHistory';
+import muiAllProjects from './components/mainPage/projects/muiAllProjects';
+import MuiNews from './components/mainPage/muiNews';
 
 function App() {
+  //Кожевников СЮ
   // условие для отображения navbarComponent
   const currentPath = window.location.pathname;
+    //console.log(currentPath); // currentPathDoc
+    // const currentPathDoc: string = currentPath.slice(0, 36).concat('');
+    //console.log(currentPathDoc); // currentPathDoc
+  const { Example } = require("./components/excelEditor/Collabration.stories");
+
   let navbarComponent;
   if (currentPath === '/main') {
     navbarComponent = <MainNavBar/>
-  } else if (currentPath === '/projects') {
+  } else if (currentPath === '/project') {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/TableData') {
     navbarComponent = <MainNavBar/>
@@ -34,7 +43,7 @@ function App() {
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/searchpage') {
     navbarComponent = <MainNavBar/>
-  } else if (currentPath === '/documents') {
+  } else if (currentPath.includes('/documents'))  {  
     navbarComponent = <MainNavBar/>
   } else if (currentPath === '/integration') {
     navbarComponent = <MainNavBar/>
@@ -60,13 +69,18 @@ function App() {
           <Route path='/searchpage' Component={Searchpage}></Route>          
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
-          <Route path='/projects' Component={Projects}></Route>
+          <Route path='/project' Component={Projects}></Route>
+          <Route path='/history' Component={History}></Route>
+          <Route path='/allprojects' Component={muiAllProjects}></Route>
           <Route path='/admin' Component={Admin}></Route>
+          <Route path='/allnews' Component={MuiNews}></Route>
           <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
+          <Route path="/workbook" element={<Navigate to={`/workbook/${uuidV4()}`} />} />
+          <Route path="/workbook/:id" element={<Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>

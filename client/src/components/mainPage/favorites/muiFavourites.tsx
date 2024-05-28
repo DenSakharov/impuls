@@ -1,3 +1,5 @@
+// Кожевников СЮ компонет избранное для стартовой страницы
+
 import React from 'react';
 import { Card, Typography, Box } from '@mui/material';
 

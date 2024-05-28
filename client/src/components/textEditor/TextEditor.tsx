@@ -27,7 +27,7 @@ const TOOLBAR_OPTIONS=[
 
 export default function TextEditor(){
     const {id: documentId} = useParams()
-    const documentObjectId = document.location.search.split("=")[1]
+    const documentObjectId = new URL(document.location.href).searchParams.get("docId")
     const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null)
     const [quill, setQuill] = useState<any>(null)
 
@@ -209,6 +209,7 @@ if (doc?.hasChildNodes){
     }, [])
 
     return(
+        
         <div className="container" id="container" ref={wrapperRef}></div>
         
     )

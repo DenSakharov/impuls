@@ -1,3 +1,5 @@
+// Кожевников СЮ страница о проекте
+
 import React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -12,8 +14,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-//import Paper, { PaperProps } from '@mui/material/Paper';
-
+import Animation from './animation';
+import './colors_styles.css';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -42,7 +44,12 @@ function About() {
     setOpen(false);
   };
 
-  return (
+  // for (var i = 1; i <= 12; i++) {
+  //   <div className='div-1 square-" + i + "'>" + i + " </div>
+  //        console.log(i); // 1, "string", false
+  //   }
+
+    return (
     <React.Fragment>
 
     <Button
@@ -56,12 +63,12 @@ function About() {
 
     <BootstrapDialog
       aria-labelledby="customized-dialog-title"
-      open={open}
-    >
+      open={open}   >
+
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-      О проекте
+      О проекте  <Animation />
       </DialogTitle>
-     
+
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -75,14 +82,17 @@ function About() {
         <CloseIcon />
       </IconButton>
 
+
   <DialogContent dividers>
 
       <Typography gutterBottom>
-        Система управления информацией “Импульс” — это платформа для совместной работы,обеспечивает взаимодействие между архитектором и стейкхолдерами,
-         которые вносят свой вклад в формирование модели данных проекта и обращаются к информации ключевых бизнес-процессов, архитектуре, проектным документам и требованиям.
-        </Typography>        
+        Система управления информацией “Импульс” — это платформа для совместной работы в области системной инженерии, которая обеспечивает взаимодействие между архитектором,
+        стейкхолдерами и проектировщиками больших систем, которые формируют связанную модель данных.
+        Содежит инструменты для инжиниринга требований и управления конфигурацией, проектирования схем архитектуры и взаимосвязи между ключевыми бизнес-процессами.
+        Обеспечивает трассируемость объектов модели данных в течении всего жизненного цикла, с возможностью автогенерации проектных документов.
+        </Typography>
         <Typography gutterBottom>
-         Полностью совместимо с решением Sparx Systems Enterprise Architect, которое фактически может выступать в качестве толстого клиент, для работы с моделью данных проекта.
+        Является тонким клиентом, для работы с моделью данных проекта в СУБД Postgres.
         </Typography>
       <Typography gutterBottom>
 
@@ -102,7 +112,7 @@ function About() {
             ER диаграмма базы данных проекта <a href='https://www.figma.com/file/vewdlcyelMrWVBgxarOSlN/DB-diagram?type=whiteboard&node-id=0-1&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer"> Смотреть ... </a>
         </Typography>
         <Typography gutterBottom>
-            Визуальное представление <a href='https://www.figma.com/file/oMGQxCqr40KSGW0XREpRHE/Макет?type=design&mode=design&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer">Смотреть ... </a>
+            Визуальное представление в Figma <a href='https://www.figma.com/file/oMGQxCqr40KSGW0XREpRHE/Макет?type=design&mode=design&t=2PxWHLlg8fztJO48-0' target="_blank" rel="noreferrer">Смотреть ... </a>
        </Typography>
         </AccordionDetails>
       </Accordion>
@@ -167,17 +177,17 @@ function About() {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel4-content"
           id="panel4-header"        >
-          <Typography>Развитие проекта </Typography>
+          <Typography>Дальнейшее развитие проекта </Typography>
         </AccordionSummary>
         <AccordionDetails>
             <Typography>
             1. Интеграция с системой по управлению задачами Jira, Битрикс24 для экспорта задач.
             </Typography>
             <Typography>
-            2. Графическое отображение диаграмм в UML нотации, спроектированных в Sparx Systems Enterprise Architect.
+            2. Реализация совместимости с Sparx Systems Enterprise Architect (в том числе вывод диаграмм в UML нотации).
             </Typography>
             <Typography>
-            3. Реализация настройки скрытия и шифрования объекта или групп объектов в соответствии с матрицей доступа.
+            3. Реализация настройки скрытия и шифрования данных в соответствии с матрицей доступа.
             </Typography>
         </AccordionDetails>
       </Accordion>
