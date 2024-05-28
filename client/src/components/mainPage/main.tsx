@@ -40,7 +40,11 @@ function Main({ changeState }: any) {
         }
     }, [projects])
     const handleCloseForm = () => {
+      if (window.location.pathname === '/main') {
         setFormOpen(false);
+      } else {
+        window.open('/main', '_self')
+      }
     };
     const handleOpenForm = () => {
         setFormOpen(true);

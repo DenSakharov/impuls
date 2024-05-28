@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
-import { Box, Button, MenuItem, Container, Grid, Stack, TextField, Typography, Divider, IconButton, Select } from '@mui/material';
+import { Box, Button, MenuItem, Container, Grid, Stack, 
+    TextField, Typography, Divider, IconButton, Select, RadioGroup,
+    FormControlLabel, FormControl, FormLabel, Radio } from '@mui/material';
 import { Add, AssignmentOutlined } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid';
 import impulsTheme from '../../muiTheme';
-import SuccessAlert from './successAlert';
+import ResultAlert from './resultAlert';
 import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
 import axios from 'axios'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-
+import { WhichAlert }  from './resultAlert'
+import { closeDialog } from '../mainPage/main';
 
 type attachment = {
     _id: string
@@ -29,7 +27,7 @@ type tags = {
 }
 
 interface tDocumentsAttributes {
-    docId: string;
+    docId: string | undefined;
     docname?: string;
     description?: string;
     status?: string;
@@ -47,12 +45,12 @@ interface tDocumentsAttributes {
 
 
 
-export default function MuiPopup(props: { documentId : string} = {documentId : '06858a60-0059-41e4-9c88-963af22dc754'}) {
-    
+export default function MuiPopup(props: { documentId : string | undefined} = {documentId : undefined}) {
+    const closeParentDialog = React.useContext(closeDialog)
     const [toUpdate, setToUpdate] = React.useState(false);
     const [attachments, setAttachments] = React.useState<attachment[]>([]);
     const [document, setDocument] = React.useState<tDocumentsAttributes>({
-        "docId": "",
+        "docId": undefined,
         "docname": "",
         "description": "",
         "status": '',
@@ -65,10 +63,11 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         "dependencies": {},
         "dateCreated": new Date("2024-05-11T16:17:19.162Z"),
         "dateEdited": new Date("2024-05-11T13:10:25.818Z"),
-        "objectId": props.documentId
+        "objectId": undefined
     });
     
     useEffect(() => {
+        if (!props.documentId) return 
         axios.get(         
             "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
@@ -103,9 +102,14 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         axios.put(
             "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
             document,
-            {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
-        )
-    }
+            {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}            
+        ).then((res) => {
+            setShowAlert({type: 'success',visible: true, message: `Успешно сохранено`})            
+            closeParentDialog()
+        }).catch((err) => {
+            setShowAlert({type: 'error',visible: true, message: `Ошибка при сохранении ${err}`})
+        })
+        }
     }
 
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
@@ -117,8 +121,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     const priorities = ['Высокий', 'Средний', 'Низкий']
     const [formOpenLink, setFormOpenLink] = React.useState(false);
     const [formApproval, setFormApproval] = React.useState(false);
-    const [showAlert, setShowAlert] = React.useState(false);
-    const [userApprove, setApproveUser] = React.useState('');												  
+    const [showAlert, setShowAlert] = React.useState({type: 'info' as WhichAlert, visible: false, message: ''});										  
 
     const addTags = (value: {key:string, value:string | number}) => {        
         setDocument({...document, tags: {...document.tags, [value.key]: value.value}});
@@ -159,8 +162,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
     }
 
     const handleAlert = (value: string) => {
-        setApproveUser(value)
-        setShowAlert(true)
+        setShowAlert({type: 'info',visible: true, message: `Отправлено на согласование пользователю ${value}`})
     }
     
 
@@ -353,7 +355,7 @@ export default function MuiPopup(props: { documentId : string} = {documentId : '
         handleCloseForm={()=>setFormApproval(false)}
         setApproveUser={handleAlert}
         />
-        <SuccessAlert user={userApprove} showAlert={showAlert} setShowAlert={setShowAlert}/>
+        <ResultAlert type={showAlert.type as WhichAlert} message={showAlert.message} showAlert={showAlert.visible} setShowAlert={() => setShowAlert({type: showAlert.type, visible:false, message: ''})}/>
     </Container>
 </ThemeProvider>
 </>

@@ -4,12 +4,12 @@ import { Typography, IconButton, Box, Toolbar, AppBar, Container } from '@mui/ma
 import { ArrowDropUp, ArrowDropDown, Close, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight  } from '@mui/icons-material';
 import MuiChat from './muiChat';
 import MuiHistChngs from './muiHistChngs';
-import { closeDialog } from '../mainPage/main';
 
 
-export default function PopupBar(props: {id:string, updateCallback: Function} = {id: 'null', updateCallback: () => {}}) {
+
+export default function PopupBar(props: {id: string | undefined, updateCallback: Function} = {id: 'null', updateCallback: () => {}}) {
   const [smallMenu, setSmallMenu] = React.useState(false);
-  const closeParentDialog = React.useContext(closeDialog)
+  
   return (
     <Box sx={{flexGrow: 0}}>
       <AppBar  position="static">
@@ -33,7 +33,7 @@ export default function PopupBar(props: {id:string, updateCallback: Function} = 
             <ArrowDropDown fontSize='large'/>
           </IconButton>
           <Typography variant="h6" component="div"  sx={{ml: 'auto', mr: 'auto', display:{xs: smallMenu ? 'none' : 'flex' } }}>
-            № {window.outerWidth<700 ? props.id.substring(0,8) + "..." : props.id}
+            № {window.outerWidth <700 && props.id ? props.id.substring(0,8) + "..." : props.id}
           </Typography>
           <IconButton 
             size="large"
@@ -56,13 +56,7 @@ export default function PopupBar(props: {id:string, updateCallback: Function} = 
             aria-label="menu"
             sx={{ mr: 2 }}
             onClick={() => {
-              if (window.location.pathname === '/main') {
                 props.updateCallback()
-                closeParentDialog()
-              } else {
-                closeParentDialog()
-                window.open('/main', '_self')
-              }
             }}>
           
               <Close fontSize='large'/>
