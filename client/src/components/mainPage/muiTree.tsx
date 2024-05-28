@@ -14,14 +14,20 @@ import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 
 export type MuiTreeProps = {
+    projectId?: string,
     header?: string,
     data: tPackageAttributes[],
     handleOpenForm: () => void,
-    setPopupData: (node: tObjectAttributes)=>void
+    setPopupData: (node: tObjectAttributes)=>void,
+    updateTree?: (string)=>void
 }
 
-export default function MuiTree({header = "Header", data, handleOpenForm, setPopupData} : MuiTreeProps) {
+export default function MuiTree({projectId, header = "Header", data, handleOpenForm, setPopupData, updateTree} : MuiTreeProps) {
     
+    const treeUpdateHandler = (projectId?: string) => {
+        projectId && updateTree && updateTree(projectId);
+    }
+
     const openPopup = (node: tObjectAttributes) => {
         setPopupData(node)
         if (node && window.innerWidth < 700) {
@@ -140,8 +146,8 @@ export default function MuiTree({header = "Header", data, handleOpenForm, setPop
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
             {data.map((item: tPackageAttributes) => renderTree(item))}
         </SimpleTreeView>
-        <MuiAddObject projectId="" onSubmit={(newObject: tObjectAttributes) => {}} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-        <MuiAddDirectory projectId="" onSubmit={(newObject: tPackageAttributes) => {}} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+        <MuiAddObject projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+        <MuiAddDirectory projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
     </Container>
     
   );

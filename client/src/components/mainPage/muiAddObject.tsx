@@ -2,15 +2,31 @@ import React, { useState } from 'react';
 import './styles/muiAddObject.scss';
 import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import usePackages from '../../hooks/usePackages';
+import axios from 'axios';
 
 interface CreateObjectModalProps {
     projectId?: string
     isOpen: boolean;
     onClose: () => void;    
-    onSubmit: (newObject: tObjectAttributes) => void;
+    onSuccessCallback: (projectId?: string) => void;
 }
 
-const MuiAddObject: React.FC<CreateObjectModalProps> = ({ projectId, isOpen, onClose, onSubmit }) => {
+const MuiAddObject: React.FC<CreateObjectModalProps> = ({ projectId, isOpen, onClose, onSuccessCallback }) => {
+
+    const addObject = (newObject: tObjectAttributes) => {
+        console.log(newObject);
+        
+        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/objects`, newObject, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((response) => {
+            console.log(response);
+            onSuccessCallback(projectId);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
     const packages = usePackages(projectId, isOpen);
 
@@ -31,7 +47,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ projectId, isOpen, onC
             type: objectType,
             attachments: attachments, 
         } as tObjectAttributes;
-        onSubmit(objectData);
+        addObject(objectData);
         onClose(); // Закрыть модальное окно после отправки формы
     };
 

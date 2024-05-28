@@ -2,16 +2,29 @@ import React from 'react';
 import './styles/muiAddDirectory.scss';
 import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 import usePackages from '../../hooks/usePackages';
+import axios from 'axios';
 
 interface ModalProps {
     projectId?: string
     isOpen: boolean;
     onClose: () => void;
-    onSubmit: (newPackage: tPackageAttributes) => void;
+    onSuccessCallback: (projectId?: string) => void;
 }
 
-const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, projectId }) => {
+const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallback, projectId }) => {
     const packages = usePackages(projectId, isOpen);
+    const addDirectory = (newPackage: tPackageAttributes) => {
+        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/packages`, newPackage, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((response) => {
+            console.log(response);
+            onSuccessCallback(projectId);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     if (!isOpen) return null;
     const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,7 +35,8 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, proj
             projectId: projectId,
             parentId: formJson.parent ? formJson.parent : null,            
         } as tPackageAttributes;
-        onSubmit(packageData);
+        addDirectory(packageData);
+        onClose();
     }
     return (
         <div className="modal-overlay" onClick={onClose}>

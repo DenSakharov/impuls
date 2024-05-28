@@ -84,7 +84,7 @@ function Main({ changeState }: any) {
                                         {/* Сайдбар с деревом объектов */}
                                         {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
                                         <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                        <MuiTree data={tree} handleOpenForm={handleOpenForm}
+                                        <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                  setPopupData={setPopupData}/>
                                     </div>
             </div>
@@ -113,7 +113,7 @@ function Main({ changeState }: any) {
                                                     {/* Сайдбар с деревом объектов */}
                                                     {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
                                                     <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                                    <MuiTree data={tree} handleOpenForm={handleOpenForm}
+                                                    <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                              setPopupData={setPopupData}/>
                                                 </div>
                                             </Disclosure.Panel>
