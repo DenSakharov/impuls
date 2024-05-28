@@ -10,7 +10,7 @@ import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
-import TableData from './components/CordinationPage/table';
+import TableData from './components/CordinationPage/table1';
 import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
 import { JWToken } from './Context'
@@ -19,6 +19,8 @@ import Report from "./components/mainPage/report";
 import Admin from "./components/mainPage/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/searchpage";
+import FormDialog from './components/CordinationPage/FormDialog';
+import CordinationPage from './components/CordinationPage/CordinationPage';
 
 function App() {
   // условие для отображения navbarComponent
@@ -66,6 +68,8 @@ function App() {
           <Route path='/integration' Component={Integration}></Route>
           <Route path='/replace_password' Component={ReplacePassword}></Route>
           <Route path='/TableData' Component={TableData}> </Route>
+          <Route path='/CordinationPage' Component={CordinationPage}></Route>
+          <Route path='/FormDialog' Component={FormDialog}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
           <Route path='/test' Component ={Testpage}> </Route>
