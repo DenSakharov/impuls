@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
-import Notes from './Notes';
+import Notes from '../history/Notes';
 
 const Demo = () => {
   const [notes, setNotes] = useState([]);
@@ -32,12 +32,12 @@ const Demo = () => {
   }, []);
   if (isLoading) {
     return <div>Loading...</div>;
-  }
+  } 
 
   return (
     <div>
       <h1>Список проектов</h1>
-      {notes && <Notes data={notes} />}
+      {notes && <Notes data={notes} />}  
       {isError && <div>Error fetching data.</div>}
     </div>
   );
