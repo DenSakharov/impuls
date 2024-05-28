@@ -10,7 +10,8 @@ import PopupBar from './popupBar';
 import ApprovalDialog from './approvalDialog';
 import AddLinkDialog from './addLinkDialog';
 import data from '../editPopup/data';
-
+import TableData from '../CordinationPage/table1';
+import FormDialog from '../CordinationPage/FormDialog';
 
 
 export default function MuiPopup(props: EditPopupProps = data.object) {
@@ -34,6 +35,13 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const [priority, setPriority] = React.useState(props.priority);
     const [showAlert, setShowAlert] = React.useState(false);
     const [userApprove, setApproveUser] = React.useState('');
+    const [formOpenDialog, setFormOpenDialog] = React.useState(false);
+    const [Cordinator, setCordinator] = React.useState('');
+   
+    const notification = (value) => { 
+        console.log(value) 
+    }
+    
 
     const addTags = (value: {key:string, value:string | number}) => {
         setTags([...tags, value]);
@@ -78,6 +86,11 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
     const handleAlert = (value: string) => {
         setApproveUser(value)
         setShowAlert(true)
+    }
+
+    const handleOpen = () => {
+      
+        setFormOpenDialog(true)
     }
     
 
@@ -220,7 +233,23 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
                             <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
                             <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
                         </Grid>  
+                        <Grid item md={mdGridName} xs={smGridName}> 
+                            <Typography align='left'>Добавить согласующих</Typography>
+                        </Grid>
+                       
+                        <Grid item md={mdGridSpace} textAlign='left' xs={4}>
+                            <Button size='small' variant='outlined' onClick={()=>{handleOpen()}}>Добавить</Button>
+                            
+                            <input id='input_epw' type="file"  ref={inputRef} onChange={handleFileChange} style={{display: 'none'}} defaultValue={file ? file['name'] : ''}/>
+                        </Grid>  
                     </Grid>
+                    <Grid item md={mdGridValue} textAlign='left' xs={smGridValue-3}>
+                           {/* <CollapsibleTable></CollapsibleTable> */}
+                           <TableData></TableData>
+                    </Grid>
+                    
+
+                   
                 </Stack>
 
                 <Container sx={{marginTop:'50px'}}>
@@ -258,6 +287,15 @@ export default function MuiPopup(props: EditPopupProps = data.object) {
         setApproveUser={handleAlert}
         />
         <SuccessAlert user={userApprove} showAlert={showAlert} setShowAlert={setShowAlert}/>
+        
+        <FormDialog 
+        handleOpen={formOpenDialog} 
+        handleClose = {()=>setFormOpenDialog(false)}
+        addCordinator = {setCordinator}
+        change = {notification}
+        
+        />
+    
     </Container>
 </ThemeProvider>
 </>
