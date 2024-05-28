@@ -53,8 +53,10 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         mouseY: null | number;
     }>(initialState);
       
-    const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    const [selectedId, setSelectedId] = React.useState<string>("");
+    const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>, id?: string) => {
         event.preventDefault();
+        id && setSelectedId(id);
         setState({
             mouseX: event.clientX - 2,
             mouseY: event.clientY - 4,
@@ -84,7 +86,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
             key={id} 
             sx={{textAlign:"left", textDecoration: isObject ? "underline" : "none", cursor: 'context-menu'}}
             onClick={() => isObject? openPopup(node) : null}
-            onContextMenu={onHandleRightClick}
+            onContextMenu={(e)=>onHandleRightClick(e,node.packageId)}
             >
                 <Menu
                 keepMounted
@@ -146,8 +148,8 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
             {data.map((item: tPackageAttributes) => renderTree(item))}
         </SimpleTreeView>
-        <MuiAddObject projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-        <MuiAddDirectory projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+        <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+        <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
     </Container>
     
   );

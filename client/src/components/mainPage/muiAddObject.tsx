@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/muiAddObject.scss';
 import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import usePackages from '../../hooks/usePackages';
 import axios from 'axios';
 
 interface CreateObjectModalProps {
+    parent?: string
     projectId?: string
     isOpen: boolean;
     onClose: () => void;    
     onSuccessCallback: (projectId?: string) => void;
 }
 
-const MuiAddObject: React.FC<CreateObjectModalProps> = ({ projectId, isOpen, onClose, onSuccessCallback }) => {
+const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOpen, onClose, onSuccessCallback }) => {
 
     const addObject = (newObject: tObjectAttributes) => {
         console.log(newObject);
@@ -33,9 +34,11 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ projectId, isOpen, onC
     const [objectName, setObjectName] = useState('');
     const [objectType, setObjectType] = useState('');
     const [description, setDescription] = useState('');
-    const [parentId, setParentId] = useState('');
+    const [parentId, setParentId] = useState(parent);
     const [attachments, setAttachments] = useState<File[]>([]);
-
+    useEffect(() => {
+        setParentId(parent);
+    }, [packages, parent]);
     const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // Обработка данных формы

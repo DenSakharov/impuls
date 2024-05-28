@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/muiAddDirectory.scss';
 import { tPackageAttributes } from '#/dtos/tPackageAttributes';
 import usePackages from '../../hooks/usePackages';
 import axios from 'axios';
 
 interface ModalProps {
-    projectId?: string
+    parent?: string;
+    projectId?: string;
     isOpen: boolean;
     onClose: () => void;
     onSuccessCallback: (projectId?: string) => void;
 }
 
-const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallback, projectId }) => {
+const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallback, projectId, parent }) => {
     const packages = usePackages(projectId, isOpen);
+    const [parentId, setParentId] = useState(parent);
+    useEffect(() => {
+        setParentId(parent);
+    }, [packages, parent]);
+
     const addDirectory = (newPackage: tPackageAttributes) => {
         axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/packages`, newPackage, {
             headers: {
@@ -47,12 +53,11 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallb
                 <div className="modal-body">
                     <form onSubmit={onSubmitHandler}>
                         <label htmlFor="parent">Родитель</label>
-                        <select id="parent" name="parent">
-                            {/* Опции должны быть добавлены здесь */}
+                        <select id="parent" name="parent" value={parentId} onChange={(e) => setParentId(e.target.value)}>
                             <option value="">-</option>
                             {packages.map((item) => (
                                 <option key={item.packageId} value={item.packageId}>{item.name}</option>
-                            ))}
+                            ))}                            
                         </select>
 
                         <label htmlFor="name">Название</label>
