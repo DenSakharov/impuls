@@ -2,7 +2,7 @@ import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { TMessage } from '#/entities/Message';
 import { tPackage } from './tPackage';
 import { UUID } from 'crypto';
-import { tObject } from '#/entities';
+import { tObject, tDocuments } from '#/entities';
 import { PackagesTree } from '#/entities/PackagesTree';
 
 @Injectable()
@@ -12,6 +12,8 @@ export class tPackageService {
     private tPackageRepository: typeof tPackage,
     @Inject('OBJECTS_REPOSITORY')
     private tObjectsRepository: typeof tObject,
+    @Inject('DOCUMENTS_REPOSITORY')
+    private tDocumentsRepository: typeof tDocuments,
   ) {}
 
   async create(
@@ -131,17 +133,27 @@ export class tPackageService {
     const objects = await this.tObjectsRepository.findAll<tObject>({
       where: { projectId: projectId },
     });
-
+    const documents = await this.tDocumentsRepository.findAll<tDocuments>({
+      where: { objectId: objects.map((o) => o.objectId) },
+    });
     const buildTree = (
       currentPackage: tPackage,
-      packages: tPackage[],
-      objects: tObject[],
+      packages: tPackage[],      
+      objects: {
+        object: tObject;
+        documents: tDocuments[];
+      }[],
     ): PackagesTree => {
       return {
         packageObject: currentPackage,
         objects: objects.filter(
-          (o) => o.packageId === currentPackage.packageId,
-        ),
+          (o) => o.object.packageId === currentPackage.packageId,
+        ).map((o) => ({
+          object: o.object,
+          documents: documents.filter(
+            (d) => d.objectId === o.object.objectId,
+          )
+        })),
         children: packages
           .filter((p) => p.parentId === currentPackage.packageId)
           .map((p) => buildTree(p, packages, objects)),
@@ -150,6 +162,6 @@ export class tPackageService {
 
     return packages
       .filter((p) => p.parentId === null)
-      .map((p) => buildTree(p, packages, objects));
+      .map((p) => buildTree(p, packages, objects.map((o) => ({ object: o, documents: documents }))));
   }
 }

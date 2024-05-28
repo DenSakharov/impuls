@@ -1,7 +1,10 @@
-import { tObject, tPackage } from '.';
+import { tObject, tPackage, tDocuments } from '.';
 
 export type PackagesTree = {
   packageObject: tPackage;
-  objects: tObject[];
+  objects: {
+    object: tObject;
+    documents: tDocuments[];
+  }[];
   children: PackagesTree[];
 };
