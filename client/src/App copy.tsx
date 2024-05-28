@@ -10,7 +10,7 @@ import LoginPage from './components/loginPage/loginPage';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
-import TableData from './components/CordinationPage/table';
+import TableData from './components/CordinationPage/table1';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
 
