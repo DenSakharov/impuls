@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './../../globals.css';
 import {Container} from '@mui/system';
 import {Dialog, Typography, Card, Box} from '@mui/material';
@@ -40,6 +40,7 @@ function Main({changeState}: any) {
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
+    const [isAuth, setIsAuth] = useState(false)
 
     const DrawerHeader = styled('div')(({theme}) => ({
         display: 'flex',
@@ -61,6 +62,18 @@ function Main({changeState}: any) {
         }
         setOpen(false);
     };
+
+    useEffect(() => {
+        if(localStorage.getItem('token') != null) {
+          setIsAuth(true)
+        }
+        return () => {}
+    },[]);
+
+    if(!isAuth) {
+        window.open('/', "_self")
+        return (<div></div>)
+    }
 
     return (
         <>

@@ -19,6 +19,7 @@ function Profile() {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [selectedFile, setSelectedFile] = useState<Blob>()
   const [imgData, setImgData] = useState('')
+  const [isAuth, setIsAuth] = useState(false)
 
   const handleChangeImage = async (e) => {
     console.log(e.target.files[0])
@@ -73,9 +74,12 @@ function Profile() {
 
   useEffect(() => {
     let userReceived = false
+    if(localStorage.getItem('token') != null) {
+      setIsAuth(true)
+    }
     if (!userReceived) {
       getUser()
-    } 
+    }
     return () => { userReceived = true; }
   },[]);
 
@@ -99,6 +103,11 @@ function Profile() {
     }).catch((reason: AxiosError) => {
       console.log(reason)
     })
+  }
+
+  if(!isAuth) {
+    window.open('/', "_self")
+    return (<div></div>)
   }
 
   return(
