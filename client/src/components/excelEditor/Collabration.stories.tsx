@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 import { hashCode } from "./utils";
 import { useParams } from 'react-router-dom';
 import './excel.css';
+import "@fortune-sheet/react/dist/index.css"
 
 export default {
   component: Workbook,
