@@ -16,8 +16,7 @@ import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
-import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import { tProjectAttributes, tObjectAttributes, tDocumentAttributes } from '#/dtos';
 import useProjects from '../../hooks/useProjects';
 import useTree from '../../hooks/useTree';
 
@@ -28,7 +27,7 @@ function Main({ changeState }: any) {
     
     
    
-    const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
+    const [popupData, setPopupData] = useState<tDocumentAttributes | null>(null);
     const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
@@ -136,7 +135,7 @@ function Main({ changeState }: any) {
 
             {/* Открытие карточки объекта  */}
             <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-                <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
+                <MuiPopup documentId={popupData?.docId} />
             </Dialog>
 
           {/* содержимое страницы Дашборд */}

@@ -1,6 +1,6 @@
 export interface tDocumentAttributes{
     docId: string;
-    name?: string;
+    docname?: string;
     packageId?: string;
     description?: string;
     priority?: string;
