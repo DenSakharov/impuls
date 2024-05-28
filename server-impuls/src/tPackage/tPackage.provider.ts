@@ -1,4 +1,4 @@
-import { tObject } from '#/entities';
+import { tObject, tDocuments } from '#/entities';
 import { tPackage } from './tPackage';
 
 export const tPackageProviders = [
@@ -9,5 +9,9 @@ export const tPackageProviders = [
   {
     provide: 'OBJECTS_REPOSITORY',
     useValue: tObject,
+  },
+  {
+    provide: 'DOCUMENTS_REPOSITORY',
+    useValue: tDocuments,
   },
 ];

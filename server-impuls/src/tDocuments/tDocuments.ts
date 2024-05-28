@@ -75,6 +75,6 @@ export class tDocuments
   dateEdited?: Date;
 
   @ForeignKey(() => tObject)
-  @Column({ field: 'object_id', allowNull: true, type: DataType.INTEGER })
+  @Column({ field: 'object_id', allowNull: true, type: DataType.STRING(40) })
   objectId?: UUID;
 }

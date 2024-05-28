@@ -7,6 +7,7 @@ import MainPage from './components/mainPage/mainPage';
 import Main from './components/mainPage/main';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
+import PassRecovery from './components/passRecovery/passRecovery';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
@@ -61,6 +62,7 @@ function App() {
         {navbarComponent}
         <Routes>
           <Route path='' Component={LoginPage}></Route>
+          <Route path='/recovery_password' Component={PassRecovery}></Route>
           <Route path='/registration' Component={Registration}></Route>
           <Route path='/main' Component ={Main}> </Route>
           <Route path='/mainPage' Component={MainPage}>  </Route>
@@ -81,7 +83,7 @@ function App() {
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
           <Route path="/workbook" element={<Navigate to={`/workbook/${uuidV4()}`} />} />
-          <Route path="/workbook/:id" element={ <Example />} />
+          <Route path="/workbook/:id" element={<Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>

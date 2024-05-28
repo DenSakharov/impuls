@@ -1,6 +1,4 @@
-// Кожевников СЮ главное меню
-
-import  React  from 'react';
+import  React, { useEffect }  from 'react';
 import './../../globals.css';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -52,6 +50,7 @@ function MainNavBar({changeState} : any) {
     // const [popupData, setPopupData] = React.useState(data.object);
     const [projectData, setProjectData] = React.useState(data.tree[0]);
     const [formOpen, setFormOpen] = React.useState(false);
+    const [isAuth, setIsAuth] = React.useState(false)
 
     // openSBMessage
     const [SBMessage, setSBMessage] = React.useState(false);
@@ -72,6 +71,17 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
+    useEffect(() => {
+      if(localStorage.getItem('token') != null) {
+        setIsAuth(true)
+      }
+      return () => {}
+    },[]);
+
+    if(!isAuth) {
+        window.open('/', "_self")
+        return (<div></div>)
+    }
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
       setOpen(true);

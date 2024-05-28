@@ -11,21 +11,19 @@ import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
 import {MuiStartpage} from './muiStartpage';
 import MuiFavourites from './favorites/muiFavourites';
-import MuiAllProjects from '../mainPage/projects/muiAllProjects';
 import { Disclosure} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
-import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import MuiAllProjects from '../mainPage/projects/muiAllProjects';
+import { tProjectAttributes, tObjectAttributes, tDocumentAttributes } from '#/dtos';
 import useProjects from '../../hooks/useProjects';
 import useTree from '../../hooks/useTree';
 
 export const closeDialog = React.createContext<Function>(() => {});
 
 function Main({ changeState }: any) {
-
-    const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
+    const [popupData, setPopupData] = useState<tDocumentAttributes | null>(null);
     const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
@@ -50,6 +48,7 @@ function Main({ changeState }: any) {
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
+    const [isAuth, setIsAuth] = useState(false)
 
     const DrawerHeader = styled('div')(({ theme }) => ({
       display: 'flex',
@@ -63,6 +62,18 @@ function Main({ changeState }: any) {
     const handleselectproject = (value) => {
       console.log(value);
       setProject(value);
+    }
+
+    useEffect(() => {
+        if(localStorage.getItem('token') != null) {
+          setIsAuth(true)
+        }
+        return () => {}
+    },[]);
+
+    if(!isAuth) {
+        window.open('/', "_self")
+        return (<div></div>)
     }
 
     return (
@@ -119,7 +130,7 @@ function Main({ changeState }: any) {
 
             {/* Открытие карточки объекта  */}
             <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-                <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
+                <MuiPopup documentId={popupData?.docId} />
             </Dialog>
 
           {/* содержимое страницы Дашборд */}

@@ -1,16 +1,20 @@
-import './style_replacePas.css';
+import './style_recoveryPass.css';
 import bClose from './img/bClose.svg'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Alert, Snackbar } from '@mui/material';
 
-function ReplacePassword() {
+function RecoveryPassword() {
 
-  const [oldPass, setOldPass] = useState('')
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false)
   const [openSnackbarError, setOpenSnackbarError] = useState(false)
   const [errorText, setErrorText] = useState('')
-  const [isAuth, setIsAuth] = useState(false)
+
+  const [userName, setUserName] = useState('')
+  const [userSurname, setUserSurname] = useState('')
+  const [userLogin, setUserLogin] = useState('')
+
+
   var newPass1: string
   var newPass2: string
 
@@ -36,18 +40,21 @@ function ReplacePassword() {
     }
     axios({
       method: 'post',
-      url: 'http://localhost:3010/users/replacepassword', 
+      url: 'http://localhost:3010/users/recoverypassword', 
       data: {
-        userlogin: localStorage.getItem('userlogin'),
-        oldPass: oldPass,
+        userlogin: userLogin,
+        userName: userName,
+        userSurname: userSurname,
         newPass: newPass1
-      },
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
+      }
     }).then((response: AxiosResponse) => {
       console.log(response)
 
-      if(response.data === 'Old password is incorrect!') {
-        setErrorText('Старый пароль неверный!')
+      if(response.data.error === 'This user does not exist') {
+        setErrorText('Данного пользователя не существует')
+        handleClickError()
+      } if(response.data.error === 'UserName or UserSurname is incorrect') {
+        setErrorText('Имя или фамилия пользователя введены неверно')
         handleClickError()
       } else {
         handleClickSuccess()
@@ -57,42 +64,39 @@ function ReplacePassword() {
     })
   }
 
-  useEffect(() => {
-    if(localStorage.getItem('token') != null) {
-      setIsAuth(true)
-    }
-    return () => {}
-  },[]);
-
-  if(!isAuth) {
-    window.open('/', "_self")
-    return (<div></div>)
-  }
-
   return(
-    <div id="root-replacePas">
-    <div id="mainForm">
-      <header id="header-replacePas">
-        <h2>Изменение пароля</h2>
-        <a href="/userProfile">
+    <div id="root-recoveryPas">
+    <div id="recoveryPas-mainForm">
+      <header id="header-recoveryPas">
+        <h2>Восстановление пароля</h2>
+        <a href="/">
           <img src={bClose} alt="Закрыть"/>
         </a>
       </header>
       <div className="textFields">
-        <div className="repPas" id="el1">
-          <label>Старый пароль</label>
-          <input type="password" onChange={(e) => {setOldPass(e.target.value)}}/>
+      <div className="recoveryPas" id="el1">
+          <label>Login</label>
+          <input type="text" onChange={(e) => {setUserLogin(e.target.value)}}/>
         </div>
-        <div className="repPas" id="el2">
+        <div className="recoveryPas" id="el2">
+          <label>Фамилия</label>
+          <input type="text" onChange={(e) => {setUserSurname(e.target.value)}}/>
+        </div>
+        <div className="recoveryPas" id="el3">
+          <label>Имя</label>
+          <input type="text" onChange={(e) => {setUserName(e.target.value)}}/>
+        </div>
+        <div className="recoveryPas" id="el4">
           <label>Новый пароль</label>
           <input type="password" onChange={(e) => {newPass1 = e.target.value}}/>
         </div>
-        <div className="repPas" id="el3">
+        <div className="recoveryPas" id="el5">
           <label>Повторите пароль</label>
           <input type="password" onChange={(e) => {newPass2 = e.target.value}}/>
         </div>
       </div>
-      <button id="bSave" type="button" onClick={updatePassword}>Сохранить</button>
+      <p>Введите <b>Фамилию</b> и <b>Имя</b> своего профиля. <br/>Это нужно, чтобы доказать, что Вы являетесь владельцем аккаунта.</p>
+      <button id="bSave" type="button" onClick={updatePassword}>Отправить</button>
     </div>
     <Snackbar
         open={openSnackbarSuccess}
@@ -104,7 +108,7 @@ function ReplacePassword() {
             variant="filled"
             sx={{ width: '100%' }}
           >
-            Пароль успешно изменён! 
+            Пароль успешно восстановлен! 
           </Alert>
     </Snackbar>
     <Snackbar
@@ -124,4 +128,4 @@ function ReplacePassword() {
   )
 }
 
-export default ReplacePassword;
+export default RecoveryPassword;
