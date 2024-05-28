@@ -77,7 +77,8 @@ function App() {
           <Route path='/TableData' Component={TableData}> </Route>
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
-          <Route path="/worksheet" element={ <Example />} />
+          <Route path="/workbook" element={<Navigate to={`/workbook/${uuidV4()}`} />} />
+          <Route path="/workbook/:id" element={ <Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
