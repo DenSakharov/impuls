@@ -9,9 +9,6 @@ import MuiAddObject from "./muiAddObject";
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import MuiSidebarConf from './muiSidebarConf';
-import { tPackageAttributes } from '#/dtos/tPackageAttributes';
-import axios from 'axios';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 
 function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?: (string)=>void}) {
     // const classes = useStyles()
@@ -25,37 +22,12 @@ function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
-
-    const addDirectory = (newPackage: tPackageAttributes) => {
-        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/packages`, newPackage, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        }).then((response) => {
-            console.log(response);
-            closeModalAddDirectory();
-            updateTree && updateTree(projectId);
-        }).catch((error) => {
-            console.log(error);
-        });
+    
+    const treeUpdateHandler = (projectId?: string) => {
+        projectId && updateTree && updateTree(projectId);
     }
-    const addObject = (newObject: tObjectAttributes) => {
-        console.log(newObject);
-        
-        axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/objects`, newObject, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        }).then((response) => {
-            console.log(response);
-            closeModalAddObject();
-            updateTree && updateTree(projectId);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    
     return (
-
     <Box sx={{ flexGrow: 0}}>
         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250}}>
 
@@ -65,10 +37,9 @@ function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?
             <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
             <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
-           
 
-            <MuiAddDirectory projectId={projectId} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} onSubmit={addDirectory}/>
-            <MuiAddObject projectId={projectId} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} onSubmit={addObject}/>
+            <MuiAddDirectory projectId={projectId} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} onSuccessCallback={treeUpdateHandler}/>
+            <MuiAddObject projectId={projectId} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} onSuccessCallback={treeUpdateHandler}/>
             <MuiSidebarConf />
 
          </Stack>

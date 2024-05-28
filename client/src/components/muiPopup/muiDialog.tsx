@@ -1,11 +1,11 @@
 import { Button , TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
-export default function MuiDialog ({formOpen, handleCloseForm, addLinks}: any){
+export default function MuiDialog (props: {formOpen: boolean, handleCloseForm: Function, addLinks: Function}){
 
     return (
      <Dialog
-        open={formOpen}
-        onClose={handleCloseForm}
+        open={props.formOpen}
+        onClose={() => props.handleCloseForm}
         PaperProps={{
         component: 'form',
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
@@ -14,8 +14,8 @@ export default function MuiDialog ({formOpen, handleCloseForm, addLinks}: any){
             const formJson = Object.fromEntries((formData as any).entries());
             const link = formJson.link;
             console.log(link);
-            addLinks(link);
-            handleCloseForm();
+            props.addLinks(link);
+            props.handleCloseForm();
         },
         }}
         >  
@@ -38,7 +38,7 @@ export default function MuiDialog ({formOpen, handleCloseForm, addLinks}: any){
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseForm}>Отмена</Button>
+          <Button onClick={() => props.handleCloseForm}>Отмена</Button>
           <Button type="submit">Подтвердить</Button>
         </DialogActions>
       </Dialog>

@@ -37,7 +37,11 @@ function Main({ changeState }: any) {
         }
     }, [projects])
     const handleCloseForm = () => {
+      if (window.location.pathname === '/main') {
         setFormOpen(false);
+      } else {
+        window.open('/main', '_self')
+      }
     };
     const handleOpenForm = () => {
         setFormOpen(true);
@@ -84,31 +88,33 @@ function Main({ changeState }: any) {
 
             {/* Start */} {/* Mobile панель ! */}
             <Disclosure as="nav">
-            {({open}) => (
-            <>
-                <div className="mr-1 flex md:hidden">
-                  <Disclosure.Button
-                    className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                         <span className="absolute -inset-0.5"/>
-                         <span className="sr-only">Open main menu</span>
-                          {open ? (
-                            <ArrowLeftStartOnRectangleIcon className="block h-6 w-6"
-                             aria-hidden="true"/>
-                             ) : (
-                             <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
-                          )}
-                  </Disclosure.Button>
-                </div>
-                <Disclosure.Panel className="md:hidden">
-                  <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3" >
-                   {/* Сайдбар с деревом объектов */}
-                   {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
-                   <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                   <MuiTree data={tree} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
-                  </div>
-                </Disclosure.Panel>
-             </>
-            )}
+                    {({open}) => (
+                                        <>
+                                            <div className="-mr-2 flex md:hidden">
+                                                <Disclosure.Button
+                                                    className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                                    <span className="absolute -inset-0.5"/>
+                                                    <span className="sr-only">Open main menu</span>
+                                                    {open ? (
+                                                        <ArrowLeftStartOnRectangleIcon className="block h-6 w-6"
+                                                                                       aria-hidden="true"/>
+                                                    ) : (
+                                                        <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
+                                                    )}
+                                                </Disclosure.Button>
+                                            </div>
+
+                                            <Disclosure.Panel className="md:hidden">
+                                                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                                                    {/* Сайдбар с деревом объектов */}
+                                                    {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
+                                                    <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                                                    <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
+                                                             setPopupData={setPopupData}/>
+                                                </div>
+                                            </Disclosure.Panel>
+                                        </>
+                    )}
             </Disclosure>
 
             {/* Открытие карточки объекта  */}
@@ -148,7 +154,7 @@ function Main({ changeState }: any) {
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              {/* <MuiDashboard></MuiDashboard> */}
+              <MuiDashboard></MuiDashboard>
             </Container>
            </div>
 
