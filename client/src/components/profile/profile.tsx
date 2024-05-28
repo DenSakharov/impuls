@@ -17,11 +17,25 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-  const [selectredFile, setSelectedFile] = useState(null)
+  const [selectedFile, setSelectedFile] = useState<Blob>()
+  const [imgData, setImgData] = useState('')
 
-  const handleChangeImage = (e) => {
-    console.log(e.target.files)
-    setSelectedFile(e.target.files[0])
+  const handleChangeImage = async (e) => {
+    console.log(e.target.files[0])
+
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    const res = await axios.post(
+      `http://${window.location.hostname.toString()}:3010/users/loadphoto`,
+      formData,
+      {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+      }
+    );
+    setImgData('data:image/png;base64,' + res.data)
+
   }
 
   const handleClick = () => {
@@ -104,7 +118,7 @@ function Profile() {
       <div id="infoProfile">
         {/* img строчный элемент, возможно стоит обернуть в div чтобы кнопки под картинку уехали @RusDa256*/}
         <div id="editPhoto">
-          <img src={Photo} alt="Аватар пользователя" id="userImage"/>
+          <img src={imgData} alt="Аватар пользователя" id="userImage"/>
           <div id="infoProfile-editPhoto-buttons">
             <label className="input-file">
               <input type="file" name="file" onChange={handleChangeImage}/>		
