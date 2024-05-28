@@ -76,7 +76,7 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({onClose}) => {
             notes: 'Add project',
             actions: 'OK:Create new project',
             // datetime: '',
-        };        
+        };
 
         // создание проекта
         try {
@@ -118,7 +118,7 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({onClose}) => {
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             // handle error, e.g., show error message, etc.
-        }     
+        }
 };
 
 
