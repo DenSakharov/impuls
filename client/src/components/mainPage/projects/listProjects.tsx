@@ -13,9 +13,9 @@ import Snackbar from '@mui/material/Snackbar';
 
 const ListProjects = ({ data }) => {
   return (
-    <Dialog open fullWidth maxWidth="sm">
-    <DialogTitle>Список проектов</DialogTitle>
-    <DialogContent>
+    // <Dialog open fullWidth maxWidth="sm">
+    // <DialogTitle>Список проектов</DialogTitle>
+    // <DialogContent>
 
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="Список проектов">
@@ -47,13 +47,13 @@ const ListProjects = ({ data }) => {
       </Table>
     </TableContainer>
 
-    </DialogContent>
+  //   </DialogContent>
 
-    <DialogActions>
-        <Button> Закрыть </Button> 
-        <Button color="primary"> Создать </Button>       
-    </DialogActions>
-  </Dialog>
+  //   <DialogActions>
+  //       <Button> Закрыть </Button> 
+  //       <Button color="primary"> Создать </Button>       
+  //   </DialogActions>
+  // </Dialog>
   );
 }
 

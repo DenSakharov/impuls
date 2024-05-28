@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
-import Notes from '../history/Notes';
+import Notes from './/Notes';
 
 const Demo = () => {
   const [notes, setNotes] = useState([]);

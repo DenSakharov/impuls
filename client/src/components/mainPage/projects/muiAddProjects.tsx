@@ -4,10 +4,7 @@ import React, { useState,useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { Button, Container, Stack, IconButton} from '@mui/material';
 import AddProjectsModal from './createProjects';
-import ListProjectsModal from './ListProjects';
-import data from '../../editPopup/data';
-import axios, { AxiosError, AxiosResponse } from "axios";
-import Projects from '#/components/projects/projects';
+import MuiAllProjectsModal from './muiAllProjects';
 
 export default function SelectProjects({changeState} : any) {
   const [showModalCreate, setShowModalCreate] = useState(false); 
@@ -20,7 +17,7 @@ export default function SelectProjects({changeState} : any) {
   
   // List Projects
   const handleCloseModaList = () => {        
-      setShowModalList(true);
+      setShowModalList(false);
   };
 
   return (
@@ -31,7 +28,7 @@ export default function SelectProjects({changeState} : any) {
         <div><Button variant="text" onClick={() => setShowModalList(true)} > Все проекты</Button></div>
 
         {showModalCreate && <AddProjectsModal onClose={handleCloseModalCreate} />}
-        {showModalList && <ListProjectsModal onClose={handleCloseModaList} />}
+        {/* {showModalList && <MuiAllProjectsModal onClose={handleCloseModalList} />} */}
         {/* {showModalEdit && <EditProjectsModal open={showModalEdit} projectsItem={currentProjectsUpdate} onClose={handleCloseModalEdit} />} */}
 
     </Box>

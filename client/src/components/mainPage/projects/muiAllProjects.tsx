@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import ListProjects from './listProjects';
 
-const Demo = () => {
+const MuiAllProjectsModal = () => {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -41,4 +41,4 @@ const Demo = () => {
     </div>
   );
 };
-export default Demo;
+export default MuiAllProjectsModal;
