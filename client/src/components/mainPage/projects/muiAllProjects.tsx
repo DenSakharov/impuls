@@ -6,9 +6,9 @@ const MuiAllProjectsModal = () => {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  
+
   const fetchData = () => {
-     axios       
+     axios
        .get(`http://${window.location.hostname}:3010/projects`,
             {
                 headers: {
@@ -31,12 +31,12 @@ const MuiAllProjectsModal = () => {
   }, []);
   if (isLoading) {
     return <div>Loading...</div>;
-  } 
+  }
 
   return (
     <div>
       <h1>Список проектов</h1>
-      {notes && <ListProjects data={notes} />}  
+      {notes && <ListProjects data={notes} />}
       {isError && <div>Error fetching data.</div>}
     </div>
   );

@@ -36,11 +36,11 @@ const ListProjects = ({ data }) => {
             >
               <TableCell component="th" scope="row"> {item.name}</TableCell>
               <TableCell align="center">{item.status}</TableCell>
-              <TableCell align="left">{item.notes}</TableCell>    
-              <TableCell align="center">              
+              <TableCell align="left">{item.notes}</TableCell>
+              <TableCell align="center">
                 <div><Button variant="text"> Изменить </Button></div>
-                <div><Button variant="text"> Удалить  </Button></div>                              
-              </TableCell>               
+                <div><Button variant="text"> Удалить  </Button></div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
