@@ -10,8 +10,7 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
-import { tPackageAttributes } from '#/dtos/tPackageAttributes';
+import { tObjectAttributes, tPackageAttributes, tDocumentAttributes } from '#/dtos';
 
 export type MuiTreeProps = {
     projectId?: string,
@@ -76,7 +75,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
-    const renderTree = (node: tPackageAttributes|tObjectAttributes) => {
+    const renderTree = (node: tPackageAttributes|tObjectAttributes|tDocumentAttributes) => {
         const isObject = "objectId" in node;
         const id = isObject ? node.objectId : node.packageId;
         return (
@@ -136,6 +135,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 {/* {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)} */}
                 {!isObject && node.children?.map((child: tPackageAttributes) => renderTree(child))}
                 {!isObject && node.objects?.map((child: tObjectAttributes) => renderTree(child))}
+                {!isObject && node.objects?.map((child: tDocumentAttributes) => renderTree(child))}
             </TreeItem>
         )
     }

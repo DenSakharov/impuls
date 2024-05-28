@@ -1,3 +1,4 @@
+import { tDocumentAttributes } from './tDocumentAttributes';
 import { tObjectAttributes } from './tObjectAttributes';
 
 export interface tPackageAttributes {
@@ -5,6 +6,9 @@ export interface tPackageAttributes {
     name?: string;
     parentId?: string;
     children?: tPackageAttributes[];
-    objects?: tObjectAttributes[];
+    objects?: {
+        object: tObjectAttributes
+        documents: tDocumentAttributes[]
+    }[];
     projectId?: string;
 }
