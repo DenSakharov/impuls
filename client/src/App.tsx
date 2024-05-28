@@ -78,7 +78,7 @@ function App() {
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
           <Route path="/workbook" element={<Navigate to={`/workbook/${uuidV4()}`} />} />
-          <Route path="/workbook/:id" element={ <Example />} />
+          <Route path="/workbook/:id" element={<Example />} />
           <Route path='/test' Component ={Testpage}> </Route>
         </Routes>
       </BrowserRouter>
