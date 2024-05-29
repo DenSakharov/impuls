@@ -7,10 +7,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
+import MuiAddDocument from "./muiAddDocument"
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import { tObjectAttributes, tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
+import { tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
 
 export type MuiTreeProps = {
     projectId?: string,
@@ -55,7 +57,9 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
       
     const [selectedId, setSelectedId] = React.useState<string>("");
     const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>, id?: string) => {
+        console.log(id)
         event.preventDefault();
+        event.stopPropagation();
         id && setSelectedId(id);
         setState({
             mouseX: event.clientX - 2,
@@ -76,6 +80,11 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
+
+    // addDocument
+    const [isModalAddDocumentOpen, setModalAddDocumentOpen] = useState(false);
+    const openModalAddDocument = () => setModalAddDocumentOpen(true);
+    const closeModalAddDocument = () => setModalAddDocumentOpen(false);
     const renderTree = (node: tPackageAttributes|tObjectWithDocuments) => {
         if ("packageId" in node) {
             return (
@@ -152,6 +161,13 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
 
                         <MenuItem onClick={handlemyClose}>
                         <ListItemIcon>
+                                <PostAddIcon fontSize="small" />
+                            </ListItemIcon>
+                        <ListItemText primary="Создать документ" onClick={openModalAddDocument}/>
+                        </MenuItem>
+
+                        <MenuItem onClick={handlemyClose}>
+                        <ListItemIcon>
                                 <ContentCopy fontSize="small" />
                             </ListItemIcon>
                         <ListItemText primary="Создать копию" />
@@ -170,6 +186,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         </SimpleTreeView>
         <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
         <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+        <MuiAddDocument parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDocumentOpen} onClose={closeModalAddDocument}></MuiAddDocument>
     </Container>
     
   );
