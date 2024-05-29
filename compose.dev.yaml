@@ -9,7 +9,8 @@ services:
     expose:
       - '3000'
     depends_on:
-      - back-mongo
+      - back-mongo-docs
+      - back-mongo-tables
       - back-nestjs
     develop:
       watch:
@@ -40,8 +41,8 @@ services:
           path: ./server-impuls/package.json
     networks:
       - integration
-  back-mongo:
-    container_name: backend-mongo
+  back-mongo-docs:
+    container_name: back-mongo-docs
     build: 
       dockerfile: Dockerfile.dev
       context: ./mongo   
@@ -56,6 +57,22 @@ services:
         - action: sync  
           path: ./mongo
           target: ./mongo
+    networks:
+      - integration      
+  back-mongo-tables:
+    container_name: back-mongo-tables
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mongo-excel   
+    ports:
+      - "8081:8081"
+    expose:
+      - '8081'
+    develop:
+      watch:
+        - action: sync  
+          path: ./mongo-excel
+          target: ./mongo-excel
     networks:
       - integration      
 networks:

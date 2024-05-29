@@ -108,19 +108,6 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ title = "Форма с
                         value={objectName}
                         onChange={(e) => setObjectName(e.target.value)}/>
 
-                    <label htmlFor="type">Тип объекта</label>
-                    <select
-                        id="type"
-                        value={objectType}
-                        onChange={(e) => setObjectType(e.target.value)}>
-                        <option value="0">-</option>
-                        <option value="1">Документ</option>
-                        <option value="2">Требование</option>
-                        <option value="3">Артефакт</option>
-                        <option value="3">Диаграмма</option>
-                        <option value="4">Задача</option>
-                    </select>
-
                     <label htmlFor="description">Описание</label>
                     <textarea
                         id="description"

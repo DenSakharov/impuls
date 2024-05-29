@@ -13,5 +13,5 @@ export interface tDocumentAttributes{
     dateEdited: Date | string;
     dateCreated: Date | string;
     projectId?: string;
-    objId: string;
+    objectId: string;
 }
