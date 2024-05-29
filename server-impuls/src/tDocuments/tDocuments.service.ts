@@ -13,6 +13,16 @@ export class tDocumentsService {
   ) {}
 
   async create(newDocument: Partial<tDocuments>, author: string): Promise<TMessage> {
+    if(!newDocument.docname){
+      this.HistoryService.create({
+        author,
+        notes: 'document name is missing',
+        logtype: 'Error',
+        modules: 'Documents',
+        actions: 'Error:Create new document',
+      });
+      return { error: 'Document name is missing', status: HttpStatus.BAD_REQUEST };
+    }
     const documentUUID = crypto.randomUUID();
     try {
       await this.tDocumentsRepository.create({

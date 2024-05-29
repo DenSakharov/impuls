@@ -86,6 +86,7 @@ const MuiAddDocument: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallba
                     </select>
                     <label htmlFor="name">Название</label>
                     <input
+                        required
                         id="name"
                         type="text"
                         value={docName}
