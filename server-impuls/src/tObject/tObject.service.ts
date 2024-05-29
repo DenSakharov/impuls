@@ -20,7 +20,7 @@ export class tObjectService {
         objectType: newObject.objectType,
         name: newObject.name,
         alias: newObject.alias,
-        author: newObject.author,
+        author: author,
         version: newObject.version,
         note: newObject.note,
         packageId: newObject.packageId,
