@@ -4,6 +4,7 @@ import { tPackage } from './tPackage';
 import { UUID } from 'crypto';
 import { tObject } from '#/entities';
 import { PackagesTree } from '#/entities/PackagesTree';
+import { tChangehistoryService } from '#/tHistory/tChangehistory.service';
 
 @Injectable()
 export class tPackageService {
@@ -12,12 +13,10 @@ export class tPackageService {
     private tPackageRepository: typeof tPackage,
     @Inject('OBJECTS_REPOSITORY')
     private tObjectsRepository: typeof tObject,
+    private readonly HistoryService: tChangehistoryService,
   ) {}
 
-  async create(
-    projectId: string,
-    newPackage: Partial<tPackage>,
-  ): Promise<TMessage> {
+  async create(projectId: string, newPackage: Partial<tPackage>, author: string): Promise<TMessage> {
     const packageUUID = crypto.randomUUID();
     try {
       await this.tPackageRepository.create({
@@ -28,6 +27,14 @@ export class tPackageService {
         notes: newPackage.notes,
         projectId: projectId as UUID,
       });
+      this.HistoryService.create({
+        author,
+        notes: 'new package was created',
+        //objectId: packageUUID,
+        logtype: 'OK',
+        modules: 'Packages',
+        actions: 'OK:Create new package',
+      });
       return {
         message: `new package was created uuid = ${packageUUID} `,
         status: HttpStatus.CREATED,
@@ -37,11 +44,27 @@ export class tPackageService {
       console.log(error);
 
       if (error.name === 'SequelizeUniqueConstraintError') {
+        this.HistoryService.create({
+          author,
+          notes: 'package UUID already exists',
+          //objectId: packageUUID,
+          logtype: 'Error',
+          modules: 'Packages',
+          actions: 'Error:Create new package',
+        });
         return {
           error: 'This UUID already exists',
           status: HttpStatus.CONFLICT,
         };
       } else {
+        this.HistoryService.create({
+          author,
+          notes: 'internal server error',
+          //objectId: packageUUID,
+          logtype: 'Error',
+          modules: 'Packages',
+          actions: 'Error:Create new package',
+        });
         return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
       }
     }
@@ -59,25 +82,14 @@ export class tPackageService {
     });
   }
 
-  async update(
-    projectId: string,
-    newPackage: Partial<tPackage>,
-  ): Promise<tPackage>;
-  async update(
-    projectId: string,
-    newPackage: Partial<tPackage>,
-    uuid: string,
-  ): Promise<tPackage>;
-  async update(
-    projectId: string,
-    newPackage: Partial<tPackage>,
-    uuid?: string,
-  ): Promise<tPackage> {
+  async update(projectId: string, newPackage: Partial<tPackage>): Promise<tPackage>;
+  async update(projectId: string, newPackage: Partial<tPackage>, uuid: string): Promise<tPackage>;
+  async update(projectId: string, newPackage: Partial<tPackage>, uuid?: string): Promise<tPackage> {
     const pack = await this.findOne(projectId, uuid ?? newPackage.projectId);
     return pack.update({ uuid } && newPackage);
   }
 
-  async delete(projectId: string, packageId: string): Promise<TMessage> {
+  async delete(projectId: string, packageId: string, emptyOnly: boolean): Promise<TMessage> {
     //TODO: Need to do something if package is not empty
 
     try {
@@ -87,16 +99,17 @@ export class tPackageService {
         throw new Error('Package not found');
       }
       if (
-        (
+        !emptyOnly ||
+        ((
           await this.tPackageRepository.findAll({
             where: { parentId: packageId },
           })
         ).length === 0 &&
-        (
-          await this.tObjectsRepository.findAll({
-            where: { packageId: packageId },
-          })
-        ).length === 0
+          (
+            await this.tObjectsRepository.findAll({
+              where: { packageId: packageId },
+            })
+          ).length === 0)
       ) {
         pack.destroy();
         return {
@@ -132,24 +145,14 @@ export class tPackageService {
       where: { projectId: projectId },
     });
 
-    const buildTree = (
-      currentPackage: tPackage,
-      packages: tPackage[],
-      objects: tObject[],
-    ): PackagesTree => {
+    const buildTree = (currentPackage: tPackage, packages: tPackage[], objects: tObject[]): PackagesTree => {
       return {
         packageObject: currentPackage,
-        objects: objects.filter(
-          (o) => o.packageId === currentPackage.packageId,
-        ),
-        children: packages
-          .filter((p) => p.parentId === currentPackage.packageId)
-          .map((p) => buildTree(p, packages, objects)),
+        objects: objects.filter((o) => o.packageId === currentPackage.packageId),
+        children: packages.filter((p) => p.parentId === currentPackage.packageId).map((p) => buildTree(p, packages, objects)),
       };
     };
 
-    return packages
-      .filter((p) => p.parentId === null)
-      .map((p) => buildTree(p, packages, objects));
+    return packages.filter((p) => p.parentId === null).map((p) => buildTree(p, packages, objects));
   }
 }
