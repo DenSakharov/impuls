@@ -10,7 +10,7 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import { tObjectAttributes, tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
+import { tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
 
 export type MuiTreeProps = {
     projectId?: string,
@@ -56,6 +56,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     const [selectedId, setSelectedId] = React.useState<string>("");
     const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>, id?: string) => {
         event.preventDefault();
+        event.stopPropagation();
         id && setSelectedId(id);
         setState({
             mouseX: event.clientX - 2,
@@ -118,9 +119,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         }
     }
     
-  // TODO: add submit handlers and projectId
-  return (
-    <Container disableGutters>
+    const menuItem = (
         <Menu
                 keepMounted
                 open={state.mouseY !== null}
@@ -163,14 +162,20 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                         <ListItemText primary="Удалить" />
                         </MenuItem>
                 </Menu>
-        <SimpleTreeView 
-        defaultExpandedItems={[header]}
-        sx={{ flexGrow: 1, overflowY: 'auto' }}>
-            {data.map((item: tPackageAttributes) => renderTree(item))}
-        </SimpleTreeView>
-        <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-        <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
-    </Container>
+    )
+  
+    return (
+        <Container disableGutters>
+            {menuItem}
+            <SimpleTreeView 
+                defaultExpandedItems={[header]}
+                sx={{ flexGrow: 1, overflowY: 'auto' }}
+            >
+                {data.map((item: tPackageAttributes) => renderTree(item))}
+            </SimpleTreeView>
+            <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+            <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+        </Container>
     
-  );
+    );
 }
