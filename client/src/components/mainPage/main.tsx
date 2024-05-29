@@ -33,7 +33,13 @@ function Main({ changeState }: any) {
     
     useEffect(() => {
         if(projects?.length > 0) {
-            setProject(projects[0]);
+            //setProject(projects[0]);
+            const id: string | null = localStorage.getItem("projectId");
+            if(id) {
+              setProject(projects.find((project) => project.projectId === id) || projects[0]);
+            } else {
+              handleselectproject(projects[0]);
+            }
         }
     }, [projects])
     const handleCloseForm = () => {
@@ -61,8 +67,8 @@ function Main({ changeState }: any) {
       justifyContent: 'flex-end',
     }));
 
-    const handleselectproject = (value) => {
-      console.log(value);
+    const handleselectproject = (value: tProjectAttributes | null) => {
+      value ? localStorage.setItem('projectId', value.projectId) : localStorage.removeItem('projectId');
       setProject(value);
     }
 
@@ -86,7 +92,7 @@ function Main({ changeState }: any) {
             <div className="hidden md:block">
               <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3">
               {/* Сайдбар с деревом объектов */}
-                {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
+                {projects.length > 0 && <SelectProjects title={project?.name} changeState={handleselectproject} projects={projects} />}
                 <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
                 <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                    setPopupData={setPopupData}/>
@@ -116,7 +122,7 @@ function Main({ changeState }: any) {
                                             <Disclosure.Panel className="md:hidden">
                                                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                                                     {/* Сайдбар с деревом объектов */}
-                                                    {projects.length > 0 &&<SelectProjects changeState={setProject} projects={projects}/>}
+                                                    {projects.length > 0 &&<SelectProjects changeState={handleselectproject} projects={projects}/>}
                                                     <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
                                                     <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
                                                              setPopupData={setPopupData}/>
