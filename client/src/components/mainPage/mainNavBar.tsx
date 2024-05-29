@@ -135,7 +135,7 @@ function MainNavBar({changeState} : any) {
                           </Button> */}
                           {/* <About /> */}
 
-                           <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
+                           <Typography variant="h5" component="div" color="common.white"> IMS IMPULSE </Typography>
                         </Container>
                       </Box>
 

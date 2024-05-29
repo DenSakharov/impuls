@@ -10,12 +10,12 @@ import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithC
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
-  fontSize: 16,
+  fontSize: 14,  
   height: 40,
-  padding: 0,
-  margin: 0,
-  border: '1.5px solid',
-  lineHeight: 1.5,
+  padding: 2,
+  margin: 2,
+  border: '0.5px solid',
+  lineHeight: 0.5,
   backgroundColor: '#147298',
   borderColor: '#0070AC',
   fontFamily: [
@@ -32,16 +32,16 @@ const ImpulseButton = styled(Button)({
   ].join(','),
   '&:hover': {
     backgroundColor: '#147298',
-    borderColor: '#0489D1',
+    borderColor: '#1BA1D6',
     boxShadow: 'none',
   },
   '&:active': {
     boxShadow: 'none',
     backgroundColor: '#075985',
-    borderColor: '#FCFCFC',
+    borderColor: '#075985',
   },
   '&:focus': {
-    boxShadow: '0 0 0 0.1rem rgba(7,89,163,.5)',
+    // boxShadow: '0 0 0 0.1rem rgba(7,89,163,0.5)',
   },
 });
 
@@ -64,9 +64,9 @@ export default function SelectProjects({projects, changeState} : any) {
 
   return (
 
-    <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
-            <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250}}>
-
+    <Box sx={{ flexGrow: 0, width:250, backgroundColor: '#147298'}}>
+            {/* <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250 , height:60 }}> */}
+            <Container >
             <Stack spacing={1} direction="row">
               {/* <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton> */}
               <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30, color: 'white'}} > {project.name} </ImpulseButton>
