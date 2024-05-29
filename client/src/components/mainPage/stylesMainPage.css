@@ -73,7 +73,7 @@ body {
 
 }
 .container-kpi1{	
-	background-image: url('KPI.PNG');
+	background-image: url('./img/KPI.PNG');
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
