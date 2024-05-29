@@ -13,6 +13,16 @@ export class tObjectService {
   ) {}
 
   async create(projectId: string, newObject: Partial<tObject>, author: string): Promise<TMessage> {
+    if(!newObject.name){
+      this.HistoryService.create({
+        author,
+        notes: 'object name is missing',
+        logtype: 'Error',
+        modules: 'Objects',
+        actions: 'Error:Create new object',
+      });
+      return { error: 'Object name is missing', status: HttpStatus.BAD_REQUEST };
+    }
     const objectUUID = crypto.randomUUID();
     try {
       await this.tObjectsRepository.create({

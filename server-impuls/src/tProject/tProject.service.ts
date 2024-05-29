@@ -14,6 +14,16 @@ export class tProjectService {
   ) {}
 
   async create(newProject: Partial<tProject>, author: string): Promise<TMessage> {
+    if(!newProject.name){
+      this.HistoryService.create({
+        author,
+        notes: 'project name is empty',
+        logtype: 'Error',
+        modules: 'Projects',
+        actions: 'Error:Create new project',
+      });
+      return { error: 'Project name is empty', status: HttpStatus.BAD_REQUEST };
+    }
     const projectUUID = crypto.randomUUID();
     try {
       await this.tProjectRepository.create({

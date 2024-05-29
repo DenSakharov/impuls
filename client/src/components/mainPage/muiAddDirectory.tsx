@@ -86,7 +86,7 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ title = "Форма созда�
                         </select>
 
                         <label htmlFor="name">Название</label>
-                        <input id="name" name="name" type="text" value={packageName} onChange={(e) => setPackageName(e.target.value)}/>
+                        <input required id="name" name="name" type="text" value={packageName} onChange={(e) => setPackageName(e.target.value)}/>
 
                         <label htmlFor="type">Тип папки</label>
                         <select id="type" name="type" value={packageType} onChange={(e) => setPackageType(e.target.value)}>

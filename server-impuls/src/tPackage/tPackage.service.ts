@@ -19,6 +19,16 @@ export class tPackageService {
   ) {}
 
   async create(projectId: string, newPackage: Partial<tPackage>, author: string): Promise<TMessage> {
+    if(!newPackage.name){
+      this.HistoryService.create({
+        author,
+        notes: 'package name is empty',
+        logtype: 'Error',
+        modules: 'Packages',
+        actions: 'Error:Create new package',
+      });
+      return { error: 'Package name is empty', status: HttpStatus.BAD_REQUEST };
+    }
     const packageUUID = crypto.randomUUID();
     try {
       await this.tPackageRepository.create({

@@ -103,6 +103,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ title = "Форма с
                     </select>
                     <label htmlFor="name">Название</label>
                     <input
+                        required
                         id="name"
                         type="text"
                         value={objectName}
