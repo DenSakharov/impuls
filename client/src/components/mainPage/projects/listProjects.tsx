@@ -18,7 +18,7 @@ const ListProjects = ({ data }) => {
     // <DialogContent>
 
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="Список проектов">
+      <Table sx={{ minWidth: 650 }} >
         <TableHead>
           <TableRow>
             <TableCell> Название проекта </TableCell>
@@ -38,8 +38,8 @@ const ListProjects = ({ data }) => {
               <TableCell align="center">{item.status}</TableCell>
               <TableCell align="left">{item.notes}</TableCell>
               <TableCell align="center">
-                <div><Button variant="text"> Изменить </Button></div>
-                <div><Button variant="text"> Удалить  </Button></div>
+                <div><Button variant="text"> Изменить </Button> "|"
+                <Button variant="text"> Удалить  </Button></div>
               </TableCell>
             </TableRow>
           ))}

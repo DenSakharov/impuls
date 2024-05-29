@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
 import AddProjects from './projects/muiAddProjects';
-import data from '../editPopup/data';
+// import data from '../editPopup/data';
 import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+// import { tObjectAttributes } from '#/dtos/tObjectAttributes';
 import useProjects from '../../hooks/useProjects';
+// import MuiAllProjectsModal from './projects/muiAllProjects';
 
 export const MuiStartpage = ({chengedproject}) => {
 
@@ -58,6 +59,7 @@ export const MuiStartpage = ({chengedproject}) => {
                       <AddProjects />
                   </Typography>
                   {/* <Typography color="textSecondary" gutterBottom> Все проекты </Typography> */}
+                  
                 </div>
                 <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                  <Typography variant="h6" color="colorPrimary" gutterBottom> Популярные </Typography>
