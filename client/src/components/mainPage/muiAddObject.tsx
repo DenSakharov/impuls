@@ -5,25 +5,35 @@ import usePackages from '../../hooks/usePackages';
 import axios from 'axios';
 
 interface CreateObjectModalProps {
+    title?: string
     parent?: string
     projectId?: string
     isOpen: boolean;
     // onSubmit: (newObject: tObjectAttributes) => void;
     onClose: () => void;    
     onSuccessCallback: (projectId?: string) => void;
+    oldObject?: tObjectAttributes;
 }
 
-const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOpen, onClose, onSuccessCallback }) => {
+const MuiAddObject: React.FC<CreateObjectModalProps> = ({ title = "Форма создания нового объекта", parent,projectId, isOpen, onClose, onSuccessCallback, oldObject }) => {
 
     const addObject = (newObject: tObjectAttributes) => {
-        console.log(newObject);
-        
         axios.post(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/objects`, newObject, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         }).then((response) => {
-            console.log(response);
+            onSuccessCallback(projectId);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+    const updateObject = (newObject: tObjectAttributes) => {
+        axios.put(`http://${window.location.hostname.toString()}:3010/projects/${projectId}/objects`, newObject, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((response) => {
             onSuccessCallback(projectId);
         }).catch((error) => {
             console.log(error);
@@ -32,26 +42,38 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
 
     const packages = usePackages(projectId, isOpen);
 
-    const [objectName, setObjectName] = useState('');
-    const [objectType, setObjectType] = useState('');
-    const [description, setDescription] = useState('');
-    const [parentId, setParentId] = useState(parent);
-    const [attachments, setAttachments] = useState<File[]>([]);
+    const [objectName, setObjectName] = useState(oldObject?.name ?? '');
+    const [objectType, setObjectType] = useState(oldObject?.type ?? '');
+    const [description, setDescription] = useState(oldObject?.note ?? '');
+    const [parentId, setParentId] = useState(oldObject?.packageId ?? parent);
+    const [attachments, setAttachments] = useState<File[]>(oldObject?.attachments ?? []);
     useEffect(() => {
         setParentId(parent);
     }, [packages, parent]);
+    useEffect(() => {
+        if(!oldObject)return;
+        setObjectName(oldObject.name||'');
+        setObjectType(oldObject.type||'');
+        setDescription(oldObject.note||'');
+        setParentId(oldObject.packageId);
+        setAttachments(oldObject.attachments||[]);
+    }, [oldObject])
     const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // Обработка данных формы
         const objectData = {
             name: objectName,
-            description: description,
+            note: description,
             projectId: projectId,
             packageId: parentId ? parentId : null,   
             type: objectType,
             attachments: attachments, 
         } as tObjectAttributes;
-        addObject(objectData);
+        if(oldObject){
+            updateObject({...oldObject,  ...objectData})
+        }else{
+            addObject(objectData);
+        }
         onClose(); // Закрыть модальное окно после отправки формы
     };
 
@@ -69,7 +91,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
         <div className="modal-overlay">
             <div className="modal"  style={{ width: 500 }}>
                 <div className="modal-header">
-                    <h2>Форма создания нового объекта</h2>
+                    <h2>{title}</h2>
                 </div>
                 <form onSubmit={onSubmitHandler} className="form-create-object">
                     <label htmlFor="parent">Родитель</label>

@@ -2,7 +2,7 @@ export interface tObjectAttributes{
     objectId: string;
     name?: string;
     packageId?: string;
-    description?: string;
+    note?: string;
     priority?: string;
     author?: string;
     status?: string;

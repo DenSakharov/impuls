@@ -8,6 +8,7 @@ export type tObjectWithDocuments = {
 export interface tPackageAttributes {
     packageId: string;
     name?: string;
+    packageType?: string;
     parentId?: string;
     children?: tPackageAttributes[];
     objects?: tObjectWithDocuments[];

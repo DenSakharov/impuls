@@ -59,7 +59,7 @@ export class tPackageController {
     @Body() newPackage: tPackage,
   ) {
     const author = req.user?.userlogin ?? 'anonymous';
-    const data = await this.tPackageService.update(projectId, newPackage, uuid, author);
+    const data = await this.tPackageService.update(projectId, newPackage, author, uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
