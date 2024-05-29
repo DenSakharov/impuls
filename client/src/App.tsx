@@ -19,7 +19,7 @@ import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/muiSearchpage";
 import Demo from './components/demo/Demo';
 import History from './components/history/muiHistory';
-import muiAllProjects from './components/mainPage/projects/muiAllProjects';
+// import muiAllProjects from './components/mainPage/projects/muiAllProjects';
 import MuiNews from './components/mainPage/muiNews';
 import MuiHistory from './components/history/muiHistory';
 
@@ -72,7 +72,7 @@ function App() {
           <Route path='/project' Component={Projects}></Route>
           <Route path='/demo' Component={Demo}></Route>
           <Route path='/history' Component={MuiHistory}></Route>
-          <Route path='/allprojects' Component={muiAllProjects}></Route>
+          {/* <Route path='/allprojects' Component={muiAllProjects}></Route> */}
           <Route path='/admin' Component={Admin}></Route>
           <Route path='/allnews' Component={MuiNews}></Route>
           <Route path='/integration' Component={Integration}></Route>

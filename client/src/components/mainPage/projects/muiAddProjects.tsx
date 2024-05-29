@@ -28,7 +28,7 @@ export default function SelectProjects({changeState} : any) {
         <div><Button variant="text" onClick={() => setShowModalList(true)} > Все проекты</Button></div>
 
         {showModalCreate && <AddProjectsModal onClose={handleCloseModalCreate} />}
-        {/* {showModalList && <MuiAllProjectsModal onClose={handleCloseModalList} />} */}
+        {showModalList &&<MuiAllProjectsModal onClose={handleCloseModaList} />}
         {/* {showModalEdit && <EditProjectsModal open={showModalEdit} projectsItem={currentProjectsUpdate} onClose={handleCloseModalEdit} />} */}
 
     </Box>
