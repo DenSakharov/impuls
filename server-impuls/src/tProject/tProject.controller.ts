@@ -1,16 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpStatus,
-  Param,
-  ParseUUIDPipe,
-  Post,
-  Put,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, ParseUUIDPipe, Post, Put, Res, UseGuards, Request } from '@nestjs/common';
 
 import { AuthGuard } from '#/auth/auth.guard';
 import { tProjectService } from './tProject.service';
@@ -36,63 +24,51 @@ export class tProjectController {
 
   @UseGuards(AuthGuard)
   @Post('/')
-  async create(@Res() res: Response, @Body() newProject: tProject) {
-    const data = await this.tProjectService.create(newProject);
+  async create(@Request() req, @Res() res: Response, @Body() newProject: tProject) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tProjectService.create(newProject, author);
     return res.status(data.status).json(data);
   }
 
   @UseGuards(AuthGuard)
   @Get('/:uuid')
-  async findOne(
-    @Res() res: Response,
-    @Param('uuid', new ParseUUIDPipe()) uuid: string,
-  ) {
+  async findOne(@Res() res: Response, @Param('uuid', new ParseUUIDPipe()) uuid: string) {
     const data = await this.tProjectService.findOne(uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+      return res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
     }
   }
 
   @UseGuards(AuthGuard)
   @Put('/:uuid')
-  async updateWithUID(
-    @Res() res: Response,
-    @Param('uuid', new ParseUUIDPipe()) uuid: string,
-    @Body() newProject: tProject,
-  ) {
-    const data = await this.tProjectService.update(newProject, uuid);
+  async updateWithUID(@Request() req, @Res() res: Response, @Param('uuid', new ParseUUIDPipe()) uuid: string, @Body() newProject: tProject) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tProjectService.update(newProject, author, uuid);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+      return res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
     }
   }
 
   @UseGuards(AuthGuard)
   @Put('/')
-  async update(@Res() res: Response, @Body() newProject: tProject) {
-    const data = await this.tProjectService.update(newProject);
+  async update(@Request() req, @Res() res: Response, @Body() newProject: tProject) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tProjectService.update(newProject, author);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'Object not found' });
+      return res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
     }
   }
   @UseGuards(AuthGuard)
   @Delete('/:uuid')
-  async delete(
-    @Res() res: Response,
-    @Param('uuid', new ParseUUIDPipe()) uuid: string,
-  ) {
-    const data = await this.tProjectService.delete(uuid);
+  async delete(@Request() req, @Res() res: Response, @Param('uuid', new ParseUUIDPipe()) uuid: string) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tProjectService.delete(uuid, author);
 
     return res.status(data.status).json(data);
   }
