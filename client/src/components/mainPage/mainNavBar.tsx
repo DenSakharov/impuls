@@ -71,6 +71,11 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
+    if(localStorage.getItem('token') == null) {
+      window.open('/', "_self")
+      return (<div></div>)
+    }
+
 
 
     return (

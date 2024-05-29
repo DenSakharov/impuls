@@ -64,6 +64,11 @@ function Main({ changeState }: any) {
       setProject(value);
     }
 
+    if(localStorage.getItem('token') == null) {
+      window.open('/', "_self")
+      return (<div></div>)
+    }
+
 
     return (
     <>
