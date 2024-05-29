@@ -72,16 +72,6 @@ function Profile() {
     })
   }
 
-  useEffect(() => {
-    let userReceived = false
-    if(localStorage.getItem('token') != null) {
-      setIsAuth(true)
-    }
-    if (!userReceived) {
-      getUser()
-    }
-    return () => { userReceived = true; }
-  },[]);
 
   function updateUser() {
     let urlForUpdate = `http://${window.location.hostname.toString()}:3010/users/` + localStorage.getItem('userlogin') + '/update'
@@ -105,7 +95,15 @@ function Profile() {
     })
   }
 
-  if(!isAuth) {
+  useEffect(() => {
+    let userReceived = false
+    if (!userReceived) {
+      getUser()
+    }
+    return () => { userReceived = true; }
+  },[]);
+
+  if(localStorage.getItem('token') == null) {
     window.open('/', "_self")
     return (<div></div>)
   }

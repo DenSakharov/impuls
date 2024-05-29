@@ -6,17 +6,7 @@ import MuiSidebarAdmin from "./muiSidebarAdmin";
 function Admin() {
   const [isAuth, setIsAuth] = useState(false)
   
-  useEffect(() => {
-    if(localStorage.getItem('token') != null) {
-      setIsAuth(true)
-    }
-    return () => {}
-},[]);
 
-if(!isAuth) {
-    window.open('/', "_self")
-    return (<div></div>)
-}
 
   return (
   <Card sx={{ padding: '20px', margin: '20px' }}>           

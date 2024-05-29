@@ -7,10 +7,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
+import MuiAddDocument from "./muiAddDocument"
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import { tObjectAttributes, tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
+import { tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
+import axios from 'axios';
 
 export type MuiTreeProps = {
     projectId?: string,
@@ -53,10 +56,68 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         mouseY: null | number;
     }>(initialState);
       
-    const [selectedId, setSelectedId] = React.useState<string>("");
-    const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>, id?: string) => {
+    const [selectedElement, setSelectedElement] = React.useState<tPackageAttributes|tDocumentAttributes|tObjectWithDocuments|undefined>(undefined);
+    const selectedId = (() => {
+        if(selectedElement && "object" in selectedElement){
+            return selectedElement.object.objectId;
+        }else if(selectedElement && "docId" in selectedElement){
+            return selectedElement.docId;
+        }else if(selectedElement && "packageId" in selectedElement){
+            return selectedElement.packageId;
+        }else{
+            return "";
+        }
+    })();
+
+    const deleteElementHandler = () => {
+        let name;
+        let typeName;
+        let path;
+        if(selectedElement && "object" in selectedElement){
+            name = selectedElement.object.name;
+            path = `http://${window.location.hostname}:3010/projects/${projectId}/objects/${selectedElement.object.objectId}`;
+            typeName = "объект";
+        }else if(selectedElement && "docId" in selectedElement){
+            name = selectedElement.docname;
+            path = `http://${window.location.hostname}:3010/documents/${selectedElement.docId}`;
+            typeName = "документ";
+        }else if(selectedElement && "packageId" in selectedElement){
+            name = selectedElement.name;
+            path = `http://${window.location.hostname}:3010/projects/${projectId}/packages/${selectedElement.packageId}`
+            typeName = "пакет";
+        }else{
+            return;
+        }
+        const isConfirmed = window.confirm(`Вы действительно хотите удалить ${typeName} "${name}"?`);
+        if(isConfirmed){
+            axios.delete(path, 
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "token"
+                    )}`,
+                },
+            }).then(() => {
+                treeUpdateHandler(projectId);
+            })
+        }
+    }
+    const editElementHandler = () => {
+        if(selectedElement && "object" in selectedElement){
+            openModalUpdateObject();
+        }else if(selectedElement && "docId" in selectedElement){
+            
+        }else if(selectedElement && "packageId" in selectedElement){
+            openModalUpdateDirectory();
+        }else{
+            
+        }
+    }
+    const onHandleRightClick = (event: React.MouseEvent<HTMLLIElement>, object?: tObjectWithDocuments | tPackageAttributes | tDocumentAttributes) => {
         event.preventDefault();
-        id && setSelectedId(id);
+        event.stopPropagation();
+        console.log(object)
+        setSelectedElement(object);
         setState({
             mouseX: event.clientX - 2,
             mouseY: event.clientY - 4,
@@ -69,13 +130,28 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
 
     // addDirectory
     const [isModalAddDirectoryOpen, setModalAddDirectoryOpen] = useState(false);
+    const [isModalUpdateDirectoryOpen, setModalUpdateDirectoryOpen] = useState(false);
+
     const openModalAddDirectory = () => setModalAddDirectoryOpen(true);
+    const openModalUpdateDirectory = () => setModalUpdateDirectoryOpen(true);
+    
     const closeModalAddDirectory = () => setModalAddDirectoryOpen(false);
+    const closeModalUpdateDirectory = () => setModalUpdateDirectoryOpen(false);
 
     // addObject
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
+
+    const [isModalUpdateObjectOpen, setModalUpdateObjectOpen] = useState(false);
+    const openModalUpdateObject = () => setModalUpdateObjectOpen(true);
+    const closeModalUpdateObject = () => setModalUpdateObjectOpen(false);
+    
+
+    // addDocument
+    const [isModalAddDocumentOpen, setModalAddDocumentOpen] = useState(false);
+    const openModalAddDocument = () => setModalAddDocumentOpen(true);
+    const closeModalAddDocument = () => setModalAddDocumentOpen(false);
     const renderTree = (node: tPackageAttributes|tObjectWithDocuments) => {
         if ("packageId" in node) {
             return (
@@ -84,7 +160,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 label={node.name} 
                 key={node.packageId} 
                 sx={{textAlign:"left"}}
-                onContextMenu={(e)=>onHandleRightClick(e,node.packageId)}
+                onContextMenu={(e)=>onHandleRightClick(e,node)}
                 >
                     {Object.keys(node).map(key => Array.isArray(node[key]) ? node[key].map((child: tPackageAttributes|tObjectWithDocuments) => renderTree(child)) : null)}
                 </TreeItem>
@@ -97,7 +173,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 label={node.object.name} 
                 key={node.object.objectId} 
                 sx={{textAlign:"left"}}
-                onContextMenu={(e)=>onHandleRightClick(e,node.object.objectId)}
+                onContextMenu={(e)=>onHandleRightClick(e,node)}
                 >
                     {node.documents?.map(
                         (doc) => (                            
@@ -107,7 +183,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                             key={doc.docId} 
                             sx={{textAlign:"left", textDecoration: doc.docId ? "underline" : "none", cursor: 'context-menu'}}
                             onClick={() => doc.docId? openPopup(doc) : null}
-                            onContextMenu={(e)=>onHandleRightClick(e,doc.docId)}>
+                            onContextMenu={(e)=>onHandleRightClick(e,doc)}>
                             </TreeItem>
                         )
                     )}
@@ -118,39 +194,50 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         }
     }
     
-  // TODO: add submit handlers and projectId
-  return (
-    <Container disableGutters>
+    const menuItem = (
         <Menu
-                keepMounted
-                open={state.mouseY !== null}
-                onClose={handlemyClose}
-                anchorReference="anchorPosition"
-                anchorPosition={
-                state.mouseY !== null && state.mouseX !== null
-                    ? { top: state.mouseY, left: state.mouseX }
-                    : undefined
-                }>       <MenuItem onClick={handlemyClose}>
-                            <ListItemIcon>
-                                <SettingsSystemDaydreamIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Свойства"/>
-                        </MenuItem>
-                    <MenuItem onClick={handlemyClose}>
-                            <ListItemIcon>
-                                <CreateNewFolderIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
-                        </MenuItem>
+            keepMounted
+            open={state.mouseY !== null}
+            onClose={handlemyClose}
+            anchorReference="anchorPosition"
+            anchorPosition={
+            state.mouseY !== null && state.mouseX !== null
+                ? { top: state.mouseY, left: state.mouseX }
+                : undefined
+            }>       
+                <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <SettingsSystemDaydreamIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Свойства"/>
+                </MenuItem>
+                <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <CreateNewFolderIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Редактировать"  onClick={editElementHandler}/>
+                </MenuItem>
+                <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <CreateNewFolderIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
+                </MenuItem>
 
-                        <MenuItem onClick={handlemyClose}>
+                <MenuItem onClick={handlemyClose}>
+                <ListItemIcon>
+                        <NoteAddIcon fontSize="small" />
+                    </ListItemIcon>
+                <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
+                </MenuItem>
+                
+                <MenuItem onClick={handlemyClose}>
                         <ListItemIcon>
-                                <NoteAddIcon fontSize="small" />
+                                <PostAddIcon fontSize="small" />
                             </ListItemIcon>
-                        <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
-                        </MenuItem>
-
-                        <MenuItem onClick={handlemyClose}>
+                        <ListItemText primary="Создать документ" onClick={openModalAddDocument}/>
+                </MenuItem>
+                <MenuItem onClick={handlemyClose}>
                         <ListItemIcon>
                                 <ContentCopy fontSize="small" />
                             </ListItemIcon>
@@ -160,17 +247,42 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                         <ListItemIcon>
                                 <DeleteIcon fontSize="small" />
                             </ListItemIcon>
-                        <ListItemText primary="Удалить" />
+                        <ListItemText primary="Удалить" onClick={deleteElementHandler}/>
                         </MenuItem>
                 </Menu>
-        <SimpleTreeView 
-        defaultExpandedItems={[header]}
-        sx={{ flexGrow: 1, overflowY: 'auto' }}>
-            {data.map((item: tPackageAttributes) => renderTree(item))}
-        </SimpleTreeView>
-        <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
-        <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
-    </Container>
+    )
+  
+    return (
+        <Container disableGutters>
+            {menuItem}
+            <SimpleTreeView 
+                defaultExpandedItems={[header]}
+                sx={{ flexGrow: 1, overflowY: 'auto' }}
+            >
+                {data.map((item: tPackageAttributes) => renderTree(item))}
+            </SimpleTreeView>
+            <MuiAddObject parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} />
+            <MuiAddDirectory parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} />
+            <MuiAddDocument parent={selectedId} projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDocumentOpen} onClose={closeModalAddDocument}></MuiAddDocument>
+            <MuiAddDirectory 
+                title="Редактировать папку"
+                oldPackage={selectedElement && !("object" in selectedElement) && !("docId" in selectedElement) ? selectedElement : undefined} 
+                parent={selectedElement && !("object" in selectedElement) && !("docId" in selectedElement) ? selectedElement.parentId : undefined} 
+                projectId={projectId} 
+                onSuccessCallback={treeUpdateHandler} 
+                isOpen={isModalUpdateDirectoryOpen} 
+                onClose={closeModalUpdateDirectory} 
+            />
+            <MuiAddObject
+                title="Редактировать объект"
+                oldObject={selectedElement && "object" in selectedElement ? selectedElement.object : undefined} 
+                parent={selectedElement && ("object" in selectedElement) ? selectedElement.object.packageId : undefined} 
+                projectId={projectId} 
+                onSuccessCallback={treeUpdateHandler} 
+                isOpen={isModalUpdateObjectOpen} 
+                onClose={closeModalUpdateObject} 
+            />
+        </Container>
     
   );
 }

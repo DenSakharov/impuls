@@ -1,33 +1,22 @@
 import { UUID } from 'crypto';
-import {
-  Model,
-  Table,
-  Column,
-  DataType,
-  Index,
-  Sequelize,
-  ForeignKey,
-} from 'sequelize-typescript';
+import { Model, Table, Column, DataType, Index, Sequelize, ForeignKey } from 'sequelize-typescript';
 
 export interface tChangehistoryAttributes {
   logId: UUID;
   datetime?: Date;
   author?: string;
   notes?: string;
-  objectId?: number;
+  objectId?: string;
   logtype?: string;
   modules?: string;
   actions?: string;
-  dateEdited?:Date;
+  dateEdited?: Date;
 }
 
 @Table({ tableName: 't_changehistory', timestamps: false })
-export class tChangehistory
-  extends Model<tChangehistoryAttributes, tChangehistoryAttributes>
-  implements tChangehistoryAttributes
-{
+export class tChangehistory extends Model<tChangehistoryAttributes, tChangehistoryAttributes> implements tChangehistoryAttributes {
   @Column({ field: 'log_id', allowNull: false, type: DataType.UUID, primaryKey: true })
-  logId:UUID;
+  logId: UUID;
 
   @Column({ allowNull: true, type: DataType.DATE(6) })
   datetime?: Date;
@@ -38,8 +27,8 @@ export class tChangehistory
   @Column({ allowNull: true, type: DataType.STRING })
   notes?: string;
 
-  @Column({ field: 'object_id', allowNull: true, type: DataType.INTEGER })
-  objectId?: number;
+  @Column({ field: 'object_id', allowNull: true, type: DataType.UUID })
+  objectId?: UUID;
 
   @Column({ allowNull: true, type: DataType.STRING(50) })
   logtype?: string;

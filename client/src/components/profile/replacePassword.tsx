@@ -56,18 +56,11 @@ function ReplacePassword() {
       console.log(reason)
     })
   }
-
-  useEffect(() => {
-    if(localStorage.getItem('token') != null) {
-      setIsAuth(true)
-    }
-    return () => {}
-  },[]);
-
-  if(!isAuth) {
+  if(localStorage.getItem('token') == null) {
     window.open('/', "_self")
     return (<div></div>)
   }
+
 
   return(
     <div id="root-replacePas">

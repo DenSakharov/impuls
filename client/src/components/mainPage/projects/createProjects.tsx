@@ -68,16 +68,6 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({onClose}) => {
             notes,
             status,
         };
-        const syslog = {
-            // id:'',
-            modules: 'Projects',
-            logtype: 'OK',
-            author: localStorage.getItem('userlogin'),
-            notes: 'Add project',
-            actions: 'OK:Create new project',
-            // datetime: '',
-        };
-
         // создание проекта
         try {
             const response = await fetch(`http://${window.location.hostname.toString()}:3010/projects`, {
@@ -97,29 +87,8 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({onClose}) => {
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             // handle error, e.g., show error message, etc.
-        }
-
-        // запись системного лога о событии
-        try {
-            const response = await fetch(`http://${window.location.hostname.toString()}:3010/history`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-                body: JSON.stringify(syslog),
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            // handle success, e.g., clear form, show success message, etc.
-            onClose();
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-            // handle error, e.g., show error message, etc.
-        }
-};
+        }        
+    };
 
 
 

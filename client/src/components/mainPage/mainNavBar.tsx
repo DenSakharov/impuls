@@ -71,24 +71,12 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
-    useEffect(() => {
-      if(localStorage.getItem('token') != null) {
-        setIsAuth(true)
-      }
-      return () => {}
-    },[]);
-
-    if(!isAuth) {
-        window.open('/', "_self")
-        return (<div></div>)
+    if(localStorage.getItem('token') == null) {
+      window.open('/', "_self")
+      return (<div></div>)
     }
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
+
+
 
     return (
     <>
@@ -147,7 +135,7 @@ function MainNavBar({changeState} : any) {
                           </Button> */}
                           {/* <About /> */}
 
-                           <Typography variant="h5" component="div" color="common.white"> IMS IMPULS </Typography>
+                           <Typography variant="h5" component="div" color="common.white"> IMS IMPULSE </Typography>
                         </Container>
                       </Box>
 

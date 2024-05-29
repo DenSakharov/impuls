@@ -55,14 +55,6 @@ export default function SignInSide() {
           display:'flex',
           justifyContent: 'flex-end'
         }}>
-          <IconButton
-            sx={{
-              color: 'white',
-              mr: '50'
-            }}
-            onClick={() => window.open('/main', '_self')}>
-              <Close fontSize='large'/>
-            </IconButton>
         </Box>
         <Box
           sx={{
