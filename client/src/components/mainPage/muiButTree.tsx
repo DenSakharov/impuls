@@ -42,8 +42,8 @@ function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddDirectory}>     <CreateNewFolderIcon fontSize="small"/></IconButton>
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddObject}>        <NoteAddIcon fontSize="small"/></IconButton>
             <IconButton aria-label="settings" color='default' size="small" onClick={openModalAddDocument}>        <PostAddIcon fontSize="small"/></IconButton>
-            <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
-            <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton>
+            {/* <IconButton aria-label="settings" color='default' size="small">                                     <ContentCopy fontSize="small" /></IconButton>
+            <IconButton edge='end' aria-label="delete" color='default' size="small">                            <DeleteIcon fontSize="small"/></IconButton> */}
             <IconButton aria-label="info" color='default' size="small">                                         <Info fontSize="small"/></IconButton>
 
             <MuiAddDirectory projectId={projectId} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} onSuccessCallback={treeUpdateHandler}/>
