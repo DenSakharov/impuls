@@ -46,7 +46,7 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallb
     }
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal" style={{ width: 500 }} onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h2>Форма создания новой папки</h2>
                 </div>
@@ -66,13 +66,15 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallb
                         <label htmlFor="type">Тип папки</label>
                         <select id="type" name="type">
                             <option value="0">-</option>
-                            <option value="1">Тип 1</option>
-                            <option value="2">Тип 2</option>
+                            <option value="1">Simple</option>
+                            <option value="2">Component</option>
+                            <option value="3">System</option>
+                            <option value="4">Private</option>
                         </select>
 
                         <div className="modal-footer">
-                            <button type="submit">Сохранить</button>
                             <button type="button" onClick={onClose}>Отменить</button>
+                            <button type="submit">Сохранить</button>
                         </div>
                     </form>
                 </div>

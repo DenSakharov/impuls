@@ -1,10 +1,13 @@
-// Кожевников СЮ
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import { Container } from "@mui/material";
 import MuiSidebarAdmin from "./muiSidebarAdmin";
 
 function Admin() {
+  const [isAuth, setIsAuth] = useState(false)
+  
+
+
   return (
   <Card sx={{ padding: '20px', margin: '20px' }}>           
    <Box  style={{ textAlign: 'center' }}>    

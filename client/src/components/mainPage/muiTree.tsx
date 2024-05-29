@@ -10,15 +10,14 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import MuiAddDirectory from "./muiAddDirectory";
 import MuiAddObject from "./muiAddObject";
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
-import { tPackageAttributes } from '#/dtos/tPackageAttributes';
+import { tObjectAttributes, tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
 
 export type MuiTreeProps = {
     projectId?: string,
     header?: string,
     data: tPackageAttributes[],
     handleOpenForm: () => void,
-    setPopupData: (node: tObjectAttributes)=>void,
+    setPopupData: (node: tDocumentAttributes)=>void,
     updateTree?: (string)=>void
 }
 
@@ -28,10 +27,11 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         projectId && updateTree && updateTree(projectId);
     }
 
-    const openPopup = (node: tObjectAttributes) => {
+    const openPopup = (node: tDocumentAttributes) => {
         setPopupData(node)
+        console.log(node)
         if (node && window.innerWidth < 700) {
-            window.open('/Popup?id=' + node.objectId,"_self")
+            window.open('/Popup?id=' + node.docId,"_self")
             return
         }
 
@@ -76,19 +76,52 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     const [isModalAddObjectOpen, setModalAddObjectOpen] = useState(false);
     const openModalAddObject = () => setModalAddObjectOpen(true);
     const closeModalAddObject = () => setModalAddObjectOpen(false);
-    const renderTree = (node: tPackageAttributes|tObjectAttributes) => {
-        const isObject = "objectId" in node;
-        const id = isObject ? node.objectId : node.packageId;
-        return (
+    const renderTree = (node: tPackageAttributes|tObjectWithDocuments) => {
+        if ("packageId" in node) {
+            return (
+                <TreeItem 
+                itemId={node.packageId}        
+                label={node.name} 
+                key={node.packageId} 
+                sx={{textAlign:"left"}}
+                onContextMenu={(e)=>onHandleRightClick(e,node.packageId)}
+                >
+                    {Object.keys(node).map(key => Array.isArray(node[key]) ? node[key].map((child: tPackageAttributes|tObjectWithDocuments) => renderTree(child)) : null)}
+                </TreeItem>
+                
+            )
+        } else if ("object" in node) {
+            return (
             <TreeItem 
-            itemId={id}        
-            label={node.name} 
-            key={id} 
-            sx={{textAlign:"left", textDecoration: isObject ? "underline" : "none", cursor: 'context-menu'}}
-            onClick={() => isObject? openPopup(node) : null}
-            onContextMenu={(e)=>onHandleRightClick(e,node.packageId)}
-            >
-                <Menu
+                itemId={node.object.objectId}        
+                label={node.object.name} 
+                key={node.object.objectId} 
+                sx={{textAlign:"left"}}
+                onContextMenu={(e)=>onHandleRightClick(e,node.object.objectId)}
+                >
+                    {node.documents?.map(
+                        (doc) => (                            
+                            <TreeItem 
+                            itemId={doc.docId}        
+                            label={doc.docname} 
+                            key={doc.docId} 
+                            sx={{textAlign:"left", textDecoration: doc.docId ? "underline" : "none", cursor: 'context-menu'}}
+                            onClick={() => doc.docId? openPopup(doc) : null}
+                            onContextMenu={(e)=>onHandleRightClick(e,doc.docId)}>
+                            </TreeItem>
+                        )
+                    )}
+                                        
+                </TreeItem>
+            )
+            
+        }
+    }
+    
+  // TODO: add submit handlers and projectId
+  return (
+    <Container disableGutters>
+        <Menu
                 keepMounted
                 open={state.mouseY !== null}
                 onClose={handlemyClose}
@@ -97,10 +130,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 state.mouseY !== null && state.mouseX !== null
                     ? { top: state.mouseY, left: state.mouseX }
                     : undefined
-                }
-
-
-                >       <MenuItem onClick={handlemyClose}>
+                }>       <MenuItem onClick={handlemyClose}>
                             <ListItemIcon>
                                 <SettingsSystemDaydreamIcon fontSize="small" />
                             </ListItemIcon>
@@ -133,16 +163,6 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                         <ListItemText primary="Удалить" />
                         </MenuItem>
                 </Menu>
-                {/* {Object.keys(node).map((key) => Array.isArray(node[key]) ? node[key].map((child: any) => renderTree(child)) : null)} */}
-                {!isObject && node.children?.map((child: tPackageAttributes) => renderTree(child))}
-                {!isObject && node.objects?.map((child: tObjectAttributes) => renderTree(child))}
-            </TreeItem>
-        )
-    }
-    
-  // TODO: add submit handlers and projectId
-  return (
-    <Container disableGutters>
         <SimpleTreeView 
         defaultExpandedItems={[header]}
         sx={{ flexGrow: 1, overflowY: 'auto' }}>

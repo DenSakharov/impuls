@@ -2,7 +2,7 @@ import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { TMessage } from '#/entities/Message';
 import { tPackage } from './tPackage';
 import { UUID } from 'crypto';
-import { tObject } from '#/entities';
+import { tObject, tDocuments } from '#/entities';
 import { PackagesTree } from '#/entities/PackagesTree';
 import { tChangehistoryService } from '#/tHistory/tChangehistory.service';
 
@@ -13,6 +13,8 @@ export class tPackageService {
     private tPackageRepository: typeof tPackage,
     @Inject('OBJECTS_REPOSITORY')
     private tObjectsRepository: typeof tObject,
+    @Inject('DOCUMENTS_REPOSITORY')
+    private tDocumentsRepository: typeof tDocuments,
     private readonly HistoryService: tChangehistoryService,
   ) {}
 
@@ -144,15 +146,37 @@ export class tPackageService {
     const objects = await this.tObjectsRepository.findAll<tObject>({
       where: { projectId: projectId },
     });
-
-    const buildTree = (currentPackage: tPackage, packages: tPackage[], objects: tObject[]): PackagesTree => {
+    const documents = await this.tDocumentsRepository.findAll<tDocuments>({
+      where: { objectId: objects.map((o) => o.objectId) },
+    });
+    const buildTree = (
+      currentPackage: tPackage,
+      packages: tPackage[],
+      objects: {
+        object: tObject;
+        documents: tDocuments[];
+      }[],
+    ): PackagesTree => {
       return {
         packageObject: currentPackage,
-        objects: objects.filter((o) => o.packageId === currentPackage.packageId),
+        objects: objects
+          .filter((o) => o.object.packageId === currentPackage.packageId)
+          .map((o) => ({
+            object: o.object,
+            documents: documents.filter((d) => d.objectId === o.object.objectId),
+          })),
         children: packages.filter((p) => p.parentId === currentPackage.packageId).map((p) => buildTree(p, packages, objects)),
       };
     };
 
-    return packages.filter((p) => p.parentId === null).map((p) => buildTree(p, packages, objects));
+    return packages
+      .filter((p) => p.parentId === null)
+      .map((p) =>
+        buildTree(
+          p,
+          packages,
+          objects.map((o) => ({ object: o, documents: documents })),
+        ),
+      );
   }
 }

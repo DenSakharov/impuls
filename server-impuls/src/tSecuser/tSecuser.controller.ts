@@ -13,6 +13,11 @@ import { tSecuser } from '#/tSecuser/tSecuser';
 import { AuthGuard } from '#/auth/auth.guard';
 import { TMessage } from '#/entities/Message';
 import { Response } from 'express';
+import { UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+
+
+
 
 @Controller('/users')
 export class TSecuserController {
@@ -45,4 +50,27 @@ export class TSecuserController {
       res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
     }
   }
+
+  @UseGuards(AuthGuard)
+  @Post(':userlogin/update')
+  update(@Body() newUser: tSecuser): Promise<tSecuser> {
+    return this.tSecuserService.update(newUser);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('/replacepassword')
+  replacepassword(@Body() loginpas: any): Promise<tSecuser|string> {
+    return this.tSecuserService.replacePassword(loginpas.userlogin, loginpas.oldPass, loginpas.newPass);
+  }
+
+  @Post('/recoverypassword')
+  recoveryPassword(@Body() userInfo: any) {
+    return this.tSecuserService.recoveryPassword(userInfo.userlogin, userInfo.userName, userInfo.userSurname, userInfo.newPass);
+  }
+
+  
+
+
+  
+
 }

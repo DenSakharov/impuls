@@ -16,19 +16,14 @@ import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
-import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-import { tObjectAttributes } from '#/dtos/tObjectAttributes';
+import { tProjectAttributes, tObjectAttributes, tDocumentAttributes } from '#/dtos';
 import useProjects from '../../hooks/useProjects';
 import useTree from '../../hooks/useTree';
 
 export const closeDialog = React.createContext<Function>(() => {});
 
-
 function Main({ changeState }: any) {
-    
-    
-   
-    const [popupData, setPopupData] = useState<tObjectAttributes | null>(null);
+    const [popupData, setPopupData] = useState<tDocumentAttributes | null>(null);
     const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
@@ -53,6 +48,7 @@ function Main({ changeState }: any) {
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
+    const [isAuth, setIsAuth] = useState(false)
 
     const DrawerHeader = styled('div')(({ theme }) => ({
       display: 'flex',
@@ -68,6 +64,7 @@ function Main({ changeState }: any) {
       setProject(value);
     }
 
+
     return (
     <>
     <closeDialog.Provider value={handleCloseForm}>
@@ -80,13 +77,12 @@ function Main({ changeState }: any) {
 
             {/* Start */} {/* FullPage панель !!!  */}
             <div className="hidden md:block">
-                                    <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                                        {/* Сайдбар с деревом объектов */}
-                                        {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
-                                        <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                                        <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
-                                                 setPopupData={setPopupData}/>
-                                    </div>
+              <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3"  style={{ width: 300 }}>
+              {/* Сайдбар с деревом объектов */}
+                {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
+                <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
+                <MuiTree data={tree} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+              </div>
             </div>
             {/* End */}
 
@@ -123,7 +119,7 @@ function Main({ changeState }: any) {
 
             {/* Открытие карточки объекта  */}
             <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
-                <MuiPopup {...popupData} documentId = '06858a60-0059-41e4-9c88-963af22dc754'/>
+                <MuiPopup documentId={popupData?.docId} />
             </Dialog>
 
           {/* содержимое страницы Дашборд */}
@@ -141,7 +137,7 @@ function Main({ changeState }: any) {
               <MuiStartpage chengedproject={handleselectproject} />
             </Container>
            </div>
-         
+
           {/* <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
               <MuiAllProjects />
@@ -158,7 +154,7 @@ function Main({ changeState }: any) {
            {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ключевые показатели</h2> */}
            <div className="flex flex-wrap items-center gap-8 ">
             <Container fixed>
-              {/* <MuiDashboard></MuiDashboard> */}
+              <MuiDashboard></MuiDashboard>
             </Container>
            </div>
 

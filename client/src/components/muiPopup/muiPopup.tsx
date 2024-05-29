@@ -148,12 +148,12 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
             }    
     };
     const handleAddAttachmentExcel = () => {
-        //const newUUID = uuidV4()
+        const newUUID = uuidV4()
         const { Example } = require("../excelEditor/Collabration.stories");
-        window.open('/workbook/1e4147f1-88b5-4345-95f4-205aad08c34a?docId=' + document.docId)
-
-															 
-		 
+        window.open(`/workbook/${newUUID}?docId=` + document.docId)
+        if (newUUID) {
+            setAttachments([...attachments, {_id: newUUID}]);
+        }     
 		
     };
 

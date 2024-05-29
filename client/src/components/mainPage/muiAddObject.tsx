@@ -8,6 +8,7 @@ interface CreateObjectModalProps {
     parent?: string
     projectId?: string
     isOpen: boolean;
+    // onSubmit: (newObject: tObjectAttributes) => void;
     onClose: () => void;    
     onSuccessCallback: (projectId?: string) => void;
 }
@@ -66,7 +67,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
 
     return (
         <div className="modal-overlay">
-            <div className="modal">
+            <div className="modal"  style={{ width: 500 }}>
                 <div className="modal-header">
                     <h2>Форма создания нового объекта</h2>
                 </div>
@@ -92,7 +93,10 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
                         onChange={(e) => setObjectType(e.target.value)}>
                         <option value="0">-</option>
                         <option value="1">Документ</option>
-                        <option value="2">Задача</option>
+                        <option value="2">Требование</option>
+                        <option value="3">Артефакт</option>
+                        <option value="3">Диаграмма</option>
+                        <option value="4">Задача</option>
                     </select>
 
                     <label htmlFor="description">Описание</label>
@@ -108,7 +112,7 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
                             type="file"
                             style={{ display: 'none' }}
                             onChange={handleAttachment} />
-                        <div className="attachment-names">
+                        <div className="attachment-names"  style={{ height: 50 }}>
                             {attachments.map((file, index) => (
                                 <div key={index} className="attachment-name">{file.name}</div>
                             ))}
@@ -116,8 +120,8 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ parent,projectId, isOp
                     </div>
 
                     <div className="modal-footer">
-                        <button type="submit" className="save-button">Сохранить</button>
                         <button type="button" className="cancel-button" onClick={onClose}>Отменить</button>
+                        <button type="submit" className="save-button">Сохранить</button>
                     </div>
                 </form>
             </div>

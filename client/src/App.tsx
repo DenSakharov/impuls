@@ -3,24 +3,25 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Profile from './components/profile/profile';
 import Projects from './components/projects/projects';
 import ReplacePassword from './components/profile/replacePassword';
-import MainPage from './components/mainPage/mainPage';
 import Main from './components/mainPage/main';
 import About from './components/about/about';
 import LoginPage from './components/loginPage/loginPage';
+import PassRecovery from './components/passRecovery/passRecovery';
 import MuiPopup from './components/muiPopup/muiPopup';
 import TextEditor from './components/textEditor/TextEditor';
 import Registration from './components/registrationPage/registrationPage';
 import TableData from './components/CordinationPage/table';
-import Testpage from './components/mainPage/testpage';
 import { v4 as uuidV4 } from 'uuid';
 import MainNavBar from './components/mainPage/mainNavBar';
 import Report from "./components/mainPage/muiReport";
 import Admin from "./components/admin/admin";
 import Integration from "./components/mainPage/integration";
 import Searchpage from "./components/mainPage/muiSearchpage";
+import Demo from './components/demo/Demo';
 import History from './components/history/muiHistory';
 import muiAllProjects from './components/mainPage/projects/muiAllProjects';
 import MuiNews from './components/mainPage/muiNews';
+import MuiHistory from './components/history/muiHistory';
 
 function App() {
   //Кожевников СЮ
@@ -59,16 +60,18 @@ function App() {
         {navbarComponent}
         <Routes>
           <Route path='' Component={LoginPage}></Route>
+          <Route path='/recovery_password' Component={PassRecovery}></Route>
           <Route path='/registration' Component={Registration}></Route>
           <Route path='/main' Component ={Main}> </Route>
-          <Route path='/mainPage' Component={MainPage}>  </Route>
+          {/* <Route path='/mainPage' Component={MainPage}>  </Route> */}
           <Route path='/about' Component={About}></Route>
           <Route path='/report' Component={Report}></Route>
           <Route path='/searchpage' Component={Searchpage}></Route>          
           <Route path='/popup' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/project' Component={Projects}></Route>
-          <Route path='/history' Component={History}></Route>
+          <Route path='/demo' Component={Demo}></Route>
+          <Route path='/history' Component={MuiHistory}></Route>
           <Route path='/allprojects' Component={muiAllProjects}></Route>
           <Route path='/admin' Component={Admin}></Route>
           <Route path='/allnews' Component={MuiNews}></Route>
@@ -78,8 +81,7 @@ function App() {
           <Route path="/documents" element={<Navigate to={`/documents/${uuidV4()}`} />} />
           <Route path="/documents/:id" element ={<TextEditor />} />
           <Route path="/workbook" element={<Navigate to={`/workbook/${uuidV4()}`} />} />
-          <Route path="/workbook/:id" element={ <Example />} />
-          <Route path='/test' Component ={Testpage}> </Route>
+          <Route path="/workbook/:id" element={<Example />} />
         </Routes>
       </BrowserRouter>
   );

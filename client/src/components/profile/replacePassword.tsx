@@ -1,6 +1,6 @@
 import './style_replacePas.css';
 import bClose from './img/bClose.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Alert, Snackbar } from '@mui/material';
 
@@ -10,6 +10,7 @@ function ReplacePassword() {
   const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false)
   const [openSnackbarError, setOpenSnackbarError] = useState(false)
   const [errorText, setErrorText] = useState('')
+  const [isAuth, setIsAuth] = useState(false)
   var newPass1: string
   var newPass2: string
 
@@ -55,6 +56,7 @@ function ReplacePassword() {
       console.log(reason)
     })
   }
+
 
   return(
     <div id="root-replacePas">

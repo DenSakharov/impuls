@@ -350,6 +350,41 @@ export default function EnhancedTable() {
     [order, orderBy, page, rowsPerPage],
   );
 
+  const [notes, setNotes] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+
+  const fetchData = () => {
+    axios
+      .get(`http://${window.location.hostname}:3010/history`,
+           {
+               headers: {
+                   Authorization: `Bearer ${localStorage.getItem("token")}`,
+               },
+           }
+       )
+      .then((response) => {
+       setIsLoading(false);
+       setNotes(response.data);
+       console.log(response.data,' - ', response.status)
+     })
+     .catch((error) => {
+       setIsLoading(false);
+       setIsError(true);
+       console.log(error);
+     });
+ };
+ useEffect(() => {
+   fetchData();
+ }, []);
+  console.log('notes', notes);
+
+ if (isLoading) {
+   return <div>Loading...</div>;
+ }
+//  console.log('render', notes.map((list, index, array) => list.id), 'notes')
+
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -369,10 +404,11 @@ export default function EnhancedTable() {
               rowCount={rows.length}
             />
             <TableBody>
+              {/* {notes.map((item,index) => { */}
+                {/* console.log(item); */}
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
                   <TableRow
                     hover
@@ -406,6 +442,7 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.author}</TableCell>
                     <TableCell align="right">{row.logtype}</TableCell>
                     <TableCell align="right">{row.datetime}</TableCell>
+
                   </TableRow>
                 );
               })}
@@ -433,8 +470,20 @@ export default function EnhancedTable() {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label="Убрать отступы в таблице "
       />
+            
+      {/* <div>
+          <h1>Список пользователей:</h1>
+      <ul>
+        {notes.map((item) => (
+          <li key={item.id}>
+            {item.modules} ({item.logtype})
+          </li>
+        ))}
+      </ul>
+    </div> */}
     </Box>
+
   );
 }

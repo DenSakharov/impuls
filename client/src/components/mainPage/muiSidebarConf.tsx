@@ -69,18 +69,18 @@ export function MuiSidebar() {
               Настройки
             </Typography>
           </div>
-          
-          <div className="p-2">
-            <TextField id="search" type="search" label="Search" value={searchTerm} 
-            onChange={handleChange} sx={{ width: 290 }} InputProps={{
-              endAdornment: (
-                 <InputAdornment position="end">
-                 <SearchIcon />  
-                 </InputAdornment> 
-                 ), 
-            }}
-            />  
-          </div>        
+
+          {/* <div className="p-2">
+            <TextField id="search" type="search" label="Search" value={searchTerm}
+              onChange={handleChange} sx={{ width: 290 }} InputProps={{
+                endAdornment: (
+                <InputAdornment position="end">
+                <SearchIcon />
+                </InputAdornment>
+                ),
+              }}
+            />
+          </div> */}
          {/* разделитель */}
          <Divider />
 

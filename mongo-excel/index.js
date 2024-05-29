@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-require('dotenv').config();
+//import queryString from "query-string";
 
 const express = require("express");
 const { MongoClient } = require("mongodb");
@@ -7,6 +7,7 @@ const SocketServer = require("ws").Server;
 const uuid = require("uuid");
 const _ = require("lodash");
 const { applyOp } = require("./op");
+
 
 const defaultData = {
   name: "Demo",
@@ -22,29 +23,15 @@ const defaultData = {
   documentId:""
 };
 
-const dbName = process.env.DB_Mongo;
-const collectionName = process.env.collectionName;
+const dbName = "google-docs-clone";
+const collectionName = "workbook";
 const uri = "mongodb://78.107.235.216:31000";
 const client = new MongoClient(uri);
 let presences = [];
 
 async function initMongoDB() {
     
-  
  await client.connect();
-/*
- const databasesList = await client.db().admin().listDatabases();
-databasesList.databases.forEach(db => console.log(`- ${db.name}`));
-for (const dbInfo of databasesList.databases) {
-  const dbName = dbInfo.name;
-  const db = client.db(dbName);
-
-  // Получение списка коллекций для текущей базы данных
-  const collections = await db.listCollections().toArray();
-  console.log(`База данных: ${dbName}`);
-  collections.forEach(collection => console.log( `- Коллекция: ${collection.name}`));
-}*/
-
     await client.db("admin").command({ ping: 1 });
 }
 
@@ -54,9 +41,6 @@ const app = express();
 const port = process.env.PORT || 8081;
 
 async function getData() {
-  console.log("db " + dbName);
-  console.log("db ", dbName);
-  
   const db = client.db(dbName);
     const data = await db.collection(collectionName).find().toArray();
 
@@ -92,6 +76,11 @@ app.get("/init", async (req, res) => {
 
 });
 
+app.get("/workbook/:id", async (req, res) => {
+    console.log(req.params.objectId)
+   // res.json(await findDocumentByObjectId(req.params.objectId));
+});
+
 const server = app.listen(port, () => {
   console.info(`running on port ${port}`);
 });
@@ -106,24 +95,29 @@ const broadcastToOthers = (selfId, data) => {
   });
 };
 
-const wss = new SocketServer({ server, path: `/ws`});
+const wss = new SocketServer({ server, path: "/workbook/:id" });
 
-wss.on('connection', (ws, req) => {
-  const location = url.parse(req.url, true);
+const url = require('url')
 
-  const pathParts = location.pathname.split('/');
-  const id = pathParts[pathParts.length - 1];
-  console.log("ID ", id);
-  /*
 wss.on("connection", (ws, req) => {
+  const location = url.parse(req.url, true);
+  console.log("location ", location)
+   /* const [_path, params] = connectionRequest?.url?.split("?");
+    const connectionParams = queryString.parse(params);
+    console.log(connectionParams);
+    */
+ 
   ws.id = uuid.v4();
   connections[ws.id] = ws;
   console.log("ws.id " + ws.id)
-  */
+  
   ws.on("message", async (data) => {
     const msg = JSON.parse(data.toString());
       console.log("msg.req " + msg.req)
       console.log(JSON.stringify(msg, null, 2));
+     /* ws.id = msg.sheetId;
+      connections[ws.id] = ws;
+      console.log("ws.id " + ws.id)*/
 
     if (msg.req === "getData") {
       ws.send(
