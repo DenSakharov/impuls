@@ -32,7 +32,7 @@ export class tPackageService {
       this.HistoryService.create({
         author,
         notes: 'new package was created',
-        //objectId: packageUUID,
+        objectId: packageUUID,
         logtype: 'OK',
         modules: 'Packages',
         actions: 'OK:Create new package',
@@ -49,7 +49,7 @@ export class tPackageService {
         this.HistoryService.create({
           author,
           notes: 'package UUID already exists',
-          //objectId: packageUUID,
+          objectId: packageUUID,
           logtype: 'Error',
           modules: 'Packages',
           actions: 'Error:Create new package',
@@ -62,7 +62,7 @@ export class tPackageService {
         this.HistoryService.create({
           author,
           notes: 'internal server error',
-          //objectId: packageUUID,
+          objectId: packageUUID,
           logtype: 'Error',
           modules: 'Packages',
           actions: 'Error:Create new package',
@@ -84,21 +84,37 @@ export class tPackageService {
     });
   }
 
-  async update(projectId: string, newPackage: Partial<tPackage>): Promise<tPackage>;
-  async update(projectId: string, newPackage: Partial<tPackage>, uuid: string): Promise<tPackage>;
-  async update(projectId: string, newPackage: Partial<tPackage>, uuid?: string): Promise<tPackage> {
+  async update(projectId: string, newPackage: Partial<tPackage>, author: string): Promise<tPackage>;
+  async update(projectId: string, newPackage: Partial<tPackage>, author: string, uuid: string): Promise<tPackage>;
+  async update(projectId: string, newPackage: Partial<tPackage>, author: string, uuid?: string): Promise<tPackage> {
     const pack = await this.findOne(projectId, uuid ?? newPackage.projectId);
+    this.HistoryService.create({
+      author,
+      notes: 'package was updated',
+      objectId: uuid as UUID,
+      logtype: 'OK',
+      modules: 'Packages',
+      actions: 'OK:Update package',
+    });
     return pack.update({ uuid } && newPackage);
   }
 
-  async delete(projectId: string, packageId: string, emptyOnly: boolean): Promise<TMessage> {
+  async delete(projectId: string, packageId: string, emptyOnly: boolean, author: string): Promise<TMessage> {
     //TODO: Need to do something if package is not empty
 
     try {
       const pack = await this.findOne(projectId, packageId);
 
       if (!pack) {
-        throw new Error('Package not found');
+        this.HistoryService.create({
+          author,
+          notes: 'package not found',
+          objectId: packageId as UUID,
+          logtype: 'Error',
+          modules: 'Packages',
+          actions: 'Error:Delete package',
+        });
+        return { error: 'Package not found', status: HttpStatus.CONFLICT };
       }
       if (
         !emptyOnly ||
@@ -114,15 +130,39 @@ export class tPackageService {
           ).length === 0)
       ) {
         pack.destroy();
+        this.HistoryService.create({
+          author,
+          notes: 'package was deleted',
+          objectId: packageId as UUID,
+          logtype: 'OK',
+          modules: 'Packages',
+          actions: 'OK:Delete package',
+        });
         return {
           message: `deleted package uuid = ${packageId}`,
           status: HttpStatus.OK,
           uuid: packageId,
         };
       } else {
+        this.HistoryService.create({
+          author,
+          notes: 'package not empty',
+          objectId: packageId as UUID,
+          logtype: 'Error',
+          modules: 'Packages',
+          actions: 'Error:Delete package',
+        });
         return { error: 'Package not empty', status: HttpStatus.CONFLICT };
       }
     } catch (error) {
+      this.HistoryService.create({
+        author,
+        notes: 'internal server error',
+        objectId: packageId as UUID,
+        logtype: 'Error',
+        modules: 'Packages',
+        actions: 'Error:Delete package',
+      });
       return { error: error.name, status: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }

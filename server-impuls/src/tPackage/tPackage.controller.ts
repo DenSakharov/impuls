@@ -33,9 +33,7 @@ export class tPackageController {
   @UseGuards(AuthGuard)
   @Post('/')
   async create(@Request() req, @Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Body() newPackage: tPackage) {
-    const author = 'admin';
-    console.log(req);
-
+    const author = req.user?.userlogin ?? 'anonymous';
     const data = await this.tPackageService.create(projectId, newPackage, author);
     return res.status(data.status).json(data);
   }
@@ -53,8 +51,15 @@ export class tPackageController {
 
   @UseGuards(AuthGuard)
   @Put('/:uuid')
-  async updateWithUID(@Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Param('uuid', new ParseUUIDPipe()) uuid: string, @Body() newPackage: tPackage) {
-    const data = await this.tPackageService.update(projectId, newPackage, uuid);
+  async updateWithUID(
+    @Request() req,
+    @Res() res: Response,
+    @Param('projectId', new ParseUUIDPipe()) projectId: string,
+    @Param('uuid', new ParseUUIDPipe()) uuid: string,
+    @Body() newPackage: tPackage,
+  ) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tPackageService.update(projectId, newPackage, uuid, author);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
@@ -63,8 +68,9 @@ export class tPackageController {
   }
   @UseGuards(AuthGuard)
   @Put('/')
-  async update(@Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Body() newPackage: tPackage) {
-    const data = await this.tPackageService.update(projectId, newPackage);
+  async update(@Request() req, @Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Body() newPackage: tPackage) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tPackageService.update(projectId, newPackage, author);
     if (data) {
       return res.status(HttpStatus.OK).json(data);
     } else {
@@ -74,8 +80,9 @@ export class tPackageController {
 
   @UseGuards(AuthGuard)
   @Delete('/:uuid')
-  async delete(@Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Param('uuid', new ParseUUIDPipe()) uuid: string) {
-    const data = await this.tPackageService.delete(projectId, uuid, false);
+  async delete(@Request() req, @Res() res: Response, @Param('projectId', new ParseUUIDPipe()) projectId: string, @Param('uuid', new ParseUUIDPipe()) uuid: string) {
+    const author = req.user?.userlogin ?? 'anonymous';
+    const data = await this.tPackageService.delete(projectId, uuid, false, author);
     return res.status(data.status).json(data);
   }
 }
