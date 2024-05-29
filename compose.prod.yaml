@@ -9,9 +9,9 @@ services:
     networks:
       - integration
     depends_on:
-      - nest-node
+      - back-mongo-docs
       - back-mongo-tables
-      - back-nestjs          
+      - nest-node          
   nest-node:
     container_name: nestNodeApp
     build:
