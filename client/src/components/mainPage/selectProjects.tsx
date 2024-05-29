@@ -10,12 +10,12 @@ import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithC
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
-  fontSize: 16,
+  fontSize: 14,  
   height: 40,
-  padding: 5,
-  margin: 5,
+  padding: 2,
+  margin: 2,
   border: '0.5px solid',
-  lineHeight: 1.5,
+  lineHeight: 0.5,
   backgroundColor: '#147298',
   borderColor: '#0070AC',
   fontFamily: [
@@ -64,7 +64,7 @@ export default function SelectProjects({projects, changeState} : any) {
 
   return (
 
-    <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
+    <Box sx={{ flexGrow: 0, width:250, backgroundColor: '#147298'}}>
             {/* <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 250 , height:60 }}> */}
             <Container >
             <Stack spacing={1} direction="row">

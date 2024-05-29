@@ -84,7 +84,7 @@ function Main({ changeState }: any) {
 
             {/* Start */} {/* FullPage панель !!!  */}
             <div className="hidden md:block">
-              <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3"  style={{ width: 300 }}>
+              <div className="space-y-1 px-2 pb-3 pt-0 sm:px-3">
               {/* Сайдбар с деревом объектов */}
                 {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
                 <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
@@ -96,7 +96,7 @@ function Main({ changeState }: any) {
 
             {/* Start */} {/* Mobile панель ! */}
             
-            <Disclosure as="nav">
+            <Disclosure as="nav" >
                     {({open}) => (
                                         <>
                                             <div className="mr-1 md:hidden">
