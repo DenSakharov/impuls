@@ -57,17 +57,6 @@ function ReplacePassword() {
     })
   }
 
-  useEffect(() => {
-    if(localStorage.getItem('token') != null) {
-      setIsAuth(true)
-    }
-    return () => {}
-  },[]);
-
-  if(!isAuth) {
-    window.open('/', "_self")
-    return (<div></div>)
-  }
 
   return(
     <div id="root-replacePas">

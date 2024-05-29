@@ -71,24 +71,7 @@ function MainNavBar({changeState} : any) {
       handleCloseForm()
     }
 
-    useEffect(() => {
-      if(localStorage.getItem('token') != null) {
-        setIsAuth(true)
-      }
-      return () => {}
-    },[]);
 
-    if(!isAuth) {
-        window.open('/', "_self")
-        return (<div></div>)
-    }
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
 
     return (
     <>
