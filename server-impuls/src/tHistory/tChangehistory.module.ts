@@ -6,9 +6,7 @@ import { tChangehistoryProviders } from '#/tHistory/tChangehistory.provider';
 @Module({
   imports: [],
   controllers: [tChangehistoryController],
-  providers: [
-    tChangehistoryService,
-    ...tChangehistoryProviders,
-  ],
+  providers: [tChangehistoryService, ...tChangehistoryProviders],
+  exports: [tChangehistoryService],
 })
 export class tChangehistoryModule {}

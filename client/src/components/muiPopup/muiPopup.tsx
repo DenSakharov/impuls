@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box, Button, MenuItem, Container, Grid, Stack, 
-    TextField, Typography, Divider, IconButton, Select, RadioGroup,
-    FormControlLabel, FormControl, FormLabel, Radio } from '@mui/material';
+    TextField, Typography, Divider, IconButton, Select } from '@mui/material';
 import { Add, AssignmentOutlined } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid';
@@ -48,7 +47,8 @@ interface tDocumentsAttributes {
 export default function MuiPopup(props: { documentId : string | undefined} = {documentId : undefined}) {
     const closeParentDialog = React.useContext(closeDialog)
     const [toUpdate, setToUpdate] = React.useState(false);
-    const [attachments, setAttachments] = React.useState<attachment[]>([]);
+    const [attachmentsDoc, setAttachmentsDoc] = React.useState<attachment[]>([]);
+    const [attachmentTables, setAttachmentTables] = React.useState<attachment[]>([]);
     const [document, setDocument] = React.useState<tDocumentsAttributes>({
         "docId": undefined,
         "docname": "",
@@ -84,7 +84,15 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
             "http://" + window.location.hostname + ":3002/documents/" + props.documentId,
         )
         .then((res) => {
-            setAttachments(res.data)
+            setAttachmentsDoc(res.data)
+        })    
+        .catch((err) => console.log(err))
+
+        axios.get(         
+            "http://" + window.location.hostname + ":8081/workbook/" + props.documentId,
+        )
+        .then((res) => {
+            setAttachmentTables(res.data)
         })    
         .catch((err) => console.log(err))
 
@@ -140,25 +148,28 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
     }
 
 
-    const handleAddAttachment = () => {
+    const handleAddAttachmentDoc = () => {
             const newUUID = uuidV4()
             window.open('/documents/'+ newUUID + '?docId=' + document.docId)
             if (newUUID) {
-                setAttachments([...attachments, {_id: newUUID}]);
+                setAttachmentsDoc([...attachmentsDoc, {_id: newUUID}]);
             }    
     };
-    const handleAddAttachmentExcel = () => {
+    const handleAddAttachmentTable = () => {
         const newUUID = uuidV4()
-        const { Example } = require("../excelEditor/Collabration.stories");
         window.open(`/workbook/${newUUID}?docId=` + document.docId)
         if (newUUID) {
-            setAttachments([...attachments, {_id: newUUID}]);
+            setAttachmentTables([...attachmentTables, {_id: newUUID}]);
         }     
 		
     };
 
-    const handleOpenAttachment = (uuid: string) => {
+    const handleOpenAttachmentDoc = (uuid: string) => {
         window.open('/documents/'+ uuid + '?docId=' + document.docId)
+    }
+
+    const handleOpenAttachmentTable = (uuid: string) => {
+        window.open('/worbook/'+ uuid + '?docId=' + document.docId)
     }
 
     const handleAlert = (value: string) => {
@@ -291,32 +302,29 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
                                 borderRadius:'5px', border: '1px solid rgb(133,133,133,0.5)', padding: '5px',
                                 minHeight: '40px'
                             }}>
-                                {attachments.map((attachment) => 
+                                {attachmentsDoc.map((attachment) => 
                                 <IconButton 
                                 
                                 key={attachment._id}
-                                onClick={() => handleOpenAttachment(attachment._id)}                                                                     
-                                sx={{borderRadius:'5px', border: 'initial', margin: '2px'}}>
+                                onClick={() => handleOpenAttachmentDoc(attachment._id)}                                                                     
+                                sx={{borderRadius:'5px', border: 'initial', margin: '2px', color: 'blue'}}>
                                     <AssignmentOutlined />
                                     <Typography sx={{color: 'black'}}>{attachment._id.slice(0, 8)}</Typography>
-                                </IconButton> )}                                                                            
+                                </IconButton> )}             
+                                {attachmentTables.map((attachment) => 
+                                <IconButton 
+                                key={attachment._id}
+                                onClick={() => handleOpenAttachmentTable(attachment._id)}                                                                     
+                                sx={{borderRadius:'5px', border: 'initial', margin: '2px', color: 'green'}}>
+                                    <AssignmentOutlined />
+                                    <Typography sx={{color: 'black'}}>{attachment._id.slice(0, 8)}</Typography>
+                                </IconButton> )}                                                                    
                             </Box>
                         </Grid>
                         <Grid item md={mdGridSpace} textAlign='left' xs={4}>
-                            <FormControl>
-                            <RadioGroup
-                                row
-                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                name="row-radio-buttons-group"
-                            >
-                                <FormControlLabel value="word" control={<Radio />} label="Добавить Word" onClick={handleAddAttachment} />
-                                <FormControlLabel value="excel" control={<Radio />} label="Добавить Excel" onClick={handleAddAttachmentExcel} />
-                            </RadioGroup>
-                            </FormControl>
-                        </Grid>  
-                        <Grid item md={mdGridSpace} textAlign='left' xs={6}>
-                            <Button size='small' variant='outlined' onClick={handleAddAttachment}>Добавить</Button>
-                        </Grid>  
+                            <Button size='small' variant='outlined'  onClick={handleAddAttachmentDoc}>Word</Button>
+                            <Button size='small' variant='outlined'  onClick={handleAddAttachmentTable}>Excel</Button>
+                        </Grid>
                     </Grid>
                 </Stack>
 

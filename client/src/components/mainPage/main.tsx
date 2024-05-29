@@ -66,6 +66,11 @@ function Main({ changeState }: any) {
       setProject(value);
     }
 
+    if(localStorage.getItem('token') == null) {
+      window.open('/', "_self")
+      return (<div></div>)
+    }
+
 
     return (
     <>
@@ -124,7 +129,7 @@ function Main({ changeState }: any) {
             
 
             {/* Открытие карточки объекта  */}
-            <Dialog maxWidth="lg" open={formOpen} onClose={handleCloseForm}>
+            <Dialog maxWidth="lg" open={formOpen} onClose={() => {}}>
                 <MuiPopup documentId={popupData?.docId} />
             </Dialog>
 

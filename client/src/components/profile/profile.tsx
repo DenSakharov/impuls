@@ -95,6 +95,18 @@ function Profile() {
     })
   }
 
+  useEffect(() => {
+    let userReceived = false
+    if (!userReceived) {
+      getUser()
+    }
+    return () => { userReceived = true; }
+  },[]);
+
+  if(localStorage.getItem('token') == null) {
+    window.open('/', "_self")
+    return (<div></div>)
+  }
 
   return(
     <div id="page-profile">
