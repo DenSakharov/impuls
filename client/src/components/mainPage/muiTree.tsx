@@ -13,6 +13,7 @@ import MuiAddObject from "./muiAddObject";
 import MuiAddDocument from "./muiAddDocument"
 import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
 import { tPackageAttributes, tObjectWithDocuments, tDocumentAttributes } from '#/dtos';
+import axios from 'axios';
 
 export type MuiTreeProps = {
     projectId?: string,
@@ -69,7 +70,37 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     })();
 
     const deleteElementHandler = () => {
-        
+        let name;
+        let typeName;
+        let path;
+        if(selectedElement && "object" in selectedElement){
+            name = selectedElement.object.name;
+            path = `http://${window.location.hostname}:3010/projects/${projectId}/objects/${selectedElement.object.objectId}`;
+            typeName = "объект";
+        }else if(selectedElement && "docId" in selectedElement){
+            name = selectedElement.docname;
+            path = `http://${window.location.hostname}:3010/documents/${selectedElement.docId}`;
+            typeName = "документ";
+        }else if(selectedElement && "packageId" in selectedElement){
+            name = selectedElement.name;
+            path = `http://${window.location.hostname}:3010/projects/${projectId}/packages/${selectedElement.packageId}`
+            typeName = "пакет";
+        }else{
+            return;
+        }
+        const isConfirmed = window.confirm(`Вы действительно хотите удалить ${typeName} "${name}"?`);
+        if(isConfirmed){
+            axios.delete(path, 
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "token"
+                    )}`,
+                },
+            }).then(() => {
+                treeUpdateHandler(projectId);
+            })
+        }
     }
     const editElementHandler = () => {
         if(selectedElement && "object" in selectedElement){
@@ -216,7 +247,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                         <ListItemIcon>
                                 <DeleteIcon fontSize="small" />
                             </ListItemIcon>
-                        <ListItemText primary="Удалить" />
+                        <ListItemText primary="Удалить" onClick={deleteElementHandler}/>
                         </MenuItem>
                 </Menu>
     )
