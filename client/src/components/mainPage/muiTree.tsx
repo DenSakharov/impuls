@@ -154,6 +154,14 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                     </ListItemIcon>
                 <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
                 </MenuItem>
+                
+                
+                <MenuItem onClick={handlemyClose}>
+                        <ListItemIcon>
+                                <PostAddIcon fontSize="small" />
+                            </ListItemIcon>
+                        <ListItemText primary="Создать документ" onClick={openModalAddDocument}/>
+                </MenuItem>
 
                 <MenuItem onClick={handlemyClose}>
                 <ListItemIcon>
