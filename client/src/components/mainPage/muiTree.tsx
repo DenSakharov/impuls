@@ -126,59 +126,53 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
             
         }
     }
-    
+    const menuItem = (<Menu
+        keepMounted
+        open={state.mouseY !== null}
+        onClose={handlemyClose}
+        anchorReference="anchorPosition"
+        anchorPosition={
+        state.mouseY !== null && state.mouseX !== null
+            ? { top: state.mouseY, left: state.mouseX }
+            : undefined
+        }>       <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <SettingsSystemDaydreamIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Свойства"/>
+                </MenuItem>
+            <MenuItem onClick={handlemyClose}>
+                    <ListItemIcon>
+                        <CreateNewFolderIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
+                </MenuItem>
+
+                <MenuItem onClick={handlemyClose}>
+                <ListItemIcon>
+                        <NoteAddIcon fontSize="small" />
+                    </ListItemIcon>
+                <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
+                </MenuItem>
+
+                <MenuItem onClick={handlemyClose}>
+                <ListItemIcon>
+                        <ContentCopy fontSize="small" />
+                    </ListItemIcon>
+                <ListItemText primary="Создать копию" />
+                </MenuItem>
+                <MenuItem onClick={handlemyClose}>
+                <ListItemIcon>
+                        <DeleteIcon fontSize="small" />
+                    </ListItemIcon>
+                <ListItemText primary="Удалить" />
+                </MenuItem>
+        </Menu>)
+
   // TODO: add submit handlers and projectId
   return (
     <Container disableGutters>
-        <Menu
-                keepMounted
-                open={state.mouseY !== null}
-                onClose={handlemyClose}
-                anchorReference="anchorPosition"
-                anchorPosition={
-                state.mouseY !== null && state.mouseX !== null
-                    ? { top: state.mouseY, left: state.mouseX }
-                    : undefined
-                }>       <MenuItem onClick={handlemyClose}>
-                            <ListItemIcon>
-                                <SettingsSystemDaydreamIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Свойства"/>
-                        </MenuItem>
-                    <MenuItem onClick={handlemyClose}>
-                            <ListItemIcon>
-                                <CreateNewFolderIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Создать папку"  onClick={openModalAddDirectory}/>
-                        </MenuItem>
-
-                        <MenuItem onClick={handlemyClose}>
-                        <ListItemIcon>
-                                <NoteAddIcon fontSize="small" />
-                            </ListItemIcon>
-                        <ListItemText primary="Создать объект" onClick={openModalAddObject}/>
-                        </MenuItem>
-
-                        <MenuItem onClick={handlemyClose}>
-                        <ListItemIcon>
-                                <PostAddIcon fontSize="small" />
-                            </ListItemIcon>
-                        <ListItemText primary="Создать документ" onClick={openModalAddDocument}/>
-                        </MenuItem>
-
-                        <MenuItem onClick={handlemyClose}>
-                        <ListItemIcon>
-                                <ContentCopy fontSize="small" />
-                            </ListItemIcon>
-                        <ListItemText primary="Создать копию" />
-                        </MenuItem>
-                        <MenuItem onClick={handlemyClose}>
-                        <ListItemIcon>
-                                <DeleteIcon fontSize="small" />
-                            </ListItemIcon>
-                        <ListItemText primary="Удалить" />
-                        </MenuItem>
-                </Menu>
+        {menuItem}
         <SimpleTreeView 
         defaultExpandedItems={[header]}
         sx={{ flexGrow: 1, overflowY: 'auto' }}>
