@@ -7,7 +7,7 @@ const SocketServer = require("ws").Server;
 const uuid = require("uuid");
 const _ = require("lodash");
 const { applyOp } = require("./op");
-
+const cors=require('cors');
 
 const defaultData = {
   name: "Demo",
@@ -39,6 +39,14 @@ initMongoDB();
 
 const app = express();
 const port = process.env.PORT || 8081;
+var corsOptions = {
+  origin: [`${process.env.HOST}`,"http://localhost:3000"]
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 async function getData() {
   const db = client.db(dbName);

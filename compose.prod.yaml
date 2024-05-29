@@ -7,7 +7,11 @@ services:
     ports:
       - 80:80
     networks:
-      - integration      
+      - integration
+    depends_on:
+      - nest-node
+      - back-mongo-tables
+      - back-nestjs          
   nest-node:
     container_name: nestNodeApp
     build:
@@ -17,8 +21,8 @@ services:
       - 3010:3010
     networks:
       - integration      
-  back-mongo:
-    container_name: backend-mongo
+  back-mongo-docs:
+    container_name: back-mongo-docs
     build: 
       dockerfile: Dockerfile.dev
       context: ./mongo   
@@ -33,6 +37,22 @@ services:
         - action: sync  
           path: ./mongo
           target: ./mongo
+    networks:
+      - integration      
+  back-mongo-tables:
+    container_name: back-mongo-tables
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mongo-excel   
+    ports:
+      - "8081:8081"
+    expose:
+      - '8081'
+    develop:
+      watch:
+        - action: sync  
+          path: ./mongo-excel
+          target: ./mongo-excel
     networks:
       - integration      
 networks:
