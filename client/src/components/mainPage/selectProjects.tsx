@@ -6,6 +6,7 @@ import { Button, Container, Stack, IconButton} from '@mui/material';
 import ProjectDialog from './muiDialog';
 import styled from '@mui/system/styled';
 import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
+import { tProjectAttributes } from '#/dtos';
 
 const ImpulseButton = styled(Button)({
   boxShadow: 'none',
@@ -45,11 +46,15 @@ const ImpulseButton = styled(Button)({
   },
 });
 
+export type SelectProjectsProps = {
+  title?: string,
+  projects: tProjectAttributes[],
+  changeState: (value : tProjectAttributes | null) => void
+}
 
-export default function SelectProjects({projects, changeState} : any) {
+export default function SelectProjects({title="", projects, changeState} : SelectProjectsProps) {
 
     const [formOpen, setFormOpen] = React.useState(false);
-    const [project, setProject] = React.useState(projects[0]);
     const handleCloseForm = () => {
           setFormOpen(false);
       }
@@ -57,7 +62,6 @@ export default function SelectProjects({projects, changeState} : any) {
           setFormOpen(true);
       }
       const changeProps = (value : any) => {
-        setProject(value)
         changeState(value)
         handleCloseForm()
       }
@@ -69,7 +73,7 @@ export default function SelectProjects({projects, changeState} : any) {
             <Container >
             <Stack spacing={1} direction="row">
               {/* <IconButton size="small" onClick={handleOpenForm}>     <PublishedWithChangesOutlinedIcon fontSize="small"/></IconButton> */}
-              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30, color: 'white'}} > {project.name} </ImpulseButton>
+              <ImpulseButton variant="text" onClick={handleOpenForm} sx={{maxHeight: 30, color: 'white'}} > {title} </ImpulseButton>
             </Stack>
             </Container>
             <ProjectDialog projects={projects} formOpen={formOpen} handleCloseForm={handleCloseForm} changeProps={changeProps}/>

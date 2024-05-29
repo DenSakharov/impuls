@@ -169,7 +169,7 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
     }
 
     const handleOpenAttachmentTable = (uuid: string) => {
-        window.open('/worbook/'+ uuid + '?docId=' + document.docId)
+        window.open('/workbook/'+ uuid + '?docId=' + document.docId)
     }
 
     const handleAlert = (value: string) => {
