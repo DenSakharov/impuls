@@ -81,7 +81,8 @@ function Main({ changeState }: any) {
               {/* Сайдбар с деревом объектов */}
                 {projects.length > 0 && <SelectProjects changeState={setProject} projects={projects} />}
                 <MuiButTree projectId={project?.projectId} updateTree={getTree}/>
-                <MuiTree data={tree} handleOpenForm={handleOpenForm} setPopupData={setPopupData}/>
+                <MuiTree projectId={project?.projectId} updateTree={getTree} data={tree} handleOpenForm={handleOpenForm}
+                                                   setPopupData={setPopupData}/>
               </div>
             </div>
             {/* End */}
