@@ -18,14 +18,14 @@ function Profile() {
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [selectedFile, setSelectedFile] = useState<Blob>()
-  const [imgData, setImgData] = useState('')
-  const [isAuth, setIsAuth] = useState(false)
+  const [imgData, setImgData] = useState(Photo)
 
   const handleChangeImage = async (e) => {
     console.log(e.target.files[0])
 
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
+    formData.append('userlogin', userLogin)
     const res = await axios.post(
       `http://${window.location.hostname.toString()}:3010/users/loadphoto`,
       formData,
@@ -36,8 +36,23 @@ function Profile() {
       }
     );
     setImgData('data:image/png;base64,' + res.data)
-
   }
+
+  function getUserImg() {
+    let url_getUserLogin = `http://${window.location.hostname.toString()}:3010/users/img/` + localStorage.getItem('userlogin')
+    axios({
+      method: 'get',
+      url: url_getUserLogin,
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
+    }).then((response: AxiosResponse) => {
+      if(response.data != null) {
+        setImgData('data:image/png;base64,' + response.data)
+      }
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    })
+  }
+
 
   const handleClick = () => {
     setOpenSnackbar(true);
@@ -99,6 +114,7 @@ function Profile() {
     let userReceived = false
     if (!userReceived) {
       getUser()
+      getUserImg()
     }
     return () => { userReceived = true; }
   },[]);
