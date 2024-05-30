@@ -141,7 +141,7 @@ function Main({ changeState }: any) {
           </Disclosure>
 
           {/* Открытие карточки объекта  */}
-          <Dialog maxWidth="lg" open={formOpen} onClose={() => {}}>
+          <Dialog maxWidth="lg" fullScreen={window.outerWidth > 700 ? false : true} open={formOpen} onClose={() => {}}>
                 <MuiPopup documentId={popupData?.docId} />
           </Dialog>
 
