@@ -11,7 +11,7 @@ import SelectProjects from './selectProjects';
 import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
-import {MuiStartpage} from './muiStartpage';
+import MuiStartpage from './muiStartpage';
 import MuiFavourites from './favorites/muiFavourites';
 import { Disclosure} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
@@ -151,7 +151,7 @@ function Main({ changeState }: any) {
             </div>         
 
             <Container fixed>
-              <MuiStartpage chengedproject={handleselectproject} />
+              <MuiStartpage projects={projects} changeProject={handleselectproject} />
             </Container>
            </div>
 

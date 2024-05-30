@@ -1,44 +1,16 @@
 // Кожевников СЮ раздел стартовая страница для главной страницы
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
 import AddProjects from './projects/muiAddProjects';
-// import data from '../editPopup/data';
-import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-// import { tObjectAttributes } from '#/dtos/tObjectAttributes';
-import useProjects from '../../hooks/useProjects';
-// import MuiAllProjectsModal from './projects/muiAllProjects';
+import { tProjectAttributes } from '#/dtos';
 
-export const MuiStartpage = ({chengedproject}) => {
-
-    // const [popupData, setPopupData] = React.useState(data.object);
-    const {projects} = useProjects();
-    const [project, setProject] = useState<tProjectAttributes | null>(null);
-    //const [projectData, setProjectData] = React.useState(data.tree[0]);
-    // const [projectData, setProjectData] = React.useState("No-project"); //React.useState(data.tree[0]);
-
-    useEffect(() => {
-      if(projects?.length > 0) {
-          setProject(projects[0]);
-      }
-  }, [projects])
-
-  //   useEffect(() => {
-  //     // console.log(projectData)
-  //     chengedproject(projectData)
-  //   }
-  //   ,[projectData]
-  // )
-
-    // const [formOpen, setFormOpen] = React.useState(false);  
-
-    // const handleCloseForm = () => {
-    // setFormOpen(false);
-    // }
-    // const handleOpenForm = () => {
-    // setFormOpen(true);
-    // }
+export type MuiStartpageProps = {
+  projects: tProjectAttributes[],
+  changeProject: (project: tProjectAttributes | null) => void
+}
+const MuiStartpage = ({projects, changeProject}: MuiStartpageProps) => {
 
     return (
         <Card sx={{ padding: '20px', margin: '20px' }}>
@@ -48,17 +20,14 @@ export const MuiStartpage = ({chengedproject}) => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
                   <Typography color="textSecondary" gutterBottom>
-                    {/* <SelectProjectsNew changeState={setProjectData}/> */}
-                    {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>}
+                    {projects.length > 0 &&<SelectProjectsNew changeState={changeProject} projects={projects}/>}
                   </Typography>
-                  {/* <Typography color="textSecondary" gutterBottom> Настроить </Typography> */}
                </div>
                <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Создать </Typography>
                   <Typography color="textSecondary" gutterBottom>
                       <AddProjects />
                   </Typography>
-                  {/* <Typography color="textSecondary" gutterBottom> Все проекты </Typography> */}
                   
                 </div>
                 <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
@@ -72,4 +41,4 @@ export const MuiStartpage = ({chengedproject}) => {
     );
 };
 
-// export default MuiStartpage;
+export default MuiStartpage;
