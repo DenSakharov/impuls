@@ -41,27 +41,20 @@ const MuiAllProjectsModal:  React.FC<AllProjectsModalProps> = ({onClose}) => {
   }
 
   return (
-    <Dialog open onClose={onClose} fullWidth maxWidth="sm">
-    <DialogTitle>Список проектов</DialogTitle>
+  <Dialog open onClose={onClose} fullWidth maxWidth="sm">
+   <DialogTitle>Список проектов</DialogTitle>
     <DialogContent>
-
-    <Box sx={{ flexGrow: 0, width: 1000 }}>
-    <div>      
-      {notes && <ListProjects data={notes} />}
-      {isError && <div>Error fetching data.</div>}
-    </div>
-    </Box>
-
+      <Box sx={{ flexGrow: 0 }}>
+        <div>
+         {notes && <ListProjects dataProject={notes} />}
+         {isError && <div>Ошибка загрузки данных! Обратитесь в тех. поддержку</div>}
+        </div>
+     </Box>
     </DialogContent>
-
     <DialogActions>
-        <Button>Закрыть</Button>     
-        <Button color="primary"> Создать </Button>      
-
+      <Button>Закрыть</Button>
     </DialogActions>
-</Dialog>
-
-
+  </Dialog>
   );
 };
 export default MuiAllProjectsModal;

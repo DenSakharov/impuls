@@ -22,7 +22,7 @@ const MuiDeleteElement = ({title, projectId, isOpen, onClose, onSuccessCallback,
         
         let path;
         if(elementType === "объект"){
-            path = `http://${window.location.hostname}:3010/projects/${projectId}/objects/${elementId}`;            
+            path = `http://${window.location.hostname}:3010/projects/${projectId}/objects/${elementId}`;
         }else if(elementType === "документ"){
             path = `http://${window.location.hostname}:3010/documents/${elementId}`;
         }else if(elementType === "пакет"){

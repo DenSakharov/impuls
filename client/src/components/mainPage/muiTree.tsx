@@ -253,7 +253,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 parent={selectedElement && ("object" in selectedElement) ? selectedElement.object.packageId : undefined} 
                 projectId={projectId} 
                 onSuccessCallback={treeUpdateHandler} 
-                isOpen={isModalUpdateObjectOpen} 
+                isOpen={isModalUpdateObjectOpen}
                 onClose={closeModalUpdateObject} 
             />
             <MuiDeleteElement
@@ -262,7 +262,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 projectId={projectId}
                 onSuccessCallback={treeUpdateHandler}
                 isOpen={isModalDeleteElementOpen}
-                onClose={closeModalDeleteElement}              
+                onClose={closeModalDeleteElement}
             />
         </Container>
     

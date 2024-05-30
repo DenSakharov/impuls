@@ -49,6 +49,8 @@ function MuiButTree({ projectId, updateTree } : {projectId?: string, updateTree?
             <MuiAddDirectory projectId={projectId} isOpen={isModalAddDirectoryOpen} onClose={closeModalAddDirectory} onSuccessCallback={treeUpdateHandler}/>
             <MuiAddObject projectId={projectId} isOpen={isModalAddObjectOpen} onClose={closeModalAddObject} onSuccessCallback={treeUpdateHandler}/>
             <MuiAddDocument projectId={projectId} onSuccessCallback={treeUpdateHandler} isOpen={isModalAddDocumentOpen} onClose={closeModalAddDocument}/>
+
+            {/* Меню для настройки дерева */}
             <MuiSidebarConf />
 
          </Stack>

@@ -1,3 +1,5 @@
+// Кожевников СЮ страница навигационной панели
+
 import  React, { useEffect }  from 'react';
 import './../../globals.css';
 import { Fragment } from 'react';
@@ -13,7 +15,6 @@ import { Container} from '@mui/material';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import BreadcrumbNew from "./breadcrumb";
 import MuiSidebarMessage from './muiSidebarMessage';
-// https://www.squash.io/tailoring-navbar-components-for-different-pages-in-reactjs/
 import Button from '@mui/material/Button';
 
 
@@ -76,40 +77,15 @@ function MainNavBar({changeState} : any) {
       return (<div></div>)
     }
 
-
-
     return (
     <>
       <div className="min-h-full">
-
-      {/* Mobile aside button */}
-        {/* <Disclosure as="nav" >
-          {({ open }) => (
-            <>
-              <div className="-mr-2 flex md:hidden">
-                          <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                <span className="absolute -inset-0.5" />
-                                <span className="sr-only">Open aside menu</span>
-                                {open ? (
-                                  <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true" />
-                                ) : (
-                                  <MultipleStopIcon className="block h-6 w-6" aria-hidden="true" />
-                                )}
-                          </Disclosure.Button>
-              </div>            
-            </>                         
-           )}
-        </Disclosure> */}
-
         <Disclosure as="nav" className="bg-[#147298]">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
                 <div className="flex h-16 items-center justify-between">
-
                   <div className="flex items-center">
-
                     <div className="flex-shrink-0">
                       <img
                         className="h-16 w-16"
@@ -120,21 +96,8 @@ function MainNavBar({changeState} : any) {
 
                     {/* Выбор проекта */}
                     <div className="flex-shrink-0">
-                      {/* <MuiMenu changeState={setProjectData}/> */}
-                      {/* <SelectProjects changeState={setProjectData}/> */}
-
                       <Box sx={{ flexGrow: 0, backgroundColor: '#147298'}}>
                         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 300}}>
-                            {/* <Button
-                            id="fade-button"
-                            aria-controls={open ? 'fade-menu' : undefined}
-                              aria-haspopup="true"
-                              aria-expanded={open ? 'true' : undefined}
-                              onClick={handleClickOpen}>
-                            IMS IMPULS
-                          </Button> */}
-                          {/* <About /> */}
-
                            <Typography variant="h5" component="div" color="common.white"> IMS IMPULSE </Typography>
                         </Container>
                       </Box>
@@ -209,18 +172,9 @@ function MainNavBar({changeState} : any) {
                   {/* Выпадающее меню Profile */}
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      {/* <button
-                        //onClick={openSBMessage}
-                        type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button> */}
 
+                      {/* Выпадающее меню  MuiSidebarMessage*/}
                       <MuiSidebarMessage />
-
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -276,9 +230,7 @@ function MainNavBar({changeState} : any) {
                             )}
                           </Disclosure.Button>
                         </div>
-
                 </div>
-
               </div>
 
               <Disclosure.Panel className="md:hidden">

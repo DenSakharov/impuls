@@ -7,12 +7,12 @@ import AddProjectsModal from './createProjects';
 import MuiAllProjectsModal from './muiAllProjects';
 
 export default function SelectProjects({changeState} : any) {
-  const [showModalCreate, setShowModalCreate] = useState(false); 
+  const [showModalCreate, setShowModalCreate] = useState(false);
   const [showModalList, setShowModalList] = useState(false);
-  
+
   // Create Projects
   const handleCloseModalCreate = () => {
-      setShowModalCreate(false);      
+      setShowModalCreate(false);
   };
   
   // List Projects
@@ -21,16 +21,11 @@ export default function SelectProjects({changeState} : any) {
   };
 
   return (
-
     <Box sx={{ flexGrow: 0}}>
         <div><Button variant="text" onClick={() => setShowModalCreate(true)}> Создать проект </Button></div>
-        {/* <div><Button variant="text" onClick={() => setShowModalEdit(true)}> Изменить проект </Button></div> */}        
+          {showModalCreate && <AddProjectsModal onClose={handleCloseModalCreate} />}
         <div><Button variant="text" onClick={() => setShowModalList(true)} > Все проекты</Button></div>
-
-        {showModalCreate && <AddProjectsModal onClose={handleCloseModalCreate} />}
-        {showModalList &&<MuiAllProjectsModal onClose={handleCloseModaList} />}
-        {/* {showModalEdit && <EditProjectsModal open={showModalEdit} projectsItem={currentProjectsUpdate} onClose={handleCloseModalEdit} />} */}
-
+          {showModalList &&<MuiAllProjectsModal onClose={handleCloseModaList} />}
     </Box>
   );
 }

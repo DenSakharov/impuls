@@ -71,7 +71,7 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ title = "Форма созда�
     }
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal" style={{ width: 500 }} onClick={(e) => e.stopPropagation()}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h2>{title}</h2>
                 </div>

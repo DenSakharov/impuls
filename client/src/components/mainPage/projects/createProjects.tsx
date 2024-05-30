@@ -94,7 +94,7 @@ const AddProjectsModal: React.FC<AddProjectsModalProps> = ({onClose}) => {
 
 return (
     <Dialog open onClose={onClose} fullWidth maxWidth="sm">
-    <DialogTitle>Содать проект</DialogTitle>
+    <DialogTitle>Создать проект</DialogTitle>
     <DialogContent>
         {/* <TextField
             label="Статус проекта"
