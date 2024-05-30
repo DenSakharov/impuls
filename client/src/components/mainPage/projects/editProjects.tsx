@@ -6,6 +6,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material
 import axios ,{ AxiosResponse, AxiosError } from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MenuItem from '@mui/material/MenuItem';
+import { Console } from 'console';
 
 const currencies = [
     {
@@ -100,6 +101,7 @@ const EditProjectsModal = ({ open,  projectsItem, onClose }) => {
             name,
             notes,
         });
+        console.log('1');  
         onClose();
         
         } catch (err) {

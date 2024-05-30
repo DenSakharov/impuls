@@ -96,27 +96,6 @@ return (
     <Dialog open onClose={onClose} fullWidth maxWidth="sm">
     <DialogTitle>Создать проект</DialogTitle>
     <DialogContent>
-        {/* <TextField
-            label="Статус проекта"
-            margin="dense"
-            type="text"    
-            fullWidth
-            value={'Draft'}
-            onChange={(e) => setStatus(e.target.value)}
-            sx={{ mb: 2 }}
-        /> */}
-
-        {/* <label htmlFor="type">Статус проекта</label>
-        <select
-                    id="status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}>                          
-                        <option value="1">Draft</option>
-                        <option value="2">Ready</option>
-                        <option value="3">InWork</option>
-                        <option value="3">Close</option>
-                        <option value="4">Hold</option>
-        </select> */}
 
         <TextField
           id="projects-select-status"
