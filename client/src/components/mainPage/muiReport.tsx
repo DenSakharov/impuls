@@ -47,7 +47,7 @@ function Report() {
             </MenuItem>
           ))}
         </TextField>
-        <div> <Button > Просморт</Button> </div>  
+        <div> <Button > Предпросмотр</Button> </div>  
         <div> <Button color="primary"> Печать </Button>  </div>  
         
 
