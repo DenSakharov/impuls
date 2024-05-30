@@ -71,7 +71,7 @@ const MuiAddDocument: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallba
     }
     return (
         <div className="modal-overlay">
-            <div className="modal"  style={{ width: 500 }}>
+            <div className="modal" >
                 <div className="modal-header">
                     <h2>Форма создания нового документа</h2>
                 </div>

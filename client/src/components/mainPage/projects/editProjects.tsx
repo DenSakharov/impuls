@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Box, TextField, Button } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import axios from 'axios';
+import axios ,{ AxiosResponse, AxiosError } from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MenuItem from '@mui/material/MenuItem';
-
+import { Console } from 'console';
 
 const currencies = [
     {
@@ -32,25 +32,58 @@ const currencies = [
     {
       value: 'Test',
       label: 'Тестовый'
-    },  
+    },
   ];
 
-const EditProjectsModal = ({ open, projectsItem, onClose }) => {
+const EditProjectsModal = ({ open,  projectsItem, onClose }) => {
+
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    
+    const [select, setSelection] = React.useState([]);
+
+    const [projectId, setProjectId] = useState('');
     const [status, setStatus] = useState('');
-    const [name, setTitle] = useState('');
+    const [name, setName] = useState('');
     const [notes, setContent] = useState('');
 
-    useEffect(() => {        
-        if (projectsItem) {
-            setStatus(projectsItem.status);
-            setTitle(projectsItem.name);
-            setContent(projectsItem.notes);
-            
-        }
-    }, [projectsItem]);
+    function getProjects() {
+      let url_getProject = `http://${window.location.hostname.toString()}:3010/projects/`+ projectId
+      axios({
+        method: 'get',
+        url: url_getProject,
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
+      }).then((response: AxiosResponse) => {
+
+        var dataProject = response.data
+        setProjectId(dataProject.projectId)
+        setStatus(dataProject.status)
+        setName(dataProject.name)
+        setContent(dataProject.notes)
+      }).catch((reason: AxiosError) => {
+        console.log(reason)
+      })
+    }
+
+
+    useEffect(() => {
+      let userReceived = false
+      if (!userReceived) {
+        getProjects()
+      }
+      return () => { userReceived = true; }
+    },[]);
+
+    // useEffect(() => {
+    //   console.log(projectsItem.projectId)
+
+    //     if (projectsItem) {
+    //         setProjectId(projectsItem.projectId);
+    //         setStatus(projectsItem.status);
+    //         setTitle(projectsItem.name);
+    //         setContent(projectsItem.notes);
+
+    //     }
+    // }, [projectsItem]);
 
     // const response = await fetch(`http://${window.location.hostname.toString()}:3010/projects/${projectsItem.projectId}`, {
     //             method: 'POST',
@@ -68,6 +101,7 @@ const EditProjectsModal = ({ open, projectsItem, onClose }) => {
             name,
             notes,
         });
+        console.log('1');  
         onClose();
         
         } catch (err) {
@@ -80,38 +114,11 @@ const EditProjectsModal = ({ open, projectsItem, onClose }) => {
             setLoading(false);
         }
     };
-        const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState(false)
-        const [openSnackbarError, setOpenSnackbarError] = useState(false)
-
-        const handleClickSuccess = () => {        
-            setOpenSnackbarSuccess(true);        
-        };
-        const handleClickError = () => {        
-            setOpenSnackbarError(true);        
-        };
-
-        const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-            if (reason === 'clickaway') {
-            return;
-            }
-            setOpenSnackbarSuccess(false)
-            setOpenSnackbarError(false)
-        };
 
 return (
     <Dialog open onClose={onClose} fullWidth maxWidth="sm">
-    <DialogTitle >Изменить проект</DialogTitle>
-    <DialogContent >
-        {/* <TextField
-            label="Статус проекта"
-            margin="dense"
-            type="text"            
-            fullWidth
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            sx={{ mb: 2 }}
-        /> */}
-
+     <DialogTitle >Изменить проект</DialogTitle>
+      <DialogContent >
         <TextField
           id="projects-select-status"
           focused
@@ -119,7 +126,7 @@ return (
           label="Статус проекта"
           margin="dense"
           onChange={(e) => setStatus(e.target.value)}
-          value ={status}
+          value ={projectsItem.status}
           helperText="Укажите cтатус проекта"
           sx={{ mb: 2 }}
         >
@@ -129,12 +136,11 @@ return (
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
             label="Название проекта"
             fullWidth
-            value={name}
-            onChange={(e) => setTitle(e.target.value)}
+            value={projectsItem.name}
+            onChange={(e) => setName(e.target.value)}
             sx={{ mb: 2 }}
         />
         <TextField
@@ -142,70 +148,27 @@ return (
             fullWidth
             multiline
             rows={4}
-            value={notes}
+            value={projectsItem.notes}
+            onChange={(e) => setContent(e.target.value)}
+            sx={{ mb: 2 }}
+        />
+         <TextField
+            label="UUID проекта"
+            fullWidth
+            multiline
+            rows={4}
+            value={projectsItem.projectId}
             onChange={(e) => setContent(e.target.value)}
             sx={{ mb: 2 }}
         />
 
-    </DialogContent>
-    <DialogActions>
-
-        <Button onClick={onClose}>Отмена</Button> 
-        <Snackbar
-            open={openSnackbarError}
-            autoHideDuration={5000}                        
-            onClose={handleClose}
-            message="Создание нового проекта отменено"  
-        />
-
-        <Button onClick={handleSave} color="primary">Сохранить</Button>        
-        <Snackbar
-            open={openSnackbarSuccess}
-            autoHideDuration={5000}            
-            onClose={handleClose}
-            message="Создан новый проект"
-        />
-
-    </DialogActions>
-</Dialog>
-
-
-        // <Modal
-        //     open={open}
-        //     onClose={onClose}
-        //     aria-labelledby="modal-modal-title"
-        //     aria-describedby="modal-modal-description">
-        //     <Box
-        //         sx={{
-        //             position: 'absolute',
-        //             top: '50%',
-        //             left: '50%',
-        //             transform: 'translate(-50%, -50%)',
-        //             width: 400,
-        //             bgcolor: 'background.paper',
-        //             boxShadow: 24,
-        //             p: 4,
-        //         }}>
-        //         <TextField
-        //             label="Название проекта"
-        //             fullWidth
-        //             value={name}
-        //             onChange={(e) => setTitle(e.target.value)}
-        //             margin="normal"/>
-        //         <TextField
-        //             label="Описание проекта"
-        //             fullWidth
-        //             multiline
-        //             rows={4}
-        //             value={notes}
-        //             onChange={(e) => setContent(e.target.value)}
-        //             margin="normal"/>
-        //         <Button variant="contained" onClick={handleSave}>
-        //            Сохранить
-        //         </Button>
-        //     </Box>
-        // </Modal>
-    );
+      </DialogContent>
+     <DialogActions>
+        <Button onClick={onClose}>Отмена</Button>
+        <Button onClick={handleSave} color="primary">Сохранить</Button>
+     </DialogActions>
+    </Dialog>
+);
 };
 
 export default EditProjectsModal;

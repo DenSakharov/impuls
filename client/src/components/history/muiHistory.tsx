@@ -22,7 +22,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-
+interface AllHistoryModalProps
+{
+    onClose: () => void;
+}
 
 // logId: UUID;
 // datetime?: Date;
@@ -33,15 +36,6 @@ import { visuallyHidden } from '@mui/utils';
 // modules?: string;
 // actions?: string;
 // dateEdited?:Date;
-
-// interface Data {
-//   id: number;
-//   calories: number;
-//   carbs: number;
-//   fat: number;
-//   name: string;
-//   protein: number;
-// }
 
 interface Data {
   id: number;
@@ -472,17 +466,6 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Убрать отступы в таблице "
       />
-            
-      {/* <div>
-          <h1>Список пользователей:</h1>
-      <ul>
-        {notes.map((item) => (
-          <li key={item.id}>
-            {item.modules} ({item.logtype})
-          </li>
-        ))}
-      </ul>
-    </div> */}
     </Box>
 
   );

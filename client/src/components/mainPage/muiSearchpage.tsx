@@ -6,6 +6,7 @@ import { Container, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
+
 function Searchpage() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -17,8 +18,9 @@ function Searchpage() {
 
   <Card sx={{ padding: '20px', margin: '20px' }}>           
    <Box height={400} style={{ textAlign: 'center' }}>    
-      <Typography variant="h5"  gutterBottom>Расширенный поиск</Typography>
+      <Typography variant="h5"  gutterBottom> Расширенный поиск</Typography>
       <Container maxWidth="md" sx={{ mt: 5 }}>
+
       <TextField
         id="search"
         type="search"
@@ -34,10 +36,18 @@ function Searchpage() {
           ),
         }}
         />
-      </Container>       
+      </Container>     
+
+      <Container maxWidth="md" sx={{ mt: 5 }}>
+
+
+
+      </Container>     
+
    </Box>
   </Card>
   );
 }
+
 
 export default Searchpage;
