@@ -94,7 +94,7 @@ function About() {
         <Typography gutterBottom>
         Является тонким клиентом, для работы с моделью данных проекта в СУБД Postgres.
         </Typography>
-      <Typography gutterBottom>
+      <Typography gutterBottom component={"div"}>
 
     <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>

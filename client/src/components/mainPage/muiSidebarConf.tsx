@@ -101,10 +101,9 @@ export function MuiSidebar() {
             <Divider /> 
 
             <ListItem>
-            Доступ
-              <ListItem>
-                <UsersIcon className="h-4 w-4" />
-              </ListItem>             
+              Доступ
+              
+              <UsersIcon className="h-4 w-6 pl-2" />
             </ListItem>
          </List>   
 
