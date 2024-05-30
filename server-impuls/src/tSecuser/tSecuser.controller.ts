@@ -15,8 +15,15 @@ import { TMessage } from '#/entities/Message';
 import { Response } from 'express';
 import { UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import * as fs from 'fs';
+import { extname } from 'path';
 
+function toBase_64(filePath) {
+  const img = fs.readFileSync(filePath);
 
+  return Buffer.from(img).toString('base64');
+}
 
 
 @Controller('/users')
@@ -68,9 +75,36 @@ export class TSecuserController {
     return this.tSecuserService.recoveryPassword(userInfo.userlogin, userInfo.userName, userInfo.userSurname, userInfo.newPass);
   }
 
-  
+  @UseGuards(AuthGuard)
+  @Get('/img/:userlogin')
+  async getUserImg(@Res() res: Response, @Param('userlogin') userlogin: string) {
+    const data = await this.tSecuserService.findOne(userlogin);
+    if (data) {
+      const base64String = toBase_64(data.pathToImg);
+      return res.status(HttpStatus.OK).json(base64String);
+    } else {
+      res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
+    }
+  }
 
+  @Post('/loadphoto')
+  @UseInterceptors(
+    FileInterceptor('file', {storage: diskStorage({
+      destination: './src/tSecuser/user_img/', 
+      filename: (req, file, cb) => {
+        const randomName = Array(10).fill(null).map(() => (Math.round(Math.random() * 5)).toString(5)).join('')
+        cb(null, `${randomName}${extname(file.originalname)}`)
+      },
+    })}
+    )
+  )
 
-  
+  uploadFile(@Body() body: any, @UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+
+    const base64String = toBase_64('./src/tSecuser/user_img/' + file.filename);
+    this.tSecuserService.setImg(body.userlogin, './src/tSecuser/user_img/' + file.filename)
+    return base64String;
+  }
 
 }
