@@ -65,7 +65,7 @@ function Contacts_teem() {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-      <Typography gutterBottom>
+      <Typography gutterBottom component={"div"}>
       <Typography>Денис Сахаров – TeamLead</Typography>
       <Typography>Жарков Андрей</Typography>
       <Typography>Красненков Илья</Typography>
@@ -74,6 +74,7 @@ function Contacts_teem() {
       <Typography>Пихтовников Владимир</Typography>
       <Typography>Фёдоров Роман</Typography>
       <Typography>Иконников Михаил</Typography>
+      <Typography>Юганов Евгений</Typography>
       </Typography>
 
       </DialogContent>
