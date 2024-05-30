@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box, Button, MenuItem, Container, Grid, Stack, 
     TextField, Typography, Divider, IconButton, Select } from '@mui/material';
-import { Add, AssignmentOutlined } from '@mui/icons-material';
+import { Add, AssignmentOutlined, Message } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import { v4 as uuidV4 } from 'uuid';
 import impulsTheme from '../../muiTheme';
@@ -12,6 +12,8 @@ import AddLinkDialog from './addLinkDialog';
 import axios from 'axios'
 import { WhichAlert }  from './resultAlert'
 import { closeDialog } from '../mainPage/main';
+import { useAppDispatch } from '../../store/hooks';
+import { setSnackBar } from '../../store/store';
 
 type attachment = {
     _id: string
@@ -46,6 +48,7 @@ interface tDocumentsAttributes {
 
 export default function MuiPopup(props: { documentId : string | undefined} = {documentId : undefined}) {
     const closeParentDialog = React.useContext(closeDialog)
+    const dispatch = useAppDispatch();
     const [toUpdate, setToUpdate] = React.useState(false);
     const [attachmentsDoc, setAttachmentsDoc] = React.useState<attachment[]>([]);
     const [attachmentTables, setAttachmentTables] = React.useState<attachment[]>([]);
@@ -77,6 +80,7 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
             doc.tags = doc.tags ? doc.tags : []
             doc.links = doc.links ? doc.links : {"values": []}            
             setDocument(doc)
+            setToUpdate(false)
         })    
         .catch((err) => console.log(err))
 
@@ -88,37 +92,40 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
         })    
         .catch((err) => console.log(err))
 
-        axios.get(         
+            axios.get(         
             "http://" + window.location.hostname + ":8081/workbook/" + props.documentId,
         )
         .then((res) => {
             setAttachmentTables(res.data)
         })    
         .catch((err) => console.log(err))
-
-        setToUpdate(false)
+        
     }, [props.documentId])
     
 
-    useEffect(() => {
+    useEffect(() => {        
         setToUpdate(true)
-    }, [document])
+    }, [JSON.stringify(document)])
 
 
     const saveData = () => {
         if (toUpdate) {
-        axios.put(
-            "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
-            document,
-            {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}            
-        ).then((res) => {
-            setShowAlert({type: 'success',visible: true, message: `Успешно сохранено`})            
+            axios.put(
+                "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
+                document,
+                {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}            
+            ).then(() => {
+                dispatch(setSnackBar({type: 'success',showAlert: true, message: `Успешно сохранено`}))
+                closeParentDialog()
+            }).catch((err) => {
+                setShowAlert({type: 'error',visible: true, message: `Ошибка при сохранении ${err}`})
+            })
+        } else {
             closeParentDialog()
-        }).catch((err) => {
-            setShowAlert({type: 'error',visible: true, message: `Ошибка при сохранении ${err}`})
-        })
         }
     }
+
+    
 
     const docType = ['Основной документ', 'Дополнительный документ', 'Технический документ']
     const authors = ['Красненков Илья', 'Кожевников Сергей', 'Жарков Андрей', 'Макшанова Алла']
