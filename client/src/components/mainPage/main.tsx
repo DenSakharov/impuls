@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './../../globals.css';
 import "./stylesMainPage.css";
 import {Container} from '@mui/system';
-import {Dialog} from '@mui/material';
+import {Dialog, IconButton} from '@mui/material';
 import MuiTree from './muiTree';
 import MuiButTree from './muiButTree';
 import MuiPopup from '../muiPopup/muiPopup';
@@ -23,6 +23,8 @@ import useTree from '../../hooks/useTree';
 import ResultAlert from '../muiPopup/resultAlert';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { closeSnackBar } from '../../store/store';
+import Drawer from '@mui/material/Drawer';
+import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
 
 
 export const closeDialog = React.createContext<Function>(() => {});
@@ -106,26 +108,20 @@ function Main({ changeState }: any) {
             {/* End */}
 
             {/* Mobile панель ! */}
-            <Disclosure as="nav" >
-              {({open}) => (
-              <>
-                 <div className="mr-1 md:hidden">
-                   <Disclosure.Button
-                     className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                   >
-                     <span className="absolute -inset-1.5"/>
-                     <span className="sr-only">Open main menu</span>
-                       {open ? (
-                          <ArrowLeftStartOnRectangleIcon className="block h-6 w-6" aria-hidden="true"/>
-                          ) : (
-                          <MultipleStopIcon className="block h-6 w-6" aria-hidden="true"/>
-                       )}
-                    </Disclosure.Button>
-                 </div>
-                 <Disclosure.Panel className="md:hidden">
+            <IconButton 
+            size="large"
+            edge="start"
+            color="primary"            
+            aria-label="menu"
+            sx={{backgroundColor:'#1f2937',fontSize:'small', color:'white', borderRadius:'50%',zIndex: 1, position:'fixed', ml:'auto', mr: 2, display:{sm: 'none', xs: 'flex'}}}
+            onClick={() => openDrawer()}    
+            >
+            <AccountTreeOutlinedIcon/>
+          </IconButton>
+                 <Drawer open={isDrawerOpen} onClose={closeDrawer}>
                    <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                    {/* Сайдбар с деревом объектов */}
-                    {projects.length > 0 &&<SelectProjects changeState={handleselectproject} projects={projects}/>}
+                    {projects.length > 0 && <SelectProjects title={project?.name} changeState={handleselectproject} projects={projects}/>}
                     <MuiButTree projectId={project?.projectId}
                                 updateTree={getTree}
                     />
@@ -135,10 +131,7 @@ function Main({ changeState }: any) {
                              setPopupData={setPopupData}
                     />
                    </div>
-                 </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>
+                 </Drawer>
 
           {/* Открытие карточки объекта  */}
           <Dialog maxWidth="lg" fullScreen={window.outerWidth > 700 ? false : true} open={formOpen} onClose={() => {}}>
