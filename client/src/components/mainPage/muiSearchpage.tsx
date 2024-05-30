@@ -5,7 +5,6 @@ import { Card, Typography, Box } from '@mui/material';
 import { Container, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import {DataGrid} from '@mui/x-data-grid';
 
 
 function Searchpage() {
