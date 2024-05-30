@@ -39,7 +39,7 @@ const MuiStartpage = ({projects, changeProject}: MuiStartpageProps) => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
                   <Typography color="textSecondary" gutterBottom>
-                    // {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>}
+                    {/* {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>} */}
                     {projects.length > 0 &&<SelectProjectsNew changeState={changeProject} projects={projects}/>}
                   </Typography>
                </div>

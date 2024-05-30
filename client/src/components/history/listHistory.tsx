@@ -35,12 +35,12 @@ const ListHistory = ({ data }) => {
         size='small'>
         <TableHead>
           <TableRow>
-            <TableCell> logId </TableCell>
+            {/* <TableCell> logId </TableCell> */}
             <TableCell> datetime </TableCell>
             <TableCell align="center"> author </TableCell>
-            <TableCell align="left"> notes </TableCell>    
-            <TableCell align="center"> objectId </TableCell>
-            <TableCell align="left"> logtype </TableCell>    
+            {/* <TableCell align="left"> notes </TableCell>     */}
+            {/* <TableCell align="center"> objectId </TableCell> */}
+            {/* <TableCell align="left"> logtype </TableCell>     */}
             <TableCell align="left"> modules </TableCell>    
             <TableCell align="left"> actions </TableCell> 
           </TableRow>
@@ -52,12 +52,12 @@ const ListHistory = ({ data }) => {
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}              
             >
-              <TableCell component="th" scope="row"> {item.logId}</TableCell>
+              {/* <TableCell component="th" scope="row"> {item.logId}</TableCell> */}
               <TableCell component="th" scope="row"> {item.datetime}</TableCell>
-              <TableCell align="center">{item.author}</TableCell>
-              <TableCell align="left" style={{ width: 100 }}>{item.notes}</TableCell>
-              <TableCell align="left">{item.objectId}</TableCell>
-              <TableCell align="left">{item.logtype}</TableCell>
+              <TableCell align="left">{item.author}</TableCell>
+              {/* <TableCell align="left" style={{ width: 100 }}>{item.notes}</TableCell> */}
+              {/* <TableCell align="left">{item.objectId}</TableCell> */}
+              {/* <TableCell align="left">{item.logtype}</TableCell> */}
               <TableCell align="left">{item.modules}</TableCell>
               <TableCell align="left">{item.actions}</TableCell>
 

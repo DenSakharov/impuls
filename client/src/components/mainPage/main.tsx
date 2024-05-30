@@ -158,7 +158,7 @@ function Main({ changeState }: any) {
 
             {/* Стартовая страница */}
             <Container fixed>
-            //  <MuiStartpage chengedproject={handleselectproject} />
+              {/* <MuiStartpage chengedproject={handleselectproject} /> */}
               <MuiStartpage projects={projects} changeProject={handleselectproject} />
             </Container>
            </div>
