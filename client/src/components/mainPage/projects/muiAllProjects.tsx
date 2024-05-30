@@ -10,7 +10,7 @@ interface AllProjectsModalProps
 }
 
 const MuiAllProjectsModal:  React.FC<AllProjectsModalProps> = ({onClose}) => {  
-  const {projects, loading, error} = useProjects();
+  const {projects, loading, error, reload} = useProjects();
   
   return (
   <Dialog open onClose={onClose} fullWidth maxWidth="sm">
@@ -19,7 +19,7 @@ const MuiAllProjectsModal:  React.FC<AllProjectsModalProps> = ({onClose}) => {
       <Box sx={{ flexGrow: 0 }}>
         <div>
          {loading && <div>Loading...</div>}
-         {!loading && !error && <ListProjects dataProject={projects} />}
+         {!loading && !error && <ListProjects projects={projects} reload={reload}/>}
          {error && <div>Ошибка загрузки данных! Обратитесь в тех. поддержку</div>}
         </div>
      </Box>

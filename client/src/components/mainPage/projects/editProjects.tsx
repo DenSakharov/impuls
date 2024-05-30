@@ -1,12 +1,12 @@
 // Кожевников СЮ страница редактирования проекта
 
 import React, { useState, useEffect } from 'react';
-import { Modal, Box, TextField, Button } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import axios ,{ AxiosResponse, AxiosError } from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MenuItem from '@mui/material/MenuItem';
-import { Console } from 'console';
+import { tProjectAttributes } from '#/dtos';
 
 const currencies = [
     {
@@ -34,85 +34,47 @@ const currencies = [
       label: 'Тестовый'
     },
   ];
+export type EditProjectsModalProps = {
+    projectsItem: tProjectAttributes;
+    onClose: () => void;
+    onSuccessCallback?: () => void;
+}
 
-const EditProjectsModal = ({ open,  projectsItem, onClose }) => {
-
+const EditProjectsModal = ({ projectsItem, onClose, onSuccessCallback }: EditProjectsModalProps) => {
+    
     const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [select, setSelection] = React.useState([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const [projectId, setProjectId] = useState('');
     const [status, setStatus] = useState('');
     const [name, setName] = useState('');
-    const [notes, setContent] = useState('');
-
-    function getProjects() {
-      let url_getProject = `http://${window.location.hostname.toString()}:3010/projects/`+ projectId
-      axios({
-        method: 'get',
-        url: url_getProject,
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
-      }).then((response: AxiosResponse) => {
-
-        var dataProject = response.data
-        setProjectId(dataProject.projectId)
-        setStatus(dataProject.status)
-        setName(dataProject.name)
-        setContent(dataProject.notes)
-      }).catch((reason: AxiosError) => {
-        console.log(reason)
-      })
-    }
-
+    const [notes, setNotes] = useState('');
 
     useEffect(() => {
-      let userReceived = false
-      if (!userReceived) {
-        getProjects()
-      }
-      return () => { userReceived = true; }
-    },[]);
-
-    // useEffect(() => {
-    //   console.log(projectsItem.projectId)
-
-    //     if (projectsItem) {
-    //         setProjectId(projectsItem.projectId);
-    //         setStatus(projectsItem.status);
-    //         setTitle(projectsItem.name);
-    //         setContent(projectsItem.notes);
-
-    //     }
-    // }, [projectsItem]);
-
-    // const response = await fetch(`http://${window.location.hostname.toString()}:3010/projects/${projectsItem.projectId}`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             },
-    //             body: JSON.stringify(data),
-    //         };
-
-    const handleSave = async () => {
-        try {
-        await axios.patch(`http://${window.location.hostname.toString()}:3010/projects/${projectsItem.projectId}`, {
-            status,
-            name,
-            notes,
-        });
-        console.log('1');  
+      setStatus(projectsItem.status || '');
+      setName(projectsItem.name || '');
+      setNotes(projectsItem.notes || '');
+    }, [projectsItem])
+    const handleSave = () => {
+      setLoading(true);
+      setError(null);
+      axios.put(`http://${window.location.hostname}:3010/projects/${projectsItem.projectId}`, {
+          status,
+          name,
+          notes,
+      },
+      {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((response: AxiosResponse) => {
+        onSuccessCallback && onSuccessCallback();
         onClose();
         
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError('An unknown error occurred');
-            }
-        } finally {
-            setLoading(false);
-        }
+      }).catch((error: AxiosError) => {
+        setError(error.message);        
+      }).finally(() => {
+        setLoading(false);          
+      })
     };
 
 return (
@@ -126,7 +88,7 @@ return (
           label="Статус проекта"
           margin="dense"
           onChange={(e) => setStatus(e.target.value)}
-          value ={projectsItem.status}
+          value ={status}
           helperText="Укажите cтатус проекта"
           sx={{ mb: 2 }}
         >
@@ -139,7 +101,7 @@ return (
         <TextField
             label="Название проекта"
             fullWidth
-            value={projectsItem.name}
+            value={name}
             onChange={(e) => setName(e.target.value)}
             sx={{ mb: 2 }}
         />
@@ -148,25 +110,23 @@ return (
             fullWidth
             multiline
             rows={4}
-            value={projectsItem.notes}
-            onChange={(e) => setContent(e.target.value)}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
             sx={{ mb: 2 }}
         />
          <TextField
             label="UUID проекта"
             fullWidth
-            multiline
-            rows={4}
             value={projectsItem.projectId}
-            onChange={(e) => setContent(e.target.value)}
             sx={{ mb: 2 }}
         />
-
       </DialogContent>
-     <DialogActions>
+      <DialogActions>
         <Button onClick={onClose}>Отмена</Button>
-        <Button onClick={handleSave} color="primary">Сохранить</Button>
-     </DialogActions>
+        <Button disabled={loading} onClick={handleSave} color={loading ? "secondary" : "primary" }>Сохранить</Button>
+        {error !== null && <Snackbar open={true} autoHideDuration={6000} onClose={() => setError(null)} message={error} />}
+      </DialogActions>
+      
     </Dialog>
 );
 };

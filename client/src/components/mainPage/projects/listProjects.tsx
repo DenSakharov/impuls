@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import EditProjectsModal from './editProjects';
+import { tProjectAttributes } from '#/dtos';
 // import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 // import { useDemoData } from '@mui/x-data-grid-generator';
 
@@ -20,7 +21,11 @@ import EditProjectsModal from './editProjects';
 //   { field: 'status', headerName: 'Статус', width: 50 },
 // ]
 
-const ListProjects = ({ dataProject }) => {
+export type ListProjectsProps = {
+  projects: tProjectAttributes[];
+  reload: () => void;
+}
+const ListProjects = ({ projects, reload }: ListProjectsProps) => {
   const [showModalEdit, setShowModalEdit] = useState(false);
 
   //const [tableData, setTableData] = useState([])
@@ -55,7 +60,7 @@ const ListProjects = ({ dataProject }) => {
         </TableHead>
 
         <TableBody>
-          {dataProject && dataProject.map((item, index) => (
+          {projects && projects.map((item, index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -74,7 +79,7 @@ const ListProjects = ({ dataProject }) => {
           ))}
         </TableBody>
       </Table>
-        {showModalEdit && selectedItem && <EditProjectsModal open  projectsItem={selectedItem} onClose={handleCloseModalEdit} />}
+        {showModalEdit && selectedItem && <EditProjectsModal projectsItem={selectedItem} onClose={handleCloseModalEdit} onSuccessCallback={reload}/>}
     </TableContainer>
 );
 }
