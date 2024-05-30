@@ -67,7 +67,7 @@ function App() {
           <Route path='/about' Component={About}></Route>
           <Route path='/report' Component={Report}></Route>
           <Route path='/searchpage' Component={Searchpage}></Route>          
-          <Route path='/popup' element={MuiPopup()}></Route>
+          <Route path='/popup/:id' element={MuiPopup()}></Route>
           <Route path='/userProfile' Component={Profile}></Route>
           <Route path='/project' Component={Projects}></Route>
           <Route path='/demo' Component={Demo}></Route>

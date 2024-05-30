@@ -6,7 +6,7 @@ export default function AddLinkDialog (props: {formOpen: boolean, handleCloseFor
     return (
      <Dialog
         open={props.formOpen}
-        onClose={() => props.handleCloseForm}
+        onClose={() => props.handleCloseForm()}
         PaperProps={{
         component: 'form',
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,7 +39,7 @@ export default function AddLinkDialog (props: {formOpen: boolean, handleCloseFor
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => props.handleCloseForm}>Отмена</Button>
+          <Button onClick={() => props.handleCloseForm()}>Отмена</Button>
           <Button type="submit">Подтвердить</Button>
         </DialogActions>
       </Dialog>
