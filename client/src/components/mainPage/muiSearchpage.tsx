@@ -44,7 +44,7 @@ const columns = [
 	}
 ];
 
-function Searchpage({rows}) {
+function Searchpage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
@@ -104,13 +104,13 @@ function Searchpage({rows}) {
   </Card>
   );
 }
-export const getStaticProps = async () => {
-	const rows = await fetch(
-		'https://jsonplaceholder.typicode.com/todos/'
-	).then((res) => res.json());
-	return {
-		props: {rows}
-	};
-};
+// export const getStaticProps = async () => {
+// 	const rows = await fetch(
+// 		'https://jsonplaceholder.typicode.com/todos/'
+// 	).then((res) => res.json());
+// 	return {
+// 		props: {rows}
+// 	};
+// };
 
 export default Searchpage;
