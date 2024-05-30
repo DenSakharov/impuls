@@ -45,6 +45,9 @@ function Profile() {
       url: url_getUserLogin,
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
     }).then((response: AxiosResponse) => {
+      if(response.status===204) {
+        return
+      }
       if(response.data != null) {
         setImgData('data:image/png;base64,' + response.data)
       }

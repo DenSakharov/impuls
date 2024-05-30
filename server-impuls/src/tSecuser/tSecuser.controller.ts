@@ -79,11 +79,15 @@ export class TSecuserController {
   @Get('/img/:userlogin')
   async getUserImg(@Res() res: Response, @Param('userlogin') userlogin: string) {
     const data = await this.tSecuserService.findOne(userlogin);
+    try {
     if (data) {
       const base64String = toBase_64(data.pathToImg);
       return res.status(HttpStatus.OK).json(base64String);
     } else {
-      res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
+      return res.status(HttpStatus.NOT_FOUND).json({ message: 'Object not found' });
+    }
+    } catch (err) {
+      return res.status(HttpStatus.NO_CONTENT).json({ message: 'NO IMAGE FOUND' })
     }
   }
 
