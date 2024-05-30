@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 
 const useProjects = () => {
     const [projects, setProjects] = useState<tProjectAttributes[]>([]);
-    useEffect(()=>{        
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    useEffect(()=>{ 
+        setLoading(true);       
+        setError(false);       
         axios.get(`http://${window.location.hostname}:3010/projects`,
                 {
                     headers: {
@@ -14,11 +18,16 @@ const useProjects = () => {
             )
             .then(({ data }) => {
                 setProjects(data);
+                setLoading(false);
+                setError(false);
             })
-            .catch((err) => console.log("Get projects error", err) );
+            .catch((err) => {
+                setError(true);
+                setLoading(false);
+            });
     }, [])
 
-    return {projects}
+    return {projects, loading, error}
 }
 
 export default useProjects;

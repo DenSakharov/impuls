@@ -11,14 +11,12 @@ import Paper from '@mui/material/Paper';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import EditProjectsModal from './editProjects';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
 
-const columns = [
-  { field: 'id', headerName: 'UUID', width: 250 },
-  { field: 'name', headerName: 'Название проекта', width: 250 },
-  { field: 'status', headerName: 'Статус', width: 50 },
-]
+// const columns = [
+//   { field: 'id', headerName: 'UUID', width: 250 },
+//   { field: 'name', headerName: 'Название проекта', width: 250 },
+//   { field: 'status', headerName: 'Статус', width: 50 },
+// ]
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'UUID', width: 250 },
@@ -30,25 +28,22 @@ const columns = [
 const ListProjects = ({ dataProject }) => {
   const [showModalEdit, setShowModalEdit] = useState(false);
 
-  const [tableData, setTableData] = useState([])
-  const [rows, setRows] = useState(tableData);
-  const [deletedRows, setDeletedRows] = useState([]);
+  //const [tableData, setTableData] = useState([])
+  const [selectedItem, setSelectedItem] = useState(null);
+  //const [rows, setRows] = useState(tableData);
+  //const [deletedRows, setDeletedRows] = useState([]);
 
 
   // Edit Projects
   const handleCloseModalEdit = () => {
       setShowModalEdit(false);
   };
-      useEffect(() => {
-        // console.log(dataProject)
-        fetch("https://jsonplaceholder.typicode.com/posts")
-          .then((data) => data.json())
-          .then((data) => setTableData(data))
-          // setTableData(dataProject)
 
-      }, [])
-      console.log(tableData)
-      const [selectedRows, setSelectedRows] = React.useState([]);
+  //const [selectedRows, setSelectedRows] = React.useState([]);
+  const editClickHandler = (item) => {
+    setSelectedItem(item);
+    setShowModalEdit(true);    
+  }
   return (
 
     // <div style={{ height: 400, width: '100%' }}>
@@ -94,17 +89,15 @@ const ListProjects = ({ dataProject }) => {
               <TableCell align="center">{item.status}</TableCell>
               {/* <TableCell align="left">{item.notes}</TableCell> */}
               <TableCell align="center">
-                <div><Button variant="text" onClick={() => setShowModalEdit(true)}> Изменить </Button>
+                <div><Button variant="text" onClick={()=>editClickHandler(item)}> Изменить </Button>
 
                 <Button variant="text" onClick={() => {}}> Удалить  </Button></div>
-                {showModalEdit && <EditProjectsModal open  projectsItem={item.projectId} onClose={handleCloseModalEdit} />}
-
-
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+        {showModalEdit && selectedItem && <EditProjectsModal open  projectsItem={selectedItem} onClose={handleCloseModalEdit} />}
     </TableContainer>
 );
 }
