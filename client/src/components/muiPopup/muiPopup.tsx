@@ -47,6 +47,11 @@ interface tDocumentsAttributes {
 
 
 export default function MuiPopup(props: { documentId : string | undefined} = {documentId : undefined}) {
+    const [paramsId, setParamsId] = React.useState<string | undefined>(
+        window.location.pathname.includes("/popup/") ?
+        window.location.pathname.split("/").pop() :
+        ''
+    );
     const closeParentDialog = React.useContext(closeDialog)
     const dispatch = useAppDispatch();
     const [toUpdate, setToUpdate] = React.useState(false);
@@ -70,9 +75,15 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
     });
     
     useEffect(() => {
-        if (!props.documentId) return 
+    
+        if ((!props.documentId) && (!paramsId)) return 
+
+        if (props.documentId) {
+            setParamsId(props.documentId)
+        }
+
         axios.get(         
-            "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
+            "http://" + window.location.hostname + ":3010/documents/" + paramsId,
             {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
         )
         .then((res) => {
@@ -85,22 +96,21 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
         .catch((err) => console.log(err))
 
         axios.get(         
-            "http://" + window.location.hostname + ":3002/documents/" + props.documentId,
+            "http://" + window.location.hostname + ":3002/documents/" + paramsId,
         )
         .then((res) => {
             setAttachmentsDoc(res.data)
         })    
         .catch((err) => console.log(err))
-
             axios.get(         
-            "http://" + window.location.hostname + ":8081/workbook/" + props.documentId,
+            "http://" + window.location.hostname + ":8081/workbook/" + paramsId,
         )
         .then((res) => {
             setAttachmentTables(res.data)
         })    
         .catch((err) => console.log(err))
         
-    }, [props.documentId])
+    }, [paramsId])
     
 
     useEffect(() => {        
@@ -111,17 +121,27 @@ export default function MuiPopup(props: { documentId : string | undefined} = {do
     const saveData = () => {
         if (toUpdate) {
             axios.put(
-                "http://" + window.location.hostname + ":3010/documents/" + props.documentId,
+                "http://" + window.location.hostname + ":3010/documents/" + paramsId,
                 document,
                 {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}            
             ).then(() => {
                 dispatch(setSnackBar({type: 'success',showAlert: true, message: `Успешно сохранено`}))
-                closeParentDialog()
+                if (window.innerWidth < 700) {
+                    window.open('/main',"_self")
+                    return
+                } else {
+                    closeParentDialog()
+                }                
             }).catch((err) => {
                 setShowAlert({type: 'error',visible: true, message: `Ошибка при сохранении ${err}`})
             })
         } else {
-            closeParentDialog()
+            if (window.innerWidth < 700) {
+                window.open('/main',"_self")
+                return
+            } else {
+                closeParentDialog()
+            }  
         }
     }
 
