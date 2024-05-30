@@ -60,7 +60,7 @@ function Searchpage() {
         label="Search"
         value={searchTerm}        
         onChange={handleChange}
-        sx={{ width: 300 }}
+        sx={{ width: 300, mb: 2 }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -72,13 +72,10 @@ function Searchpage() {
       </Container>     
 
       <Container maxWidth="md" sx={{ mt: 5 }}>
-
-      <div className="flex-wrap items-center gap-8 ">
+        <div className="flex-wrap items-center gap-8 ">
          {notes && <SearchResult data={notes} />}
          {isError && <div>Ошибка загрузки данных! Обратитесь в тех. поддержку</div>}
         </div>
-      
-
       </Container>     
 
    </Box>
