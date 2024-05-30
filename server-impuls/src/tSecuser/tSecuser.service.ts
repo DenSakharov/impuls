@@ -110,4 +110,28 @@ export class tSecuserService {
       }
     }
   }
+
+  async setImg(userlogin: string, pathToImg: string): Promise<TMessage> {
+    let user: tSecuser = new tSecuser
+    try {
+      user = await this.tSecuserRepository.findOne<tSecuser>({
+        where: { userlogin: userlogin },
+      })
+      if(user == null) {
+        throw Error()
+      }
+    } catch(error) {
+      return {
+        error: 'This user does not exist',
+        status: HttpStatus.CONFLICT,
+      }
+    }
+    const newUser = JSON.parse(JSON.stringify(user))
+    newUser.pathToImg = pathToImg
+    user.update(newUser)
+    return {
+      error: 'New picture added successfully',
+      status: HttpStatus.OK,
+    }
+  }
 }

@@ -19,6 +19,7 @@ export interface tSecuserAttributes {
   department?: string;
   password?: string;
   groupid?: string;
+  pathToImg?: string;
 }
 
 
@@ -51,4 +52,7 @@ export class tSecuser
 
   @Column({ allowNull: true, type: DataType.STRING(40) })
   groupid?: string;
+
+  @Column({ allowNull: true, type: DataType.STRING(200) })
+  pathToImg?: string;
 }
