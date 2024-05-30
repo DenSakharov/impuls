@@ -20,54 +20,16 @@ const columns = [
   { field: 'status', headerName: 'Статус', width: 50 },
 ]
 
-// const columns: GridColDef[] = [
-//   { field: 'id', headerName: 'UUID', width: 250 },
-//   { field: 'name', headerName: 'Название проекта', width: 250 },
-//   { field: 'status', headerName: 'Статус', width: 50 },
-// ];
-
-
 const ListProjects = ({ dataProject }) => {
   const [showModalEdit, setShowModalEdit] = useState(false);
-
   const [tableData, setTableData] = useState([])
-  const [rows, setRows] = useState(tableData);
-  const [deletedRows, setDeletedRows] = useState([]);
-
 
   // Edit Projects
   const handleCloseModalEdit = () => {
       setShowModalEdit(false);
   };
-      useEffect(() => {
-        // console.log(dataProject)
-        fetch("https://jsonplaceholder.typicode.com/posts")
-          .then((data) => data.json())
-          .then((data) => setTableData(data))
-          // setTableData(dataProject)
 
-      }, [])
-      console.log(tableData)
-      const [selectedRows, setSelectedRows] = React.useState([]);
   return (
-
-    // <div style={{ height: 400, width: '100%' }}>
-    //   <DataGrid
-    //     checkboxSelection
-    //     onSelectionModelChange={(ids) => {
-    //       const selectedIDs = new Set(ids);
-    //       const selectedRows = dataProject.rows.filter((row) =>
-    //         selectedIDs.has(row.id),
-    //       );
-
-    //       setSelectedRows(selectedRows);
-    //     }}
-    //     {...dataProject}
-    //   />
-    //   <pre style={{ fontSize: 10 }}>
-    //     {JSON.stringify(selectedRows, null, 4)}
-    //   </pre>
-    // </div>
     <TableContainer component={Paper} >
       <Table
         aria-labelledby="tableTitle"
@@ -95,10 +57,8 @@ const ListProjects = ({ dataProject }) => {
               {/* <TableCell align="left">{item.notes}</TableCell> */}
               <TableCell align="center">
                 <div><Button variant="text" onClick={() => setShowModalEdit(true)}> Изменить </Button>
-
                 <Button variant="text" onClick={() => {}}> Удалить  </Button></div>
                 {showModalEdit && <EditProjectsModal open  projectsItem={item.projectId} onClose={handleCloseModalEdit} />}
-
 
               </TableCell>
             </TableRow>

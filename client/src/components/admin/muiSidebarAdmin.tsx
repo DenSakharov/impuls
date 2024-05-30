@@ -1,13 +1,14 @@
 // Кожевников СЮ
-import * as React from 'react';
+
+import React, { useState } from "react";
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import {IconButton, Button} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -19,11 +20,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import History from '../history/muiHistory';
+import MuiHistoryList from '../history/muiHistoryList';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
+import { Card, Typography, Box } from '@mui/material';
+import { Container, InputAdornment, TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 
 
@@ -98,6 +103,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+// const [searchTerm, setSearchTerm] = useState('');
+
+// const handleChange = (event) => {
+//   setSearchTerm(event.target.value);
+// };
+
 export default function MuiSidebarTree() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -112,7 +123,7 @@ export default function MuiSidebarTree() {
 
   return (
 
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex', width:1 }}>
       <CssBaseline />
 
       {/* навбар страницы */}
@@ -225,35 +236,47 @@ export default function MuiSidebarTree() {
           ))}
         </List>
 
-      </Drawer>
+      </Drawer>     
 
-
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+      <Box component="main" style={{ textAlign: 'left' }} sx={{ flexGrow: 1, p: 3 }}>
+      <Typography variant="h5"  gutterBottom> Cистемные события</Typography>
+        {/* <DrawerHeader /> */}
         <Typography paragraph sx={{
                     minWidth: 240,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
                   }}>
-                  {/* Все события системы       */}
-                  <History />
+        Поиск событий в системе
         </Typography>
+        <Container maxWidth="md" sx={{ mt: 1 }}> 
+        <TextField
+        id="search"
+        type="search"
+        label="Search"
+        // value={searchTerm}        
+        // onChange={handleChange}
+        sx={{ width: 300 }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        />
+       </Container>    
 
-
-
-        <DrawerHeader />
-
+        {/* <DrawerHeader /> */}
         <Typography paragraph sx={{
                     minWidth: 240,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'left',
-                  }}>
-        </Typography>
-
-        {/* Список проектов           */}
-        {/* <MuiAllProjects /> */}
-
+                  }}>Cобытия системы
+        </Typography>       
+        {/* Все события системы       */}        
+        <MuiHistoryList />
       </Box>
     </Box>
+    
   );
 }
