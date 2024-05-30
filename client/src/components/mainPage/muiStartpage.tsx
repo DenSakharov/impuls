@@ -1,23 +1,33 @@
 // Кожевников СЮ раздел стартовая страница для главной страницы
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, Typography, Box } from '@mui/material';
 import SelectProjectsNew from './selectProjectsNew';
 import AddProjects from './projects/muiAddProjects';
+
 import ActiveProjects from './projects/muiActiveProjects';
-import { tProjectAttributes } from '#/dtos/tProjectAttributes';
-import useProjects from '../../hooks/useProjects';
+// import { tProjectAttributes } from '#/dtos/tProjectAttributes';
+// import useProjects from '../../hooks/useProjects';
 
-export const MuiStartpage = ({chengedproject}) => {
+// export const MuiStartpage = ({chengedproject}) => {
 
-    const {projects} = useProjects();
-    const [project, setProject] = useState<tProjectAttributes | null>(null);
+//     const {projects} = useProjects();
+//     const [project, setProject] = useState<tProjectAttributes | null>(null);
 
-    useEffect(() => {
-      if(projects?.length > 0) {
-          setProject(projects[0]);
-      }
-  }, [projects])
+//     useEffect(() => {
+//       if(projects?.length > 0) {
+//           setProject(projects[0]);
+//       }
+//   }, [projects])
+
+
+import { tProjectAttributes } from '#/dtos';
+
+export type MuiStartpageProps = {
+  projects: tProjectAttributes[],
+  changeProject: (project: tProjectAttributes | null) => void
+}
+const MuiStartpage = ({projects, changeProject}: MuiStartpageProps) => {
 
 
     return (
@@ -29,7 +39,8 @@ export const MuiStartpage = ({chengedproject}) => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
                   <Typography color="textSecondary" gutterBottom>
-                    {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>}
+                    // {projects.length > 0 &&<SelectProjectsNew changeState={setProject} projects={projects}/>}
+                    {projects.length > 0 &&<SelectProjectsNew changeState={changeProject} projects={projects}/>}
                   </Typography>
                </div>
 
@@ -53,4 +64,6 @@ export const MuiStartpage = ({chengedproject}) => {
         </Card>
     );
 };
+
+export default MuiStartpage;
 

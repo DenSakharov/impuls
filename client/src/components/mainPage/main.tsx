@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './../../globals.css';
 import "./stylesMainPage.css";
 import {Container} from '@mui/system';
@@ -10,20 +10,27 @@ import SelectProjects from './selectProjects';
 import MainFooter from './mainFooter';
 import MuiNews from "./muiNews";
 import MuiDashboard from "./muiDashboard";
-import {MuiStartpage} from './muiStartpage';
+import MuiStartpage from './muiStartpage';
 import MuiFavourites from './favorites/muiFavourites';
 import { Disclosure} from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAllProjects from '../mainPage/projects/muiAllProjects';
-import { tProjectAttributes, tObjectAttributes, tDocumentAttributes } from '#/dtos';
+import { tProjectAttributes, tDocumentAttributes } from '#/dtos';
 import useProjects from '../../hooks/useProjects';
 import useTree from '../../hooks/useTree';
+import ResultAlert from '../muiPopup/resultAlert';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { closeSnackBar } from '../../store/store';
+
 
 export const closeDialog = React.createContext<Function>(() => {});
 
+
 function Main({ changeState }: any) {
+    const dispatch = useAppDispatch();
+    const snackData = useAppSelector(state => state.snackBar);
     const [popupData, setPopupData] = useState<tDocumentAttributes | null>(null);
     const {projects} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
@@ -79,6 +86,7 @@ function Main({ changeState }: any) {
     return (
     <>
     <closeDialog.Provider value={handleCloseForm}>
+      
        <meta name='viewport' content='width=device-width, initial-scale=1'/>
        <div className="min-h-full">
         <main className="m-1">
@@ -150,7 +158,8 @@ function Main({ changeState }: any) {
 
             {/* Стартовая страница */}
             <Container fixed>
-             <MuiStartpage chengedproject={handleselectproject} />
+            //  <MuiStartpage chengedproject={handleselectproject} />
+              <MuiStartpage projects={projects} changeProject={handleselectproject} />
             </Container>
            </div>
 
@@ -182,6 +191,7 @@ function Main({ changeState }: any) {
         {/* footer страницы */}
         <MainFooter/>
        </div>
+       <ResultAlert type={snackData.snackBar.type as 'info' | 'success' | 'warning' | 'error'} message={snackData.snackBar.message} showAlert={snackData.snackBar.showAlert} setShowAlert={() => dispatch(closeSnackBar())}/>
     </closeDialog.Provider>
     </>
     );
