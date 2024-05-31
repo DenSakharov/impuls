@@ -236,7 +236,7 @@ export default function Registration() {
                 </Typography>
               </Box>
               <Typography component="h1" variant="h5" sx={{ mt: 5, mb: 1}}>
-                © Impuls Teem 2024
+                © Impulse Team 2024
               </Typography>
           </Box>
         </Box>

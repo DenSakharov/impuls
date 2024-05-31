@@ -145,7 +145,7 @@ function Main({ changeState }: any) {
             {/* Заголовок для дашборда */}
              <div id="mainHeader">
                <div className="content-text-block">
-                   <h2 className="text-3xl font-bold tracking-tight text-gray-100">Рабочий стол</h2>
+                   <h2 className="text-3xl font-bold tracking-tight text-gray-100">Дашборд</h2>
                </div>
             </div>
 

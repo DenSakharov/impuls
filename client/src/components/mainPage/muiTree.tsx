@@ -128,7 +128,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                 itemId={node.packageId}        
                 label={node.name} 
                 key={node.packageId} 
-                sx={{textAlign:"left"}}
+                sx={{textAlign:"left", fontWeight: "bold", color:"#050505", fontsize: 14}}
                 onContextMenu={(e)=>onHandleRightClick(e,node)}
                 >
                     {Object.keys(node).map(key => Array.isArray(node[key]) ? node[key].map((child: tPackageAttributes|tObjectWithDocuments) => renderTree(child)) : null)}
@@ -138,10 +138,10 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
         } else if ("object" in node) {
             return (
             <TreeItem 
-                itemId={node.object.objectId}        
+                itemId={node.object.objectId}                        
                 label={node.object.name} 
-                key={node.object.objectId} 
-                sx={{textAlign:"left"}}
+                key={node.object.objectId}                 
+                sx={{textAlign:"left",color:"#020202", fontWeight: "bold", lineHeight: 0.5, fontsize: 12}}
                 onContextMenu={(e)=>onHandleRightClick(e,node)}
                 >
                     {node.documents?.map(
@@ -150,7 +150,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
                             itemId={doc.docId}        
                             label={doc.docname} 
                             key={doc.docId} 
-                            sx={{textAlign:"left", textDecoration: doc.docId ? "underline" : "none", cursor: 'context-menu'}}
+                            sx={{ color:"#147298", lineHeight: 0.5, fontsize: 9, textAlign:"left", textDecoration: doc.docId ? "underline" : "none", cursor: 'context-menu'}}
                             onClick={() => doc.docId? openPopup(doc) : null}
                             onContextMenu={(e)=>onHandleRightClick(e,doc)}>
                             </TreeItem>
