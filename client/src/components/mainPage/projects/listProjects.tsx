@@ -67,7 +67,7 @@ const ListProjects = ({ projects, reload }: ListProjectsProps) => {
           size='small'>
           <TableHead>
             <TableRow>
-              <TableCell> UUID </TableCell>
+              {/* <TableCell> UUID </TableCell> */}
               <TableCell> Название проекта </TableCell>
               <TableCell align="center"> Статус </TableCell>
               {/* <TableCell align="left"> Описание </TableCell>     */}
@@ -82,8 +82,8 @@ const ListProjects = ({ projects, reload }: ListProjectsProps) => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 // onSelectionChange={(newSelection) => {setSelection(newSelection.rows) }}
               >
-                <TableCell component="th" scope="row"> {item.projectId}</TableCell>
-                <TableCell component="th" scope="row"> {item.name}</TableCell>
+                {/* <TableCell component="th" scope="row"> {item.projectId}</TableCell> */}
+                <TableCell component="th" scope="row" sx={{fontWeight: "bold", fontsize: 14}}> {item.name}</TableCell>
                 <TableCell align="center">{item.status}</TableCell>
                 {/* <TableCell align="left">{item.notes}</TableCell> */}
                 <TableCell align="center">
