@@ -34,7 +34,7 @@ function Main({ changeState }: any) {
     const dispatch = useAppDispatch();
     const snackData = useAppSelector(state => state.snackBar);
     const [popupData, setPopupData] = useState<tDocumentAttributes | null>(null);
-    const {projects} = useProjects();
+    const {projects, reload} = useProjects();
     const [project, setProject] = useState<tProjectAttributes | null>(null);
     const [formOpen, setFormOpen] = useState(false);
     const {tree, getTree} = useTree(project?.projectId);
@@ -152,7 +152,7 @@ function Main({ changeState }: any) {
             {/* Стартовая страница */}
             <Container fixed>
               {/* <MuiStartpage chengedproject={handleselectproject} /> */}
-              <MuiStartpage projects={projects} changeProject={handleselectproject} />
+              <MuiStartpage projects={projects} changeProject={handleselectproject} reload={reload}/>
             </Container>
            </div>
 

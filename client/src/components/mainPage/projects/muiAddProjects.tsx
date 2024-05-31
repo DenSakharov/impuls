@@ -6,18 +6,23 @@ import { Button, Container, Stack, IconButton} from '@mui/material';
 import AddProjectsModal from './createProjects';
 import MuiAllProjectsModal from './muiAllProjects';
 
-export default function SelectProjects({changeState} : any) {
+export type SelectProjectsProps = {
+  reload: () => void
+}
+export default function SelectProjects({reload} : SelectProjectsProps) {
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [showModalList, setShowModalList] = useState(false);
 
   // Create Projects
   const handleCloseModalCreate = () => {
       setShowModalCreate(false);
+      reload();
   };
   
   // List Projects
   const handleCloseModaList = () => {        
       setShowModalList(false);
+      reload();
   };
 
   return (

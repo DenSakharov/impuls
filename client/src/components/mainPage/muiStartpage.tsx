@@ -26,8 +26,9 @@ import { tProjectAttributes } from '#/dtos';
 export type MuiStartpageProps = {
   projects: tProjectAttributes[],
   changeProject: (project: tProjectAttributes | null) => void
+  reload: () => void
 }
-const MuiStartpage = ({projects, changeProject}: MuiStartpageProps) => {
+const MuiStartpage = ({projects, changeProject, reload}: MuiStartpageProps) => {
 
 
     return (
@@ -47,7 +48,7 @@ const MuiStartpage = ({projects, changeProject}: MuiStartpageProps) => {
                <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Создать </Typography>
                     <Typography color="textSecondary" gutterBottom component={"div"}>
-                      <AddProjects />
+                      <AddProjects reload={reload}/>
                     </Typography>
                 </div>
 

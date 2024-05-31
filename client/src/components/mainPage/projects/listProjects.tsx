@@ -53,7 +53,12 @@ const ListProjects = ({ projects, reload }: ListProjectsProps) => {
     setSelectedItem(item);
     openModalDelete();
   }
-
+  const deleteCallback = (item: tProjectAttributes) => {
+    if(localStorage.getItem("projectId") === item.projectId){
+      localStorage.removeItem("projectId");
+    }
+    reload();
+  }
   return (
     <>
       <TableContainer component={Paper} >
@@ -96,7 +101,7 @@ const ListProjects = ({ projects, reload }: ListProjectsProps) => {
           title="Удалить проект" 
           element={selectedItem}
           projectId={""}
-          onSuccessCallback={reload}
+          onSuccessCallback={() => deleteCallback(selectedItem)}
           isOpen={showModalDelete}
           onClose={closeModalDelete}
       />}
