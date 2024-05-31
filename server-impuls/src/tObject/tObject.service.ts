@@ -129,7 +129,7 @@ export class tObjectService {
         return { error: 'Object not found', status: HttpStatus.NOT_FOUND };
       }
 
-      object.destroy();
+      await object.destroy();
       this.HistoryService.create({
         author,
         notes: 'object was deleted',

@@ -116,7 +116,7 @@ export class tDocumentsService {
         return { error: 'Document not found', status: HttpStatus.NOT_FOUND };
       }
 
-      document.destroy();
+      await document.destroy();
       this.HistoryService.create({
         author,
         notes: 'document was deleted',

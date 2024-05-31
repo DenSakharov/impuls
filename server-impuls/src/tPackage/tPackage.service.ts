@@ -139,7 +139,7 @@ export class tPackageService {
             })
           ).length === 0)
       ) {
-        pack.destroy();
+        await pack.destroy();
         this.HistoryService.create({
           author,
           notes: 'package was deleted',

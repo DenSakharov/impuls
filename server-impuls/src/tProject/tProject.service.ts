@@ -109,7 +109,7 @@ export class tProjectService {
         return { error: 'Project not found', status: HttpStatus.NOT_FOUND };
       }
 
-      project.destroy();
+      await project.destroy();
       this.HistoryService.create({
         author,
         notes: 'project was deleted',

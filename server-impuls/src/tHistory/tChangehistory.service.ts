@@ -67,7 +67,7 @@ export class tChangehistoryService {
         return { error: 'Document not found', status: HttpStatus.NOT_FOUND };
       }
 
-      document.destroy();
+      await document.destroy();
       return {
         message: `deleted document uuid = ${objectId}`,
         status: HttpStatus.OK,
