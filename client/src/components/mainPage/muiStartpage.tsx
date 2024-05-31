@@ -35,7 +35,7 @@ const MuiStartpage = ({projects, changeProject, reload}: MuiStartpageProps) => {
         <Card sx={{ padding: '20px', margin: '20px' }}>
             <Typography variant="h5" gutterBottom sx={{ flexGrow: 1 }}>Стартовая страница</Typography>
             <Box>
-             <div className="flex flex-wrap items-center gap-8 ">
+             <div className="flex flex-wrap gap-8 items-stretch">
 
                <div className="max-w-7xl py-1 sm:px-6 lg:px-6">
                   <Typography variant="h6" color="colorPrimary" gutterBottom> Открыть </Typography>
@@ -55,7 +55,7 @@ const MuiStartpage = ({projects, changeProject, reload}: MuiStartpageProps) => {
                 <div className="max-w-7xl py-1 sm:px-6 lg:px-8">
                  <Typography variant="h6" color="colorPrimary" gutterBottom> Популярные </Typography>
                     <Typography color="textSecondary" gutterBottom component={"div"}>
-                    <ActiveProjects />
+                    <ActiveProjects changeState={changeProject}/>
                     </Typography>
                 </div>
 
