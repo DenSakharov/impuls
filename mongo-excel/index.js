@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-//import queryString from "query-string";
 
 const express = require("express");
 const { MongoClient } = require("mongodb");
@@ -68,7 +66,7 @@ async function findDocumentByObjectId(objectId) {
     if (objectId === null) return
     const document = await db.collection(collectionName).findOne({
         id: objectId
-    }).select('__id')
+    })
     return document
 }
 async function getData() {
