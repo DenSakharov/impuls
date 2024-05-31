@@ -24,8 +24,8 @@ const currencies = [
 function Report() {
   return (
 <Card sx={{ padding: '20px', margin: '20px' }}>
-   <Box height={400} style={{ textAlign: 'center' }}>
-      <Typography variant="h5"  gutterBottom>Отчеты</Typography>
+   <Box style={{ textAlign: 'center' }}>
+      <Typography variant="h5"  gutterBottom> Отчеты </Typography>
       <Container maxWidth="md" sx={{ mt: 5 }}>
     
 
@@ -38,8 +38,8 @@ function Report() {
           fullWidth
           // onChange={(e) => setStatus(e.target.value)}
           // value ={}
-          helperText="Выберите отчет из списка"
-          sx={{ mb: 2 }}
+          helperText="Выберите отчет из списка"          
+          sx={{width: 300, mb: 2 }}
         >
           {currencies.map((option) => (
             <MenuItem key={option.value} value={option.value}>
