@@ -48,7 +48,7 @@ export default function MainFormBar({changeState} : any) {
                 marginRight: '10px',
                 }}
                 alt="impuls"
-                src="./img/logo.png"
+                src="/img/logo.png"
             />
 
             <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 400}}>
