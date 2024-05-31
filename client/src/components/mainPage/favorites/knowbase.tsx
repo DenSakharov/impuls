@@ -3,10 +3,10 @@ import  React  from 'react';
 import { CreateTodo } from "./create_todo";
 
 const initialTodos = [
-  "База знаний 1 ",
-  "База знаний 2 ",
-  "База знаний 3 ",
-  "База знаний 4 ",
+  "Рекорд 2.0 ",
+  "ATOM Space",
+  "NormaCS Online",
+  "Консультант Online",
 ];
 
 function Knowbase() {
