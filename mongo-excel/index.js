@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+//import queryString from "query-string";
 
 const express = require("express");
 const { MongoClient } = require("mongodb");
@@ -25,7 +27,7 @@ initMongoDB();
 const app = express();
 const port = process.env.PORT || 8081;
 var corsOptions = {
-  origin: [`${process.env.HOST}`,"http://localhost:3000"]
+  origin: [`${process.env.HOST}`,"http://localhost:3001"]
 };
 
 app.use(cors(corsOptions));
