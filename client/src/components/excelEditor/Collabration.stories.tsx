@@ -39,7 +39,7 @@ console.log("documentId ", documentId)
     wsRef.current = socket;
 
     socket.onopen = () => {
-      socket.send(JSON.stringify({ req: "getData", sheetId: documentId  }));
+      socket.send(JSON.stringify({ req: "getData", documentId: documentId, documentObjectId: documentObjectId tId  }));
     };
     socket.onmessage = (e) => {
       const msg = JSON.parse(e.data);
