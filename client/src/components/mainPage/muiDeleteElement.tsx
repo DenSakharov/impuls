@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/muiAddObject.scss';
-import { tDocumentAttributes, tObjectWithDocuments, tPackageAttributes } from '#/dtos';
+import { tDocumentAttributes, tObjectWithDocuments, tPackageAttributes, tProjectAttributes } from '#/dtos';
 import axios from 'axios';
 
 interface CreateObjectModalProps {
@@ -9,7 +9,7 @@ interface CreateObjectModalProps {
     isOpen: boolean;
     onClose: () => void;    
     onSuccessCallback: (projectId?: string) => void;
-    element?: tObjectWithDocuments|tPackageAttributes|tDocumentAttributes;
+    element?: tProjectAttributes|tObjectWithDocuments|tPackageAttributes|tDocumentAttributes;
 }
 
 const MuiDeleteElement = ({title, projectId, isOpen, onClose, onSuccessCallback, element}: CreateObjectModalProps) => {
@@ -27,6 +27,8 @@ const MuiDeleteElement = ({title, projectId, isOpen, onClose, onSuccessCallback,
             path = `http://${window.location.hostname}:3010/documents/${elementId}`;
         }else if(elementType === "пакет"){
             path = `http://${window.location.hostname}:3010/projects/${projectId}/packages/${elementId}`
+        }else if(elementType === "проект"){
+            path = `http://${window.location.hostname}:3010/projects/${elementId}`
         }else{
             return;
         }
@@ -40,7 +42,9 @@ const MuiDeleteElement = ({title, projectId, isOpen, onClose, onSuccessCallback,
         }).then(() => {
             onSuccessCallback(projectId);
             onClose(); // Закрыть модальное окно после отправки формы
-        })        
+        }).catch((err) => {
+            console.log(err);
+        })       
 
     };
 
@@ -52,8 +56,10 @@ const MuiDeleteElement = ({title, projectId, isOpen, onClose, onSuccessCallback,
             return [element.object.objectId, "объект", element.object.name || "" ];
         }else if("docId" in element){
             return [element.docId, "документ", element.docname || "" ];
-        }else{
+        }else if("packageId" in element){
             return [element.packageId, "пакет", element.name || "" ];
+        }else{
+            return [element.projectId, "проект", element.name || "" ];
         }
     })()
    

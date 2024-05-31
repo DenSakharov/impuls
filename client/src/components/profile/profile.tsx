@@ -17,7 +17,6 @@ function Profile() {
   var [userDepartment, setUserDepartment] = useState('');
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
-  const [selectedFile, setSelectedFile] = useState<Blob>()
   const [imgData, setImgData] = useState(Photo)
 
   const handleChangeImage = async (e) => {
@@ -51,6 +50,20 @@ function Profile() {
       if(response.data != null) {
         setImgData('data:image/png;base64,' + response.data)
       }
+    }).catch((reason: AxiosError) => {
+      console.log(reason)
+    })
+  }
+
+  function deleteUserImg() {
+    let url_getUserLogin = `http://${window.location.hostname.toString()}:3010/users/img/` + localStorage.getItem('userlogin')
+    axios({
+      method: 'delete',
+      url: url_getUserLogin,
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token')}
+    }).then((response: AxiosResponse) => {
+      console.log(response)
+      setImgData(Photo)
     }).catch((reason: AxiosError) => {
       console.log(reason)
     })
@@ -150,7 +163,7 @@ function Profile() {
               <input type="file" name="file" onChange={handleChangeImage}/>		
               <span>Загрузить фото</span>
             </label>
-            <button id="bDelImg" type="button">Удалить</button>
+            <button id="bDelImg" type="button" onClick={deleteUserImg}>Удалить</button>
           </div>
         </div>
 

@@ -1,10 +1,11 @@
 import { tProjectAttributes } from '#/dtos/tProjectAttributes';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useProjects = () => {
-    const [projects, setProjects] = useState<tProjectAttributes[]>([]);
-    useEffect(()=>{        
+    const getProjects = useCallback(() => {
+        setLoading(true);       
+        setError(false);       
         axios.get(`http://${window.location.hostname}:3010/projects`,
                 {
                     headers: {
@@ -14,11 +15,22 @@ const useProjects = () => {
             )
             .then(({ data }) => {
                 setProjects(data);
+                setLoading(false);
+                setError(false);
             })
-            .catch((err) => console.log("Get projects error", err) );
+            .catch((err) => {
+                setError(true);
+                setLoading(false);
+            });
     }, [])
+    const [projects, setProjects] = useState<tProjectAttributes[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    useEffect(()=>{ 
+        getProjects()
+    }, [getProjects])
 
-    return {projects}
+    return {projects, loading, error, reload: getProjects}
 }
 
 export default useProjects;

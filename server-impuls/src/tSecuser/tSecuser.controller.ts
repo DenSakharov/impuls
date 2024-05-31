@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -90,6 +91,15 @@ export class TSecuserController {
       return res.status(HttpStatus.NO_CONTENT).json({ message: 'NO IMAGE FOUND' })
     }
   }
+
+  @UseGuards(AuthGuard)
+  @Delete('/img/:userlogin')
+  async deleteImg(@Res() res: Response, @Param('userlogin') userlogin: string) {
+    this.tSecuserService.setImg(userlogin, null)
+    return res.status(HttpStatus.OK).json('');
+  }
+
+
 
   @Post('/loadphoto')
   @UseInterceptors(

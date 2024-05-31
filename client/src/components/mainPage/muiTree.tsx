@@ -32,12 +32,7 @@ export default function MuiTree({projectId, header = "Header", data, handleOpenF
     }
 
     const openPopup = (node: tDocumentAttributes) => {
-        setPopupData(node)
-        console.log(node)
-        if (node && window.innerWidth < 700) {
-            window.open('/Popup?id=' + node.docId,"_self")
-            return
-        }
+        setPopupData(node)        
 
         if (node) {
             handleOpenForm()    

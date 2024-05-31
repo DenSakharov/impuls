@@ -34,7 +34,7 @@ const Template: StoryFn<typeof Workbook> = ({ ...args }) => {
   useEffect(() => {
     console.log("documentObjectId ", documentObjectId)
 console.log("documentId ", documentId)
-      const socket = new WebSocket(`ws://localhost:8081/workbook/:id`);
+      const socket = new WebSocket(`ws://${window.location.hostname}:8081/workbook/:id`);
         //const socket = new WebSocket(`ws://localhost:8081/workbook/${documentId}`);
     wsRef.current = socket;
 
