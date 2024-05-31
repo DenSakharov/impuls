@@ -22,7 +22,7 @@ const user = {
   name: 'Иванов Иван',
   email: 'ii@rosatom.ru',
   imageUrl:
-    '../../img/male_user_50px.png',
+    '/img/male_user_50px.png',
 }
 
 const navigation = [
@@ -89,7 +89,7 @@ function MainNavBar({changeState} : any) {
                     <div className="flex-shrink-0">
                       <img
                         className="h-16 w-16"
-                        src="./img/logo.png"
+                        src="/img/logo.png"
                         alt="IMS Impulse"
                       />
                     </div>
