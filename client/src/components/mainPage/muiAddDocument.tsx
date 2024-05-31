@@ -49,6 +49,9 @@ const MuiAddDocument: React.FC<ModalProps> = ({ isOpen, onClose, onSuccessCallba
         }).then((response) => {
             console.log(response);
             onSuccessCallback(projectId);
+            setDocName("");
+            setDescription("");
+            setParentId("");
         }).catch((error) => {
             console.log(error);
         });

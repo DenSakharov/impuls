@@ -70,10 +70,15 @@ const MuiAddObject: React.FC<CreateObjectModalProps> = ({ title = "Форма с
             attachments: attachments, 
         } as tObjectAttributes;
         if(oldObject){
-            updateObject({...oldObject,  ...objectData})
+            updateObject({...oldObject,  ...objectData});
         }else{
             addObject(objectData);
         }
+        setObjectName("");
+        setObjectType("");
+        setDescription("");
+        setParentId("");
+        setAttachments([]);
         onClose(); // Закрыть модальное окно после отправки формы
     };
 

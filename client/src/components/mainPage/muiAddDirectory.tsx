@@ -38,6 +38,9 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ title = "Форма созда�
             },
         }).then((_) => {
             onSuccessCallback(projectId);
+            setPackageName("");
+            setParentId("");
+            setPackageType("");
         }).catch((error) => {
             console.log(error);
         });
@@ -49,6 +52,9 @@ const MuiAddDirectory: React.FC<ModalProps> = ({ title = "Форма созда�
             },
         }).then((_) => {
             onSuccessCallback(projectId);
+            setPackageName("");
+            setParentId("");
+            setPackageType("");
         }).catch((error) => {
             console.log(error);
         });
