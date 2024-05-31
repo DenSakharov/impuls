@@ -25,7 +25,7 @@ const columns_: GridColDef[] = [
 
 
 const SearchResult= ({ data }) => {
-    const { dataGridProps } = data();
+    const { dataGridProps } = data;
 
     const columns = React.useMemo<GridColDef[]>(
         () => [
